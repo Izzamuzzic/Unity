@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -70,12 +71,14 @@ public abstract class BaseActivity extends AppCompatActivity
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         bindViews();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void bindViews() {
         ButterKnife.bind(this);
         setupToolbar();
@@ -85,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity
         super.setContentView(layoutResId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupToolbar() {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -92,6 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -210,6 +215,7 @@ public abstract class BaseActivity extends AppCompatActivity
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
