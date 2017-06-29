@@ -154,7 +154,7 @@ public class SendingProgressView extends View {
     }
 
     private void setupCheckmarkBitmap() {
-        checkmarkBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp);
+        checkmarkBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_done_white_48dp);
         checkmarkXPosition = getWidth() / 2 - checkmarkBitmap.getWidth() / 2;
         checkmarkYPosition = getWidth() / 2 - checkmarkBitmap.getHeight() / 2;
     }

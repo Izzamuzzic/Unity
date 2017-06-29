@@ -131,7 +131,7 @@ public class FeedItemAnimator extends DefaultItemAnimator {
         bounceAnimY.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                holder.btnLike.setImageResource(R.drawable.ic_heart_red);
+                holder.btnLike.setImageResource(R.mipmap.ic_heart_red);
             }
 
             @Override

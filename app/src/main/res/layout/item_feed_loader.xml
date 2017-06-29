@@ -17,7 +17,7 @@
             android:id="@+id/ivUserProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_feed_top" />
+            android:src="@mipmap/ic_feed_top" />
 
         <io.github.froger.instamaterial.ui.view.SquaredFrameLayout
             android:id="@+id/vImageRoot"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"
-                android:src="@drawable/ic_heart_outline_white"
+                android:src="@mipmap/ic_heart_outline_white"
                 android:visibility="invisible" />
 
             <View
@@ -75,21 +75,21 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_heart_outline_grey" />
+                android:src="@mipmap/ic_heart_outline_grey" />
 
             <ImageButton
                 android:id="@+id/btnComments"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_feed_action"
-                android:src="@drawable/ic_comment_outline_grey" />
+                android:src="@mipmap/ic_comment_outline_grey" />
 
             <ImageButton
                 android:id="@+id/btnMore"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_feed_action"
-                android:src="@drawable/ic_more_grey" />
+                android:src="@mipmap/ic_more_grey" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -100,7 +100,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart_small_blue" />
+                    android:src="@mipmap/ic_heart_small_blue" />
 
                 <TextSwitcher
                     android:id="@+id/tsLikesCounter"
