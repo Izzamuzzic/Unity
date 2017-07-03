@@ -19,8 +19,6 @@ package com.zwq65.unity.ui.base;
  * Created by janisharali on 27/01/17.
  */
 
-import com.zwq65.unity.utils.rx.SchedulerProvider;
-
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -34,16 +32,13 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     private static final String TAG = "BasePresenter";
 
-    private final SchedulerProvider mSchedulerProvider;
     private final CompositeDisposable mCompositeDisposable;
 
     private V mMvpView;
 
     @Inject
     public BasePresenter(
-            SchedulerProvider schedulerProvider,
             CompositeDisposable compositeDisposable) {
-        this.mSchedulerProvider = schedulerProvider;
         this.mCompositeDisposable = compositeDisposable;
     }
 
@@ -64,11 +59,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     public V getMvpView() {
         return mMvpView;
-    }
-
-
-    public SchedulerProvider getSchedulerProvider() {
-        return mSchedulerProvider;
     }
 
     public CompositeDisposable getCompositeDisposable() {

@@ -19,6 +19,7 @@ package com.zwq65.unity.ui.base;
  * Created by janisharali on 27/01/17.
  */
 
+import android.os.Bundle;
 import android.support.annotation.StringRes;
 
 /**
@@ -27,6 +28,8 @@ import android.support.annotation.StringRes;
  * that then usually will be implemented by an Activity or Fragment.
  */
 public interface MvpView {
+
+    void openActivity(Class<?> cls, Bundle bundle);
 
     void showLoading();
 

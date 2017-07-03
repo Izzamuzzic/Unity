@@ -20,8 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.di.ActivityContext;
-import com.zwq65.unity.utils.rx.AppSchedulerProvider;
-import com.zwq65.unity.utils.rx.SchedulerProvider;
+import com.zwq65.unity.di.PerActivity;
+import com.zwq65.unity.ui.login.LoginMvpPresenter;
+import com.zwq65.unity.ui.login.LoginMvpView;
+import com.zwq65.unity.ui.login.LoginPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -57,11 +59,11 @@ public class ActivityModule {
     }
 
     @Provides
-    SchedulerProvider provideSchedulerProvider() {
-        return new AppSchedulerProvider();
+    @PerActivity
+    LoginMvpPresenter<LoginMvpView> provideLoginPresenter(
+            LoginPresenter<LoginMvpView> loginPresenter) {
+        return loginPresenter;
     }
-
-
 //    @Provides
 //    @PerActivity
 //    MainMvpPresenter<MainMvpView> provideMainPresenter(

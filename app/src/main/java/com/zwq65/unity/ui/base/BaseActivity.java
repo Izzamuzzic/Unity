@@ -18,6 +18,7 @@ package com.zwq65.unity.ui.base;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -147,6 +148,18 @@ public abstract class BaseActivity extends AppCompatActivity
     public boolean hasPermission(String permission) {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
                 checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void openActivity(Class<?> cls, Bundle bundle) {
+        Intent intent = new Intent(this, cls);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void openActivity(Class<?> cls) {
+        openActivity(cls, null);
     }
 
     @Override
