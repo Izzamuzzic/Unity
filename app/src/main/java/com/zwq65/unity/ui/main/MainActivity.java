@@ -55,11 +55,6 @@ public class MainActivity extends BaseActivity implements FeedAdapter.OnFeedItem
         }
     }
 
-    @Override
-    protected void setUp() {
-
-    }
-
     private void setupFeed() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
             @Override

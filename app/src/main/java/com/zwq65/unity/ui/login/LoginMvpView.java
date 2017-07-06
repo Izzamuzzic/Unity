@@ -8,4 +8,6 @@ import com.zwq65.unity.ui.base.MvpView;
 
 public interface LoginMvpView extends MvpView {
     void openMainActivity();
+
+    void openRegisterActivity();
 }

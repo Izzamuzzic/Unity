@@ -125,7 +125,6 @@ public abstract class BaseActivity extends AppCompatActivity
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((UnityApp) getApplication()).getComponent())
                 .build();
-
     }
 
     public ActivityComponent getActivityComponent() {
@@ -256,5 +255,4 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    protected abstract void setUp();
 }
