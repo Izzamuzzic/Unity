@@ -10,6 +10,7 @@ import com.zwq65.unity.ui.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity {
 
@@ -23,19 +24,18 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setUnBinder(ButterKnife.bind(this));
-        initView();
     }
 
-    protected void initView() {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 10000);
-        valueAnimator.setDuration(1000);
+    @OnClick(R.id.tv_test)
+    public void onViewClicked() {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1000);
+        valueAnimator.setDuration(2000);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                tvTest.setText((float) animation.getAnimatedValue() + "");
+                tvTest.setText(String.valueOf(animation.getAnimatedValue()));
             }
         });
         valueAnimator.start();
     }
-
 }

@@ -37,6 +37,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.barlibrary.ImmersionBar;
+import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.UnityApp;
 import com.zwq65.unity.di.component.ActivityComponent;
@@ -125,6 +127,17 @@ public abstract class BaseActivity extends AppCompatActivity
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((UnityApp) getApplication()).getComponent())
                 .build();
+        //沉浸式状态栏(所有子类都将继承这些相同的属性)
+        ImmersionBar.with(this).statusBarColor(R.color.style_color_primary).fitsSystemWindows(true).init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
+        super.onDestroy();
+        ImmersionBar.with(this).destroy();//不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
     }
 
     public ActivityComponent getActivityComponent() {
@@ -184,12 +197,22 @@ public abstract class BaseActivity extends AppCompatActivity
         snackbar.show();
     }
 
+    private void showAlert(String message) {
+        Alerter.create(this)
+                .setBackgroundColorRes(R.color.colorAccent)
+                .enableSwipeToDismiss()
+                .setDuration(3000)
+                .setTitle("提示")
+                .setText(message)
+                .show();
+    }
+
     @Override
     public void onError(String message) {
         if (message != null) {
-            showSnackBar(message);
+            showAlert(message);
         } else {
-            showSnackBar(getString(R.string.some_error));
+            showAlert(getString(R.string.some_error));
         }
     }
 
@@ -245,14 +268,6 @@ public abstract class BaseActivity extends AppCompatActivity
 
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
-        }
-        super.onDestroy();
     }
 
 }
