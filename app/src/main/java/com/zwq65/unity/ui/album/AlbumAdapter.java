@@ -1,11 +1,13 @@
 package com.zwq65.unity.ui.album;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 
@@ -19,11 +21,13 @@ import butterknife.ButterKnife;
  * Created by zwq65 on 2017/07/20
  */
 
-class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
+    private Context context;
     private List<Image> imageList;
 
-    AlbumAdapter() {
+    AlbumAdapter(Context context) {
+        this.context = context;
         imageList = new ArrayList<>();
     }
 
@@ -33,14 +37,14 @@ class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_album, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).ivBeauty.setImageURI(imageList.get(position).getUrl());
+    public void onBindViewHolder(AlbumAdapter.ViewHolder holder, int position) {
+        Glide.with(context).load(imageList.get(position).getUrl()).into(holder.ivBeauty);
     }
 
     @Override
@@ -50,7 +54,7 @@ class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_beauty)
-        SimpleDraweeView ivBeauty;
+        ImageView ivBeauty;
 
         ViewHolder(View view) {
             super(view);

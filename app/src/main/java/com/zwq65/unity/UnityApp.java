@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
@@ -38,7 +37,6 @@ public class UnityApp extends Application {
             AndroidNetworking.enableLogging(Level.BODY);
         }
         CalligraphyConfig.initDefault(mCalligraphyConfig);
-        Fresco.initialize(this);
     }
 
     public ApplicationComponent getComponent() {
