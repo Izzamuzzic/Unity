@@ -21,6 +21,9 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.di.ActivityContext;
 import com.zwq65.unity.di.PerActivity;
+import com.zwq65.unity.ui.album.AlbumMvpPresenter;
+import com.zwq65.unity.ui.album.AlbumMvpView;
+import com.zwq65.unity.ui.album.AlbumPresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
@@ -64,28 +67,13 @@ public class ActivityModule {
             LoginPresenter<LoginMvpView> loginPresenter) {
         return loginPresenter;
     }
-//    @Provides
-//    @PerActivity
-//    MainMvpPresenter<MainMvpView> provideMainPresenter(
-//            MainPresenter<MainMvpView> presenter) {
-//        return presenter;
-//    }
 
-
-//    @Provides
-//    FeedPagerAdapter provideFeedPagerAdapter(AppCompatActivity activity) {
-//        return new FeedPagerAdapter(activity.getSupportFragmentManager());
-//    }
-
-//    @Provides
-//    OpenSourceAdapter provideOpenSourceAdapter() {
-//        return new OpenSourceAdapter(new ArrayList<OpenSourceResponse.Repo>());
-//    }
-//
-//    @Provides
-//    BlogAdapter provideBlogAdapter() {
-//        return new BlogAdapter(new ArrayList<BlogResponse.Blog>());
-//    }
+    @Provides
+    @PerActivity
+    AlbumMvpPresenter<AlbumMvpView> provideAlbumPresenter(
+            AlbumPresenter<AlbumMvpView> albumPresenter) {
+        return albumPresenter;
+    }
 
     @Provides
     LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {

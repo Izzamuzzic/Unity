@@ -9,4 +9,6 @@ import com.zwq65.unity.ui.base.MvpView;
 
 public interface AlbumMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
 
+    void getBeautys(int page);//获取妹子图片资源
+
 }

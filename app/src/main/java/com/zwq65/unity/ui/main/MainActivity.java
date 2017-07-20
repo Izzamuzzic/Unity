@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity implements FeedAdapter.OnFeedItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUnBinder(ButterKnife.bind(this));
-        setupFeed();
         if (savedInstanceState == null) {
             pendingIntroAnimation = true;
         } else {

@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zwq65.unity.R;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Beauty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,13 +21,14 @@ import butterknife.ButterKnife;
 
 class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<String> numList;
+    private List<Beauty> beautyList;
 
     AlbumAdapter() {
+        beautyList = new ArrayList<>();
     }
 
-    void setNumList(List<String> numList) {
-        this.numList = numList;
+    void setBeautyList(List<Beauty> beautyList) {
+        this.beautyList = beautyList;
         notifyDataSetChanged();
     }
 
@@ -37,17 +40,17 @@ class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).tvNum.setText(numList.get(position));
+        ((ViewHolder) holder).ivBeauty.setImageURI(beautyList.get(position).getUrl());
     }
 
     @Override
     public int getItemCount() {
-        return numList.size();
+        return beautyList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_num)
-        TextView tvNum;
+        @BindView(R.id.iv_beauty)
+        SimpleDraweeView ivBeauty;
 
         ViewHolder(View view) {
             super(view);

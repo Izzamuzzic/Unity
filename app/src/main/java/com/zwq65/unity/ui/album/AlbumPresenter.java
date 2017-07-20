@@ -1,5 +1,8 @@
 package com.zwq65.unity.ui.album;
 
+import com.zwq65.unity.data.network.retrofit.ApiSubscriberCallBack;
+import com.zwq65.unity.data.network.retrofit.GankIoApiManager;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BasePresenter;
 
 import javax.inject.Inject;
@@ -14,5 +17,15 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
     @Inject
     public AlbumPresenter(CompositeDisposable compositeDisposable) {
         super(compositeDisposable);
+    }
+
+    @Override
+    public void getBeautys(int page) {
+        GankIoApiManager.getInstance().getBeautysByPage(page, new ApiSubscriberCallBack<WelfareResponse>() {
+            @Override
+            public void onSuccess(WelfareResponse welfareResponse) {
+                getMvpView().loadBeatys(welfareResponse);
+            }
+        });
     }
 }

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui.base.BaseActivity;
-import com.zwq65.unity.ui.home.HomeActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 
 import javax.inject.Inject;
@@ -43,7 +42,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     //跳转到主界面
     @Override
     public void openMainActivity() {
-        openActivity(HomeActivity.class);
+        openActivity(MainActivity.class);
     }
 
     @Override
