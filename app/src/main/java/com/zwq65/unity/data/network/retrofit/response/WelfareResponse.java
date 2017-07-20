@@ -14,7 +14,7 @@ public class WelfareResponse {
      */
 
     private boolean error;
-    private List<Beauty> results;
+    private List<Image> results;
 
     public boolean isError() {
         return error;
@@ -24,15 +24,15 @@ public class WelfareResponse {
         this.error = error;
     }
 
-    public List<Beauty> getResults() {
+    public List<Image> getResults() {
         return results;
     }
 
-    public void setResults(List<Beauty> results) {
+    public void setResults(List<Image> results) {
         this.results = results;
     }
 
-    public static class Beauty {
+    public static class Image {
         /**
          * _id : 596ea620421aa90c9203d3bc
          * createdAt : 2017-07-19T08:21:52.67Z

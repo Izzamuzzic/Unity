@@ -2,20 +2,20 @@ package com.zwq65.unity.ui.album;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 
 public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
@@ -25,8 +25,6 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     @Inject
     AlbumMvpPresenter<AlbumMvpView> mPresenter;
     AlbumAdapter adapter;
-
-    int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +38,28 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     }
 
     public void initView() {
-        rvAlbums.setLayoutManager(new GridLayoutManager(this, 3));
+        rvAlbums.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));//垂直方向两排
         rvAlbums.setItemAnimator(new DefaultItemAnimator());
         rvAlbums.addItemDecoration(new MyItemDecoration());
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (SCROLL_STATE_SETTLING == newState) {
-                    page++;
-                    mPresenter.getBeautys(page);
+                StaggeredGridLayoutManager lm = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = recyclerView.getAdapter().getItemCount();
+                int[] lastVisibleItemPositions = lm.findLastVisibleItemPositions(null);
+                int lastVisibleItemPosition = 0;
+                for (int p : lastVisibleItemPositions) {
+                    if (p > lastVisibleItemPosition) {
+                        lastVisibleItemPosition = p;
+                    }
+                }
+                int visibleItemCount = recyclerView.getChildCount();
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItemPosition == totalItemCount - 1
+                        && visibleItemCount > 0) {
+                    //加载更多
+                    mPresenter.loadImages();
                 }
             }
 
@@ -63,14 +73,16 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     }
 
     public void initData() {
-        page = 1;
-        mPresenter.getBeautys(page);
+        mPresenter.initImages();
     }
 
     @Override
-    public void loadBeatys(WelfareResponse welfareResponse) {
-        if (welfareResponse.getResults() != null) {
-            adapter.setBeautyList(welfareResponse.getResults());
-        }
+    public void loadImages(List<WelfareResponse.Image> imageList) {
+        adapter.setImageList(imageList);
+    }
+
+    @Override
+    public void noMoreData() {
+        onError("没有更多数据了！");
     }
 }

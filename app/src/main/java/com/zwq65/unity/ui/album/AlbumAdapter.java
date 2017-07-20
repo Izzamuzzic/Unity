@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Beauty;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +21,14 @@ import butterknife.ButterKnife;
 
 class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Beauty> beautyList;
+    private List<Image> imageList;
 
     AlbumAdapter() {
-        beautyList = new ArrayList<>();
+        imageList = new ArrayList<>();
     }
 
-    void setBeautyList(List<Beauty> beautyList) {
-        this.beautyList = beautyList;
+    void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
         notifyDataSetChanged();
     }
 
@@ -40,12 +40,12 @@ class AlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).ivBeauty.setImageURI(beautyList.get(position).getUrl());
+        ((ViewHolder) holder).ivBeauty.setImageURI(imageList.get(position).getUrl());
     }
 
     @Override
     public int getItemCount() {
-        return beautyList.size();
+        return imageList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
