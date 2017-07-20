@@ -5,6 +5,7 @@ import android.util.Log;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zwq65.unity.data.network.Constants;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.utils.LogUtils;
 
 import org.reactivestreams.Publisher;
 
@@ -75,6 +76,7 @@ public class GankIoApiManager {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Response response = chain.proceed(chain.request());
+            LogUtils.d("request", "request:" + chain.request().url());
             ResponseBody body;
             try {
                 body = response.peekBody(1024 * 1024);
