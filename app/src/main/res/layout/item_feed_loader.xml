@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_feed_top" />
 
-        <io.github.froger.instamaterial.ui.view.SquaredFrameLayout
+        <com.zwq65.unity.ui.custom.SquaredFrameLayout
             android:id="@+id/vImageRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -57,7 +57,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center" />
 
-        </io.github.froger.instamaterial.ui.view.SquaredFrameLayout>
+        </com.zwq65.unity.ui.custom.SquaredFrameLayout>
 
         <ImageView
             android:id="@+id/ivFeedBottom"

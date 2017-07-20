@@ -59,7 +59,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public abstract class BaseActivity extends AppCompatActivity
         implements MvpView, BaseFragment.Callback {
 
-
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -108,6 +107,7 @@ public abstract class BaseActivity extends AppCompatActivity
         return true;
     }
 
+    @Nullable
     public Toolbar getToolbar() {
         return toolbar;
     }
@@ -116,6 +116,7 @@ public abstract class BaseActivity extends AppCompatActivity
         return inboxMenuItem;
     }
 
+    @Nullable
     public ImageView getIvLogo() {
         return ivLogo;
     }
@@ -162,7 +163,6 @@ public abstract class BaseActivity extends AppCompatActivity
                 checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    @Override
     public void openActivity(Class<?> cls, Bundle bundle) {
         Intent intent = new Intent(this, cls);
         if (bundle != null)
