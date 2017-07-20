@@ -18,6 +18,7 @@ package com.zwq65.unity.di.component;
 
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.di.module.ActivityModule;
+import com.zwq65.unity.ui.album.AlbumActivity;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 
@@ -34,5 +35,7 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(LoginActivity activity);
+
+    void inject(AlbumActivity activity);
 
 }
