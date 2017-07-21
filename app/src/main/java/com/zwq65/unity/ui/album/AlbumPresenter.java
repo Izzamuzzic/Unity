@@ -27,7 +27,15 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
             public void onSuccess(WelfareResponse welfareResponse) {
                 if (welfareResponse != null && welfareResponse.getResults() != null) {
                     getMvpView().loadImages(welfareResponse.getResults());
+                } else {
+                    getMvpView().noMoreData();
                 }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                super.onFailure(t);
+                getMvpView().loadError(t);
             }
         });
     }

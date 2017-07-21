@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Unity</string>
     <string name="some_error">出错了！</string>
+    <string name="network_abnormal">网络异常</string>
     <plurals name="likes_count">
         <item quantity="one">%d like</item>
         <item quantity="other">%d likes</item>
     </plurals>
-    <string name="title_activity_home">HomeActivity</string>
 </resources>

@@ -1,10 +1,10 @@
 package com.zwq65.unity.ui.album;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseActivity;
@@ -22,10 +22,13 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     @BindView(R.id.rv_albums)
     RecyclerView rvAlbums;
+    @BindView(R.id.pull_to_refresh)
+    PullToRefreshView pullToRefresh;
 
     @Inject
     AlbumMvpPresenter<AlbumMvpView> mPresenter;
     AlbumAdapter adapter;
+
     private int page;
     private List<WelfareResponse.Image> imageList;
 
@@ -42,7 +45,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     public void initView() {
         rvAlbums.setLayoutManager(new LinearLayoutManager(this));//垂直方向两排
-        rvAlbums.setItemAnimator(new DefaultItemAnimator());
+//        rvAlbums.setItemAnimator(new DefaultItemAnimator());
         rvAlbums.addItemDecoration(new MyItemDecoration());
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -65,6 +68,12 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+        pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
         adapter = new AlbumAdapter(this);
         rvAlbums.setAdapter(adapter);
     }
@@ -77,9 +86,15 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     @Override
     public void loadImages(List<WelfareResponse.Image> imageList) {
+        pullToRefresh.setRefreshing(false);//取消下拉加载
         this.imageList.addAll(imageList);
         page++;
         adapter.setImageList(this.imageList);
+    }
+
+    @Override
+    public void loadError(Throwable t) {
+        pullToRefresh.setRefreshing(false);//取消下拉加载
     }
 
     @Override

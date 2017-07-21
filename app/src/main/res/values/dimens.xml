@@ -8,4 +8,6 @@
     <dimen name="global_menu_avatar_size">64dp</dimen>
     <dimen name="publish_photo_thumbnail_size">96dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="default_dimen">18dp</dimen>
+    <dimen name="default_less_dimen">5dp</dimen>
 </resources>

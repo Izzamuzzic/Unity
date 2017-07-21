@@ -1,12 +1,14 @@
 package com.zwq65.unity;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
+import com.zwq65.unity.utils.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -22,11 +24,16 @@ public class UnityApp extends Application {
     CalligraphyConfig mCalligraphyConfig;
 
     private ApplicationComponent mApplicationComponent;
+    private static UnityApp unityApp;
+
+    public static UnityApp getInstance() {
+        return unityApp;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        unityApp = this;
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
 
@@ -47,6 +54,10 @@ public class UnityApp extends Application {
     // Needed to replace the component with a test specific one
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
+    }
+
+    public static void showShortToast(String msg) {
+        ToastUtils.makeText(msg, Toast.LENGTH_SHORT);
     }
 }
 

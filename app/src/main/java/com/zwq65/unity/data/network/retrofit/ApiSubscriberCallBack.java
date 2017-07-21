@@ -3,6 +3,8 @@ package com.zwq65.unity.data.network.retrofit;
 
 import android.util.Log;
 
+import com.zwq65.unity.UnityApp;
+
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -43,7 +45,9 @@ public abstract class ApiSubscriberCallBack<T> implements Subscriber<T> {
     public void onFailure(Throwable t) {
         if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException) {
             //网络异常（超时、连接、未识别域名...）
+            UnityApp.showShortToast("网络异常");
         } else {
+            UnityApp.showShortToast(t.toString());
         }
     }
 

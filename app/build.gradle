@@ -57,6 +57,7 @@ dependencies {
     compile 'com.gyf.barlibrary:barlibrary:2.2.5'
     compile 'com.tapadoo.android:alerter:2.0.0'
     compile 'com.orhanobut:logger:1.15'//logger：方便使用、查看log日志
+    compile 'com.yalantis:phoenix:1.2.3'//下拉刷新控件
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'

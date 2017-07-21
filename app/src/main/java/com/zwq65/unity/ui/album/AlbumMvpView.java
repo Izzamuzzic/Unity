@@ -12,5 +12,7 @@ import java.util.List;
 public interface AlbumMvpView extends MvpView {
     void loadImages(List<WelfareResponse.Image> beautyList);//加载图片
 
+    void loadError(Throwable t);//加载报错
+
     void noMoreData();//没有数据了
 }
