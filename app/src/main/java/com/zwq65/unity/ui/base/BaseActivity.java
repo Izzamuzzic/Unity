@@ -53,7 +53,7 @@ import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Created by janisharali on 27/01/17.
+ * Created by janisharali on 27/01/17
  */
 
 public abstract class BaseActivity extends AppCompatActivity
@@ -95,15 +95,28 @@ public abstract class BaseActivity extends AppCompatActivity
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
+            //导航icon点击事件
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onError("2333");
+                }
+            });
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        inboxMenuItem = menu.findItem(R.id.action_inbox);
-        inboxMenuItem.setActionView(R.layout.menu_item_view);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        inboxMenuItem = menu.findItem(R.id.action_inbox);
+//        inboxMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                onError("666");
+//                return false;
+//            }
+//        });
         return true;
     }
 

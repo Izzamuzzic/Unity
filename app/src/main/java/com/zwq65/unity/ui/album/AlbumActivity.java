@@ -1,6 +1,7 @@
 package com.zwq65.unity.ui.album;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,8 +10,8 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.utils.LogUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,9 +29,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     @Inject
     AlbumMvpPresenter<AlbumMvpView> mPresenter;
     AlbumAdapter adapter;
-
-    private int page;
-    private List<WelfareResponse.Image> imageList;
+    boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     public void initView() {
         rvAlbums.setLayoutManager(new LinearLayoutManager(this));//垂直方向两排
-//        rvAlbums.setItemAnimator(new DefaultItemAnimator());
+        rvAlbums.setItemAnimator(new DefaultItemAnimator());
         rvAlbums.addItemDecoration(new MyItemDecoration());
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -54,12 +53,13 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                 int totalItemCount = recyclerView.getAdapter().getItemCount();
                 int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
                 int visibleItemCount = recyclerView.getChildCount();
-
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItemPosition == totalItemCount - 1
-                        && visibleItemCount > 0) {
+                        && visibleItemCount > 0 && !isLoading) {
                     //加载更多
-                    mPresenter.loadImages(page);
+                    LogUtils.e("totalItemCount:" + totalItemCount + " lastVisibleItemPosition:" + lastVisibleItemPosition + " visibleItemCount" + visibleItemCount);
+                    isLoading = true;
+                    mPresenter.loadImages();
                 }
             }
 
@@ -79,26 +79,27 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     }
 
     public void initData() {
-        page = 1;
-        imageList = new ArrayList<>();
-        mPresenter.loadImages(page);
+        isLoading = false;
+        adapter.initImageList();
+        mPresenter.initImages();
     }
 
     @Override
     public void loadImages(List<WelfareResponse.Image> imageList) {
+        isLoading = false;
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        this.imageList.addAll(imageList);
-        page++;
-        adapter.setImageList(this.imageList);
+        adapter.addImageList(imageList);//加载数据
     }
 
     @Override
     public void loadError(Throwable t) {
+        isLoading = false;
         pullToRefresh.setRefreshing(false);//取消下拉加载
     }
 
     @Override
     public void noMoreData() {
+        isLoading = false;
         onError("没有更多数据了！");
     }
 }

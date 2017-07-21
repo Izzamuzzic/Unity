@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> implements AlbumMvpPresenter<V> {
+    private int page;
 
     @Inject
     public AlbumPresenter(CompositeDisposable compositeDisposable) {
@@ -21,11 +22,18 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
     }
 
     @Override
-    public void loadImages(int page) {
+    public void initImages() {
+        page = 1;
+        loadImages();
+    }
+
+    @Override
+    public void loadImages() {
         GankIoApiManager.getInstance().getBeautysByPage(page, new ApiSubscriberCallBack<WelfareResponse>() {
             @Override
             public void onSuccess(WelfareResponse welfareResponse) {
                 if (welfareResponse != null && welfareResponse.getResults() != null) {
+                    page++;
                     getMvpView().loadImages(welfareResponse.getResults());
                 } else {
                     getMvpView().noMoreData();
