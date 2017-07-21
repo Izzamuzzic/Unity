@@ -55,7 +55,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                 int visibleItemCount = recyclerView.getChildCount();
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItemPosition == totalItemCount - 1
-                        && visibleItemCount > 0 && !isLoading) {
+                        && !isLoading) {
                     //加载更多
                     LogUtils.e("totalItemCount:" + totalItemCount + " lastVisibleItemPosition:" + lastVisibleItemPosition + " visibleItemCount" + visibleItemCount);
                     isLoading = true;
@@ -86,9 +86,9 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     @Override
     public void loadImages(List<WelfareResponse.Image> imageList) {
-        isLoading = false;
         pullToRefresh.setRefreshing(false);//取消下拉加载
         adapter.addImageList(imageList);//加载数据
+        isLoading = false;
     }
 
     @Override
