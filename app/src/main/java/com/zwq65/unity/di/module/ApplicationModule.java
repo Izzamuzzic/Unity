@@ -19,6 +19,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.data.AppDataManager;
+import com.zwq65.unity.data.DataManager;
+import com.zwq65.unity.data.db.AppDbHelper;
+import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -68,13 +72,23 @@ public class ApplicationModule {
         return AppConstants.PREF_NAME;
     }
 
+    @Provides
+    @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
+    }
+
+    @Provides
+    @Singleton
+    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+        return appDbHelper;
+    }
 
     @Provides
     @Singleton
     PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
         return appPreferencesHelper;
     }
-
 
     @Provides
     @Singleton

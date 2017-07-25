@@ -15,11 +15,15 @@
 
 package com.zwq65.unity.data.prefs;
 
+import com.zwq65.unity.data.DataManager;
+
 /**
  * Created by janisharali on 27/01/17.
  */
 
 public interface PreferencesHelper {
+
+    void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
 
     int getCurrentUserLoggedInMode();
 

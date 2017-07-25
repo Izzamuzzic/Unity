@@ -19,6 +19,8 @@ package com.zwq65.unity.ui.base;
  * Created by janisharali on 27/01/17.
  */
 
+import com.zwq65.unity.data.DataManager;
+
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -30,13 +32,16 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
+    private final DataManager mDataManager;
     private final CompositeDisposable mCompositeDisposable;
 
     private V mMvpView;
 
     @Inject
     public BasePresenter(
+            DataManager DataManager,
             CompositeDisposable compositeDisposable) {
+        this.mDataManager = DataManager;
         this.mCompositeDisposable = compositeDisposable;
     }
 
@@ -61,6 +66,10 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     public CompositeDisposable getCompositeDisposable() {
         return mCompositeDisposable;
+    }
+
+    public DataManager getDataManager() {
+        return mDataManager;
     }
 
 }
