@@ -108,15 +108,15 @@ public abstract class BaseActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        inboxMenuItem = menu.findItem(R.id.action_inbox);
-//        inboxMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                onError("666");
-//                return false;
-//            }
-//        });
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        inboxMenuItem = menu.findItem(R.id.action_inbox);
+        inboxMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                onError("666");
+                return false;
+            }
+        });
         return true;
     }
 

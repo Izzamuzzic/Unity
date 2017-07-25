@@ -10,7 +10,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -42,6 +41,12 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
+    }
+
     public void initView() {
         rvAlbums.setLayoutManager(new LinearLayoutManager(this));//垂直方向两排
         rvAlbums.setItemAnimator(new DefaultItemAnimator());
@@ -52,12 +57,10 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                 LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int totalItemCount = recyclerView.getAdapter().getItemCount();
                 int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
-                int visibleItemCount = recyclerView.getChildCount();
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItemPosition == totalItemCount - 1
                         && !isLoading) {
                     //加载更多
-                    LogUtils.e("totalItemCount:" + totalItemCount + " lastVisibleItemPosition:" + lastVisibleItemPosition + " visibleItemCount" + visibleItemCount);
                     isLoading = true;
                     mPresenter.loadImages();
                 }

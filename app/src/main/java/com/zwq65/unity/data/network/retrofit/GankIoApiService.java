@@ -4,7 +4,7 @@ package com.zwq65.unity.data.network.retrofit;
 import com.zwq65.unity.data.network.Constants;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 
-import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -18,6 +18,6 @@ public interface GankIoApiService {
      * 获取福利图片
      */
     @GET(Constants.welfare + "/{page}")
-    Flowable<WelfareResponse> getBeautysByPage(@Path("page") int page);
+    Observable<WelfareResponse> getImagesByPage(@Path("page") int page);
 
 }

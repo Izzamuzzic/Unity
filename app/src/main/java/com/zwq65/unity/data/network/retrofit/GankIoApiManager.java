@@ -7,13 +7,14 @@ import com.zwq65.unity.data.network.Constants;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.utils.LogUtils;
 
-import org.reactivestreams.Publisher;
-
 import java.io.IOException;
 
-import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -38,22 +39,13 @@ public class GankIoApiManager {
         return apiManager;
     }
 
-    public void getBeautysByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack) {
-        getApiService().getBeautysByPage(page).compose(schedulersTransformer())
-                .subscribe(callBack);
+    public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
-    private FlowableTransformer schedulersTransformer() {
-        return new FlowableTransformer() {
-            @Override
-            public Publisher apply(Flowable upstream) {
-                return upstream.subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
-
+    /**
+     * @return retrofit_http_api
+     */
     private GankIoApiService getApiService() {
         if (apiService == null) {
             OkHttpClient okClient = new OkHttpClient.Builder()
@@ -71,10 +63,26 @@ public class GankIoApiManager {
         return apiService;
     }
 
-    private class MyInterceptor implements Interceptor {
+    /**
+     * @return 包装Observable，使之采用统一的线程调度
+     */
+    private ObservableTransformer schedulersTransformer() {
+        return new ObservableTransformer() {
+            @Override
+            public ObservableSource apply(@NonNull Observable upstream) {
+                return upstream.subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
 
+    /**
+     * 自定义拦截器(log request and response data)
+     */
+    private class MyInterceptor implements Interceptor {
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(@android.support.annotation.NonNull Chain chain) throws IOException {
             Response response = chain.proceed(chain.request());
             LogUtils.d("request", "request:" + chain.request().url());
             ResponseBody body;

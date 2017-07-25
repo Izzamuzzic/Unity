@@ -1,54 +1,20 @@
 package com.zwq65.unity.data.network.retrofit;
 
 
-import android.util.Log;
-
-import com.zwq65.unity.UnityApp;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
- * 回调的基类
+ * Created by zwq65 on 2017/07/25
+ * 封装的api接口response回调类
  */
 
-public abstract class ApiSubscriberCallBack<T> implements Subscriber<T> {
-    public Subscription subscription;
+public abstract class ApiSubscriberCallBack<T> implements Consumer<T> {
 
     @Override
-    public void onSubscribe(Subscription s) {
-        s.request(Long.MAX_VALUE);
-        subscription = s;
-    }
-
-    @Override
-    public void onNext(T t) {
+    public void accept(@NonNull T t) throws Exception {
         onSuccess(t);
     }
 
-    @Override
-    public void onError(Throwable t) {
-        Log.e("onError", t.toString());
-        onFailure(t);
-    }
-
-    @Override
-    public void onComplete() {
-    }
-
     public abstract void onSuccess(T t);
-
-    public void onFailure(Throwable t) {
-        if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException) {
-            //网络异常（超时、连接、未识别域名...）
-            UnityApp.showShortToast("网络异常");
-        } else {
-            UnityApp.showShortToast(t.toString());
-        }
-    }
-
 }
