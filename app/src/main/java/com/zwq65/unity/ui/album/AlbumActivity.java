@@ -50,6 +50,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
         rvAlbums.setLayoutManager(new LinearLayoutManager(this));//垂直方向两排
         rvAlbums.setItemAnimator(new DefaultItemAnimator());
         rvAlbums.addItemDecoration(new MyItemDecoration());
+        ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -85,8 +86,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     @Override
     public void refreshImages(List<WelfareResponse.Image> imageList) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        adapter.initImageList();
-        adapter.addImageList(imageList);//加载数据
+        adapter.initImageList(imageList);
     }
 
     @Override
@@ -101,6 +101,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     @Override
     public void noMoreData() {
+        pullToRefresh.setRefreshing(false);//取消下拉加载
         onError("没有更多数据了！");
     }
 }

@@ -31,8 +31,10 @@ class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
         imageList = new ArrayList<>();
     }
 
-    void initImageList() {
-        imageList.clear();
+    void initImageList(List<Image> imageList) {
+        this.imageList.clear();
+        this.imageList.addAll(imageList);
+        notifyDataSetChanged();
     }
 
     void addImageList(List<Image> imageList) {
