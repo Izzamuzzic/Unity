@@ -142,7 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity
                 .applicationComponent(((UnityApp) getApplication()).getComponent())
                 .build();
         //沉浸式状态栏(所有子类都将继承这些相同的属性)
-        ImmersionBar.with(this).statusBarColor(R.color.style_color_primary).fitsSystemWindows(true).init();
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).fitsSystemWindows(true).init();
     }
 
     @Override

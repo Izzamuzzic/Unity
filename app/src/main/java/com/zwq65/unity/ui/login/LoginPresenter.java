@@ -1,5 +1,6 @@
 package com.zwq65.unity.ui.login;
 
+import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.ui.base.BasePresenter;
 
 import javax.inject.Inject;
@@ -13,8 +14,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> implements LoginMvpPresenter<V> {
 
     @Inject
-    public LoginPresenter(CompositeDisposable compositeDisposable) {
-        super(compositeDisposable);
+    public LoginPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+        super(dataManager, compositeDisposable);
     }
 
     @Override

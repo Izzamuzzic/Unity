@@ -10,7 +10,10 @@ import java.util.List;
  */
 
 public interface AlbumMvpView extends MvpView {
-    void loadImages(List<WelfareResponse.Image> beautyList);//加载图片
+
+    void refreshImages(List<WelfareResponse.Image> imageList);//刷新图片
+
+    void loadImages(List<WelfareResponse.Image> imageList);//加载图片
 
     void loadError(Throwable t);//加载报错
 

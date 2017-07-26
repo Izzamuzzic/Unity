@@ -18,6 +18,7 @@ package com.zwq65.unity.data.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.di.ApplicationContext;
 import com.zwq65.unity.di.PreferenceInfo;
 import com.zwq65.unity.utils.AppConstants;
@@ -46,6 +47,11 @@ public class AppPreferencesHelper implements PreferencesHelper {
     public AppPreferencesHelper(@ApplicationContext Context context,
                                 @PreferenceInfo String prefFileName) {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
+
     }
 
     @Override

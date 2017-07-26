@@ -28,7 +28,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -47,13 +46,12 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public Observable<Long> insertUser(final User user) {
-//        return Observable.fromCallable(new Callable<Long>() {
-//            @Override
-//            public Long call() throws Exception {
-//                return mDaoSession.getUserDao().insert(user);
-//            }
-//        });
-        return Observable.just(mDaoSession.getUserDao().insert(user)).subscribeOn(Schedulers.io());
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                return mDaoSession.getUserDao().insert(user);
+            }
+        });
     }
 
     @Override

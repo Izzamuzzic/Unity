@@ -17,7 +17,7 @@ import com.zwq65.unity.R;
  * Created by zwq65 on 2017/03/06.
  * 波浪view
  */
-public class WaveBezierView extends View implements View.OnClickListener {
+public class WaveBezierView extends View {
 
     private Paint mPaint, mPaint2;
     private Path mPath, mPath2;
@@ -28,7 +28,6 @@ public class WaveBezierView extends View implements View.OnClickListener {
     private int mWaveCount;
     private int mCenterY;
     private ValueAnimator animator;
-    private Boolean isPause = false;
 
     public WaveBezierView(Context context) {
         super(context);
@@ -43,13 +42,32 @@ public class WaveBezierView extends View implements View.OnClickListener {
         mPath = new Path();
         mPath2 = new Path();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(ContextCompat.getColor(context, R.color.blue));
+        mPaint.setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint2.setColor(ContextCompat.getColor(context, R.color.light_blue));
+        mPaint2.setColor(ContextCompat.getColor(context, R.color.colorPrimary));
         mPaint2.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        setOnClickListener(this);
+        startAnim();
+    }
+
+    private void startAnim() {
+        if (animator == null) {
+            animator = ValueAnimator.ofInt(0, mWaveLength);
+            animator.setDuration(2000);
+            animator.setRepeatCount(ValueAnimator.INFINITE);
+            animator.setInterpolator(new LinearInterpolator());
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mOffset = (int) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+            animator.start();
+        } else {
+            animator.resume();
+        }
     }
 
     @Override
@@ -90,33 +108,5 @@ public class WaveBezierView extends View implements View.OnClickListener {
         mPath2.lineTo(0, mScreenHeight);
         mPath2.close();//回到初始点
         canvas.drawPath(mPath2, mPaint2);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (animator == null) {
-            animator = ValueAnimator.ofInt(0, mWaveLength);
-            animator.setDuration(2000);
-            animator.setRepeatCount(ValueAnimator.INFINITE);
-            animator.setInterpolator(new LinearInterpolator());
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mOffset = (int) animation.getAnimatedValue();
-                    invalidate();
-                }
-            });
-            animator.start();
-        } else {
-            if (isPause) {
-                isPause = false;
-                animator.resume();
-            } else {
-                isPause = true;
-                animator.pause();
-            }
-
-        }
-
     }
 }

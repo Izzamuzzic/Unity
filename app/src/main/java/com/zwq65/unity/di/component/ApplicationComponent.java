@@ -19,6 +19,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.zwq65.unity.UnityApp;
+import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.di.ApplicationContext;
 import com.zwq65.unity.di.module.ApplicationModule;
 
@@ -39,4 +40,6 @@ public interface ApplicationComponent {
     Context context();
 
     Application application();
+
+    DataManager getDataManager();
 }

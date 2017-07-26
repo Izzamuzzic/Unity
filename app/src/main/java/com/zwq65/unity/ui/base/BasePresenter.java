@@ -39,9 +39,9 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Inject
     public BasePresenter(
-            DataManager DataManager,
+            DataManager dataManager,
             CompositeDisposable compositeDisposable) {
-        this.mDataManager = DataManager;
+        this.mDataManager = dataManager;
         this.mCompositeDisposable = compositeDisposable;
     }
 

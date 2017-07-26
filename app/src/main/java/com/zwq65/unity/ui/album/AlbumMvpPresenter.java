@@ -11,7 +11,10 @@ public interface AlbumMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
 
     void initImages();
 
-    void loadImages();//加载图片资源
+    /**
+     * @param isRefresh 是否为刷新操作
+     */
+    void loadImages(Boolean isRefresh);//加载图片资源
 
 
 }

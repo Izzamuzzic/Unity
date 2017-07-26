@@ -28,7 +28,6 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     @Inject
     AlbumMvpPresenter<AlbumMvpView> mPresenter;
     AlbumAdapter adapter;
-    boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +57,9 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                 int totalItemCount = recyclerView.getAdapter().getItemCount();
                 int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItemPosition == totalItemCount - 1
-                        && !isLoading) {
+                        && lastVisibleItemPosition == totalItemCount - 1) {
                     //加载更多
-                    isLoading = true;
-                    mPresenter.loadImages();
+                    mPresenter.loadImages(false);
                 }
             }
 
@@ -82,27 +79,28 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     }
 
     public void initData() {
-        isLoading = false;
-        adapter.initImageList();
         mPresenter.initImages();
     }
 
     @Override
-    public void loadImages(List<WelfareResponse.Image> imageList) {
+    public void refreshImages(List<WelfareResponse.Image> imageList) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
+        adapter.initImageList();
         adapter.addImageList(imageList);//加载数据
-        isLoading = false;
+    }
+
+    @Override
+    public void loadImages(List<WelfareResponse.Image> imageList) {
+        adapter.addImageList(imageList);//加载数据
     }
 
     @Override
     public void loadError(Throwable t) {
-        isLoading = false;
         pullToRefresh.setRefreshing(false);//取消下拉加载
     }
 
     @Override
     public void noMoreData() {
-        isLoading = false;
         onError("没有更多数据了！");
     }
 }
