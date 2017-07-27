@@ -47,7 +47,9 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     }
 
     public void initView() {
-        rvAlbums.setLayoutManager(new LinearLayoutManager(this));//垂直方向两排
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        rvAlbums.setLayoutManager(linearLayoutManager);//垂直方向两排
         rvAlbums.setItemAnimator(new DefaultItemAnimator());
         rvAlbums.addItemDecoration(new MyItemDecoration());
         ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
