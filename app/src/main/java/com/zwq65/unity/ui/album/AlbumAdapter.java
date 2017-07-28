@@ -25,6 +25,7 @@ class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
     private Context context;
     private List<Image> imageList;
+    private OnItemClickListener onItemClickListener;
 
     AlbumAdapter(Context context) {
         this.context = context;
@@ -42,9 +43,21 @@ class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public Image getPosition(int position) {
+        if (position > imageList.size()) {
+            return null;
+        }
+        return imageList.get(position);
+    }
+
     @Override
     public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_album, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -58,14 +71,26 @@ class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
         return imageList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            ivBeauty.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onClick(v, getAdapterPosition());
+            }
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(View view, int position);
     }
 
 }

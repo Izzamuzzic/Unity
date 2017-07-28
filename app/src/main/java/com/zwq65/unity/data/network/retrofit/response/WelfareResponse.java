@@ -1,5 +1,8 @@
 package com.zwq65.unity.data.network.retrofit.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -32,7 +35,7 @@ public class WelfareResponse {
         this.results = results;
     }
 
-    public static class Image {
+    public static class Image implements Parcelable {
         /**
          * _id : 596ea620421aa90c9203d3bc
          * createdAt : 2017-07-19T08:21:52.67Z
@@ -54,6 +57,30 @@ public class WelfareResponse {
         private String url;
         private boolean used;
         private String who;
+
+        protected Image(Parcel in) {
+            _id = in.readString();
+            createdAt = in.readString();
+            desc = in.readString();
+            publishedAt = in.readString();
+            source = in.readString();
+            type = in.readString();
+            url = in.readString();
+            used = in.readByte() != 0;
+            who = in.readString();
+        }
+
+        public static final Creator<Image> CREATOR = new Creator<Image>() {
+            @Override
+            public Image createFromParcel(Parcel in) {
+                return new Image(in);
+            }
+
+            @Override
+            public Image[] newArray(int size) {
+                return new Image[size];
+            }
+        };
 
         public String get_id() {
             return _id;
@@ -125,6 +152,24 @@ public class WelfareResponse {
 
         public void setWho(String who) {
             this.who = who;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(_id);
+            dest.writeString(createdAt);
+            dest.writeString(desc);
+            dest.writeString(publishedAt);
+            dest.writeString(source);
+            dest.writeString(type);
+            dest.writeString(url);
+            dest.writeByte((byte) (used ? 1 : 0));
+            dest.writeString(who);
         }
     }
 }

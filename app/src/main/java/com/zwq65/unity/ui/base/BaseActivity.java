@@ -68,6 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity
     ImageView ivLogo;
 
     private MenuItem inboxMenuItem;
+    private boolean hideToolBar;//是否隐藏toolBar
 
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
@@ -78,6 +79,11 @@ public abstract class BaseActivity extends AppCompatActivity
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         bindViews();
+    }
+
+    //隐藏toolBar，必须在setContentView()前调用
+    public void setHideToolBar(boolean hideToolBar) {
+        this.hideToolBar = hideToolBar;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
@@ -92,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupToolbar() {
-        if (toolbar != null) {
+        if (toolbar != null && !hideToolBar) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
             //导航icon点击事件
@@ -102,6 +108,10 @@ public abstract class BaseActivity extends AppCompatActivity
                     onError("2333");
                 }
             });
+            //沉浸式状态栏(所有子类都将继承这些相同的属性)
+            ImmersionBar.with(this).titleBar(toolbar).init();
+        } else if (hideToolBar) {
+            ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
     }
 
@@ -141,8 +151,6 @@ public abstract class BaseActivity extends AppCompatActivity
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((UnityApp) getApplication()).getComponent())
                 .build();
-        //沉浸式状态栏(所有子类都将继承这些相同的属性)
-        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).fitsSystemWindows(true).init();
     }
 
     @Override

@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 
@@ -78,7 +80,20 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
             }
         });
         adapter = new AlbumAdapter(this);
+        adapter.setOnItemClickListener(new AlbumAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Image image = adapter.getPosition(position);
+                startContentActivity(image);
+            }
+        });
         rvAlbums.setAdapter(adapter);
+    }
+
+    private void startContentActivity(Image image) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ImageActivity.IMAGE, image);
+        openActivity(ImageActivity.class, bundle);
     }
 
     public void initData() {
