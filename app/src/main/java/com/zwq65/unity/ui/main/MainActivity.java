@@ -27,7 +27,13 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUnBinder(ButterKnife.bind(this));
+        initDrawer();
+    }
 
+    /**
+     * 初始化抽屉栏界面
+     */
+    private void initDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
