@@ -15,9 +15,15 @@ import retrofit2.http.Path;
 
 public interface GankIoApiService {
     /**
-     * 获取福利图片
+     * 获取福利图片(pagesize=10)
      */
-    @GET(Constants.welfare + "/{page}")
+    @GET(Constants.welfare10 + "/{page}")
     Observable<WelfareResponse> getImagesByPage(@Path("page") int page);
+
+    /**
+     * 获取福利图片(pagesize=1)
+     */
+    @GET(Constants.welfare10 + "/{page}")
+    Observable<WelfareResponse> getImageByPage(@Path("page") int page);
 
 }

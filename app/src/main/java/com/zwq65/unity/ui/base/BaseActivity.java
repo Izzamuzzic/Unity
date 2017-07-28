@@ -68,7 +68,6 @@ public abstract class BaseActivity extends AppCompatActivity
     ImageView ivLogo;
 
     private MenuItem inboxMenuItem;
-    private boolean hideToolBar;//是否隐藏toolBar
 
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
@@ -81,11 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity
         bindViews();
     }
 
-    //隐藏toolBar，必须在setContentView()前调用
-    public void setHideToolBar(boolean hideToolBar) {
-        this.hideToolBar = hideToolBar;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void bindViews() {
         ButterKnife.bind(this);
@@ -94,24 +88,17 @@ public abstract class BaseActivity extends AppCompatActivity
 
     public void setContentViewWithoutInject(int layoutResId) {
         super.setContentView(layoutResId);
+        //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
+        ImmersionBar.with(this).fitsSystemWindows(false).init();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupToolbar() {
-        if (toolbar != null && !hideToolBar) {
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
-            //导航icon点击事件
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onError("2333");
-                }
-            });
-            //沉浸式状态栏(所有子类都将继承这些相同的属性)
+            //含toolbar的activity，实现沉浸式状态栏
             ImmersionBar.with(this).titleBar(toolbar).init();
-        } else if (hideToolBar) {
-            ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
     }
 

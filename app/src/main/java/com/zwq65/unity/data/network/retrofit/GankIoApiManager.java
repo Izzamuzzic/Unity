@@ -32,15 +32,20 @@ public class GankIoApiManager {
     private GankIoApiService apiService;
     private static GankIoApiManager apiManager;
 
+    public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    public Disposable getImageByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getApiService().getImageByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+
     public synchronized static GankIoApiManager getInstance() {
         if (apiManager == null) {
             apiManager = new GankIoApiManager();
         }
         return apiManager;
-    }
-
-    public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
     /**

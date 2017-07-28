@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.zwq65.unity.ui.base.base_adapter.BaseRecyclerViewAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,76 +19,33 @@ import butterknife.ButterKnife;
  * Created by zwq65 on 2017/07/20
  */
 
-class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
 
     private Context context;
-    private List<Image> imageList;
-    private OnItemClickListener onItemClickListener;
 
     AlbumAdapter(Context context) {
         this.context = context;
-        imageList = new ArrayList<>();
-    }
-
-    void initImageList(List<Image> imageList) {
-        this.imageList.clear();
-        this.imageList.addAll(imageList);
-        notifyDataSetChanged();
-    }
-
-    void addImageList(List<Image> imageList) {
-        this.imageList.addAll(imageList);
-        notifyDataSetChanged();
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public Image getPosition(int position) {
-        if (position > imageList.size()) {
-            return null;
-        }
-        return imageList.get(position);
     }
 
     @Override
     public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_album, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AlbumAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(imageList.get(position).getUrl()).into(holder.ivBeauty);
+        Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
     }
 
-    @Override
-    public int getItemCount() {
-        return imageList.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            ivBeauty.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            if (onItemClickListener != null) {
-                onItemClickListener.onClick(v, getAdapterPosition());
-            }
-        }
     }
-
-    public interface OnItemClickListener {
-        void onClick(View view, int position);
-    }
-
 }

@@ -14,5 +14,6 @@ public class Constants {
      * eg: http://gank.io/api/data/福利/10/1
      */
     public static String GANK_IO_HOST = "http://gank.io/api/data/";
-    public static final String welfare = "福利/10";
+    public static final String welfare10 = "福利/10";
+    public static final String welfare1 = "福利/1";
 }
