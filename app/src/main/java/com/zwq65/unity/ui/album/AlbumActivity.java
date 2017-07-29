@@ -2,18 +2,20 @@ package com.zwq65.unity.ui.album;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.base.base_adapter.OnItemClickListener;
-import com.zwq65.unity.ui.custom.recycleview.LoadingMoreFooter;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.swipe_image.ImageActivity;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -22,10 +24,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zwq65.unity.ui.custom.recycleview.XRecyclerView.findMax;
+
 public class AlbumActivity extends BaseActivity implements AlbumMvpView {
 
     @BindView(R.id.rv_albums)
-    XRecyclerView rvAlbums;
+    RecyclerView rvAlbums;
     @BindView(R.id.pull_to_refresh)
     PullToRefreshView pullToRefresh;
 
@@ -54,17 +58,30 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
         rvAlbums.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         rvAlbums.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rvAlbums.addItemDecoration(new MyItemDecoration());//item间隔
-        rvAlbums.setFootView(new LoadingMoreFooter(this));//添加上拉加载动画
         ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
-        rvAlbums.setLoadingListener(new XRecyclerView.LoadingListener() {
+        rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                mPresenter.loadImages(false);
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    RecyclerView.LayoutManager layoutManager = rvAlbums.getLayoutManager();
+                    int lastVisibleItemPosition;
+                    if (layoutManager instanceof GridLayoutManager) {
+                        lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                        int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
+                        ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
+                        lastVisibleItemPosition = findMax(into);
+                    } else {
+                        lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    }
+                    if (layoutManager.getChildCount() > 0
+                            && lastVisibleItemPosition >= layoutManager.getItemCount() - 1
+                            && layoutManager.getItemCount() > layoutManager.getChildCount()) {
+                        LogUtils.e("onLoadMore");
+                        mPresenter.loadImages(false);
+                    }
+                }
             }
         });
         pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
