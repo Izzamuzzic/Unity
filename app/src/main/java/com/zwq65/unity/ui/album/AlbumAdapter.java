@@ -34,19 +34,20 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(AlbumAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onClick(data.get(position), position);
+                    //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
+                    listener.onClick(data.get(holder.getLayoutPosition()), holder.getLayoutPosition());
                 }
             }
         });
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
 

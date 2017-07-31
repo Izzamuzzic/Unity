@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class ImageActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);
         imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        LogUtils.e("position:" + currentPosition);
     }
 
     private void initViewPager() {

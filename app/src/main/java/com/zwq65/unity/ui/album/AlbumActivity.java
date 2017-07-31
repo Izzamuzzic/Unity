@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
@@ -99,6 +100,8 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
             }
         });
         rvAlbums.setAdapter(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(adapter));//拖拽监听
+        helper.attachToRecyclerView(rvAlbums);
     }
 
     private void startContentActivity(int position) {
