@@ -28,22 +28,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by zwq65 on 2017/05/03.
  */
 
-public class GankIoApiManager {
-    private GankIoApiService apiService;
-    private static GankIoApiManager apiManager;
+public class RetrofitApiManager {
+    private GankIoApiService gankIoApiService;
+    private static RetrofitApiManager apiManager;
 
     public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+        return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
     public Disposable getImageByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getApiService().getImageByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+        return getGankIoApiService().getImageByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
 
-    public synchronized static GankIoApiManager getInstance() {
+    public synchronized static RetrofitApiManager getInstance() {
         if (apiManager == null) {
-            apiManager = new GankIoApiManager();
+            apiManager = new RetrofitApiManager();
         }
         return apiManager;
     }
@@ -51,8 +51,8 @@ public class GankIoApiManager {
     /**
      * @return retrofit_http_api
      */
-    private GankIoApiService getApiService() {
-        if (apiService == null) {
+    private GankIoApiService getGankIoApiService() {
+        if (gankIoApiService == null) {
             OkHttpClient okClient = new OkHttpClient.Builder()
                     .addInterceptor(new MyInterceptor())
                     .build();
@@ -63,9 +63,9 @@ public class GankIoApiManager {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            apiService = retrofit.create(GankIoApiService.class);
+            gankIoApiService = retrofit.create(GankIoApiService.class);
         }
-        return apiService;
+        return gankIoApiService;
     }
 
     /**

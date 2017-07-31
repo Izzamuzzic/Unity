@@ -3,7 +3,7 @@ package com.zwq65.unity.ui.album;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.network.retrofit.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.GankIoApiManager;
+import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BasePresenter;
 
@@ -35,7 +35,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(
-                GankIoApiManager.getInstance().getImagesByPage(page, new ApiSubscriberCallBack<WelfareResponse>() {
+                RetrofitApiManager.getInstance().getImagesByPage(page, new ApiSubscriberCallBack<WelfareResponse>() {
                     @Override
                     public void onSuccess(WelfareResponse welfareResponse) {
                         if (welfareResponse != null && welfareResponse.getResults() != null) {
