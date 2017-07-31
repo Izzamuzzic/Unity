@@ -17,6 +17,7 @@ import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.swipe_image.ImageActivity;
 import com.zwq65.unity.utils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -94,15 +95,16 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
         adapter.setOnItemClickListener(new OnItemClickListener<Image>() {
             @Override
             public void onClick(Image image, int position) {
-                startContentActivity(image);
+                startContentActivity(position);
             }
         });
         rvAlbums.setAdapter(adapter);
     }
 
-    private void startContentActivity(Image image) {
+    private void startContentActivity(int position) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ImageActivity.IMAGE, image);
+        bundle.putInt(ImageActivity.POSITION, position);
+        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) adapter.getData());
         openActivity(ImageActivity.class, bundle);
     }
 

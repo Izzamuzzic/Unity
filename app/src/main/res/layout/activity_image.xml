@@ -8,8 +8,8 @@
     android:paddingTop="30dp"
     tools:context="com.zwq65.unity.ui.swipe_image.ImageActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_images"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_images"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

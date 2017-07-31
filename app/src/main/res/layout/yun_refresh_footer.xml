@@ -22,8 +22,8 @@
             android:id="@+id/msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/listview_loading"
+            android:layout_marginStart="@dimen/defult_padding_10"
+            android:text="@string/loading"
             android:textColor="#333333" />
     </LinearLayout>
 </LinearLayout>

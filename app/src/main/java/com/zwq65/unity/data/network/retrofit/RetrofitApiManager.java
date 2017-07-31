@@ -41,9 +41,13 @@ public class RetrofitApiManager {
     }
 
 
-    public synchronized static RetrofitApiManager getInstance() {
+    public static RetrofitApiManager getInstance() {
         if (apiManager == null) {
-            apiManager = new RetrofitApiManager();
+            synchronized (RetrofitApiManager.class) {
+                if (apiManager == null) {
+                    apiManager = new RetrofitApiManager();
+                }
+            }
         }
         return apiManager;
     }

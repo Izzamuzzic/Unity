@@ -34,8 +34,16 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(AlbumAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(AlbumAdapter.ViewHolder holder, final int position) {
         Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
+        holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClick(data.get(position), position);
+                }
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
