@@ -3,6 +3,7 @@ package com.zwq65.unity;
 import android.app.Application;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
@@ -30,6 +31,7 @@ public class UnityApp extends Application {
                 .applicationModule(new ApplicationModule(this)).build();
 
         mApplicationComponent.inject(this);
+        Stetho.initializeWithDefaults(this);//初始化Stetho(可以在chrome中方便地查看app数据库等信息，release时注释掉就ok了)
     }
 
     public ApplicationComponent getComponent() {

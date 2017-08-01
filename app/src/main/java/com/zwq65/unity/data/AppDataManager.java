@@ -18,28 +18,19 @@ package com.zwq65.unity.data;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.$Gson$Types;
-import com.google.gson.reflect.TypeToken;
 import com.zwq65.unity.data.db.DbHelper;
-import com.zwq65.unity.data.db.model.Option;
-import com.zwq65.unity.data.db.model.Question;
+import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.db.model.User;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
-import com.zwq65.unity.utils.AppConstants;
-import com.zwq65.unity.utils.CommonUtils;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -80,6 +71,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<List<User>> getAllUsers() {
         return mDbHelper.getAllUsers();
+    }
+
+    @Override
+    public Completable insertPicture(Picture picture) {
+        return mDbHelper.insertPicture(picture);
     }
 
     @Override
@@ -165,94 +161,5 @@ public class AppDataManager implements DataManager {
                 null,
                 null,
                 null);
-    }
-
-    @Override
-    public Observable<Boolean> isQuestionEmpty() {
-        return mDbHelper.isQuestionEmpty();
-    }
-
-    @Override
-    public Observable<Boolean> isOptionEmpty() {
-        return mDbHelper.isOptionEmpty();
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestion(Question question) {
-        return mDbHelper.saveQuestion(question);
-    }
-
-    @Override
-    public Observable<Boolean> saveOption(Option option) {
-        return mDbHelper.saveOption(option);
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestionList(List<Question> questionList) {
-        return mDbHelper.saveQuestionList(questionList);
-    }
-
-    @Override
-    public Observable<Boolean> saveOptionList(List<Option> optionList) {
-        return mDbHelper.saveOptionList(optionList);
-    }
-
-    @Override
-    public Observable<List<Question>> getAllQuestions() {
-        return mDbHelper.getAllQuestions();
-    }
-
-    @Override
-    public Observable<Boolean> seedDatabaseQuestions() {
-
-        GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
-        final Gson gson = builder.create();
-
-        return mDbHelper.isQuestionEmpty()
-                .concatMap(new Function<Boolean, ObservableSource<? extends Boolean>>() {
-                    @Override
-                    public ObservableSource<? extends Boolean> apply(Boolean isEmpty)
-                            throws Exception {
-                        if (isEmpty) {
-                            Type type = $Gson$Types
-                                    .newParameterizedTypeWithOwner(null, List.class,
-                                            Question.class);
-                            List<Question> questionList = gson.fromJson(
-                                    CommonUtils.loadJSONFromAsset(mContext,
-                                            AppConstants.SEED_DATABASE_QUESTIONS),
-                                    type);
-
-                            return saveQuestionList(questionList);
-                        }
-                        return Observable.just(false);
-                    }
-                });
-    }
-
-    @Override
-    public Observable<Boolean> seedDatabaseOptions() {
-
-        GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
-        final Gson gson = builder.create();
-
-        return mDbHelper.isOptionEmpty()
-                .concatMap(new Function<Boolean, ObservableSource<? extends Boolean>>() {
-                    @Override
-                    public ObservableSource<? extends Boolean> apply(Boolean isEmpty)
-                            throws Exception {
-                        if (isEmpty) {
-                            Type type = new TypeToken<List<Option>>() {
-                            }
-                                    .getType();
-                            List<Option> optionList = gson.fromJson(
-                                    CommonUtils.loadJSONFromAsset(mContext,
-                                            AppConstants.SEED_DATABASE_OPTIONS),
-                                    type);
-
-                            return saveOptionList(optionList);
-                        }
-                        return Observable.just(false);
-                    }
-                });
     }
 }

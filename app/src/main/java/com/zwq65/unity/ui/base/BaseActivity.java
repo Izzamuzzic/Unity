@@ -199,7 +199,17 @@ public abstract class BaseActivity extends AppCompatActivity
         snackbar.show();
     }
 
-    private void showAlert(String message) {
+    private void showErrorAlert(String message) {
+        Alerter.create(this)
+                .setBackgroundColorRes(R.color.red_alert)
+                .enableSwipeToDismiss()
+                .setDuration(3000)
+                .setTitle("提示")
+                .setText(message)
+                .show();
+    }
+
+    public void showSuccessAlert(String message) {
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.colorAccent)
                 .enableSwipeToDismiss()
@@ -212,9 +222,9 @@ public abstract class BaseActivity extends AppCompatActivity
     @Override
     public void onError(String message) {
         if (message != null) {
-            showAlert(message);
+            showErrorAlert(message);
         } else {
-            showAlert(getString(R.string.some_error));
+            showErrorAlert(getString(R.string.some_error));
         }
     }
 
@@ -222,6 +232,7 @@ public abstract class BaseActivity extends AppCompatActivity
     public void onError(@StringRes int resId) {
         onError(getString(resId));
     }
+
 
     @Override
     public void showMessage(String message) {

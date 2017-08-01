@@ -19,8 +19,6 @@ package com.zwq65.unity.data;
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 
-import io.reactivex.Observable;
-
 /**
  * Created by janisharali on 27/01/17.
  */
@@ -31,9 +29,6 @@ public interface DataManager extends DbHelper, PreferencesHelper {
 
     void setUserAsLoggedOut();
 
-    Observable<Boolean> seedDatabaseQuestions();
-
-    Observable<Boolean> seedDatabaseOptions();
 
     void updateUserInfo(
             String accessToken,

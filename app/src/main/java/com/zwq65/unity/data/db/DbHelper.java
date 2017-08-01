@@ -16,12 +16,12 @@
 package com.zwq65.unity.data.db;
 
 
-import com.zwq65.unity.data.db.model.Option;
-import com.zwq65.unity.data.db.model.Question;
+import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.db.model.User;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 
@@ -35,17 +35,6 @@ public interface DbHelper {
 
     Observable<List<User>> getAllUsers();
 
-    Observable<List<Question>> getAllQuestions();
+    Completable insertPicture(final Picture picture);
 
-    Observable<Boolean> isQuestionEmpty();
-
-    Observable<Boolean> isOptionEmpty();
-
-    Observable<Boolean> saveQuestion(Question question);
-
-    Observable<Boolean> saveOption(Option option);
-
-    Observable<Boolean> saveQuestionList(List<Question> questionList);
-
-    Observable<Boolean> saveOptionList(List<Option> optionList);
 }

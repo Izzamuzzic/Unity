@@ -17,8 +17,7 @@ package com.zwq65.unity.data.db;
 
 import com.zwq65.unity.data.db.model.DaoMaster;
 import com.zwq65.unity.data.db.model.DaoSession;
-import com.zwq65.unity.data.db.model.Option;
-import com.zwq65.unity.data.db.model.Question;
+import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.db.model.User;
 
 import java.util.List;
@@ -27,11 +26,13 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 
 /**
  * Created by janisharali on 08/12/16.
+ * databese操作帮助类
  */
 
 @Singleton
@@ -65,75 +66,11 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<List<Question>> getAllQuestions() {
-        return Observable.fromCallable(new Callable<List<Question>>() {
+    public Completable insertPicture(final Picture picture) {
+        return Completable.fromCallable(new Callable<Long>() {
             @Override
-            public List<Question> call() throws Exception {
-                return mDaoSession.getQuestionDao().loadAll();
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> isQuestionEmpty() {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                return !(mDaoSession.getQuestionDao().count() > 0);
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> isOptionEmpty() {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                return !(mDaoSession.getOptionDao().count() > 0);
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestion(final Question question) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mDaoSession.getQuestionDao().insert(question);
-                return true;
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> saveOption(final Option option) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mDaoSession.getOptionDao().insertInTx(option);
-                return true;
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestionList(final List<Question> questionList) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mDaoSession.getQuestionDao().insertInTx(questionList);
-                return true;
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> saveOptionList(final List<Option> optionList) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mDaoSession.getOptionDao().insertInTx(optionList);
-                return true;
+            public Long call() throws Exception {
+                return mDaoSession.getPictureDao().insert(picture);
             }
         });
     }

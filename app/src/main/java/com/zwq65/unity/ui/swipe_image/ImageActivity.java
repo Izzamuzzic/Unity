@@ -1,6 +1,5 @@
 package com.zwq65.unity.ui.swipe_image;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -18,32 +17,50 @@ import com.zwq65.unity.ui.base.BaseActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 查看大图Activity
  */
-public class ImageActivity extends BaseActivity {
+public class ImageActivity extends BaseActivity implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
+
+    int currentPosition;//当前显示的大图position
+    List<Image> imageList;//图片list
+
     @BindView(R.id.vp_images)
     ViewPager vpImages;
     @BindView(R.id.tv_current_page)
-    TextView tvCurrentPage;
+    TextView tvCurrentPage;//当前页数
     @BindView(R.id.tv_total_page)
-    TextView tvTotalPage;
+    TextView tvTotalPage;//图片list总数
+    @BindView(R.id.tv_save_image)
+    TextView tvSaveImage;
 
-    int currentPosition;
-    List<Image> imageList;
+    @Inject
+    ImageMvpPresenter<ImageMvpView> mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentViewWithoutInject(R.layout.activity_image);//不绑定toolBar
         setUnBinder(ButterKnife.bind(this));
+        getActivityComponent().inject(this);
+        mPresenter.onAttach(this);
         initData();
+        initView();
         initViewPager();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
     }
 
     private void initData() {
@@ -51,39 +68,51 @@ public class ImageActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);
         imageList = bundle.getParcelableArrayList(IMAGE_LIST);
-        tvCurrentPage.setText(String.valueOf(currentPosition));
+    }
+
+    private void initView() {
+        tvCurrentPage.setText(String.valueOf(currentPosition + 1));
         tvTotalPage.setText(String.valueOf(imageList.size()));
     }
 
     private void initViewPager() {
-        vpImages.setOffscreenPageLimit(2);
-        Myadapter mAdapter = new Myadapter(this);
+        vpImages.setOffscreenPageLimit(2);//预加载2个item
+        Myadapter mAdapter = new Myadapter();
         vpImages.setAdapter(mAdapter);
         vpImages.setCurrentItem(currentPosition);//设置当前加载的资源为点击进入的图片
-        vpImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        vpImages.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                tvCurrentPage.setText(String.valueOf(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+                //滑动改变当前页数
+                currentPosition = position;
+                tvCurrentPage.setText(String.valueOf(currentPosition + 1));
             }
         });
     }
 
+    @OnClick(R.id.tv_save_image)
+    public void onViewClicked() {
+        //保存大图
+        mPresenter.savePicture(imageList.get(currentPosition));
+    }
+
+    @Override
+    public void saveSuccess() {
+        showSuccessAlert("保存成功！");
+    }
+
+    @Override
+    public void saveError() {
+        onError("保存失败！");
+    }
+
+    /**
+     * 显示大图viewpager's adapter
+     */
     private class Myadapter extends PagerAdapter {
         LayoutInflater inflater;
-        Context context;
 
-        Myadapter(Context context) {
-            this.context = context;
+        Myadapter() {
             this.inflater = getLayoutInflater();
         }
 
@@ -102,9 +131,10 @@ public class ImageActivity extends BaseActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
             ImageView ivImage = (ImageView) view.findViewById(R.id.iv_image);
-            Glide.with(context).load(imageList.get(position).getUrl()).into(ivImage);
+            Glide.with(ImageActivity.this).load(imageList.get(position).getUrl()).into(ivImage);
             container.addView(view, 0);
             return view;
         }
@@ -114,29 +144,7 @@ public class ImageActivity extends BaseActivity {
             View view = (View) object;
             container.removeView(view);
         }
-    }
 
-//    float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-//
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        switch (ev.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                x1 = ev.getRawX();
-//                y1 = ev.getRawY();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                x2 = ev.getRawX();
-//                y2 = ev.getRawY();
-//                if (Math.abs(y2 - y1) < 150) {//左滑
-//                    if (x2 - x1 > 200) {
-//                        finish();
-//                    } else if (x2 - x1 < -200) {//右滑
-//
-//                    }
-//                }
-//                break;
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
+
+    }
 }

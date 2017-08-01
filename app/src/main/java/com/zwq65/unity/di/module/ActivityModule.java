@@ -27,6 +27,9 @@ import com.zwq65.unity.ui.album.AlbumPresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
+import com.zwq65.unity.ui.swipe_image.ImageMvpPresenter;
+import com.zwq65.unity.ui.swipe_image.ImageMvpView;
+import com.zwq65.unity.ui.swipe_image.ImagePresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -73,6 +76,13 @@ public class ActivityModule {
     AlbumMvpPresenter<AlbumMvpView> provideAlbumPresenter(
             AlbumPresenter<AlbumMvpView> albumPresenter) {
         return albumPresenter;
+    }
+
+    @Provides
+    @PerActivity
+    ImageMvpPresenter<ImageMvpView> provideImageMvpPresenter(
+            ImagePresenter<ImageMvpView> imagePresenter) {
+        return imagePresenter;
     }
 
     @Provides

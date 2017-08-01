@@ -18,10 +18,8 @@ package com.zwq65.unity.data.db;
 import android.content.Context;
 
 import com.zwq65.unity.data.db.model.DaoMaster;
-import com.zwq65.unity.data.db.model.UserDao;
 import com.zwq65.unity.di.ApplicationContext;
 import com.zwq65.unity.di.DatabaseInfo;
-import com.zwq65.unity.utils.LogUtils;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -43,12 +41,14 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
     @Override
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
-        LogUtils.d("DEBUG", "DB_OLD_VERSION : " + oldVersion + ", DB_NEW_VERSION : " + newVersion);
-        switch (oldVersion) {
-            case 1:
-            case 2:
-                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
-                        + "sex" + " TEXT DEFAULT 'MAN'");
-        }
+//        LogUtils.d("DEBUG", "DB_OLD_VERSION : " + oldVersion + ", DB_NEW_VERSION : " + newVersion);
+//        switch (oldVersion) {
+//            case 1:
+//            case 2:
+//                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
+//                        + "sex" + " TEXT DEFAULT 'MAN'");
+//                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
+//                        + "sex" + " TEXT DEFAULT 'MAN'");
+//        }
     }
 }

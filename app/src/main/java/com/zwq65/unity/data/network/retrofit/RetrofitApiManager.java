@@ -52,20 +52,16 @@ public class RetrofitApiManager {
      */
     private GankIoApiService getGankIoApiService() {
         if (gankIoApiService == null) {
-            synchronized (RetrofitApiManager.class) {
-                if (gankIoApiService == null) {
-                    OkHttpClient okClient = new OkHttpClient.Builder()
-                            .addInterceptor(new MyInterceptor())
-                            .build();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(Constants.GANK_IO_HOST)
-                            .client(okClient)
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    gankIoApiService = retrofit.create(GankIoApiService.class);
-                }
-            }
+            OkHttpClient okClient = new OkHttpClient.Builder()
+                    .addInterceptor(new MyInterceptor())
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.GANK_IO_HOST)
+                    .client(okClient)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            gankIoApiService = retrofit.create(GankIoApiService.class);
         }
         return gankIoApiService;
     }

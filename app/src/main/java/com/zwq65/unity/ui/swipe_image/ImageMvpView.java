@@ -7,4 +7,7 @@ import com.zwq65.unity.ui.base.MvpView;
  */
 
 public interface ImageMvpView extends MvpView {
+    void saveSuccess();
+
+    void saveError();
 }
