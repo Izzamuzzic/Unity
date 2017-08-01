@@ -97,13 +97,12 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     }
 
     @Override
-    public void saveSuccess() {
-        showSuccessAlert("保存成功！");
-    }
-
-    @Override
-    public void saveError() {
-        onError("保存失败！");
+    public void savePictrueWhetherSucceed(Boolean success) {
+        if (success) {
+            showSuccessAlert("保存成功！");
+        } else {
+            onError("保存失败！");
+        }
     }
 
     /**

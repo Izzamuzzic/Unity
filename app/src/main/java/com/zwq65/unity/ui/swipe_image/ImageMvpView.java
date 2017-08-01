@@ -7,7 +7,5 @@ import com.zwq65.unity.ui.base.MvpView;
  */
 
 public interface ImageMvpView extends MvpView {
-    void saveSuccess();
-
-    void saveError();
+    void savePictrueWhetherSucceed(Boolean success);//保存图片是否成功
 }

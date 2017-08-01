@@ -29,12 +29,12 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
         getDataManager().insertPicture(picture).subscribe(new Action() {
             @Override
             public void run() throws Exception {
-                getMvpView().saveSuccess();
+                getMvpView().savePictrueWhetherSucceed(true);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
-                getMvpView().saveError();
+                getMvpView().savePictrueWhetherSucceed(false);
             }
         });
     }
