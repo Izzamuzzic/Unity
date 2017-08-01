@@ -39,6 +39,12 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         mPresenter.onAttach(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
+    }
+
     //跳转到主界面
     @Override
     public void openMainActivity() {
