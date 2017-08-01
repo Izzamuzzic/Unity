@@ -18,7 +18,6 @@ package com.zwq65.unity.di.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.zwq65.unity.R;
 import com.zwq65.unity.data.AppDataManager;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.AppDbHelper;
@@ -34,7 +33,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -88,14 +86,5 @@ public class ApplicationModule {
     @Singleton
     PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
         return appPreferencesHelper;
-    }
-
-    @Provides
-    @Singleton
-    CalligraphyConfig provideCalligraphyDefaultConfig() {
-        return new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build();
     }
 }

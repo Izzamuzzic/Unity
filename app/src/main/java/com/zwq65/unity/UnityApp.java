@@ -3,16 +3,10 @@ package com.zwq65.unity;
 import android.app.Application;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
 import com.zwq65.unity.utils.ToastUtils;
-
-import javax.inject.Inject;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by zwq65 on 2017/06/28.
@@ -20,8 +14,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class UnityApp extends Application {
-    @Inject
-    CalligraphyConfig mCalligraphyConfig;
 
     private ApplicationComponent mApplicationComponent;
     private static UnityApp unityApp;
@@ -38,12 +30,6 @@ public class UnityApp extends Application {
                 .applicationModule(new ApplicationModule(this)).build();
 
         mApplicationComponent.inject(this);
-
-        AndroidNetworking.initialize(getApplicationContext());
-        if (BuildConfig.DEBUG) {
-            AndroidNetworking.enableLogging(Level.BODY);
-        }
-        CalligraphyConfig.initDefault(mCalligraphyConfig);
     }
 
     public ApplicationComponent getComponent() {

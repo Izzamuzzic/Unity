@@ -36,11 +36,6 @@ public class RetrofitApiManager {
         return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
-    public Disposable getImageByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getGankIoApiService().getImageByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
-    }
-
-
     public static RetrofitApiManager getInstance() {
         if (apiManager == null) {
             synchronized (RetrofitApiManager.class) {
@@ -57,17 +52,20 @@ public class RetrofitApiManager {
      */
     private GankIoApiService getGankIoApiService() {
         if (gankIoApiService == null) {
-            OkHttpClient okClient = new OkHttpClient.Builder()
-                    .addInterceptor(new MyInterceptor())
-                    .build();
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.GANK_IO_HOST)
-                    .client(okClient)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            gankIoApiService = retrofit.create(GankIoApiService.class);
+            synchronized (RetrofitApiManager.class) {
+                if (gankIoApiService == null) {
+                    OkHttpClient okClient = new OkHttpClient.Builder()
+                            .addInterceptor(new MyInterceptor())
+                            .build();
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(Constants.GANK_IO_HOST)
+                            .client(okClient)
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    gankIoApiService = retrofit.create(GankIoApiService.class);
+                }
+            }
         }
         return gankIoApiService;
     }
@@ -89,7 +87,7 @@ public class RetrofitApiManager {
     /**
      * 自定义拦截器(log request and response data)
      */
-    private class MyInterceptor implements Interceptor {
+    private static class MyInterceptor implements Interceptor {
         @Override
         public Response intercept(@android.support.annotation.NonNull Chain chain) throws IOException {
             Response response = chain.proceed(chain.request());

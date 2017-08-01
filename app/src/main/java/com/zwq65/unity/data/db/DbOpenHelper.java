@@ -18,6 +18,7 @@ package com.zwq65.unity.data.db;
 import android.content.Context;
 
 import com.zwq65.unity.data.db.model.DaoMaster;
+import com.zwq65.unity.data.db.model.UserDao;
 import com.zwq65.unity.di.ApplicationContext;
 import com.zwq65.unity.di.DatabaseInfo;
 import com.zwq65.unity.utils.LogUtils;
@@ -46,8 +47,8 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
         switch (oldVersion) {
             case 1:
             case 2:
-                //db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
-                // + UserDao.Properties.Name.columnName + " TEXT DEFAULT 'DEFAULT_VAL'");
+                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
+                        + "sex" + " TEXT DEFAULT 'MAN'");
         }
     }
 }

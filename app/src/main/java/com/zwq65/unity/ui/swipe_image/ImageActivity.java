@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
@@ -28,6 +29,11 @@ public class ImageActivity extends BaseActivity {
     public static final String IMAGE_LIST = "IMAGE_LIST";
     @BindView(R.id.vp_images)
     ViewPager vpImages;
+    @BindView(R.id.tv_current_page)
+    TextView tvCurrentPage;
+    @BindView(R.id.tv_total_page)
+    TextView tvTotalPage;
+
     int currentPosition;
     List<Image> imageList;
 
@@ -45,6 +51,8 @@ public class ImageActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);
         imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        tvCurrentPage.setText(String.valueOf(currentPosition));
+        tvTotalPage.setText(String.valueOf(imageList.size()));
     }
 
     private void initViewPager() {
@@ -52,6 +60,22 @@ public class ImageActivity extends BaseActivity {
         Myadapter mAdapter = new Myadapter(this);
         vpImages.setAdapter(mAdapter);
         vpImages.setCurrentItem(currentPosition);//设置当前加载的资源为点击进入的图片
+        vpImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tvCurrentPage.setText(String.valueOf(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private class Myadapter extends PagerAdapter {

@@ -39,13 +39,18 @@ public class User {
     @Property(nameInDb = "updated_at")
     private String updatedAt;
 
+    @Property(nameInDb = "sex")
+    private String sex;
 
-    @Generated(hash = 1543916479)
-    public User(Long id, String name, String createdAt, String updatedAt) {
+
+    @Generated(hash = 703574482)
+    public User(Long id, String name, String createdAt, String updatedAt,
+            String sex) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.sex = sex;
     }
 
     @Generated(hash = 586692638)
@@ -82,5 +87,13 @@ public class User {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

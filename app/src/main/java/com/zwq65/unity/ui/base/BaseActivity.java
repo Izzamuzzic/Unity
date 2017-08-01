@@ -50,7 +50,6 @@ import com.zwq65.unity.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by janisharali on 27/01/17
@@ -151,11 +150,6 @@ public abstract class BaseActivity extends AppCompatActivity
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @TargetApi(Build.VERSION_CODES.M)
