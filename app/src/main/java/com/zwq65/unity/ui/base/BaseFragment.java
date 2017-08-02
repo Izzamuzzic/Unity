@@ -74,27 +74,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public void onError(String message) {
-        if (mActivity != null) {
-            mActivity.onError(message);
-        }
-    }
-
-    @Override
-    public void onError(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.onError(resId);
-        }
-    }
-
-    @Override
-    public void showMessage(String message) {
-        if (mActivity != null) {
-            mActivity.showMessage(message);
-        }
-    }
-
-    @Override
     public void showMessage(@StringRes int resId) {
         if (mActivity != null) {
             mActivity.showMessage(resId);
@@ -126,6 +105,20 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void openActivityOnTokenExpire() {
         if (mActivity != null) {
             mActivity.openActivityOnTokenExpire();
+        }
+    }
+
+    @Override
+    public void showErrorAlert(@StringRes int resId) {
+        if (mActivity != null) {
+            mActivity.showErrorAlert(resId);
+        }
+    }
+
+    @Override
+    public void showSuccessAlert(@StringRes int resId) {
+        if (mActivity != null) {
+            mActivity.showSuccessAlert(resId);
         }
     }
 

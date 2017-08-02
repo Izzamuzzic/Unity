@@ -70,23 +70,16 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     }
 
     @Override
-    public void onError(String message) {
+    public void showErrorAlert(@StringRes int resId) {
         if (mActivity != null) {
-            mActivity.onError(message);
+            mActivity.showErrorAlert(resId);
         }
     }
 
     @Override
-    public void onError(@StringRes int resId) {
+    public void showSuccessAlert(@StringRes int resId) {
         if (mActivity != null) {
-            mActivity.onError(resId);
-        }
-    }
-
-    @Override
-    public void showMessage(String message) {
-        if (mActivity != null) {
-            mActivity.showMessage(message);
+            mActivity.showSuccessAlert(resId);
         }
     }
 

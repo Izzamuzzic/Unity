@@ -34,11 +34,9 @@ public interface MvpView {
 
     void openActivityOnTokenExpire();
 
-    void onError(@StringRes int resId);
+    void showErrorAlert(@StringRes int resId);
 
-    void onError(String message);
-
-    void showMessage(String message);
+    void showSuccessAlert(@StringRes int resId);
 
     void showMessage(@StringRes int resId);
 

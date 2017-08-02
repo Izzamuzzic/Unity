@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by janisharali on 27/01/17.
+ * 自定义view基类
  */
 
 public abstract class BaseSubView extends ViewGroup implements SubMvpView {
@@ -66,23 +67,16 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
     }
 
     @Override
-    public void onError(@StringRes int resId) {
+    public void showErrorAlert(@StringRes int resId) {
         if (mParentMvpView != null) {
-            mParentMvpView.onError(resId);
+            mParentMvpView.showErrorAlert(resId);
         }
     }
 
     @Override
-    public void onError(String message) {
+    public void showSuccessAlert(@StringRes int resId) {
         if (mParentMvpView != null) {
-            mParentMvpView.onError(message);
-        }
-    }
-
-    @Override
-    public void showMessage(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(message);
+            mParentMvpView.showSuccessAlert(resId);
         }
     }
 
@@ -114,6 +108,7 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
             mParentMvpView.openActivityOnTokenExpire();
         }
     }
+
 
     protected abstract void bindViewsAndSetOnClickListeners();
 

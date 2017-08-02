@@ -101,7 +101,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         if (success) {
             showSuccessAlert("保存成功！");
         } else {
-            onError("保存失败！");
+            showErrorAlert("保存失败！");
         }
     }
 

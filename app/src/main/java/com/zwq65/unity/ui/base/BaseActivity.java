@@ -35,7 +35,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.tapadoo.alerter.Alerter;
@@ -55,7 +54,7 @@ import butterknife.Unbinder;
  * Created by janisharali on 27/01/17
  */
 
-public abstract class BaseActivity extends AppCompatActivity
+public class BaseActivity extends AppCompatActivity
         implements MvpView, BaseFragment.Callback {
 
     @Nullable
@@ -109,7 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity
         inboxMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                onError("666");
+                showErrorAlert("666");
                 return false;
             }
         });
@@ -189,22 +188,27 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
-    private void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
-        snackbar.show();
+    @Override
+    public void showErrorAlert(@StringRes int resId) {
+        showErrorAlert(getString(resId));
     }
 
-    private void showErrorAlert(String message) {
+    @Override
+    public void showSuccessAlert(@StringRes int resId) {
+        showSuccessAlert(getString(resId));
+    }
+
+    @Override
+    public void showMessage(@StringRes int resId) {
+        showMessage(getString(resId));
+    }
+
+    public void showErrorAlert(String message) {
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.red_alert)
                 .enableSwipeToDismiss()
                 .setDuration(3000)
-                .setTitle("提示")
+                .setTitle("出错了")
                 .setText(message)
                 .show();
     }
@@ -219,33 +223,14 @@ public abstract class BaseActivity extends AppCompatActivity
                 .show();
     }
 
-    @Override
-    public void onError(String message) {
-        if (message != null) {
-            showErrorAlert(message);
-        } else {
-            showErrorAlert(getString(R.string.some_error));
-        }
-    }
-
-    @Override
-    public void onError(@StringRes int resId) {
-        onError(getString(resId));
-    }
-
-
-    @Override
     public void showMessage(String message) {
-        if (message != null) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void showMessage(@StringRes int resId) {
-        showMessage(getString(resId));
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                message, Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView
+                .findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+        snackbar.show();
     }
 
     @Override
