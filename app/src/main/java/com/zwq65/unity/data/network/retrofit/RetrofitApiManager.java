@@ -48,7 +48,7 @@ public class RetrofitApiManager {
     }
 
     /**
-     * @return retrofit_http_api
+     * @return api
      */
     private GankIoApiService getGankIoApiService() {
         if (gankIoApiService == null) {
@@ -67,7 +67,7 @@ public class RetrofitApiManager {
     }
 
     /**
-     * @return 包装Observable，使之采用统一的线程调度
+     * @return 包装Observable采用统一的线程调度(网络请求在io线程执行, 回调在Android主线程)
      */
     private ObservableTransformer schedulersTransformer() {
         return new ObservableTransformer() {
