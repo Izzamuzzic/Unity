@@ -80,7 +80,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
                     if (layoutManager.getChildCount() > 0
                             && lastVisibleItemPosition >= layoutManager.getItemCount() - 1
                             && layoutManager.getItemCount() > layoutManager.getChildCount()) {
-                        LogUtils.e("onLoadMore");
+                        LogUtils.i("onLoadMore");
                         mPresenter.loadImages(false);
                     }
                 }
@@ -135,6 +135,6 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
     @Override
     public void noMoreData() {
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        onError("没有更多数据了！");
+        showErrorAlert("没有更多数据了！");
     }
 }

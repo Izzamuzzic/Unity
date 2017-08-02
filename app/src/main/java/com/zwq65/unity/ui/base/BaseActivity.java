@@ -203,6 +203,7 @@ public class BaseActivity extends AppCompatActivity
         showMessage(getString(resId));
     }
 
+    @Override
     public void showErrorAlert(String message) {
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.red_alert)
@@ -213,6 +214,7 @@ public class BaseActivity extends AppCompatActivity
                 .show();
     }
 
+    @Override
     public void showSuccessAlert(String message) {
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.colorAccent)
@@ -223,6 +225,7 @@ public class BaseActivity extends AppCompatActivity
                 .show();
     }
 
+    @Override
     public void showMessage(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);

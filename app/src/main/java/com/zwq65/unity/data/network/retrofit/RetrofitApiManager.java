@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiManager {
     private GankIoApiService gankIoApiService;
-    private static RetrofitApiManager apiManager;
+    private static volatile RetrofitApiManager apiManager;
 
     public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);

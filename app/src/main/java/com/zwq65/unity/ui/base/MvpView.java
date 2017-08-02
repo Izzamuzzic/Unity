@@ -36,9 +36,15 @@ public interface MvpView {
 
     void showErrorAlert(@StringRes int resId);
 
+    void showErrorAlert(String message);
+
     void showSuccessAlert(@StringRes int resId);
 
+    void showSuccessAlert(String message);
+
     void showMessage(@StringRes int resId);
+
+    void showMessage(String message);
 
     boolean isNetworkConnected();
 

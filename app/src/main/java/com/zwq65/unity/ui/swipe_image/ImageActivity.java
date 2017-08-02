@@ -15,6 +15,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,15 +31,13 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
 
-    int currentPosition;//当前显示的大图position
+    int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list
 
     @BindView(R.id.vp_images)
     ViewPager vpImages;
     @BindView(R.id.tv_current_page)
     TextView tvCurrentPage;//当前页数
-    @BindView(R.id.tv_total_page)
-    TextView tvTotalPage;//图片list总数
     @BindView(R.id.tv_save_image)
     TextView tvSaveImage;
 
@@ -68,11 +67,21 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);
         imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        if (imageList == null) {
+            imageList = new ArrayList<>();
+        }
+        pageSize = imageList.size();
     }
 
     private void initView() {
-        tvCurrentPage.setText(String.valueOf(currentPosition + 1));
-        tvTotalPage.setText(String.valueOf(imageList.size()));
+        setCurrentPage();
+    }
+
+    /**
+     * 设置当前页数
+     */
+    private void setCurrentPage() {
+        tvCurrentPage.setText(currentPosition + 1 + " / " + pageSize);
     }
 
     private void initViewPager() {
@@ -85,7 +94,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             public void onPageSelected(int position) {
                 //滑动改变当前页数
                 currentPosition = position;
-                tvCurrentPage.setText(String.valueOf(currentPosition + 1));
+                setCurrentPage();
             }
         });
     }

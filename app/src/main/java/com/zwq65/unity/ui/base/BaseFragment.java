@@ -81,6 +81,13 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
+    public void showMessage(String message) {
+        if (mActivity != null) {
+            mActivity.showMessage(message);
+        }
+    }
+
+    @Override
     public boolean isNetworkConnected() {
         if (mActivity != null) {
             return mActivity.isNetworkConnected();
@@ -116,9 +123,23 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
+    public void showErrorAlert(String message) {
+        if (mActivity != null) {
+            mActivity.showErrorAlert(message);
+        }
+    }
+
+    @Override
     public void showSuccessAlert(@StringRes int resId) {
         if (mActivity != null) {
             mActivity.showSuccessAlert(resId);
+        }
+    }
+
+    @Override
+    public void showSuccessAlert(String message) {
+        if (mActivity != null) {
+            mActivity.showSuccessAlert(message);
         }
     }
 
