@@ -208,7 +208,7 @@ public class BaseActivity extends AppCompatActivity
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.red_alert)
                 .enableSwipeToDismiss()
-                .setDuration(3000)
+                .setDuration(1000)
                 .setTitle("出错了")
                 .setText(message)
                 .show();
@@ -219,7 +219,7 @@ public class BaseActivity extends AppCompatActivity
         Alerter.create(this)
                 .setBackgroundColorRes(R.color.colorAccent)
                 .enableSwipeToDismiss()
-                .setDuration(3000)
+                .setDuration(1000)
                 .setTitle("提示")
                 .setText(message)
                 .show();

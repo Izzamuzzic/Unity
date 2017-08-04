@@ -70,7 +70,7 @@ public class AppDbHelper implements DbHelper {
         return Completable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
-                return mDaoSession.getPictureDao().insert(picture);
+                return mDaoSession.getPictureDao().insertOrReplace(picture);
             }
         });
     }

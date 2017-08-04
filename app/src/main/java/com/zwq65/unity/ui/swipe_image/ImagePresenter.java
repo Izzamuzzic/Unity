@@ -4,6 +4,7 @@ import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BasePresenter;
+import com.zwq65.unity.utils.LogUtils;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,7 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
+                LogUtils.e(throwable.toString());
                 getMvpView().savePictrueWhetherSucceed(false);
             }
         });
