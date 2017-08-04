@@ -61,6 +61,7 @@ public class AlbumActivity extends BaseActivity implements AlbumMvpView {
         rvAlbums.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rvAlbums.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
+        //下拉加載監聽
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
