@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <!--Implementation of ImageView for Android that supports zooming,
-     by various touch gestures.-->
+     by various touch gestures. -->
     <com.zwq65.unity.ui.custom.photoview.PhotoView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
