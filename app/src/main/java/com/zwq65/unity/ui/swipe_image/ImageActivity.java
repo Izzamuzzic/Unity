@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.ui.custom.photoview.PhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +142,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         public Object instantiateItem(ViewGroup container, int position) {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
-            ImageView ivImage = (ImageView) view.findViewById(R.id.iv_image);
+            PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
             Glide.with(ImageActivity.this).load(imageList.get(position).getUrl()).into(ivImage);
             container.addView(view, 0);
             return view;
