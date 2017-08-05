@@ -74,6 +74,8 @@ dependencies {
     compile 'me.yuqirong:cardswipelayout:1.0.0'
     //stetho：facebook开发的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices）
     compile 'com.facebook.stetho:stetho:1.4.2'
+    //Implementation of ImageView for Android that supports zooming, by various touch gestures.
+    compile 'com.github.chrisbanes:PhotoView:latest.release.here'
 
     testCompile 'junit:junit:4.12'
 }
