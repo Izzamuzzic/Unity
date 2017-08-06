@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.BaseActivity;
@@ -24,6 +28,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.view.View.GONE;
 
 /**
  * 查看大图Activity
@@ -143,7 +149,23 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
             PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
-            Glide.with(ImageActivity.this).load(imageList.get(position).getUrl()).into(ivImage);
+            final MKLoader pbLoader = (MKLoader) view.findViewById(R.id.pb_loader);
+            Glide.with(ImageActivity.this).load(imageList.get(position).getUrl())
+                    .crossFade()//图片加载动画
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    showErrorAlert("加载失败");
+                    pbLoader.setVisibility(GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    pbLoader.setVisibility(GONE);
+                    return false;
+                }
+            }).error(R.mipmap.ic_load_fail).into(ivImage);
             container.addView(view, 0);
             return view;
         }
