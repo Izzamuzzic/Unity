@@ -39,7 +39,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
     private final String TAG = getClass().getSimpleName();
-    private BaseActivity mActivity;
+    public BaseActivity mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
 

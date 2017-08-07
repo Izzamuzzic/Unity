@@ -26,11 +26,12 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -65,11 +66,11 @@ public class BaseActivity extends AppCompatActivity
     @BindView(R.id.ivLogo)
     ImageView ivLogo;
 
-    private MenuItem inboxMenuItem;
-
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
+
+    public FragmentManager fragmentManager;
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
@@ -118,15 +119,6 @@ public class BaseActivity extends AppCompatActivity
     @Nullable
     public Toolbar getToolbar() {
         return toolbar;
-    }
-
-    public MenuItem getInboxMenuItem() {
-        return inboxMenuItem;
-    }
-
-    @Nullable
-    public ImageView getIvLogo() {
-        return ivLogo;
     }
 
     @Override
@@ -249,6 +241,12 @@ public class BaseActivity extends AppCompatActivity
     @Override
     public void onFragmentDetached(String tag) {
 
+    }
+
+    public void replaceFragment(int containerViewId, Fragment fragment, String tag) {
+        if (fragmentManager == null)
+            fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(containerViewId, fragment, tag).commit();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)

@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.base.BaseActivity;
 
 import butterknife.BindView;
@@ -44,6 +45,8 @@ public class MainActivity extends BaseActivity {
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        AlbumFragment albumFragment = new AlbumFragment();
+        replaceFragment(R.id.fl_main, albumFragment, albumFragment.getClass().getSimpleName());
     }
 
     @Override
@@ -58,8 +61,11 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.ll_welfare, R.id.ll_setting, R.id.ll_out})
     public void onViewClicked(View view) {
+        drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
             case R.id.ll_welfare:
+                AlbumFragment albumFragment = new AlbumFragment();
+                replaceFragment(R.id.fl_main, albumFragment, albumFragment.getClass().getSimpleName());
                 break;
             case R.id.ll_setting:
                 break;

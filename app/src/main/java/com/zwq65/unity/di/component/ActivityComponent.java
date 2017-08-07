@@ -18,7 +18,7 @@ package com.zwq65.unity.di.component;
 
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.di.module.ActivityModule;
-import com.zwq65.unity.ui.album.AlbumActivity;
+import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 import com.zwq65.unity.ui.swipe_image.ImageActivity;
@@ -41,4 +41,5 @@ public interface ActivityComponent {
 
     void inject(ImageActivity activity);
 
+    void inject(AlbumFragment fragment);
 }
