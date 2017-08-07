@@ -93,11 +93,17 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public void onDestroy() {
-        LogUtils.i(TAG, "onDetach");
+    public void onDestroyView() {
+        LogUtils.i(TAG, "onDestroyView");
+        super.onDestroyView();
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        LogUtils.i(TAG, "onDestroy");
         super.onDestroy();
     }
 
