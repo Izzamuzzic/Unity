@@ -1,6 +1,9 @@
 package com.zwq65.unity.ui.album;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.zwq65.unity.ui.base.BaseFragment;
 
@@ -10,7 +13,12 @@ import com.zwq65.unity.ui.base.BaseFragment;
 
 public class AlbumFragment extends BaseFragment {
     @Override
-    protected void setUp(View view) {
+    public View initView(LayoutInflater inflater, ViewGroup container) {
+        return null;
+    }
+
+    @Override
+    public void initData(Bundle saveInstanceState) {
 
     }
 }

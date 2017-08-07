@@ -193,9 +193,9 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         mUnBinder = unBinder;
     }
 
-    public abstract void initData(Bundle saveInstanceState);
-
     public abstract View initView(LayoutInflater inflater, ViewGroup container);
+
+    public abstract void initData(Bundle saveInstanceState);
 
     public interface Callback {
 
