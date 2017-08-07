@@ -28,6 +28,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -70,8 +71,7 @@ public class BaseActivity extends AppCompatActivity
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;//An unbinder contract that will unbind views when called
-
-    public FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
@@ -244,11 +244,47 @@ public class BaseActivity extends AppCompatActivity
 
     }
 
-    public void replaceFragment(int containerViewId, Fragment fragment, String tag) {
-        if (fragmentManager == null)
+    Fragment currentFragment;
+
+    /**
+     * 切换fragment
+     * hide当前显示的fragment，若已添加,show(),否则add()
+     *
+     * @param containerViewId 容器view
+     * @param targetFragment  要切换的fragment
+     * @param tag             fragment'tag
+     */
+    public void switchFragment(int containerViewId, Fragment targetFragment, String tag) {
+        if (fragmentManager == null) {
             fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(containerViewId, fragment, tag).commit();
+        }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment exsitFragment = fragmentManager.findFragmentByTag(tag);
+        if (exsitFragment != null) {
+            //已添加( ⊙o⊙ ),show()
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction.show(exsitFragment).commit();
+            currentFragment = exsitFragment;
+        } else {
+            //还没添加呢,add()
+            if (!targetFragment.isAdded()) {
+                if (currentFragment != null) {
+                    transaction.hide(currentFragment);
+                }
+                transaction.add(containerViewId, targetFragment, tag).commit();
+            } else {
+                //已添加( ⊙o⊙ ),show()
+                if (currentFragment != null) {
+                    transaction.hide(currentFragment);
+                }
+                transaction.show(targetFragment).commit();
+            }
+            currentFragment = targetFragment;
+        }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public void hideKeyboard() {

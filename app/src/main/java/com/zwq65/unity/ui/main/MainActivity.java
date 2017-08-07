@@ -33,6 +33,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.fl_main)
     FrameLayout flMain;
 
+    AlbumFragment albumFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,7 @@ public class MainActivity extends BaseActivity {
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        AlbumFragment albumFragment = new AlbumFragment();
-        replaceFragment(R.id.fl_main, albumFragment, albumFragment.getClass().getSimpleName());
+        gotoFragment(new AlbumFragment());
     }
 
     @Override
@@ -84,7 +85,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void gotoFragment(BaseFragment fragment) {
-        replaceFragment(R.id.fl_main, fragment, fragment.getClass().getSimpleName());
+        switchFragment(R.id.fl_main, fragment, fragment.getClass().getSimpleName());
+
     }
 
 }
