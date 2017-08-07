@@ -14,8 +14,8 @@
     <!--图片加载中动画-->
     <com.tuyenmonkey.mkloader.MKLoader
         android:id="@+id/pb_loader"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_centerInParent="true"
         app:mk_type="Sharingan" />
 </RelativeLayout>
