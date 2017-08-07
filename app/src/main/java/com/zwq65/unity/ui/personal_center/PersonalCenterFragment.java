@@ -45,6 +45,11 @@ public class PersonalCenterFragment extends BaseFragment implements PersonalCent
     @Override
     public void initData(Bundle saveInstanceState) {
         initView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mPresenter.getCollectionPhoto();
     }
 
@@ -59,6 +64,7 @@ public class PersonalCenterFragment extends BaseFragment implements PersonalCent
 
     @Override
     public void showCollection(List<Picture> pictures) {
+        adapter.clear();
         adapter.addAll(pictures);
     }
 
