@@ -21,19 +21,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.utils.CommonUtils;
+import com.zwq65.unity.utils.LogUtils;
 
 import butterknife.Unbinder;
 
+
 /**
  * Created by janisharali on 27/01/17.
+ * Fragment基类
  */
 
 public abstract class BaseFragment extends Fragment implements MvpView {
-
+    private final String TAG = getClass().getSimpleName();
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
@@ -45,19 +50,55 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setUp(view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogUtils.i(TAG, "onCreateView");
+        return initView(inflater, container);
+    }
+
+    @Override
+    public void onResume() {
+        LogUtils.i(TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        LogUtils.i(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        LogUtils.i(TAG, "onActivityCreated");
+        initData(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onAttach(Context context) {
+        LogUtils.i(TAG, "onAttach");
         super.onAttach(context);
         if (context instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
+    }
+
+    @Override
+    public void onDetach() {
+        LogUtils.i(TAG, "onDetach");
+        mActivity = null;
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        LogUtils.i(TAG, "onDetach");
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -93,12 +134,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             return mActivity.isNetworkConnected();
         }
         return false;
-    }
-
-    @Override
-    public void onDetach() {
-        mActivity = null;
-        super.onDetach();
     }
 
     @Override
@@ -158,15 +193,9 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         mUnBinder = unBinder;
     }
 
-    protected abstract void setUp(View view);
+    public abstract void initData(Bundle saveInstanceState);
 
-    @Override
-    public void onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
-        }
-        super.onDestroy();
-    }
+    public abstract View initView(LayoutInflater inflater, ViewGroup container);
 
     public interface Callback {
 
