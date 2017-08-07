@@ -29,7 +29,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 /**
@@ -74,8 +73,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Completable insertPicture(Picture picture) {
+    public Observable<Long> insertPicture(Picture picture) {
         return mDbHelper.insertPicture(picture);
+    }
+
+    @Override
+    public Observable<List<Picture>> getCollectionPictures() {
+        return mDbHelper.getCollectionPictures();
     }
 
     @Override

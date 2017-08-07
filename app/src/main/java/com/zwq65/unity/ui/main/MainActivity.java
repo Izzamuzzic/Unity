@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.ui.base.BaseFragment;
+import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,12 +24,15 @@ public class MainActivity extends BaseActivity {
     DrawerLayout drawerLayout;
     @BindView(R.id.ll_welfare)
     LinearLayout llWelfare;
+    @BindView(R.id.ll_personal_center)
+    LinearLayout llPersonalCenter;
     @BindView(R.id.ll_setting)
     LinearLayout llSetting;
     @BindView(R.id.ll_out)
     LinearLayout llOut;
     @BindView(R.id.fl_main)
     FrameLayout flMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +64,17 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.ll_welfare, R.id.ll_setting, R.id.ll_out})
+    @OnClick({R.id.ll_welfare, R.id.ll_setting, R.id.ll_out, R.id.ll_personal_center})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
             case R.id.ll_welfare:
-                AlbumFragment albumFragment = new AlbumFragment();
-                replaceFragment(R.id.fl_main, albumFragment, albumFragment.getClass().getSimpleName());
+                //gank.io福利
+                gotoFragment(new AlbumFragment());
+                break;
+            case R.id.ll_personal_center:
+                //个人中心
+                gotoFragment(new PersonalCenterFragment());
                 break;
             case R.id.ll_setting:
                 break;
@@ -73,4 +82,9 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void gotoFragment(BaseFragment fragment) {
+        replaceFragment(R.id.fl_main, fragment, fragment.getClass().getSimpleName());
+    }
+
 }

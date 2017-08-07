@@ -21,7 +21,8 @@ import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
-import com.zwq65.unity.ui.swipe_image.ImageActivity;
+import com.zwq65.unity.ui.image_detail.ImageActivity;
+import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
 
 import dagger.Component;
 
@@ -37,9 +38,9 @@ public interface ActivityComponent {
 
     void inject(LoginActivity activity);
 
-    void inject(AlbumActivity activity);
-
     void inject(ImageActivity activity);
 
     void inject(AlbumFragment fragment);
+
+    void inject(PersonalCenterFragment fragment);
 }

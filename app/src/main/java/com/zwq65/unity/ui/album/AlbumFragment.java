@@ -17,7 +17,7 @@ import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseFragment;
 import com.zwq65.unity.ui.base.base_adapter.OnItemClickListener;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.swipe_image.ImageActivity;
+import com.zwq65.unity.ui.image_detail.ImageActivity;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ import static com.zwq65.unity.ui.custom.recycleview.XRecyclerView.findMax;
 
 /**
  * Created by zwq65 on 2017/08/07
+ * gank.io开源美图
  */
 
 public class AlbumFragment extends BaseFragment implements AlbumMvpView {
@@ -145,6 +146,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     @Override
     public void onDetach() {
         mPresenter.onDetach();
+        mPresenter = null;
         super.onDetach();
     }
 }

@@ -26,7 +26,6 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 
@@ -66,11 +65,21 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Completable insertPicture(final Picture picture) {
-        return Completable.fromCallable(new Callable<Long>() {
+    public Observable<Long> insertPicture(final Picture picture) {
+        return Observable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
                 return mDaoSession.getPictureDao().insertOrReplace(picture);
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<Picture>> getCollectionPictures() {
+        return Observable.fromCallable(new Callable<List<Picture>>() {
+            @Override
+            public List<Picture> call() throws Exception {
+                return mDaoSession.getPictureDao().loadAll();
             }
         });
     }

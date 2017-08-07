@@ -27,6 +27,8 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
     @Override
     public void initImages() {
         page = 1;
+        getCompositeDisposable().dispose();//取消所有数据加载请求
+        isLoading = false;
         loadImages(true);
     }
 

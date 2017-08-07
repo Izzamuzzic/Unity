@@ -1,5 +1,8 @@
 package com.zwq65.unity.data.db.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
@@ -10,7 +13,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 
 @Entity(nameInDb = "Picture")
-public class Picture {
+public class Picture implements Parcelable{
     @Id
     private String _id;
     @Property(nameInDb = "created_at")
@@ -39,6 +42,29 @@ public class Picture {
     @Generated(hash = 1602548376)
     public Picture() {
     }
+
+    protected Picture(Parcel in) {
+        _id = in.readString();
+        createdAt = in.readString();
+        desc = in.readString();
+        source = in.readString();
+        type = in.readString();
+        url = in.readString();
+        who = in.readString();
+    }
+
+    public static final Creator<Picture> CREATOR = new Creator<Picture>() {
+        @Override
+        public Picture createFromParcel(Parcel in) {
+            return new Picture(in);
+        }
+
+        @Override
+        public Picture[] newArray(int size) {
+            return new Picture[size];
+        }
+    };
+
     public String get_id() {
         return this._id;
     }
@@ -82,4 +108,19 @@ public class Picture {
         this.who = who;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(createdAt);
+        dest.writeString(desc);
+        dest.writeString(source);
+        dest.writeString(type);
+        dest.writeString(url);
+        dest.writeString(who);
+    }
 }

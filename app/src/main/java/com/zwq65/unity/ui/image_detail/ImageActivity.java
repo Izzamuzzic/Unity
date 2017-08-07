@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.swipe_image;
+package com.zwq65.unity.ui.image_detail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +36,7 @@ import static android.view.View.GONE;
 public class ImageActivity extends BaseActivity implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
+    public static final String COLLECTIONS = "COLLECTIONS";
 
     int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list

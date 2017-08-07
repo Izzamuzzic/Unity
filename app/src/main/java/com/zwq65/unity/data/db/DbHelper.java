@@ -21,7 +21,6 @@ import com.zwq65.unity.data.db.model.User;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 
@@ -35,6 +34,9 @@ public interface DbHelper {
 
     Observable<List<User>> getAllUsers();
 
-    Completable insertPicture(final Picture picture);
+    Observable<Long> insertPicture(final Picture picture);
+
+    //获取用户收藏的图片
+    Observable<List<Picture>> getCollectionPictures();
 
 }

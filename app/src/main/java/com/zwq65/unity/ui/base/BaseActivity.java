@@ -53,6 +53,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by janisharali on 27/01/17
+ * activity基类
  */
 
 public class BaseActivity extends AppCompatActivity
@@ -68,7 +69,7 @@ public class BaseActivity extends AppCompatActivity
 
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
-    private Unbinder mUnBinder;
+    private Unbinder mUnBinder;//An unbinder contract that will unbind views when called
 
     public FragmentManager fragmentManager;
 

@@ -24,12 +24,15 @@ import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.album.AlbumMvpPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpView;
 import com.zwq65.unity.ui.album.AlbumPresenter;
+import com.zwq65.unity.ui.image_detail.ImageMvpPresenter;
+import com.zwq65.unity.ui.image_detail.ImageMvpView;
+import com.zwq65.unity.ui.image_detail.ImagePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
-import com.zwq65.unity.ui.swipe_image.ImageMvpPresenter;
-import com.zwq65.unity.ui.swipe_image.ImageMvpView;
-import com.zwq65.unity.ui.swipe_image.ImagePresenter;
+import com.zwq65.unity.ui.personal_center.PersonalCenterMvpPresenter;
+import com.zwq65.unity.ui.personal_center.PersonalCenterMvpView;
+import com.zwq65.unity.ui.personal_center.PersonalCenterPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -83,6 +86,13 @@ public class ActivityModule {
     ImageMvpPresenter<ImageMvpView> provideImageMvpPresenter(
             ImagePresenter<ImageMvpView> imagePresenter) {
         return imagePresenter;
+    }
+
+    @Provides
+    @PerActivity
+    PersonalCenterMvpPresenter<PersonalCenterMvpView> providePersonalCenterMvpPresenter(
+            PersonalCenterPresenter<PersonalCenterMvpView> personalCenterPresenter) {
+        return personalCenterPresenter;
     }
 
     @Provides

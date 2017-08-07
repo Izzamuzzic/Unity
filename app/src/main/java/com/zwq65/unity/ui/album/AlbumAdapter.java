@@ -55,6 +55,5 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
             super(view);
             ButterKnife.bind(this, view);
         }
-
     }
 }

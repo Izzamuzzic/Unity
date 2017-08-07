@@ -11,6 +11,7 @@ import java.util.Collections;
 
 /**
  * Created by zwq65 on 2017/07/31
+ * recycleView 拖拽item监听
  */
 
 public class MyItemTouchCallBack extends ItemTouchHelper.Callback {
