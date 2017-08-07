@@ -76,5 +76,7 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.4.2'
     //Beautiful and smooth custom loading views
     compile 'com.tuyenmonkey:mkloader:1.4.0'
+    //A circular ImageView for Android
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
 }

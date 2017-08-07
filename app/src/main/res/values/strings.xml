@@ -15,4 +15,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="loading">正在加载</string>
     <string name="save">保存</string>
+    <string name="desperadozck">desperadozck</string>
+    <string name="github_host">https://github.com/NlRVANA</string>
+    <string name="welfare">福利</string>
+    <string name="setting">设置</string>
+    <string name="out">退出</string>
 </resources>
