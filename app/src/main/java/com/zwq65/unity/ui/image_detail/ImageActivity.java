@@ -1,7 +1,9 @@
 package com.zwq65.unity.ui.image_detail;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -10,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.tuyenmonkey.mkloader.MKLoader;
@@ -115,9 +118,9 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     @Override
     public void savePictrueWhetherSucceed(Boolean success) {
         if (success) {
-            showSuccessAlert("保存成功！");
+            showSuccessAlert(R.string.save_success);
         } else {
-            showErrorAlert("保存失败！");
+            showErrorAlert(R.string.save_fail);
         }
     }
 
@@ -151,21 +154,20 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
             final MKLoader pbLoader = (MKLoader) view.findViewById(R.id.pb_loader);
             Glide.with(ImageActivity.this).load(imageList.get(position).getUrl())
-                    .crossFade()//图片加载动画
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                @Override
-                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                    showErrorAlert("加载失败");
-                    pbLoader.setVisibility(GONE);
-                    return false;
-                }
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            showMessage(R.string.load_fail);
+                            pbLoader.setVisibility(GONE);
+                            return false;
+                        }
 
-                @Override
-                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    pbLoader.setVisibility(GONE);
-                    return false;
-                }
-            }).error(R.mipmap.ic_load_fail).into(ivImage);
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            pbLoader.setVisibility(GONE);
+                            return false;
+                        }
+                    }).into(ivImage);
             container.addView(view, 0);
             return view;
         }
@@ -175,7 +177,5 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             View view = (View) object;
             container.removeView(view);
         }
-
-
     }
 }

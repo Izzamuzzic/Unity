@@ -18,7 +18,6 @@ import com.zwq65.unity.ui.base.BaseFragment;
 import com.zwq65.unity.ui.base.base_adapter.OnItemClickListener;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.image_detail.ImageActivity;
-import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
                     if (layoutManager.getChildCount() > 0
                             && lastVisibleItemPosition >= layoutManager.getItemCount() - 1
                             && layoutManager.getItemCount() > layoutManager.getChildCount()) {
-                        LogUtils.i("onLoadMore");
+                        //onLoadMore
                         mPresenter.loadImages(false);
                     }
                 }
@@ -129,7 +128,8 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
 
     @Override
     public void loadImages(List<WelfareResponse.Image> imageList) {
-        adapter.addAll(imageList);//加载数据
+        //加载数据
+        adapter.addAll(imageList);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     @Override
     public void noMoreData() {
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        showErrorAlert("没有更多数据了！");
+        showErrorAlert(R.string.no_more_data);
     }
 
     @Override

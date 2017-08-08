@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.jingewenku.abrahamcaijin.commonutil.AppNetworkMgr;
 import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.UnityApp;
@@ -46,7 +47,6 @@ import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.di.component.DaggerActivityComponent;
 import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.utils.CommonUtils;
-import com.zwq65.unity.utils.NetworkUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -231,7 +231,7 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getApplicationContext());
+        return AppNetworkMgr.isNetworkConnected(getApplicationContext());
     }
 
     @Override

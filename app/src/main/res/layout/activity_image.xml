@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_effective">
 
+    <!--ViewPager左右滑动查看图片-->
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_images"
         android:layout_width="match_parent"
@@ -12,25 +13,25 @@
     <!-- 当前显示页数 e.g. 1/10-->
     <TextView
         android:id="@+id/tv_current_page"
-        style="@style/text_16_white"
+        style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tv_save_image"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
     <!--保存按钮-->
     <TextView
         android:id="@+id/tv_save_image"
-        style="@style/text_16_white"
-        android:background="@drawable/bg_button_save_image"
+        style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/bg_button_save_image"
         android:text="@string/save" />
 
 
