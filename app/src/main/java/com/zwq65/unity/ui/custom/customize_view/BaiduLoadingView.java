@@ -16,6 +16,7 @@ import android.view.animation.LinearInterpolator;
 
 import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
+import com.zwq65.unity.utils.LogUtils;
 
 
 /**
@@ -146,8 +147,6 @@ public class BaiduLoadingView extends View {
     }
 
     private void drawCenterText(Canvas canvas, Paint textPaint, String text) {
-//        Rect rect = new Rect(0, 0, mWidth, mHeight);
-//        canvas.drawText(text, rect.centerX(), rect.centerY(), textPaint);
         Rect rect = new Rect(0, 0, mWidth, mHeight);
         textPaint.setTextAlign(Paint.Align.CENTER);
 
@@ -156,7 +155,7 @@ public class BaiduLoadingView extends View {
         float top = fontMetrics.top;
         //文字框最低点距离baseline的距离（正数）
         float bottom = fontMetrics.bottom;
-
+        //调整到正中位置
         int centerY = (int) (rect.centerY() - top / 2 - bottom / 2);
 
         canvas.drawText(text, rect.centerX(), centerY, textPaint);
