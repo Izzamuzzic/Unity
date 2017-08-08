@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--图片加载中动画-->
+    <!--图片加载动画,当前为仿苹果样式-->
     <com.tuyenmonkey.mkloader.MKLoader
         android:id="@+id/pb_loader"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerInParent="true"
-        app:mk_type="Sharingan" />
+        app:mk_type="LineSpinner" />
 </RelativeLayout>

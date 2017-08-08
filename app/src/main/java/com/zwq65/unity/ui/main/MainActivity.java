@@ -33,8 +33,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.fl_main)
     FrameLayout flMain;
 
-    AlbumFragment albumFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
