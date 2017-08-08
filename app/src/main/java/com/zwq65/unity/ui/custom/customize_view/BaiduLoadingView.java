@@ -16,7 +16,6 @@ import android.view.animation.LinearInterpolator;
 
 import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
-import com.zwq65.unity.utils.LogUtils;
 
 
 /**
