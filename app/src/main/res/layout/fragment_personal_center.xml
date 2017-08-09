@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_padding">
+        android:orientation="vertical">
 
-        <TextView
-            style="@style/text_16_dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/conllection" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rl_abbreviated_collections"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.zwq65.unity.ui.custom.customize_view.BaiduLoadingView
-            android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_gravity="center"
-            app:text="贴" />
+            android:background="@color/wave_bg">
+
+            <com.zwq65.unity.ui.custom.customize_view.WaveBezierView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_avatar" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_16_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_conllection" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rl_abbreviated_collections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

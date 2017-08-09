@@ -3,8 +3,10 @@ package com.zwq65.unity.ui.custom.customize_view;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Shader;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -42,12 +44,15 @@ public class WaveBezierView extends View {
         mPath = new Path();
         mPath2 = new Path();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+
         mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint2.setColor(ContextCompat.getColor(context, R.color.colorPrimary));
         mPaint2.setStyle(Paint.Style.FILL_AND_STROKE);
 
+        Shader shader1 = new LinearGradient(0, 0, 100, 100, ContextCompat.getColor(context, R.color.wave2),
+                ContextCompat.getColor(context, R.color.wave1), Shader.TileMode.CLAMP);
+        mPaint.setShader(shader1);
+        mPaint2.setShader(shader1);
         startAnim();
     }
 

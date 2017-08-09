@@ -34,7 +34,6 @@ public class BaiduLoadingView extends View {
     private float currentPercent;
     private int color;
     private String text = "贴";
-    private int textSize = DensityUtils.sp2px(getContext(), 25);
 
     public BaiduLoadingView(Context context) {
         super(context);
@@ -100,7 +99,7 @@ public class BaiduLoadingView extends View {
             mHeight = height;
         }
         setMeasuredDimension(mWidth, mHeight);
-        textSize = mWidth / 2;
+        int textSize = mWidth / 2;
         textPaint.setTextSize(textSize);
     }
 

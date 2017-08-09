@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2d5d82</color>
+    <color name="colorPrimary">#d02d5d82</color>
     <color name="colorPrimaryDark">#21425d</color>
     <color name="colorAccent">#01bcd5</color>
     <color name="white">#FFFFFF</color>
@@ -16,6 +16,11 @@
 
     <!-- text color-->
     <color name="text_color_dark">#FF4A4A4A</color>
+
+    <!-- wave bg color-->
+    <color name="wave1">#560096ff</color>
+    <color name="wave2">#a20096ff</color>
+    <color name="wave_bg">#430096ff</color>
 
     <color name="btn_default_light_normal">#00000000</color>
     <color name="btn_default_light_pressed">#40ffffff</color>
