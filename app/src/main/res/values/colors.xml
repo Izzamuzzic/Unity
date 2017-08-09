@@ -18,8 +18,8 @@
     <color name="text_color_dark">#FF4A4A4A</color>
 
     <!-- wave bg color-->
-    <color name="wave1">#560096ff</color>
-    <color name="wave2">#a20096ff</color>
+    <color name="wave1">#690096ff</color>
+    <color name="wave2">#080096ff</color>
     <color name="wave_bg">#430096ff</color>
 
     <color name="btn_default_light_normal">#00000000</color>
