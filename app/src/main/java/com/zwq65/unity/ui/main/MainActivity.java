@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui.album.AlbumFragment;
@@ -14,6 +15,7 @@ import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.base.BaseFragment;
 import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
+import com.zwq65.unity.utils.FontUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +37,10 @@ public class MainActivity extends BaseActivity {
     FrameLayout flMain;
     @BindView(R.id.ll_rxjava)
     LinearLayout llRxjava;
+    @BindView(R.id.tv_account_name)
+    TextView tvAccountName;
+    @BindView(R.id.tv_account_website_address)
+    TextView tvAccountWebsiteAddress;
 
 
     @Override
@@ -49,6 +55,10 @@ public class MainActivity extends BaseActivity {
      * 将drawerLayout、toolBar绑定
      */
     private void initDrawer() {
+        //设置字体
+        FontUtils.getInstance().setTypeface(tvAccountName, FontUtils.Font.Montserrat_Medium);
+        FontUtils.getInstance().setTypeface(tvAccountWebsiteAddress, FontUtils.Font.Montserrat_Medium);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
