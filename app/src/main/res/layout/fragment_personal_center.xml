@@ -8,51 +8,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <include layout="@layout/head_personal_center" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_personal"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_gradient_personal_center">
+            android:layout_height="match_parent">
 
-            <com.zwq65.unity.ui.custom.customize_view.WaveBezierView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_avatar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:src="@mipmap/ic_avatar" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/text_14_white"
+            <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_avatar"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/defult_margin"
-                android:text="@string/desperadozck" />
-        </RelativeLayout>
+                android:text="发布" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/text_16_dark"
+            <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my_conllection" />
+                android:text="收藏" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rl_abbreviated_collections"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
+                android:text="喜欢" />
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

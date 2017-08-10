@@ -1,9 +1,6 @@
 package com.zwq65.unity.ui.personal_center;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.TextView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.ui.base.BaseFragment;
-import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.utils.FontUtils;
 
 import java.util.List;
@@ -32,13 +28,8 @@ public class PersonalCenterFragment extends BaseFragment implements PersonalCent
     @Inject
     PersonalCenterMvpPresenter<PersonalCenterMvpView> mPresenter;
 
-    @BindView(R.id.rl_abbreviated_collections)
-    RecyclerView rlAbbreviatedCollections;
     @BindView(R.id.tv_name)
     TextView tvName;
-
-    CollectionAdapter adapter;
-
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
@@ -63,18 +54,10 @@ public class PersonalCenterFragment extends BaseFragment implements PersonalCent
     private void initView() {
         //设置特殊字体
         FontUtils.getInstance().setTypeface(tvName, FontUtils.Font.Roboto_Bold);
-
-        rlAbbreviatedCollections.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
-        rlAbbreviatedCollections.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        rlAbbreviatedCollections.addItemDecoration(new MyItemDecoration());
-        adapter = new CollectionAdapter(mActivity);
-        rlAbbreviatedCollections.setAdapter(adapter);
     }
 
     @Override
     public void showCollection(List<Picture> pictures) {
-        adapter.clear();
-        adapter.addAll(pictures);
     }
 
     @Override
