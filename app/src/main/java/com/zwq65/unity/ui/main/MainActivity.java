@@ -13,6 +13,7 @@ import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.base.BaseFragment;
 import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
+import com.zwq65.unity.ui.rxjava.RxjavaFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +33,8 @@ public class MainActivity extends BaseActivity {
     LinearLayout llOut;
     @BindView(R.id.fl_main)
     FrameLayout flMain;
+    @BindView(R.id.ll_rxjava)
+    LinearLayout llRxjava;
 
 
     @Override
@@ -63,7 +66,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.ll_welfare, R.id.ll_setting, R.id.ll_out, R.id.ll_personal_center})
+    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_rxjava, R.id.ll_setting, R.id.ll_out})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
@@ -74,6 +77,9 @@ public class MainActivity extends BaseActivity {
             case R.id.ll_personal_center:
                 //个人中心
                 gotoFragment(new PersonalCenterFragment());
+                break;
+            case R.id.ll_rxjava:
+                gotoFragment(new RxjavaFragment());
                 break;
             case R.id.ll_setting:
                 break;

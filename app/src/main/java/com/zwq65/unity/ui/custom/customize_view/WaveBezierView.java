@@ -88,11 +88,11 @@ public class WaveBezierView extends View {
         //当前x点坐标（根据动画进度水平推移，一个动画周期推移的距离为一个mWidth）
         x += percent * mScreenWidth;
         //设置起点
-        path.moveTo(x, mScreenHeight / 2);
+        path.moveTo(x, mScreenHeight / 3);
         //控制点的相对宽度
         int quadWidth = mScreenWidth / 4;
         //控制点的相对高度
-        int quadHeight = mScreenHeight / 20 * 3;
+        int quadHeight = mScreenHeight / 5;
         //相对起点绘制贝塞尔曲线（rQuadTo():相对path起点坐标绘制）
         //第一个周期
         path.rQuadTo(quadWidth, quadHeight, 2 * quadWidth, 0);
@@ -115,11 +115,11 @@ public class WaveBezierView extends View {
         //当前x点坐标（根据动画进度水平推移，一个动画周期推移的距离为一个mWidth）
         x += percent * 2 * mScreenWidth;
         //设置起点
-        path.moveTo(x, mScreenHeight / 2);
+        path.moveTo(x, mScreenHeight / 3);
         //控制点的相对宽度
         int quadWidth = mScreenWidth / 2;
         //控制点的相对高度
-        int quadHeight = mScreenHeight / 5;
+        int quadHeight = mScreenHeight / 6;
         //相对起点绘制贝塞尔曲线（rQuadTo():相对path起点坐标绘制）
         //第一个周期
         path.rQuadTo(quadWidth, -quadHeight, 2 * quadWidth, 0);

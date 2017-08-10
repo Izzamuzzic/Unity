@@ -57,8 +57,7 @@ import butterknife.Unbinder;
  * activity基类
  */
 
-public class BaseActivity extends AppCompatActivity
-        implements MvpView, BaseFragment.Callback {
+public class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
 
     @Nullable
     @BindView(R.id.toolbar)
@@ -80,16 +79,16 @@ public class BaseActivity extends AppCompatActivity
         bindViews();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-    protected void bindViews() {
-        ButterKnife.bind(this);
-        setupToolbar();
-    }
-
     public void setContentViewWithoutInject(int layoutResId) {
         super.setContentView(layoutResId);
         //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
         ImmersionBar.with(this).fitsSystemWindows(false).init();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    protected void bindViews() {
+        ButterKnife.bind(this);
+        setupToolbar();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
@@ -106,14 +105,6 @@ public class BaseActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-//        inboxMenuItem = menu.findItem(R.id.action_inbox);
-//        inboxMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                showErrorAlert("666");
-//                return false;
-//            }
-//        });
         return true;
     }
 

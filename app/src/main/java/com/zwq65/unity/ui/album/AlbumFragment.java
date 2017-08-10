@@ -17,7 +17,7 @@ import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.BaseFragment;
 import com.zwq65.unity.ui.base.base_adapter.OnItemClickListener;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.image_detail.ImageActivity;
+import com.zwq65.unity.ui.album.image_detail.ImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -46,12 +46,14 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.image_detail.ImageActivity" />
-        <activity android:name=".ui.image_detail.SwipeImageActivity" />
+        <activity android:name=".ui.album.image_detail.ImageActivity" />
+        <activity android:name=".ui.album.image_detail.SwipeImageActivity" />
+        <activity android:name=".ui.personal_center.collection_album.CollectionAlbumActivity"></activity>
     </application>
 
 </manifest>

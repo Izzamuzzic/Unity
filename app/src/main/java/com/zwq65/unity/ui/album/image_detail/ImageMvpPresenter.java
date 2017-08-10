@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.image_detail;
+package com.zwq65.unity.ui.album.image_detail;
 
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui.base.MvpPresenter;

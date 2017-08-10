@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by zwq65 on 2017/08/07
+ * 个人中心
  */
 
 public class PersonalCenterFragment extends BaseFragment implements PersonalCenterMvpView {

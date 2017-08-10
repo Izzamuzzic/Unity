@@ -21,7 +21,7 @@ import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
-import com.zwq65.unity.ui.image_detail.ImageActivity;
+import com.zwq65.unity.ui.album.image_detail.ImageActivity;
 import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
 
 import dagger.Component;

@@ -19,8 +19,7 @@
 
     <!-- wave bg color-->
     <color name="wave1">#690096ff</color>
-    <color name="wave2">#080096ff</color>
-    <color name="wave_bg">#430096ff</color>
+    <color name="wave2">#360096ff</color>
 
     <color name="btn_default_light_normal">#00000000</color>
     <color name="btn_default_light_pressed">#40ffffff</color>

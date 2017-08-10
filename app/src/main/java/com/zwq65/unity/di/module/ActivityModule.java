@@ -24,22 +24,25 @@ import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.album.AlbumMvpPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpView;
 import com.zwq65.unity.ui.album.AlbumPresenter;
-import com.zwq65.unity.ui.image_detail.ImageMvpPresenter;
-import com.zwq65.unity.ui.image_detail.ImageMvpView;
-import com.zwq65.unity.ui.image_detail.ImagePresenter;
+import com.zwq65.unity.ui.album.image_detail.ImageMvpPresenter;
+import com.zwq65.unity.ui.album.image_detail.ImageMvpView;
+import com.zwq65.unity.ui.album.image_detail.ImagePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
 import com.zwq65.unity.ui.personal_center.PersonalCenterMvpPresenter;
 import com.zwq65.unity.ui.personal_center.PersonalCenterMvpView;
 import com.zwq65.unity.ui.personal_center.PersonalCenterPresenter;
+import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumMvpPresenter;
+import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumMvpView;
+import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumPresenter;
 
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by janisharali on 27/01/17.
+ * Created by janisharali on 27/01/17
  */
 
 @Module
@@ -92,6 +95,13 @@ public class ActivityModule {
     @PerActivity
     PersonalCenterMvpPresenter<PersonalCenterMvpView> providePersonalCenterMvpPresenter(
             PersonalCenterPresenter<PersonalCenterMvpView> personalCenterPresenter) {
+        return personalCenterPresenter;
+    }
+
+    @Provides
+    @PerActivity
+    CollectionAlbumMvpPresenter<CollectionAlbumMvpView> provideCollectionAlbumMvpPresenter(
+            CollectionAlbumPresenter<CollectionAlbumMvpView> personalCenterPresenter) {
         return personalCenterPresenter;
     }
 
