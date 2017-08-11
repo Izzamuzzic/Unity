@@ -10,6 +10,8 @@ import java.util.List;
  */
 public abstract class BaseRecyclerViewAdapter<T, R extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<R> {
 
+    public String TAG = getClass().getSimpleName();
+
     protected List<T> data = new ArrayList<>();
     protected OnItemClickListener<T> listener;
     protected OnItemLongClickListener<T> onItemLongClickListener;

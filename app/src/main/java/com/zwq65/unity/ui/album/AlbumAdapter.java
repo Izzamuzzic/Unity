@@ -19,9 +19,11 @@ import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui.base.base_adapter.BaseRecyclerViewAdapter;
+import com.zwq65.unity.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by zwq65 on 2017/07/20
@@ -60,9 +62,11 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                 int mWidth = resource.getIntrinsicWidth();
                 int mHeight = resource.getIntrinsicHeight();
-                //获取屏幕的宽度
-                int height = (int) (width / (mHeight / mWidth) + 0.5f);
-                holder.ivBeauty.setLayoutParams(new LinearLayout.LayoutParams(width, height));
+                LogUtils.e(TAG, "mWidth:" + mWidth + " mHeight:" + mHeight);
+//                //获取屏幕的宽度
+//                int height = (int) (width / (mWidth / mHeight) + 0.5f);
+//                LogUtils.e(TAG, "width:" + width + " height:" + height);
+                holder.ivBeauty.setLayoutParams(new LinearLayout.LayoutParams(mWidth, mHeight));
                 return false;
             }
         }).into(holder.ivBeauty);
