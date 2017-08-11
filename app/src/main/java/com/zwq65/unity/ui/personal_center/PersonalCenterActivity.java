@@ -39,6 +39,8 @@ public class PersonalCenterActivity extends BaseActivity implements PersonalCent
     @BindView(R.id.iv_back)
     ImageView ivBack;
 
+    public static String[] Tabs = new String[]{"收藏", "发布", "喜欢"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,26 +60,17 @@ public class PersonalCenterActivity extends BaseActivity implements PersonalCent
     private void initView() {
         //设置特殊字体
         FontUtils.getInstance().setTypeface(tvName, FontUtils.Font.Roboto_Bold);
-        tlPersonal.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-//        vpPersonal.setOffscreenPageLimit(0);
-//        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        vpPersonal.setAdapter(viewPagerAdapter);
-//        //将tabLayout与ViewPager绑定
-//        tlPersonal.setupWithViewPager(vpPersonal);
+        for (String tabStr : Tabs) {
+            TabLayout.Tab tab = tlPersonal.newTab();
+            tab.setText(tabStr);
+            tlPersonal.addTab(tab);
+        }
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        vpPersonal.setAdapter(viewPagerAdapter);
+        vpPersonal.setOffscreenPageLimit(0);
+        //将tabLayout与ViewPager绑定
+        tlPersonal.setupWithViewPager(vpPersonal);
     }
 
     @OnClick(R.id.iv_back)
@@ -98,15 +91,29 @@ public class PersonalCenterActivity extends BaseActivity implements PersonalCent
         }
 
         @Override
+        public CharSequence getPageTitle(int position) {
+            return Tabs[position];
+        }
+
+        @Override
         public Fragment getItem(int position) {
-            return null;
+            if (getSupportFragmentManager().getFragments() != null)
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    if (fragment instanceof TabCollectionFragment && ((TabCollectionFragment) fragment).type.ordinal() == position) {
+                        return fragment;
+                    }
+                }
+            Bundle bundle = new Bundle();
+            bundle.putInt(TabCollectionFragment.TYPE, position);
+            TabCollectionFragment fragment = new TabCollectionFragment();
+            fragment.setArguments(bundle);
+            return fragment;
         }
 
         @Override
         public int getCount() {
-            return tlPersonal.getTabCount();
+            return Tabs.length;
         }
     }
-
 
 }

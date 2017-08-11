@@ -21,6 +21,9 @@
     <color name="wave1">#690096ff</color>
     <color name="wave2">#360096ff</color>
 
+    <!-- collection nice colors-->
+    <color name="picton_blue">#59ABE3</color>
+
     <color name="btn_default_light_normal">#00000000</color>
     <color name="btn_default_light_pressed">#40ffffff</color>
     <color name="btn_send_normal">#02c754</color>

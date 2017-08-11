@@ -40,7 +40,6 @@ import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.jingewenku.abrahamcaijin.commonutil.AppNetworkMgr;
-import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.UnityApp;
@@ -86,8 +85,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         super.setContentView(layoutResId);
         //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
         ImmersionBar.with(this).fitsSystemWindows(false).init();
-        int statusHeight = AppScreenMgr.getStatusHeight(this);
-        LogUtils.i("statusHeight：" + statusHeight);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
