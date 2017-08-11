@@ -9,7 +9,5 @@ import com.zwq65.unity.ui.base.MvpView;
 
 public interface PersonalCenterMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
 
-    //获取收藏的图片集合
-    void getCollectionPhoto();
 
 }

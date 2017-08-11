@@ -13,7 +13,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.base.BaseFragment;
-import com.zwq65.unity.ui.personal_center.PersonalCenterFragment;
+import com.zwq65.unity.ui.personal_center.PersonalCenterActivity;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
 import com.zwq65.unity.utils.FontUtils;
 
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.ll_personal_center:
                 //个人中心
-                gotoFragment(new PersonalCenterFragment());
+                openActivity(PersonalCenterActivity.class);
                 break;
             case R.id.ll_rxjava:
                 gotoFragment(new RxjavaFragment());
@@ -94,6 +94,8 @@ public class MainActivity extends BaseActivity {
             case R.id.ll_setting:
                 break;
             case R.id.ll_out:
+                //退出app
+                finish();
                 break;
         }
     }
