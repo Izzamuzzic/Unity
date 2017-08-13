@@ -187,37 +187,37 @@
 
 #-----------处理第三方依赖库---------
 # AndroidEventBus
--keep class org.simple.** { *; }
--keep interface org.simple.** { *; }
--keepclassmembers class * {
-    @org.simple.eventbus.Subscriber <methods>;
-}
+#-keep class org.simple.** { *; }
+#-keep interface org.simple.** { *; }
+#-keepclassmembers class * {
+#    @org.simple.eventbus.Subscriber <methods>;
+#}
 
 
-# 百度地图（jar包换成自己的版本，记得签名要匹配）
--libraryjars libs/baidumapapi_v2_1_3.jar
--keep class com.baidu.** {*;}
--keep class vi.com.** {*;}
--keep class com.sinovoice.** {*;}
--keep class pvi.com.** {*;}
--dontwarn com.baidu.**
--dontwarn vi.com.**
--dontwarn pvi.com.**
+## 百度地图（jar包换成自己的版本，记得签名要匹配）
+#-libraryjars libs/baidumapapi_v2_1_3.jar
+#-keep class com.baidu.** {*;}
+#-keep class vi.com.** {*;}
+#-keep class com.sinovoice.** {*;}
+#-keep class pvi.com.** {*;}
+#-dontwarn com.baidu.**
+#-dontwarn vi.com.**
+#-dontwarn pvi.com.**
 
 
-# BRVAH
--keep class com.chad.library.adapter.** { *; }
--keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
--keep public class * extends com.chad.library.adapter.base.BaseViewHolder
--keepclassmembers public class * extends com.chad.library.adapter.base.BaseViewHolder {
-    <init>(android.view.View);
-}
+## BRVAH
+#-keep class com.chad.library.adapter.** { *; }
+#-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+#-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+#-keepclassmembers public class * extends com.chad.library.adapter.base.BaseViewHolder {
+#    <init>(android.view.View);
+#}
 
 
-# Bugly
--dontwarn com.tencent.bugly.**
--keep class com.tencent.bugly.** {*;}
-
+## Bugly
+#-dontwarn com.tencent.bugly.**
+#-keep class com.tencent.bugly.** {*;}
+#
 
 # ButterKnife
 -keep public class * implements butterknife.Unbinder {
@@ -236,59 +236,59 @@
 -dontwarn com.google.errorprone.annotations.*
 
 
-# EventBus
--keepattributes *Annotation*
--keepclassmembers class ** {
-    @org.greenrobot.eventbus.Subscribe <methods>;
-}
--keep enum org.greenrobot.eventbus.ThreadMode { *; }
-
-
-# Facebook
--keep class com.facebook.** {*;}
--keep interface com.facebook.** {*;}
--keep enum com.facebook.** {*;}
+## EventBus
+#-keepattributes *Annotation*
+#-keepclassmembers class ** {
+#    @org.greenrobot.eventbus.Subscribe <methods>;
+#}
+#-keep enum org.greenrobot.eventbus.ThreadMode { *; }
 #
+#
+## Facebook
+#-keep class com.facebook.** {*;}
+#-keep interface com.facebook.** {*;}
+#-keep enum com.facebook.** {*;}
+##
 #
 ## FastJson
 #-dontwarn com.alibaba.fastjson.**
 #-keep class com.alibaba.fastjson.** { *; }
 #-keepattributes Signature
 #-keepattributes *Annotation*
+#
+#
+## Fresco
+#-keep class com.facebook.fresco.** {*;}
+#-keep interface com.facebook.fresco.** {*;}
+#-keep enum com.facebook.fresco.** {*;}
 
-
-# Fresco
--keep class com.facebook.fresco.** {*;}
--keep interface com.facebook.fresco.** {*;}
--keep enum com.facebook.fresco.** {*;}
-
-
-# 高德相关依赖
-# 集合包:3D地图3.3.2 导航1.8.0 定位2.5.0
--dontwarn com.amap.api.**
--dontwarn com.autonavi.**
--keep class com.amap.api.**{*;}
--keep class com.autonavi.**{*;}
-# 地图服务
--dontwarn com.amap.api.services.**
--keep class com.map.api.services.** {*;}
-# 3D地图
--dontwarn com.amap.api.mapcore.**
--dontwarn com.amap.api.maps.**
--dontwarn com.autonavi.amap.mapcore.**
--keep class com.amap.api.mapcore.**{*;}
--keep class com.amap.api.maps.**{*;}
--keep class com.autonavi.amap.mapcore.**{*;}
-# 定位
--dontwarn com.amap.api.location.**
--dontwarn com.aps.**
--keep class com.amap.api.location.**{*;}
--keep class com.aps.**{*;}
-# 导航
--dontwarn com.amap.api.navi.**
--dontwarn com.autonavi.**
--keep class com.amap.api.navi.** {*;}
--keep class com.autonavi.** {*;}
+#
+## 高德相关依赖
+## 集合包:3D地图3.3.2 导航1.8.0 定位2.5.0
+#-dontwarn com.amap.api.**
+#-dontwarn com.autonavi.**
+#-keep class com.amap.api.**{*;}
+#-keep class com.autonavi.**{*;}
+## 地图服务
+#-dontwarn com.amap.api.services.**
+#-keep class com.map.api.services.** {*;}
+## 3D地图
+#-dontwarn com.amap.api.mapcore.**
+#-dontwarn com.amap.api.maps.**
+#-dontwarn com.autonavi.amap.mapcore.**
+#-keep class com.amap.api.mapcore.**{*;}
+#-keep class com.amap.api.maps.**{*;}
+#-keep class com.autonavi.amap.mapcore.**{*;}
+## 定位
+#-dontwarn com.amap.api.location.**
+#-dontwarn com.aps.**
+#-keep class com.amap.api.location.**{*;}
+#-keep class com.aps.**{*;}
+## 导航
+#-dontwarn com.amap.api.navi.**
+#-dontwarn com.autonavi.**
+#-keep class com.amap.api.navi.** {*;}
+#-keep class com.autonavi.** {*;}
 
 
 # Glide
@@ -327,12 +327,12 @@ public static java.lang.String TABLENAME;
 #-keep class org.codehaus.jackson.** { *;}
 #-keep class com.fasterxml.jackson.** { *; }
 
-
-# 极光推送
--dontoptimize
--dontpreverify
--dontwarn cn.jpush.**
--keep class cn.jpush.** { *; }
+#
+## 极光推送
+#-dontoptimize
+#-dontpreverify
+#-dontwarn cn.jpush.**
+#-keep class cn.jpush.** { *; }
 
 
 # OkHttp
@@ -348,26 +348,26 @@ public static java.lang.String TABLENAME;
 -keep public class org.codehaus.* { *; }
 -keep public class java.nio.* { *; }
 
-
-# OrmLite
--keepattributes *DatabaseField*
--keepattributes *DatabaseTable*
--keepattributes *SerializedName*
--keep class com.j256.**
--keepclassmembers class com.j256.** { *; }
--keep enum com.j256.**
--keepclassmembers enum com.j256.** { *; }
--keep interface com.j256.**
--keepclassmembers interface com.j256.** { *; }
-
-
-# Realm
--keep class io.realm.annotations.RealmModule
--keep @io.realm.annotations.RealmModule class *
--keep class io.realm.internal.Keep
--keep @io.realm.internal.Keep class * { *; }
--dontwarn javax.**
--dontwarn io.realm.**
+#
+## OrmLite
+#-keepattributes *DatabaseField*
+#-keepattributes *DatabaseTable*
+#-keepattributes *SerializedName*
+#-keep class com.j256.**
+#-keepclassmembers class com.j256.** { *; }
+#-keep enum com.j256.**
+#-keepclassmembers enum com.j256.** { *; }
+#-keep interface com.j256.**
+#-keepclassmembers interface com.j256.** { *; }
+#
+#
+## Realm
+#-keep class io.realm.annotations.RealmModule
+#-keep @io.realm.annotations.RealmModule class *
+#-keep class io.realm.internal.Keep
+#-keep @io.realm.internal.Keep class * { *; }
+#-dontwarn javax.**
+#-dontwarn io.realm.**
 
 
 # Retrofit
@@ -379,8 +379,8 @@ public static java.lang.String TABLENAME;
 -dontwarn javax.annotation.**
 
 
-# Retrolambda
--dontwarn java.lang.invoke.*
+## Retrolambda
+#-dontwarn java.lang.invoke.*
 
 
 # RxJava RxAndroid
@@ -430,27 +430,27 @@ public static java.lang.String TABLENAME;
 #-dontwarn com.baidu.**
 #
 
-
-# 讯飞语音
--dontwarn com.iflytek.**
--keep class com.iflytek.** {*;}
-
-
-# 银联
--dontwarn com.unionpay.**
--keep class com.unionpay.** { *; }
-
-
-# 友盟统计分析
--keepclassmembers class * { public <init>(org.json.JSONObject); }
--keepclassmembers enum com.umeng.analytics.** {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
-
-# 友盟自动更新
--keepclassmembers class * { public <init>(org.json.JSONObject); }
--keep public class cn.irains.parking.cloud.pub.R$*{ public static final int *; }
--keep public class * extends com.umeng.**
--keep class com.umeng.** { *; }
+#
+## 讯飞语音
+#-dontwarn com.iflytek.**
+#-keep class com.iflytek.** {*;}
+#
+#
+## 银联
+#-dontwarn com.unionpay.**
+#-keep class com.unionpay.** { *; }
+#
+#
+## 友盟统计分析
+#-keepclassmembers class * { public <init>(org.json.JSONObject); }
+#-keepclassmembers enum com.umeng.analytics.** {
+#    public static **[] values();
+#    public static ** valueOf(java.lang.String);
+#}
+#
+#
+## 友盟自动更新
+#-keepclassmembers class * { public <init>(org.json.JSONObject); }
+#-keep public class cn.irains.parking.cloud.pub.R$*{ public static final int *; }
+#-keep public class * extends com.umeng.**
+#-keep class com.umeng.** { *; }
