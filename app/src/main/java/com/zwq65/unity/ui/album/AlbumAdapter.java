@@ -52,24 +52,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(data.get(position).getUrl()).listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                int mWidth = resource.getIntrinsicWidth();
-                int mHeight = resource.getIntrinsicHeight();
-                LogUtils.e(TAG, "mWidth:" + mWidth + " mHeight:" + mHeight);
-//                //获取屏幕的宽度
-//                int height = (int) (width / (mWidth / mHeight) + 0.5f);
-//                LogUtils.e(TAG, "width:" + width + " height:" + height);
-                holder.ivBeauty.setLayoutParams(new LinearLayout.LayoutParams(mWidth, mHeight));
-                return false;
-            }
-        }).into(holder.ivBeauty);
+        Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
