@@ -6,11 +6,17 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     app:elevation="@dimen/default_elevation"
-    app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_scrollFlags="scroll|enterAlways|snap"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <!--app:layout_scrollFlags="scroll|enterAlways":
     scroll: 所有想滚动出屏幕的view都需要设置这个flag， 没有设置这个flag的view将被固定在屏幕顶部。
-    enterAlways: 设置这个flag时，向下的滚动都会导致该view变为可见。-->
+    enterAlways: 设置这个flag时，向下的滚动都会导致该view变为可见。
+    enterAlwaysCollapsed: enterAlways的附加值。这里涉及到Child View的高度和最小高度，向下滚动时，Child View先向下滚动最小高度值，
+                          然后Scrolling View开始滚动，到达边界时，Child View再向下滚动，直至显示完全。
+    exitUntilCollapsed:这里也涉及到最小高度。发生向上滚动事件时，Child View向上滚动退出直至最小高度，然后Scrolling View开始滚动。
+                       也就是，Child View不会完全退出屏幕。
+    snap:简单理解，就是Child View滚动比例的一个吸附效果。也就是说，Child View不会存在局部显示的情况，滚动Child View的部分高度，
+         当我们松开手指时，Child View要么向上全部滚出屏幕，要么向下全部滚进屏幕，有点类似ViewPager的左右滑动。-->
 
     <ImageView
         android:id="@+id/ivLogo"

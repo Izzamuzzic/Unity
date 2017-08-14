@@ -23,6 +23,7 @@ import com.zwq65.unity.ui.album.image_detail.ImageActivity;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 import com.zwq65.unity.ui.personal_center.PersonalCenterActivity;
+import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionFragment;
 
 import dagger.Component;
 
@@ -43,4 +44,6 @@ public interface ActivityComponent {
     void inject(AlbumFragment fragment);
 
     void inject(PersonalCenterActivity activity);
+
+    void inject(TabCollectionFragment fragment);
 }

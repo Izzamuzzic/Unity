@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by jingbin on 2016/11/25
  */
-public abstract class BaseRecyclerViewAdapter<T, R extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<R> {
+public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V> {
 
     public String TAG = getClass().getSimpleName();
 
@@ -58,4 +58,25 @@ public abstract class BaseRecyclerViewAdapter<T, R extends RecyclerView.ViewHold
     public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
         this.onItemLongClickListener = onItemLongClickListener;
     }
+
+//    private int lastPosition = -1;
+
+//    @Override
+//    public void onBindViewHolder(V holder, int position) {
+//        setAnimation(holder.itemView, position);
+//    }
+//
+//    protected void setAnimation(View viewToAnimate, int position) {
+//        if (position > lastPosition) {
+//            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.item_slide_bottom_up);
+//            viewToAnimate.startAnimation(animation);
+//            lastPosition = position;
+//        }
+//    }
+//
+//    @Override
+//    public void onViewDetachedFromWindow(V holder) {
+//        super.onViewDetachedFromWindow(holder);
+//        holder.itemView.clearAnimation();
+//    }
 }

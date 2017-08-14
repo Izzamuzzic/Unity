@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionFragment;
 import com.zwq65.unity.utils.FontUtils;
 
 import javax.inject.Inject;
@@ -99,15 +100,11 @@ public class PersonalCenterActivity extends BaseActivity implements PersonalCent
         public Fragment getItem(int position) {
             if (getSupportFragmentManager().getFragments() != null)
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                    if (fragment instanceof TabCollectionFragment && ((TabCollectionFragment) fragment).type.ordinal() == position) {
+                    if (0 == position && fragment instanceof TabCollectionFragment) {
                         return fragment;
                     }
                 }
-            Bundle bundle = new Bundle();
-            bundle.putInt(TabCollectionFragment.TYPE, position);
-            TabCollectionFragment fragment = new TabCollectionFragment();
-            fragment.setArguments(bundle);
-            return fragment;
+            return new TabCollectionFragment();
         }
 
         @Override

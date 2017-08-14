@@ -2,6 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.zwq65.unity"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
     signingConfigs {
         release {
             storeFile file(KEYSTORE_FILE)
@@ -17,17 +29,6 @@ android {
         }
     }
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
-    defaultConfig {
-        applicationId "com.zwq65.unity"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-    }
     buildTypes {
         release {
             // 混淆
@@ -36,10 +37,13 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
+            //发布生产版本时，直接跑releaseAppRelease包，签名过的生产包就会打在out文件夹
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
+
 greendao {
     schemaVersion 2
 }
@@ -103,5 +107,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     //快速开发工具类收集
     compile 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
+    //Simple Adapter for recycleView
+    compile 'com.zhy:base-rvadapter:3.0.3'
     testCompile 'junit:junit:4.12'
 }

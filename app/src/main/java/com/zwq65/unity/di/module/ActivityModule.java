@@ -36,6 +36,9 @@ import com.zwq65.unity.ui.personal_center.PersonalCenterPresenter;
 import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumMvpPresenter;
 import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumMvpView;
 import com.zwq65.unity.ui.personal_center.collection_album.CollectionAlbumPresenter;
+import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionMvpPresenter;
+import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionMvpView;
+import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -103,6 +106,13 @@ public class ActivityModule {
     CollectionAlbumMvpPresenter<CollectionAlbumMvpView> provideCollectionAlbumMvpPresenter(
             CollectionAlbumPresenter<CollectionAlbumMvpView> personalCenterPresenter) {
         return personalCenterPresenter;
+    }
+
+    @Provides
+    @PerActivity
+    TabCollectionMvpPresenter<TabCollectionMvpView> provideTabCollectionMvpPresenter(
+            TabCollectionPresenter<TabCollectionMvpView> tabCollectionPresenter) {
+        return tabCollectionPresenter;
     }
 
     @Provides
