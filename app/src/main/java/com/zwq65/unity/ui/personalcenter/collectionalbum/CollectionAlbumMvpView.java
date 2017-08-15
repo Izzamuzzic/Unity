@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.personal_center.collection_album;
+package com.zwq65.unity.ui.personalcenter.collectionalbum;
 
 import com.zwq65.unity.ui.base.MvpView;
 

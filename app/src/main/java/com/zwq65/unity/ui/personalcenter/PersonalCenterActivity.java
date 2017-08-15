@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.personal_center;
+package com.zwq65.unity.ui.personalcenter;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui.base.BaseActivity;
-import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionFragment;
+import com.zwq65.unity.ui.personalcenter.tabs.tabcollection.TabCollectionFragment;
 import com.zwq65.unity.utils.FontUtils;
 
 import javax.inject.Inject;

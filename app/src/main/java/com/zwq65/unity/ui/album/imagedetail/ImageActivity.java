@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.album.image_detail;
+package com.zwq65.unity.ui.album.imagedetail;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

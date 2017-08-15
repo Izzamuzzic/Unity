@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.personal_center.tabs.tab_collection;
+package com.zwq65.unity.ui.personalcenter.tabs.tabcollection;
 
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;

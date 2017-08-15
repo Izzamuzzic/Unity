@@ -13,7 +13,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.base.BaseActivity;
 import com.zwq65.unity.ui.base.BaseFragment;
-import com.zwq65.unity.ui.personal_center.PersonalCenterActivity;
+import com.zwq65.unity.ui.personalcenter.PersonalCenterActivity;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
 import com.zwq65.unity.utils.FontUtils;
 

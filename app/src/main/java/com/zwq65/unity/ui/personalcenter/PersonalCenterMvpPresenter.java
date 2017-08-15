@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.personal_center;
+package com.zwq65.unity.ui.personalcenter;
 
 import com.zwq65.unity.ui.base.MvpPresenter;
 import com.zwq65.unity.ui.base.MvpView;

@@ -51,10 +51,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.album.image_detail.ImageActivity" />
-        <activity android:name=".ui.album.image_detail.SwipeImageActivity" />
-        <activity android:name=".ui.personal_center.collection_album.CollectionAlbumActivity" />
-        <activity android:name=".ui.personal_center.PersonalCenterActivity" />
+        <activity android:name=".ui.album.imagedetail.ImageActivity" />
+        <activity android:name=".ui.album.imagedetail.SwipeImageActivity" />
+        <activity android:name=".ui.personalcenter.collectionalbum.CollectionAlbumActivity" />
+        <activity android:name=".ui.personalcenter.PersonalCenterActivity" />
     </application>
 
 </manifest>

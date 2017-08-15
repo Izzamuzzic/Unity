@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.personal_center.tabs.tab_collection;
+package com.zwq65.unity.ui.personalcenter.tabs.tabcollection;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;

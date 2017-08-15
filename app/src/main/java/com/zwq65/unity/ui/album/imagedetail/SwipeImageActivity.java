@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.album.image_detail;
+package com.zwq65.unity.ui.album.imagedetail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.zwq65.unity.ui.album.image_detail.ImageActivity.IMAGE_LIST;
-import static com.zwq65.unity.ui.album.image_detail.ImageActivity.POSITION;
+import static com.zwq65.unity.ui.album.imagedetail.ImageActivity.IMAGE_LIST;
+import static com.zwq65.unity.ui.album.imagedetail.ImageActivity.POSITION;
 
 public class SwipeImageActivity extends BaseActivity {
 

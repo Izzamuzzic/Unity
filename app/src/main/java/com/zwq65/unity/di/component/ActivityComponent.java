@@ -19,11 +19,11 @@ package com.zwq65.unity.di.component;
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.ui.album.AlbumFragment;
-import com.zwq65.unity.ui.album.image_detail.ImageActivity;
+import com.zwq65.unity.ui.album.imagedetail.ImageActivity;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
-import com.zwq65.unity.ui.personal_center.PersonalCenterActivity;
-import com.zwq65.unity.ui.personal_center.tabs.tab_collection.TabCollectionFragment;
+import com.zwq65.unity.ui.personalcenter.PersonalCenterActivity;
+import com.zwq65.unity.ui.personalcenter.tabs.tabcollection.TabCollectionFragment;
 
 import dagger.Component;
 
