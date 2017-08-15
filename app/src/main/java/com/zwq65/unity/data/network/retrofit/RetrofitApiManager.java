@@ -56,7 +56,8 @@ public class RetrofitApiManager {
                     public List<VideoWithImage> apply(@NonNull RestVideoResponse restVideoResponse, @NonNull WelfareResponse welfareResponse) throws Exception {
                         List<VideoWithImage> videoWithImageList = new ArrayList<>();
 
-                        if (restVideoResponse != null && welfareResponse != null && welfareResponse.getResults() != null) {
+                        if (restVideoResponse != null && restVideoResponse.getResults() != null
+                                && welfareResponse != null && welfareResponse.getResults() != null) {
                             List<Video> videos = restVideoResponse.getResults();
                             List<Image> images = welfareResponse.getResults();
                             for (int i = 0; i < videos.size(); i++) {

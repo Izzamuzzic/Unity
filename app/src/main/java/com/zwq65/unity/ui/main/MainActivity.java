@@ -107,6 +107,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onToolbarClick() {
+    }
+
     private void gotoFragment(BaseFragment fragment) {
         switchFragment(R.id.fl_main, fragment, fragment.getClass().getSimpleName());
     }

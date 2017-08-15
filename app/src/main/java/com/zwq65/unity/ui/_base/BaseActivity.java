@@ -98,6 +98,12 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onToolbarClick();
+                }
+            });
             //含toolbar的activity，实现沉浸式状态栏
             ImmersionBar.with(this).titleBar(toolbar).init();
         }
@@ -113,6 +119,9 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     @Nullable
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    public void onToolbarClick() {
     }
 
     @Override

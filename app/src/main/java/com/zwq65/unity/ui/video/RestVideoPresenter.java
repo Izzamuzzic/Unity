@@ -35,19 +35,33 @@ public class RestVideoPresenter<V extends RestVideoMvpView> extends BasePresente
     }
 
     @Override
-    public void loadVideos(Boolean isRefresh) {
+    public void loadVideos(final Boolean isRefresh) {
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(RetrofitApiManager.getInstance().getVideosAndIMagesByPage(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
             @Override
             public void onSuccess(List<VideoWithImage> videoWithImages) {
-                isLoading = false;
-                getMvpView().showVideos(videoWithImages);
+                if (videoWithImages != null && videoWithImages.size() > 0) {
+                    isLoading = false;
+                    page++;
+                    if (isRefresh) {
+                        getMvpView().refreshVideos(videoWithImages);
+                    } else {
+                        getMvpView().showVideos(videoWithImages);
+                    }
+                } else {
+                    if (videoWithImages != null) {
+                        getMvpView().noMoreData();
+                    } else {
+                        getMvpView().loadFail();
+                    }
+                }
             }
         }, new ApiErrorCallBack<Throwable>() {
             @Override
             public void onFailure(Throwable t) {
                 isLoading = false;
+                getMvpView().loadFail();
             }
         }));
     }

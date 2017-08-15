@@ -41,6 +41,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     private final String TAG = getClass().getSimpleName();
     public BaseActivity mActivity;
     private Unbinder mUnBinder;
+    private MvpPresenter mPresenter;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -89,6 +90,10 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void onDetach() {
         LogUtils.i(TAG, "onDetach");
         mActivity = null;
+        if (mPresenter != null) {
+            mPresenter.onDetach();
+            mPresenter = null;
+        }
         super.onDetach();
     }
 
@@ -98,6 +103,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         super.onDestroyView();
         if (mUnBinder != null) {
             mUnBinder.unbind();
+            mUnBinder = null;
         }
     }
 
@@ -197,6 +203,10 @@ public abstract class BaseFragment extends Fragment implements MvpView {
 
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
+    }
+
+    public void setmPresenter(MvpPresenter mPresenter) {
+        this.mPresenter = mPresenter;
     }
 
     public abstract View inflateView(LayoutInflater inflater, ViewGroup container);

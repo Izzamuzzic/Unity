@@ -46,6 +46,8 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
         View view = inflater.inflate(R.layout.fragment_rest_video, container, false);
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
+        mPresenter.onAttach(this);
+        setmPresenter(mPresenter);
         return view;
     }
 
@@ -108,7 +110,25 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     }
 
     @Override
-    public void showVideos(List<VideoWithImage> videoWithImages) {
+    public void refreshVideos(List<VideoWithImage> videoWithImages) {
+        pullToRefresh.setRefreshing(false);
+        mAdapter.clear();
+        mAdapter.addAll(videoWithImages);
+    }
 
+    @Override
+    public void showVideos(List<VideoWithImage> videoWithImages) {
+        mAdapter.addAll(videoWithImages);
+    }
+
+    @Override
+    public void noMoreData() {
+        pullToRefresh.setRefreshing(false);
+        showErrorAlert(R.string.no_more_data);
+    }
+
+    @Override
+    public void loadFail() {
+        pullToRefresh.setRefreshing(false);
     }
 }

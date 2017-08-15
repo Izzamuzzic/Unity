@@ -37,6 +37,7 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
+        setmPresenter(mPresenter);
         return view;
     }
 

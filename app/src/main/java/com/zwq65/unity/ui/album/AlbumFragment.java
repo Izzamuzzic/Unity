@@ -50,6 +50,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
+        setmPresenter(mPresenter);
         return view;
     }
 
@@ -143,12 +144,5 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     public void noMoreData() {
         pullToRefresh.setRefreshing(false);//取消下拉加载
         showErrorAlert(R.string.no_more_data);
-    }
-
-    @Override
-    public void onDetach() {
-        mPresenter.onDetach();
-        mPresenter = null;
-        super.onDetach();
     }
 }

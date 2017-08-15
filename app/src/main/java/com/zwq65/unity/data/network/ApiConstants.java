@@ -18,7 +18,7 @@ public class ApiConstants {
     public static final String RestVideo = "休息视频/";
     public static final String Android = "Android/";
 
-    public static final String WelfarePageSize = "20";
+    public static final String WelfarePageSize = "10";
     public static final String RestVideoPageSize = "10";
     public static final String AndroidPageSize = "10";
 }
