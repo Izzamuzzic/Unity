@@ -2,6 +2,7 @@ package com.zwq65.unity.data.network.retrofit;
 
 
 import com.zwq65.unity.data.network.ApiConstants;
+import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 
 import io.reactivex.Observable;
@@ -24,6 +25,6 @@ public interface GankIoApiService {
      * 获取休息视频
      */
     @GET(ApiConstants.RestVideo + ApiConstants.RestVideoPageSize + "/{page}")
-    Observable<WelfareResponse> getVideosByPage(@Path("page") int page);
+    Observable<RestVideoResponse> getVideosByPage(@Path("page") int page);
 
 }

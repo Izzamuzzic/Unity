@@ -4,8 +4,10 @@ import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
+import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.ui._base.BasePresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,16 +31,18 @@ public class RestVideoPresenter<V extends RestVideoMvpView> extends BasePresente
     public void init() {
         page = 1;
         isLoading = false;
+        loadVideos(true);
     }
 
     @Override
     public void loadVideos(Boolean isRefresh) {
         if (isLoading) return;
         isLoading = true;
-        getCompositeDisposable().add(RetrofitApiManager.getInstance().getVideosByPage(page, new ApiSubscriberCallBack<RestVideoResponse>() {
+        getCompositeDisposable().add(RetrofitApiManager.getInstance().getVideosAndIMagesByPage(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
             @Override
-            public void onSuccess(RestVideoResponse restVideoResponse) {
+            public void onSuccess(List<VideoWithImage> videoWithImages) {
                 isLoading = false;
+                getMvpView().showVideos(videoWithImages);
             }
         }, new ApiErrorCallBack<Throwable>() {
             @Override

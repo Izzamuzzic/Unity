@@ -44,7 +44,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
                             if (isRefresh) {
                                 getMvpView().refreshImages(welfareResponse.getResults());
                             } else {
-                                getMvpView().loadImages(welfareResponse.getResults());
+                                getMvpView().showImages(welfareResponse.getResults());
                             }
                         } else {
                             getMvpView().noMoreData();

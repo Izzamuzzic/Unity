@@ -42,10 +42,10 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
 
     @Inject
     AlbumMvpPresenter<AlbumMvpView> mPresenter;
-    AlbumAdapter adapter;
+    AlbumAdapter mAdapter;
 
     @Override
-    public View initView(LayoutInflater inflater, ViewGroup container) {
+    public View inflateView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_album, container, false);
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
@@ -64,6 +64,13 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         rvAlbums.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rvAlbums.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
+        //上拉刷新監聽
+        pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
         //下拉加載監聽
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -90,28 +97,23 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
                 }
             }
         });
-        pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initData();
-            }
-        });
-        adapter = new AlbumAdapter(mActivity);
-        adapter.setOnItemClickListener(new OnItemClickListener<WelfareResponse.Image>() {
+
+        mAdapter = new AlbumAdapter(mActivity);
+        mAdapter.setOnItemClickListener(new OnItemClickListener<WelfareResponse.Image>() {
             @Override
             public void onClick(WelfareResponse.Image image, int position) {
                 startContentActivity(position);
             }
         });
-        rvAlbums.setAdapter(adapter);
-        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(adapter));//拖拽监听
+        rvAlbums.setAdapter(mAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
         helper.attachToRecyclerView(rvAlbums);
     }
 
     private void startContentActivity(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);
-        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) adapter.getData());
+        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) mAdapter.getData());
         mActivity.openActivity(ImageActivity.class, bundle);
     }
 
@@ -122,14 +124,14 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     @Override
     public void refreshImages(List<WelfareResponse.Image> imageList) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        adapter.clear();
-        adapter.addAll(imageList);
+        mAdapter.clear();
+        mAdapter.addAll(imageList);
     }
 
     @Override
-    public void loadImages(List<WelfareResponse.Image> imageList) {
+    public void showImages(List<WelfareResponse.Image> imageList) {
         //加载数据
-        adapter.addAll(imageList);
+        mAdapter.addAll(imageList);
     }
 
     @Override

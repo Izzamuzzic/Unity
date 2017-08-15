@@ -52,7 +52,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView");
-        return initView(inflater, container);
+        return inflateView(inflater, container);
     }
 
     @Override
@@ -199,7 +199,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         mUnBinder = unBinder;
     }
 
-    public abstract View initView(LayoutInflater inflater, ViewGroup container);
+    public abstract View inflateView(LayoutInflater inflater, ViewGroup container);
 
     public abstract void initData(Bundle saveInstanceState);
 

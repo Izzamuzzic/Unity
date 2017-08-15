@@ -7,10 +7,15 @@ import com.zwq65.unity.data.network.ApiConstants;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
+import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse.Video;
+import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -18,6 +23,7 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -42,6 +48,28 @@ public class RetrofitApiManager {
     public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return getGankIoApiService().getVideosByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
+
+    public Disposable getVideosAndIMagesByPage(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return Observable.zip(getGankIoApiService().getVideosByPage(page), getGankIoApiService().getImagesByPage(page),
+                new BiFunction<RestVideoResponse, WelfareResponse, List<VideoWithImage>>() {
+                    @Override
+                    public List<VideoWithImage> apply(@NonNull RestVideoResponse restVideoResponse, @NonNull WelfareResponse welfareResponse) throws Exception {
+                        List<VideoWithImage> videoWithImageList = new ArrayList<>();
+
+                        if (restVideoResponse != null && welfareResponse != null && welfareResponse.getResults() != null) {
+                            List<Video> videos = restVideoResponse.getResults();
+                            List<Image> images = welfareResponse.getResults();
+                            for (int i = 0; i < videos.size(); i++) {
+                                if (i < images.size()) {
+                                    videoWithImageList.add(new VideoWithImage(videos.get(i), images.get(i)));
+                                }
+                            }
+                        }
+                        return videoWithImageList;
+                    }
+                }).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
 
     public static RetrofitApiManager getInstance() {
         if (apiManager == null) {

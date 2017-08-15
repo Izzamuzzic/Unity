@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.video;
 
-import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
+import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.ui._base.MvpView;
 
 import java.util.List;
@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface RestVideoMvpView extends MvpView{
-    void showVideos(List<RestVideoResponse.Video> videoList);
+    void showVideos(List<VideoWithImage> videoWithImages);
 }

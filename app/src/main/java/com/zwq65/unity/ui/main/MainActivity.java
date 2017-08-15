@@ -15,6 +15,7 @@ import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
+import com.zwq65.unity.ui.video.RestVideoFragment;
 import com.zwq65.unity.utils.FontUtils;
 
 import butterknife.BindView;
@@ -92,7 +93,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.ll_video:
                 //休息视频
-                openActivity(AccountActivity.class);
+                gotoFragment(new RestVideoFragment());
                 break;
             case R.id.ll_rxjava:
                 gotoFragment(new RxjavaFragment());
@@ -108,7 +109,6 @@ public class MainActivity extends BaseActivity {
 
     private void gotoFragment(BaseFragment fragment) {
         switchFragment(R.id.fl_main, fragment, fragment.getClass().getSimpleName());
-
     }
 
 }

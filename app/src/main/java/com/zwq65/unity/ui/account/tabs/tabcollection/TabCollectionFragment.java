@@ -32,7 +32,7 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
     TabCollectionAdapter adapter;
 
     @Override
-    public View initView(LayoutInflater inflater, ViewGroup container) {
+    public View inflateView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_tab_collection, container, false);
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);

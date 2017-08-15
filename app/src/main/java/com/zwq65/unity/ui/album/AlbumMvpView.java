@@ -13,7 +13,7 @@ public interface AlbumMvpView extends MvpView {
 
     void refreshImages(List<WelfareResponse.Image> imageList);//刷新图片
 
-    void loadImages(List<WelfareResponse.Image> imageList);//加载图片
+    void showImages(List<WelfareResponse.Image> imageList);//加载图片
 
     void loadError(Throwable t);//加载报错
 
