@@ -1,7 +1,7 @@
 package com.zwq65.unity.data.network.retrofit;
 
 
-import com.zwq65.unity.data.network.Constants;
+import com.zwq65.unity.data.network.ApiConstants;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 
 import io.reactivex.Observable;
@@ -15,9 +15,15 @@ import retrofit2.http.Path;
 
 public interface GankIoApiService {
     /**
-     * 获取福利图片(pagesize=20)
+     * 获取福利图片
      */
-    @GET(Constants.Welfare20 + "/{page}")
+    @GET(ApiConstants.Welfare + ApiConstants.WelfarePageSize + "/{page}")
     Observable<WelfareResponse> getImagesByPage(@Path("page") int page);
+
+    /**
+     * 获取休息视频
+     */
+    @GET(ApiConstants.RestVideo + ApiConstants.RestVideoPageSize + "/{page}")
+    Observable<WelfareResponse> getVideosByPage(@Path("page") int page);
 
 }

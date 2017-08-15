@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui.base.BaseFragment;
+import com.zwq65.unity.ui._base.BaseFragment;
 
 import java.util.concurrent.Callable;
 

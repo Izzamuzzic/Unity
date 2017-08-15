@@ -37,6 +37,7 @@
     <string name="save_fail">保存失败</string>
     <string name="rxjava">Rxjava</string>
     <string name="defer">defer</string>
+    <string name="rest_video">休息视频</string>
 
 
 </resources>

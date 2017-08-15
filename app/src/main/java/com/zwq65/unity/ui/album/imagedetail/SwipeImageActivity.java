@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
-import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseActivity;
 
 import java.util.List;
 

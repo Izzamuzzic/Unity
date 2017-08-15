@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.zwq65.unity.ui.base.base_adapter.BaseRecyclerViewAdapter;
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 
 import java.util.Collections;
 

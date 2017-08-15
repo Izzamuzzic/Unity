@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui.base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 
 import javax.inject.Inject;

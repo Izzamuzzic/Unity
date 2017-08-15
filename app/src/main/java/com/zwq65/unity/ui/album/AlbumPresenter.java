@@ -1,11 +1,11 @@
 package com.zwq65.unity.ui.album;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.ApiErrorCallBack;
-import com.zwq65.unity.data.network.retrofit.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
+import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
+import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
-import com.zwq65.unity.ui.base.BasePresenter;
+import com.zwq65.unity.ui._base.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -25,7 +25,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
     }
 
     @Override
-    public void initImages() {
+    public void init() {
         page = 1;
         isLoading = false;
         loadImages(true);
@@ -54,7 +54,6 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
                 }, new ApiErrorCallBack<Throwable>() {
                     @Override
                     public void onFailure(Throwable t) {
-                        super.onFailure(t);
                         getMvpView().loadError(t);
                         isLoading = false;
                     }

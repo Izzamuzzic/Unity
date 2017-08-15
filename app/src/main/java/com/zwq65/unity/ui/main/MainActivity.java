@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.ui.account.AccountActivity;
 import com.zwq65.unity.ui.album.AlbumFragment;
-import com.zwq65.unity.ui.base.BaseActivity;
-import com.zwq65.unity.ui.base.BaseFragment;
-import com.zwq65.unity.ui.personalcenter.PersonalCenterActivity;
+import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
 import com.zwq65.unity.utils.FontUtils;
 
@@ -41,6 +41,8 @@ public class MainActivity extends BaseActivity {
     TextView tvAccountName;
     @BindView(R.id.tv_account_website_address)
     TextView tvAccountWebsiteAddress;
+    @BindView(R.id.ll_video)
+    LinearLayout llVideo;
 
 
     @Override
@@ -76,7 +78,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_rxjava, R.id.ll_setting, R.id.ll_out})
+    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_video, R.id.ll_rxjava, R.id.ll_setting, R.id.ll_out})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
@@ -86,7 +88,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.ll_personal_center:
                 //个人中心
-                openActivity(PersonalCenterActivity.class);
+                openActivity(AccountActivity.class);
+                break;
+            case R.id.ll_video:
+                //休息视频
+                openActivity(AccountActivity.class);
                 break;
             case R.id.ll_rxjava:
                 gotoFragment(new RxjavaFragment());

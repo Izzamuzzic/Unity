@@ -1,7 +1,7 @@
 package com.zwq65.unity.ui.album;
 
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
-import com.zwq65.unity.ui.base.MvpView;
+import com.zwq65.unity.ui._base.MvpView;
 
 import java.util.List;
 

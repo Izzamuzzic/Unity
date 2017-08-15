@@ -4,7 +4,7 @@
     android:layout_height="200dp"
     android:background="@drawable/bg_gradient_personal_center">
 
-    <com.zwq65.unity.ui.custom.customize_view.WaveBezierView
+    <com.zwq65.unity.ui.custom.customizeview.WaveBezierView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

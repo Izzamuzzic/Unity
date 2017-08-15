@@ -1,7 +1,7 @@
 package com.zwq65.unity.ui.login;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui.base.BasePresenter;
+import com.zwq65.unity.ui._base.BasePresenter;
 
 import javax.inject.Inject;
 

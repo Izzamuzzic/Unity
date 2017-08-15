@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
-import com.zwq65.unity.ui.base.base_adapter.BaseRecyclerViewAdapter;
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

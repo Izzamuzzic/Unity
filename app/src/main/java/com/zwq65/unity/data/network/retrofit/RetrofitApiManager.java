@@ -3,7 +3,10 @@ package com.zwq65.unity.data.network.retrofit;
 import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.zwq65.unity.data.network.Constants;
+import com.zwq65.unity.data.network.ApiConstants;
+import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
+import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
+import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.utils.LogUtils;
 
@@ -36,6 +39,10 @@ public class RetrofitApiManager {
         return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
+    public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getGankIoApiService().getVideosByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
     public static RetrofitApiManager getInstance() {
         if (apiManager == null) {
             synchronized (RetrofitApiManager.class) {
@@ -56,7 +63,7 @@ public class RetrofitApiManager {
                     .addInterceptor(new MyInterceptor())
                     .build();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.GANK_IO_HOST)
+                    .baseUrl(ApiConstants.GANK_IO_HOST)
                     .client(okClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

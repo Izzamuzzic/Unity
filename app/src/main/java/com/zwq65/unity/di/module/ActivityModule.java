@@ -21,6 +21,15 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.di.ActivityContext;
 import com.zwq65.unity.di.PerActivity;
+import com.zwq65.unity.ui.account.AccountMvpPresenter;
+import com.zwq65.unity.ui.account.AccountMvpView;
+import com.zwq65.unity.ui.account.AccountPresenter;
+import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpPresenter;
+import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpView;
+import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumPresenter;
+import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionMvpPresenter;
+import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionMvpView;
+import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpView;
 import com.zwq65.unity.ui.album.AlbumPresenter;
@@ -30,15 +39,9 @@ import com.zwq65.unity.ui.album.imagedetail.ImagePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
-import com.zwq65.unity.ui.personalcenter.PersonalCenterMvpPresenter;
-import com.zwq65.unity.ui.personalcenter.PersonalCenterMvpView;
-import com.zwq65.unity.ui.personalcenter.PersonalCenterPresenter;
-import com.zwq65.unity.ui.personalcenter.collectionalbum.CollectionAlbumMvpPresenter;
-import com.zwq65.unity.ui.personalcenter.collectionalbum.CollectionAlbumMvpView;
-import com.zwq65.unity.ui.personalcenter.collectionalbum.CollectionAlbumPresenter;
-import com.zwq65.unity.ui.personalcenter.tabs.tabcollection.TabCollectionMvpPresenter;
-import com.zwq65.unity.ui.personalcenter.tabs.tabcollection.TabCollectionMvpView;
-import com.zwq65.unity.ui.personalcenter.tabs.tabcollection.TabCollectionPresenter;
+import com.zwq65.unity.ui.video.RestVideoMvpPresenter;
+import com.zwq65.unity.ui.video.RestVideoMvpView;
+import com.zwq65.unity.ui.video.RestVideoPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -96,8 +99,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    PersonalCenterMvpPresenter<PersonalCenterMvpView> providePersonalCenterMvpPresenter(
-            PersonalCenterPresenter<PersonalCenterMvpView> personalCenterPresenter) {
+    AccountMvpPresenter<AccountMvpView> providePersonalCenterMvpPresenter(
+            AccountPresenter<AccountMvpView> personalCenterPresenter) {
         return personalCenterPresenter;
     }
 
@@ -113,6 +116,13 @@ public class ActivityModule {
     TabCollectionMvpPresenter<TabCollectionMvpView> provideTabCollectionMvpPresenter(
             TabCollectionPresenter<TabCollectionMvpView> tabCollectionPresenter) {
         return tabCollectionPresenter;
+    }
+
+    @Provides
+    @PerActivity
+    RestVideoMvpPresenter<RestVideoMvpView> provideRestVideoMvpPresenter(
+            RestVideoPresenter<RestVideoMvpView> restVideoPresenter) {
+        return restVideoPresenter;
     }
 
     @Provides

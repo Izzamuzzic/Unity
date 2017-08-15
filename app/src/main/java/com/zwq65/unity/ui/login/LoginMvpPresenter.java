@@ -1,8 +1,8 @@
 package com.zwq65.unity.ui.login;
 
 import com.zwq65.unity.di.PerActivity;
-import com.zwq65.unity.ui.base.MvpPresenter;
-import com.zwq65.unity.ui.base.MvpView;
+import com.zwq65.unity.ui._base.MvpPresenter;
+import com.zwq65.unity.ui._base.MvpView;
 
 /**
  * Created by zwq65 on 2017/06/29.
