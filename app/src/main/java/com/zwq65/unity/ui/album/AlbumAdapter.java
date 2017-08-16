@@ -52,6 +52,8 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
                 }
             }
         });
+        //添加动画
+        setAnimation(holder.itemView, position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

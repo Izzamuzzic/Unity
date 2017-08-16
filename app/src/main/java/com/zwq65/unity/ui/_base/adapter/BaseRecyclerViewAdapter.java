@@ -1,6 +1,11 @@
 package com.zwq65.unity.ui._base.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import com.zwq65.unity.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,24 +64,24 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
         this.onItemLongClickListener = onItemLongClickListener;
     }
 
-//    private int lastPosition = -1;
+    private int lastPosition = -1;
 
-//    @Override
-//    public void onBindViewHolder(V holder, int position) {
-//        setAnimation(holder.itemView, position);
-//    }
-//
-//    protected void setAnimation(View viewToAnimate, int position) {
-//        if (position > lastPosition) {
-//            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.item_slide_bottom_up);
-//            viewToAnimate.startAnimation(animation);
-//            lastPosition = position;
-//        }
-//    }
-//
-//    @Override
-//    public void onViewDetachedFromWindow(V holder) {
-//        super.onViewDetachedFromWindow(holder);
-//        holder.itemView.clearAnimation();
-//    }
+    @Override
+    public void onBindViewHolder(V holder, int position) {
+        setAnimation(holder.itemView, position);
+    }
+
+    protected void setAnimation(View viewToAnimate, int position) {
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.slide_in_right);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(V holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.itemView.clearAnimation();
+    }
 }

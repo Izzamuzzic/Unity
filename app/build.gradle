@@ -98,8 +98,7 @@ dependencies {
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
     //仿探探滑动相册
     compile 'me.yuqirong:cardswipelayout:1.0.0'
-    //stetho：facebook开发的一款用于查看app数据库等信息的工具,浏览器访
-    // 问地址：chrome://inspect/#devices
+    //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
     compile 'com.facebook.stetho:stetho:1.4.2'
     //Beautiful and smooth custom loading views
     compile 'com.tuyenmonkey:mkloader:1.4.0'
@@ -107,7 +106,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     //快速开发工具类收集
     compile 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
-    //Simple Adapter for recycleView
-    compile 'com.zhy:base-rvadapter:3.0.3'
     testCompile 'junit:junit:4.12'
 }
