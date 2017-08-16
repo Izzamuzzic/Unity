@@ -9,6 +9,9 @@ public class VideoWithImage {
     private RestVideoResponse.Video video;
     private WelfareResponse.Image image;
 
+    public VideoWithImage() {
+    }
+
     public VideoWithImage(RestVideoResponse.Video video, WelfareResponse.Image image) {
         this.video = video;
         this.image = image;

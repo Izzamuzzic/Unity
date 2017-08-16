@@ -39,8 +39,11 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     ViewPager vpPersonal;
     @BindView(R.id.iv_back)
     ImageView ivBack;
+    @BindView(R.id.iv_avatar)
+    ImageView ivAvatar;
 
     public static String[] Tabs = new String[]{"收藏", "发布", "喜欢"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.zwq65.unity.data.network.retrofit;
+package com.zwq65.unity.data.network.retrofit.api;
 
 
 import com.zwq65.unity.data.network.ApiConstants;
@@ -26,5 +26,4 @@ public interface GankIoApiService {
      */
     @GET(ApiConstants.RestVideo + ApiConstants.RestVideoPageSize + "/{page}")
     Observable<RestVideoResponse> getVideosByPage(@Path("page") int page);
-
 }

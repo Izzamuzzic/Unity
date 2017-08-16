@@ -54,7 +54,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
                 }, new ApiErrorCallBack<Throwable>() {
                     @Override
                     public void onFailure(Throwable t) {
-                        getMvpView().loadError(t);
+                        getMvpView().loadFail(t);
                         isLoading = false;
                     }
                 })

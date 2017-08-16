@@ -113,6 +113,9 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         super.onDestroy();
     }
 
+    public void onToolbarClick() {
+    }
+
     @Override
     public void showLoading() {
         hideLoading();

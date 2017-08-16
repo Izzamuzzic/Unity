@@ -9,10 +9,15 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
     <TextView
         android:id="@+id/tv_video_title"
         style="@style/text_16_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/defult_margin"
+        android:background="@drawable/bg_text_title"
+        android:ellipsize="end"
+        android:maxLines="3" />
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zwq65.unity.data.network.ApiConstants;
+import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
@@ -45,9 +46,9 @@ public class RetrofitApiManager {
         return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
-    public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getGankIoApiService().getVideosByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
-    }
+//    public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+//        return getGankIoApiService().getVideosByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+//    }
 
     public Disposable getVideosAndIMagesByPage(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return Observable.zip(getGankIoApiService().getVideosByPage(page), getGankIoApiService().getImagesByPage(page),

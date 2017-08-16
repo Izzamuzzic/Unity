@@ -110,6 +110,11 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     }
 
     @Override
+    public void onToolbarClick() {
+        rvVideos.smoothScrollToPosition(0);
+    }
+
+    @Override
     public void refreshVideos(List<VideoWithImage> videoWithImages) {
         pullToRefresh.setRefreshing(false);
         mAdapter.clear();
@@ -130,5 +135,6 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     @Override
     public void loadFail() {
         pullToRefresh.setRefreshing(false);
+        showErrorAlert(R.string.load_fail);
     }
 }

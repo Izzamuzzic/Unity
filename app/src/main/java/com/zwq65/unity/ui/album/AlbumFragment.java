@@ -118,6 +118,11 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         mActivity.openActivity(ImageActivity.class, bundle);
     }
 
+    @Override
+    public void onToolbarClick() {
+        rvAlbums.smoothScrollToPosition(0);
+    }
+
     public void initData() {
         mPresenter.init();
     }
@@ -136,7 +141,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     }
 
     @Override
-    public void loadError(Throwable t) {
+    public void loadFail(Throwable t) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
     }
 

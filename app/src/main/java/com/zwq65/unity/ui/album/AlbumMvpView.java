@@ -15,7 +15,7 @@ public interface AlbumMvpView extends MvpView {
 
     void showImages(List<WelfareResponse.Image> imageList);//加载图片
 
-    void loadError(Throwable t);//加载报错
+    void loadFail(Throwable t);//加载报错
 
     void noMoreData();//没有数据了
 }

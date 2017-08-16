@@ -98,12 +98,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
-            toolbar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onToolbarClick();
-                }
-            });
             //含toolbar的activity，实现沉浸式状态栏
             ImmersionBar.with(this).titleBar(toolbar).init();
         }
@@ -119,9 +113,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     @Nullable
     public Toolbar getToolbar() {
         return toolbar;
-    }
-
-    public void onToolbarClick() {
     }
 
     @Override
@@ -241,6 +232,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary_blue));
         TextView textView = (TextView) sbView
                 .findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
