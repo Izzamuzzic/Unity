@@ -71,7 +71,8 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
 
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
-    private Unbinder mUnBinder;//An unbinder contract that will unbind views when called
+    //An unbinder contract that will unbind views when called
+    private Unbinder mUnBinder;
     private FragmentManager fragmentManager;
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
@@ -90,11 +91,11 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void bindViews() {
         ButterKnife.bind(this);
-        setupToolbar();
+        setupBaseToolbar();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-    protected void setupToolbar() {
+    protected void setupBaseToolbar() {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);

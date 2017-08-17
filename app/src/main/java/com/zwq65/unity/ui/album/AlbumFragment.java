@@ -103,7 +103,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<WelfareResponse.Image>() {
             @Override
             public void onClick(WelfareResponse.Image image, int position) {
-                startContentActivity(position);
+                gotoContentActivity(position);
             }
         });
         rvAlbums.setAdapter(mAdapter);
@@ -111,7 +111,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         helper.attachToRecyclerView(rvAlbums);
     }
 
-    private void startContentActivity(int position) {
+    private void gotoContentActivity(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) mAdapter.getData());

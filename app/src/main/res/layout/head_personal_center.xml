@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="@dimen/activity_header_height"
     android:background="@drawable/bg_gradient_personal_center">
 
     <com.zwq65.unity.ui.custom.widget.WaveBezierView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/iv_back"
@@ -14,14 +15,14 @@
         android:layout_height="30dp"
         android:layout_marginStart="@dimen/defult_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_no_statusbar"
-        android:src="@mipmap/ic_back" />
+        android:src="@mipmap/ic_back"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_avatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_avatar" />
+        android:src="@mipmap/ic_avatar"/>
 
     <TextView
         android:id="@+id/tv_name"
@@ -31,5 +32,5 @@
         android:layout_below="@+id/iv_avatar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/defult_margin"
-        android:text="@string/desperadozck" />
+        android:text="@string/desperadozck"/>
 </RelativeLayout>

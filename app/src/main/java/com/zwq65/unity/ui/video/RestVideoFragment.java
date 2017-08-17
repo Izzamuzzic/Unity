@@ -16,6 +16,7 @@ import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
 
@@ -99,10 +100,16 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
         mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<VideoWithImage>() {
             @Override
             public void onClick(VideoWithImage videoWithImage, int position) {
-
+                gotoWatchActivity(videoWithImage);
             }
         });
         rvVideos.setAdapter(mAdapter);
+    }
+
+    private void gotoWatchActivity(VideoWithImage videoWithImage) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(WatchActivity.VIDEO_WITH_IMAGE, videoWithImage);
+        mActivity.openActivity(WatchActivity.class, bundle);
     }
 
     public void initData() {
