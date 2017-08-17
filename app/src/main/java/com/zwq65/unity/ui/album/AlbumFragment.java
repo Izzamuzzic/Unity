@@ -15,9 +15,9 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.adapter.OnItemClickListener;
-import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui.album.imagedetail.ImageActivity;
+import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +100,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         });
 
         mAdapter = new AlbumAdapter(mActivity);
-        mAdapter.setOnItemClickListener(new OnItemClickListener<WelfareResponse.Image>() {
+        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<WelfareResponse.Image>() {
             @Override
             public void onClick(WelfareResponse.Image image, int position) {
                 startContentActivity(position);

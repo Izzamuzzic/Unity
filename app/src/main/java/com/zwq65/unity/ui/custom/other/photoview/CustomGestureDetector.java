@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.zwq65.unity.ui.custom.photoview;
+package com.zwq65.unity.ui.custom.other.photoview;
 
 import android.content.Context;
 import android.view.MotionEvent;

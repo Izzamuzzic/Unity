@@ -19,7 +19,6 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
 
     protected List<T> data = new ArrayList<>();
     protected OnItemClickListener<T> listener;
-    protected OnItemLongClickListener<T> onItemLongClickListener;
 
     @Override
     public int getItemCount() {
@@ -60,10 +59,6 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
         return data;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
-        this.onItemLongClickListener = onItemLongClickListener;
-    }
-
     private int lastPosition = -1;
 
     @Override
@@ -84,4 +79,9 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
         super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
     }
+
+    public interface OnItemClickListener<T> {
+        void onClick(T t, int position);
+    }
+
 }

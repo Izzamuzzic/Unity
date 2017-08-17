@@ -14,7 +14,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.adapter.OnItemClickListener;
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
 
 import java.util.List;
@@ -96,7 +96,7 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
             }
         });
         mAdapter = new RestVideoAdapter(getContext());
-        mAdapter.setOnItemClickListener(new OnItemClickListener<VideoWithImage>() {
+        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<VideoWithImage>() {
             @Override
             public void onClick(VideoWithImage videoWithImage, int position) {
 

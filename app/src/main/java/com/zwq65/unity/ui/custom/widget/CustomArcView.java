@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.custom.customizeview;
+package com.zwq65.unity.ui.custom.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

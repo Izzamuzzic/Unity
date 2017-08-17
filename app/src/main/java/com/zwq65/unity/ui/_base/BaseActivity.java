@@ -315,5 +315,4 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.custom.drawable;
+package com.zwq65.unity.ui.custom.widget.drawable;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

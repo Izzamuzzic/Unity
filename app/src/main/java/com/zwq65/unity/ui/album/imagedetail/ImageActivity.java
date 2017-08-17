@@ -20,7 +20,7 @@ import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
-import com.zwq65.unity.ui.custom.photoview.PhotoView;
+import com.zwq65.unity.ui.custom.other.photoview.PhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
