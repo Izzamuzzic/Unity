@@ -104,13 +104,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
     @Nullable
     public Toolbar getToolbar() {
         return toolbar;
@@ -124,6 +117,13 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((UnityApp) getApplication()).getComponent())
                 .build();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
