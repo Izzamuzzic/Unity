@@ -1,16 +1,33 @@
 package com.zwq65.unity.ui.album.imagedetail;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
+import com.zwq65.unity.utils.AppFileMgr;
 import com.zwq65.unity.utils.LogUtils;
+
+import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zwq65 on 2017/08/01
@@ -18,25 +35,81 @@ import io.reactivex.functions.Consumer;
 
 public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> implements ImageMvpPresenter<V> {
     @Inject
-    public ImagePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    ImagePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 
     @Override
-    public void savePicture(WelfareResponse.Image image) {
+    public void savePicture(final Context context, Image image) {
+        Observable.just(image)
+                .observeOn(Schedulers.io())
+                .map(new Function<Image, Bitmap>() {
+                    Bitmap bitmap;
+
+                    @Override
+                    public Bitmap apply(@NonNull Image image) throws Exception {
+                        try {
+                            bitmap = Glide.with(context).asBitmap().load(image.getUrl()).listener(new RequestListener<Bitmap>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                                    return false;
+                                }
+                            }).submit().get();
+                        } catch (InterruptedException | ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                        String path;
+                        if (AppFileMgr.getSdCardIsEnable()) {
+                            path = AppFileMgr.getSdCardPath();
+                            // path:/storage/emulated/0/unity
+                        } else {
+                            path = AppFileMgr.getDataPath();
+                        }
+                        LogUtils.i("path:" + path);
+                        AppFileMgr.saveFileToSdcard(bitmap, path + "Unity" + File.separator + image.get_id() + ".jpg");
+                        return bitmap;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(@NonNull Bitmap bitmap) throws Exception {
+                        getMvpView().savePictrueWhetherSucceed(true);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        LogUtils.e(throwable.toString());
+                        getMvpView().savePictrueWhetherSucceed(false);
+                    }
+                });
+    }
+
+    @Override
+    public void collectPicture(Image image) {
         Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
                 image.getSource(), image.getType(), image.getUrl(), image.getWho());
         getDataManager().insertPicture(picture).subscribe(new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                getMvpView().savePictrueWhetherSucceed(true);
+                getMvpView().collectPictrueWhetherSucceed(true);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 LogUtils.e(throwable.toString());
-                getMvpView().savePictrueWhetherSucceed(false);
+                getMvpView().collectPictrueWhetherSucceed(false);
             }
         });
+    }
+
+    @Override
+    public void cancelCollectPicture(Image image) {
+
     }
 }

@@ -34,12 +34,15 @@ public class TabCollectionAdapter extends BaseRecyclerViewAdapter<Picture, TabCo
     @Override
     public TabCollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_tab_collection, parent, false);
+        view.setLayoutParams(new LinearLayout.LayoutParams(width, height));
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final TabCollectionAdapter.ViewHolder holder, int position) {
-        holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(width, height));
+        //添加动画
+        setAnimation(holder.itemView, position);
+
         Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override

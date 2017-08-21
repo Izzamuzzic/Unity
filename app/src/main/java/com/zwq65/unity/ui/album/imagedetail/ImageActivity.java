@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -112,15 +114,24 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     @OnClick(R.id.tv_save_image)
     public void onViewClicked() {
         //保存大图
-        mPresenter.savePicture(imageList.get(currentPosition));
+        mPresenter.savePicture(this, imageList.get(currentPosition));
     }
 
     @Override
     public void savePictrueWhetherSucceed(Boolean success) {
+        if(success){
+           showSuccessAlert(R.string.save_success);
+        }else{
+            showSuccessAlert(R.string.save_fail);
+        }
+    }
+
+    @Override
+    public void collectPictrueWhetherSucceed(Boolean success) {
         if (success) {
-            showSuccessAlert(R.string.save_success);
+            showSuccessAlert(R.string.collect_success);
         } else {
-            showErrorAlert(R.string.save_fail);
+            showErrorAlert(R.string.collect_fail);
         }
     }
 
@@ -148,12 +159,26 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(ViewGroup container, final int position) {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
             PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
+            CheckBox cbLove = (CheckBox) view.findViewById(R.id.cb_love);
+
+            final Image image = imageList.get(position);
+
+            cbLove.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        mPresenter.collectPicture(image);
+                    } else {
+                        mPresenter.cancelCollectPicture(image);
+                    }
+                }
+            });
             final MKLoader pbLoader = (MKLoader) view.findViewById(R.id.pb_loader);
-            Glide.with(ImageActivity.this).load(imageList.get(position).getUrl())
+            Glide.with(ImageActivity.this).load(image.getUrl())
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
