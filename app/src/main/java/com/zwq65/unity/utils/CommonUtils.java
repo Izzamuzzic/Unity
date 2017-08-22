@@ -22,6 +22,8 @@ import android.graphics.drawable.ColorDrawable;
 
 import com.zwq65.unity.R;
 
+import java.io.File;
+
 
 public final class CommonUtils {
 
@@ -40,6 +42,17 @@ public final class CommonUtils {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
+    }
+
+    public static String getImageStorePath() {
+        String path;
+        if (AppFileMgr.getSdCardIsEnable()) {
+            path = AppFileMgr.getSdCardPath();
+        } else {
+            path = AppFileMgr.getDataPath();
+        }
+        path = path + "Unity" + File.separator + "image" + File.separator;
+        return path;
     }
 
 }

@@ -36,6 +36,10 @@ public interface DbHelper {
 
     Observable<Long> insertPicture(final Picture picture);
 
+    Observable<Long> deletePicture(final String id);
+
+    Observable<Boolean> isPictureExist(final String id);
+
     //获取用户收藏的图片
     Observable<List<Picture>> getCollectionPictures();
 

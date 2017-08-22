@@ -78,6 +78,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Long> deletePicture(String id) {
+        return mDbHelper.deletePicture(id);
+    }
+
+    @Override
+    public Observable<Boolean> isPictureExist(String id) {
+        return mDbHelper.isPictureExist(id);
+    }
+
+    @Override
     public Observable<List<Picture>> getCollectionPictures() {
         return mDbHelper.getCollectionPictures();
     }

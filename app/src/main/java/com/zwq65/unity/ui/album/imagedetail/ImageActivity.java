@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +31,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 import static android.view.View.GONE;
 
@@ -45,6 +46,8 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
 
     int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list
+    @Inject
+    ImageMvpPresenter<ImageMvpView> mPresenter;
 
     @BindView(R.id.vp_images)
     ViewPager vpImages;
@@ -52,9 +55,8 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     TextView tvCurrentPage;//当前页数
     @BindView(R.id.tv_save_image)
     TextView tvSaveImage;
-
-    @Inject
-    ImageMvpPresenter<ImageMvpView> mPresenter;
+    @BindView(R.id.cb_love)
+    CheckBox cbLove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,6 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         mPresenter.onAttach(this);
         initData();
         initView();
-        initViewPager();
     }
 
     @Override
@@ -87,6 +88,17 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
 
     private void initView() {
         setCurrentPage();
+        initViewPager();
+        cbLove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cbLove.isChecked()) {
+                    mPresenter.collectPicture(imageList.get(currentPosition));
+                } else {
+                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
+                }
+            }
+        });
     }
 
     /**
@@ -107,6 +119,13 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 //滑动改变当前页数
                 currentPosition = position;
                 setCurrentPage();
+
+                mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        cbLove.setChecked(aBoolean);
+                    }
+                });
             }
         });
     }
@@ -119,9 +138,9 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
 
     @Override
     public void savePictrueWhetherSucceed(Boolean success) {
-        if(success){
-           showSuccessAlert(R.string.save_success);
-        }else{
+        if (success) {
+            showSuccessAlert(R.string.save_success);
+        } else {
             showSuccessAlert(R.string.save_fail);
         }
     }
@@ -163,20 +182,8 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
             PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
-            CheckBox cbLove = (CheckBox) view.findViewById(R.id.cb_love);
 
             final Image image = imageList.get(position);
-
-            cbLove.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        mPresenter.collectPicture(image);
-                    } else {
-                        mPresenter.cancelCollectPicture(image);
-                    }
-                }
-            });
             final MKLoader pbLoader = (MKLoader) view.findViewById(R.id.pb_loader);
             Glide.with(ImageActivity.this).load(image.getUrl())
                     .listener(new RequestListener<Drawable>() {

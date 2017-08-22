@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.tabcollection;
+package com.zwq65.unity.ui.account.tabs.collection;
 
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.ui._base.MvpView;

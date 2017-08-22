@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.tabcollection;
+package com.zwq65.unity.ui.account.tabs.collection;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by zwq65 on 2017/08/11
+ * 收藏图片相册
  */
 public class TabCollectionFragment extends BaseFragment implements TabCollectionMvpView {
     @BindView(R.id.rl_collection)

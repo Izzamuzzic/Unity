@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black_effective">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_effective">
 
     <!--ViewPager左右滑动查看图片-->
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_images"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <!-- 当前显示页数 e.g. 1/10-->
     <TextView
@@ -19,7 +19,7 @@
         android:layout_alignBaseline="@+id/tv_save_image"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
     <!--保存按钮-->
     <TextView
@@ -32,7 +32,15 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:background="@drawable/bg_button_save_image"
-        android:text="@string/save" />
+        android:text="@string/save"/>
 
-
+    <CheckBox
+        android:id="@+id/cb_love"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_save_image"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:button="@drawable/selector_ic_love"/>
 </RelativeLayout>

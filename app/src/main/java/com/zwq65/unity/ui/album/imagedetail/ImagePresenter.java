@@ -14,9 +14,9 @@ import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
 import com.zwq65.unity.utils.AppFileMgr;
+import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
-import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
@@ -63,15 +63,8 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
                         } catch (InterruptedException | ExecutionException e) {
                             e.printStackTrace();
                         }
-                        String path;
-                        if (AppFileMgr.getSdCardIsEnable()) {
-                            path = AppFileMgr.getSdCardPath();
-                            // path:/storage/emulated/0/unity
-                        } else {
-                            path = AppFileMgr.getDataPath();
-                        }
-                        LogUtils.i("path:" + path);
-                        AppFileMgr.saveFileToSdcard(bitmap, path + "Unity" + File.separator + image.get_id() + ".jpg");
+                        String path = CommonUtils.getImageStorePath();
+                        AppFileMgr.saveFileToSdcard(bitmap, path + image.get_id() + ".jpg");
                         return bitmap;
                     }
                 })
@@ -110,6 +103,15 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
 
     @Override
     public void cancelCollectPicture(Image image) {
+        getDataManager().deletePicture(image.get_id()).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+            }
+        });
+    }
 
+    @Override
+    public Observable<Boolean> isPictureCollect(Image image) {
+        return getDataManager().isPictureExist(image.get_id());
     }
 }

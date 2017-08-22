@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseActivity;
-import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionFragment;
+import com.zwq65.unity.ui.account.tabs.collection.TabCollectionFragment;
+import com.zwq65.unity.ui.account.tabs.localdata.TabLocalFragment;
 import com.zwq65.unity.utils.FontUtils;
 
 import javax.inject.Inject;
@@ -42,7 +43,7 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
 
-    public static String[] Tabs = new String[]{"收藏", "发布", "喜欢"};
+    public static String[] Tabs = new String[]{"收藏", "本地", "喜欢"};
 
 
     @Override
@@ -105,9 +106,15 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (0 == position && fragment instanceof TabCollectionFragment) {
                         return fragment;
+                    } else if (1 == position && fragment instanceof TabLocalFragment) {
+                        return fragment;
                     }
                 }
-            return new TabCollectionFragment();
+            if (1 == position) {
+                return new TabLocalFragment();
+            } else {
+                return new TabCollectionFragment();
+            }
         }
 
         @Override

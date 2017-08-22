@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.tabcollection;
+package com.zwq65.unity.ui.account.tabs.collection;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

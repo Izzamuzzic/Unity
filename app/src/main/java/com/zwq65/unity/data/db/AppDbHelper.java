@@ -75,6 +75,28 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Observable<Long> deletePicture(final String id) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                mDaoSession.getPictureDao().deleteByKey(id);
+                return 1L;
+            }
+        });
+    }
+
+    @Override
+    public Observable<Boolean> isPictureExist(final String id) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                Picture picture = mDaoSession.getPictureDao().load(id);
+                return picture != null;
+            }
+        });
+    }
+
+    @Override
     public Observable<List<Picture>> getCollectionPictures() {
         return Observable.fromCallable(new Callable<List<Picture>>() {
             @Override

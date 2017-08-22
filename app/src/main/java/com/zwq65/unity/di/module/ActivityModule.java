@@ -27,9 +27,12 @@ import com.zwq65.unity.ui.account.AccountPresenter;
 import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpPresenter;
 import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpView;
 import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumPresenter;
-import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionMvpPresenter;
-import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionMvpView;
-import com.zwq65.unity.ui.account.tabs.tabcollection.TabCollectionPresenter;
+import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpPresenter;
+import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpView;
+import com.zwq65.unity.ui.account.tabs.collection.TabCollectionPresenter;
+import com.zwq65.unity.ui.account.tabs.localdata.TabLocalMvpPresenter;
+import com.zwq65.unity.ui.account.tabs.localdata.TabLocalMvpView;
+import com.zwq65.unity.ui.account.tabs.localdata.TabLocalPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpView;
 import com.zwq65.unity.ui.album.AlbumPresenter;
@@ -116,6 +119,13 @@ public class ActivityModule {
     TabCollectionMvpPresenter<TabCollectionMvpView> provideTabCollectionMvpPresenter(
             TabCollectionPresenter<TabCollectionMvpView> tabCollectionPresenter) {
         return tabCollectionPresenter;
+    }
+
+    @Provides
+    @PerActivity
+    TabLocalMvpPresenter<TabLocalMvpView> provideTabLocalMvpPresenter(
+            TabLocalPresenter<TabLocalMvpView> tabLocalPresenter) {
+        return tabLocalPresenter;
     }
 
     @Provides
