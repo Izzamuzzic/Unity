@@ -10,7 +10,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zwq65 on 2017/08/22
@@ -18,18 +23,36 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class TabLocalPresenter<V extends TabLocalMvpView> extends BasePresenter<V> implements TabLocalMvpPresenter<V> {
     @Inject
-    public TabLocalPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    TabLocalPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 
     @Override
-    public void getLocalPictures() {
-        File file = new File(CommonUtils.getImageStorePath());
-        if (file.exists() && file.isDirectory()) {
-            File[] files = file.listFiles();
-            List<File> fileList = Arrays.asList(files);
-            getMvpView().showLocalPictures(fileList);
-        }
-
+    public Observable<List<File>> getLocalPictures() {
+        return Observable.just(CommonUtils.getImageStorePath())
+                .observeOn(Schedulers.io())
+                .map(new Function<String, File>() {
+                    @Override
+                    public File apply(@NonNull String s) throws Exception {
+                        return new File(s);
+                    }
+                })
+                .map(new Function<File, File[]>() {
+                    @Override
+                    public File[] apply(@NonNull File file) throws Exception {
+                        if (file.exists() && file.isDirectory() && file.list().length > 0) {
+                            return file.listFiles();
+                        }
+                        // TODO: 2017/08/23 一定不能返null值
+                        return new File[0];
+                    }
+                })
+                .map(new Function<File[], List<File>>() {
+                    @Override
+                    public List<File> apply(@NonNull File[] files) throws Exception {
+                        return Arrays.asList(files);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

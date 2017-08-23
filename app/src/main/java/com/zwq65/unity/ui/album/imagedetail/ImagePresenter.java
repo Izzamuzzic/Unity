@@ -9,6 +9,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
@@ -41,6 +42,7 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
 
     @Override
     public void savePicture(final Context context, Image image) {
+        getMvpView().showLoading();
         Observable.just(image)
                 .observeOn(Schedulers.io())
                 .map(new Function<Image, Bitmap>() {
@@ -72,40 +74,53 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
                 .subscribe(new Consumer<Bitmap>() {
                     @Override
                     public void accept(@NonNull Bitmap bitmap) throws Exception {
-                        getMvpView().savePictrueWhetherSucceed(true);
+                        getMvpView().hideLoading();
+                        getMvpView().showSuccessAlert(R.string.save_success);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         LogUtils.e(throwable.toString());
-                        getMvpView().savePictrueWhetherSucceed(false);
+                        getMvpView().hideLoading();
+                        getMvpView().showSuccessAlert(R.string.save_fail);
                     }
                 });
     }
 
     @Override
     public void collectPicture(Image image) {
+        getMvpView().showLoading();
         Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
                 image.getSource(), image.getType(), image.getUrl(), image.getWho());
         getDataManager().insertPicture(picture).subscribe(new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                getMvpView().collectPictrueWhetherSucceed(true);
+                getMvpView().hideLoading();
+                getMvpView().showSuccessAlert(R.string.collect_success);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 LogUtils.e(throwable.toString());
-                getMvpView().collectPictrueWhetherSucceed(false);
+                getMvpView().hideLoading();
+                getMvpView().showErrorAlert(R.string.collect_fail);
             }
         });
     }
 
     @Override
     public void cancelCollectPicture(Image image) {
+        getMvpView().showLoading();
         getDataManager().deletePicture(image.get_id()).subscribe(new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
+                getMvpView().hideLoading();
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                getMvpView().hideLoading();
+                getMvpView().showErrorAlert(R.string.cancel_collect_fail);
             }
         });
     }

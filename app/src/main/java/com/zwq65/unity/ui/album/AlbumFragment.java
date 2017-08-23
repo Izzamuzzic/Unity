@@ -51,12 +51,12 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
         setmPresenter(mPresenter);
+        initView();
         return view;
     }
 
     @Override
     public void initData(Bundle saveInstanceState) {
-        initView();
         initData();
     }
 

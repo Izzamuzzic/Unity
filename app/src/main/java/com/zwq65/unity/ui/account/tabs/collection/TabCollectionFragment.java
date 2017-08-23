@@ -19,6 +19,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by zwq65 on 2017/08/11
@@ -45,7 +47,18 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
     @Override
     public void initData(Bundle saveInstanceState) {
         initView();
-        mPresenter.getCollectionPictures();
+        mPresenter.getCollectionPictures().subscribe(new Consumer<List<Picture>>() {
+            @Override
+            public void accept(@NonNull List<Picture> pictures) throws Exception {
+                adapter.clear();
+                adapter.addAll(pictures);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                showErrorAlert(R.string.load_fail);
+            }
+        });
     }
 
     private void initView() {
@@ -56,11 +69,5 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         adapter = new TabCollectionAdapter(getContext());
         rlCollection.setAdapter(adapter);
 
-    }
-
-    @Override
-    public void showCollectionPictures(List<Picture> pictures) {
-        adapter.clear();
-        adapter.addAll(pictures);
     }
 }

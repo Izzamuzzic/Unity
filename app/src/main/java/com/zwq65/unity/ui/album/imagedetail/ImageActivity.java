@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -89,16 +88,6 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     private void initView() {
         setCurrentPage();
         initViewPager();
-        cbLove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cbLove.isChecked()) {
-                    mPresenter.collectPicture(imageList.get(currentPosition));
-                } else {
-                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
-                }
-            }
-        });
     }
 
     /**
@@ -130,27 +119,23 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         });
     }
 
-    @OnClick(R.id.tv_save_image)
-    public void onViewClicked() {
-        //保存大图
-        mPresenter.savePicture(this, imageList.get(currentPosition));
-    }
-
-    @Override
-    public void savePictrueWhetherSucceed(Boolean success) {
-        if (success) {
-            showSuccessAlert(R.string.save_success);
-        } else {
-            showSuccessAlert(R.string.save_fail);
-        }
-    }
-
-    @Override
-    public void collectPictrueWhetherSucceed(Boolean success) {
-        if (success) {
-            showSuccessAlert(R.string.collect_success);
-        } else {
-            showErrorAlert(R.string.collect_fail);
+    @OnClick({R.id.tv_save_image, R.id.cb_love})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_save_image:
+                //保存大图
+                mPresenter.savePicture(this, imageList.get(currentPosition));
+                break;
+            case R.id.cb_love:
+                //收藏、取消收藏 图片
+                if (cbLove.isChecked()) {
+                    mPresenter.collectPicture(imageList.get(currentPosition));
+                } else {
+                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -158,12 +143,6 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
      * 显示大图viewpager's adapter
      */
     private class Myadapter extends PagerAdapter {
-        LayoutInflater inflater;
-
-        Myadapter() {
-            this.inflater = getLayoutInflater();
-        }
-
         @Override
         public int getCount() {
             if (imageList == null) {

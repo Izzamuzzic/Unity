@@ -259,7 +259,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
 
     /**
      * 切换fragment
-     * hide当前显示的fragment，若已添加,show(),否则add()
+     * hide当前显示的fragment，若已添加show,否则add
      *
      * @param containerViewId 容器view
      * @param targetFragment  要切换的fragment
@@ -295,7 +295,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
             currentFragment = targetFragment;
         }
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public void hideKeyboard() {

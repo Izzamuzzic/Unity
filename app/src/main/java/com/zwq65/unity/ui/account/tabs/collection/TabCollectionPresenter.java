@@ -8,9 +8,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.annotations.NonNull;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by zwq65 on 2017/08/14
@@ -23,17 +22,7 @@ public class TabCollectionPresenter<V extends TabCollectionMvpView> extends Base
     }
 
     @Override
-    public void getCollectionPictures() {
-        getDataManager().getCollectionPictures().subscribe(new Consumer<List<Picture>>() {
-            @Override
-            public void accept(@NonNull List<Picture> pictures) throws Exception {
-                getMvpView().showCollectionPictures(pictures);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-
-            }
-        });
+    public Observable<List<Picture>> getCollectionPictures() {
+        return getDataManager().getCollectionPictures();
     }
 }
