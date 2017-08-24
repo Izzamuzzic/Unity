@@ -20,7 +20,6 @@ import android.content.Context;
 
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.db.model.Picture;
-import com.zwq65.unity.data.db.model.User;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
 
@@ -60,16 +59,6 @@ public class AppDataManager implements DataManager {
     @Override
     public void setAccessToken(String accessToken) {
         mPreferencesHelper.setAccessToken(accessToken);
-    }
-
-    @Override
-    public Observable<Long> insertUser(User user) {
-        return mDbHelper.insertUser(user);
-    }
-
-    @Override
-    public Observable<List<User>> getAllUsers() {
-        return mDbHelper.getAllUsers();
     }
 
     @Override
