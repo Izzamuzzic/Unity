@@ -43,13 +43,13 @@ public class TabCollectionAdapter extends BaseRecyclerViewAdapter<Picture, TabCo
         //添加动画
         setAnimation(holder.itemView, position);
 
-        Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
+        Glide.with(context).load(mDataList.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
                     //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(data.get(holder.getLayoutPosition()), holder.getLayoutPosition());
+                    listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
                 }
             }
         });

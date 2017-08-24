@@ -124,13 +124,13 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     @Override
     public void refreshVideos(List<VideoWithImage> videoWithImages) {
         pullToRefresh.setRefreshing(false);
-        mAdapter.clear();
-        mAdapter.addAll(videoWithImages);
+        mAdapter.clearItems();
+        mAdapter.addItems(videoWithImages);
     }
 
     @Override
     public void showVideos(List<VideoWithImage> videoWithImages) {
-        mAdapter.addAll(videoWithImages);
+        mAdapter.addItems(videoWithImages);
     }
 
     @Override

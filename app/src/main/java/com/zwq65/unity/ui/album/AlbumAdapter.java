@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.album;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,9 @@ import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
+import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /**
@@ -42,13 +41,13 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(data.get(position).getUrl()).into(holder.ivBeauty);
+        Glide.with(context).load(mDataList.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
                     //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(data.get(holder.getLayoutPosition()), holder.getLayoutPosition());
+                    listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
                 }
             }
         });
@@ -56,13 +55,17 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
         setAnimation(holder.itemView, position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends BaseViewHolder<Image> {
         @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
 
-        ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void bindViewData(Image data) {
+
         }
     }
 }

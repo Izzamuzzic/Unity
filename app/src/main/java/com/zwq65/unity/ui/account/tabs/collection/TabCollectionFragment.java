@@ -50,8 +50,8 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         mPresenter.getCollectionPictures().subscribe(new Consumer<List<Picture>>() {
             @Override
             public void accept(@NonNull List<Picture> pictures) throws Exception {
-                adapter.clear();
-                adapter.addAll(pictures);
+                adapter.clearItems();
+                adapter.addItems(pictures);
             }
         }, new Consumer<Throwable>() {
             @Override

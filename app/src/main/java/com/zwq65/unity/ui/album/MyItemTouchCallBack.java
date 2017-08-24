@@ -44,11 +44,11 @@ public class MyItemTouchCallBack extends ItemTouchHelper.Callback {
         int toPosition = target.getAdapterPosition();
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(adapter.getData(), i, i + 1);
+                Collections.swap(adapter.getmDataList(), i, i + 1);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(adapter.getData(), i, i - 1);
+                Collections.swap(adapter.getmDataList(), i, i - 1);
             }
         }
         recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
@@ -60,7 +60,7 @@ public class MyItemTouchCallBack extends ItemTouchHelper.Callback {
         //侧滑删除
         int position = viewHolder.getAdapterPosition();
         if (direction == ItemTouchHelper.END) {
-            adapter.getData().remove(position);
+            adapter.getmDataList().remove(position);
             adapter.notifyItemRemoved(position);
         }
     }

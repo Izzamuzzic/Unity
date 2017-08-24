@@ -114,7 +114,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     private void gotoContentActivity(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);
-        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) mAdapter.getData());
+        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) mAdapter.getmDataList());
         mActivity.openActivity(ImageActivity.class, bundle);
     }
 
@@ -130,14 +130,14 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     @Override
     public void refreshImages(List<WelfareResponse.Image> imageList) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
-        mAdapter.clear();
-        mAdapter.addAll(imageList);
+        mAdapter.clearItems();
+        mAdapter.addItems(imageList);
     }
 
     @Override
     public void showImages(List<WelfareResponse.Image> imageList) {
         //加载数据
-        mAdapter.addAll(imageList);
+        mAdapter.addItems(imageList);
     }
 
     @Override

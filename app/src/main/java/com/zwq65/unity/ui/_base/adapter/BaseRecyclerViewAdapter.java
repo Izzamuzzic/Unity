@@ -12,57 +12,109 @@ import java.util.List;
 
 /**
  * Created by jingbin on 2016/11/25
+ * RecyclerView.ViewHolder基类
  */
 public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V> {
 
     public String TAG = getClass().getSimpleName();
 
-    protected List<T> data = new ArrayList<>();
+    /**
+     * 标记使用动画的final item'position，加载过的item不用动画
+     */
+    private int lastPosition = -1;
+
+    protected List<T> mDataList = new ArrayList<>();
     protected OnItemClickListener<T> listener;
+
+    public List<T> getmDataList() {
+        return mDataList;
+    }
+
+    public T getItemData(int position) {
+        return (position >= 0 && position < mDataList.size()) ? mDataList.get(position) : null;
+    }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mDataList == null ? 0 : mDataList.size();
     }
 
-    public void addAll(List<T> data) {
-        this.data.addAll(data);
-        notifyDataSetChanged();
+    /**
+     * 移除某一条记录
+     *
+     * @param position 移除数据的position
+     */
+    public void removeItem(int position) {
+        if (position >= 0 && position < mDataList.size()) {
+            mDataList.remove(position);
+            notifyItemRemoved(position);
+        }
     }
 
-    public void add(T object) {
-        data.add(object);
+    /**
+     * 添加一条记录
+     *
+     * @param data     需要加入的数据结构
+     * @param position 插入位置
+     */
+    public void addItem(T data, int position) {
+        if (position >= 0 && position <= mDataList.size()) {
+            mDataList.add(position, data);
+            notifyItemInserted(position);
+        }
     }
 
-    public void clear() {
-        data.clear();
+    /**
+     * 添加一条记录
+     *
+     * @param data 需要加入的数据结构
+     */
+    public void addItem(T data) {
+        addItem(data, mDataList.size());
     }
 
-    public void remove(T object) {
-        data.remove(object);
+    /**
+     * 移除所有记录
+     */
+    public void clearItems() {
+        int size = mDataList.size();
+        if (size > 0) {
+            mDataList.clear();
+            notifyItemRangeRemoved(0, size);
+        }
     }
 
-    public void remove(int position) {
-        data.remove(position);
+    /**
+     * 批量添加记录
+     *
+     * @param data     需要加入的数据结构
+     * @param position 插入位置
+     */
+    public void addItems(List<T> data, int position) {
+        if (position >= 0 && position <= mDataList.size() && data != null && data.size() > 0) {
+            mDataList.addAll(position, data);
+            notifyItemRangeChanged(position, data.size());
+        }
     }
 
-    public void removeAll(List<T> data) {
-        this.data.retainAll(data);
-        notifyDataSetChanged();
+    /**
+     * 批量添加记录
+     *
+     * @param data 需要加入的数据结构
+     */
+    public void addItems(List<T> data) {
+        addItems(data, mDataList.size());
     }
 
     public void setOnItemClickListener(OnItemClickListener<T> listener) {
         this.listener = listener;
     }
 
-    public List<T> getData() {
-        return data;
-    }
-
-    private int lastPosition = -1;
-
     @Override
     public void onBindViewHolder(V holder, int position) {
+        if (holder instanceof BaseViewHolder) {
+            ((BaseViewHolder) holder).bindViewData(getItemData(position));
+        }
         setAnimation(holder.itemView, position);
     }
 

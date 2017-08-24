@@ -43,9 +43,9 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         FontUtils.getInstance().setTypeface(holder.tvVideoTitle, FontUtils.Font.Roboto_Bold);
-        holder.tvVideoTitle.setText(data.get(position).getVideo().getDesc());
+       holder.tvVideoTitle.setText(mDataList.get(position).getVideo().getDesc());
         holder.tvVideoTitle.setVisibility(View.INVISIBLE);
-        Glide.with(context).load(data.get(position).getImage().getUrl()).listener(new RequestListener<Drawable>() {
+        Glide.with(context).load(mDataList.get(position).getImage().getUrl()).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 return false;
@@ -62,7 +62,7 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
             public void onClick(View v) {
                 if (listener != null) {
                     //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(data.get(holder.getLayoutPosition()), holder.getLayoutPosition());
+                    listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
                 }
             }
         });

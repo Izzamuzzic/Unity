@@ -60,8 +60,8 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
         mPresenter.getLocalPictures().subscribe(new Consumer<List<File>>() {
             @Override
             public void accept(@NonNull List<File> files) throws Exception {
-                adapter.clear();
-                adapter.addAll(files);
+                adapter.clearItems();
+                adapter.addItems(files);
             }
         }, new Consumer<Throwable>() {
             @Override
