@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +19,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.gyf.barlibrary.ImmersionBar;
 import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.Image;
@@ -29,7 +33,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
@@ -52,10 +55,10 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     ViewPager vpImages;
     @BindView(R.id.tv_current_page)
     TextView tvCurrentPage;//当前页数
-    @BindView(R.id.tv_save_image)
-    TextView tvSaveImage;
-    @BindView(R.id.cb_love)
-    CheckBox cbLove;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    AppCompatCheckBox cbLove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,37 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
         mPresenter.onAttach(this);
         initData();
         initView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_meizhi, menu);
+        //找到checkbox设置下样式
+        cbLove = (AppCompatCheckBox) menu.findItem(R.id.menu_cb_love).getActionView();
+        cbLove.setButtonDrawable(R.drawable.selector_ic_love);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_save:
+                //保存大图
+                mPresenter.savePicture(this, imageList.get(currentPosition));
+                break;
+            case R.id.menu_cb_love:
+                //收藏、取消收藏 图片
+                if (cbLove.isChecked()) {
+                    mPresenter.collectPicture(imageList.get(currentPosition));
+                } else {
+                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
+                }
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -86,8 +120,27 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     }
 
     private void initView() {
+        initToolbar();
         setCurrentPage();
         initViewPager();
+    }
+
+    private void initToolbar() {
+        //setup toolbar
+        setSupportActionBar(toolbar);
+        //添加‘<--’返回功能
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
+        }
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ImageActivity.this.onBackPressed();
+//            }
+//        });
+        //添加了toolbar，重新设置沉浸栏
+        ImmersionBar.with(this).titleBar(toolbar).init();
     }
 
     /**
@@ -112,31 +165,17 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(@NonNull Boolean aBoolean) throws Exception {
-                        cbLove.setChecked(aBoolean);
+                        if (cbLove != null) {
+                            cbLove.setChecked(aBoolean);
+                        }
                     }
                 });
+                //改变toolbar标题
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(imageList.get(currentPosition).getDesc());
+                }
             }
         });
-    }
-
-    @OnClick({R.id.tv_save_image, R.id.cb_love})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_save_image:
-                //保存大图
-                mPresenter.savePicture(this, imageList.get(currentPosition));
-                break;
-            case R.id.cb_love:
-                //收藏、取消收藏 图片
-                if (cbLove.isChecked()) {
-                    mPresenter.collectPicture(imageList.get(currentPosition));
-                } else {
-                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     /**

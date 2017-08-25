@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_effective">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/black_effective">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/white"/>
+    </android.support.design.widget.AppBarLayout>
 
     <!--ViewPager左右滑动查看图片-->
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_images"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        />
 
     <!-- 当前显示页数 e.g. 1/10-->
     <TextView
@@ -16,31 +33,7 @@
         style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tv_save_image"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
-
-    <!--保存按钮-->
-    <TextView
-        android:id="@+id/tv_save_image"
-        style="@style/text_14_white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:background="@drawable/bg_button_save_image"
-        android:text="@string/save"/>
-
-    <CheckBox
-        android:id="@+id/cb_love"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tv_save_image"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:button="@drawable/selector_ic_love"/>
-</RelativeLayout>
+        android:text="1"/>
+</LinearLayout>
