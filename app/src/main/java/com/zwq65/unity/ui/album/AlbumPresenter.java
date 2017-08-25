@@ -36,7 +36,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(
-                RetrofitApiManager.getInstance().getImagesByPage(page, new ApiSubscriberCallBack<WelfareResponse>() {
+                RetrofitApiManager.getInstance().getImagesByPage20(page, new ApiSubscriberCallBack<WelfareResponse>() {
                     @Override
                     public void onSuccess(WelfareResponse welfareResponse) {
                         if (welfareResponse != null && welfareResponse.getResults() != null) {

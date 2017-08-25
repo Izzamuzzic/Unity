@@ -1,17 +1,23 @@
 package com.zwq65.unity.ui.album;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
+import com.zwq65.unity.ui.custom.widget.RatioImageView;
 
 import butterknife.BindView;
 
@@ -40,8 +46,21 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(mDataList.get(position).getUrl()).into(holder.ivBeauty);
+    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
+
+        Glide.with(context).load(mDataList.get(position).getUrl()).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                //设置图片自适应宽高
+                holder.ivBeauty.setOriginalSize(resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
+                return false;
+            }
+        }).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +76,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
 
     class ViewHolder extends BaseViewHolder<Image> {
         @BindView(R.id.iv_beauty)
-        ImageView ivBeauty;
+        RatioImageView ivBeauty;
 
         public ViewHolder(View itemView) {
             super(itemView);

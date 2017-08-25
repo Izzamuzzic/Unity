@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui.custom.other.photoview.PhotoView;
 

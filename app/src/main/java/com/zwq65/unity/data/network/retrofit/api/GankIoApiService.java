@@ -16,10 +16,16 @@ import retrofit2.http.Path;
 
 public interface GankIoApiService {
     /**
-     * 获取福利图片
+     * 获取福利图片（10张）
      */
     @GET(ApiConstants.Welfare + ApiConstants.WelfarePageSize + "/{page}")
     Observable<WelfareResponse> getImagesByPage(@Path("page") int page);
+
+    /**
+     * 获取福利图片（20张）
+     */
+    @GET(ApiConstants.Welfare + ApiConstants.WelfarePageSize20 + "/{page}")
+    Observable<WelfareResponse> getImagesByPage20(@Path("page") int page);
 
     /**
      * 获取休息视频

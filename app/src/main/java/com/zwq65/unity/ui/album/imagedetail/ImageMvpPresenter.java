@@ -2,7 +2,7 @@ package com.zwq65.unity.ui.album.imagedetail;
 
 import android.content.Context;
 
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._base.MvpView;
 

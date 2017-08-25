@@ -10,17 +10,17 @@ import android.os.Parcelable;
 
 public class VideoWithImage implements Parcelable {
     private RestVideoResponse.Video video;
-    private WelfareResponse.Image image;
+    private Image image;
 
 
-    public VideoWithImage(RestVideoResponse.Video video, WelfareResponse.Image image) {
+    public VideoWithImage(RestVideoResponse.Video video, Image image) {
         this.video = video;
         this.image = image;
     }
 
     protected VideoWithImage(Parcel in) {
         video = in.readParcelable(RestVideoResponse.Video.class.getClassLoader());
-        image = in.readParcelable(WelfareResponse.Image.class.getClassLoader());
+        image = in.readParcelable(Image.class.getClassLoader());
     }
 
     @Override
@@ -54,11 +54,11 @@ public class VideoWithImage implements Parcelable {
         this.video = video;
     }
 
-    public WelfareResponse.Image getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(WelfareResponse.Image image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 }

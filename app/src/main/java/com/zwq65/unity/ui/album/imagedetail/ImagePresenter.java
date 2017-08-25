@@ -12,7 +12,7 @@ import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
 import com.zwq65.unity.utils.AppFileMgr;
 import com.zwq65.unity.utils.CommonUtils;

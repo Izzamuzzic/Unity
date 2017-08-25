@@ -7,11 +7,11 @@ import com.zwq65.unity.data.network.ApiConstants;
 import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
 import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse.Video;
 import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
 import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse.Image;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.io.IOException;
@@ -44,6 +44,10 @@ public class RetrofitApiManager {
 
     public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    public Disposable getImagesByPage20(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getGankIoApiService().getImagesByPage20(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
 //    public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {

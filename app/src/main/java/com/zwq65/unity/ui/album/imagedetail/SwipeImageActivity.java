@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class SwipeImageActivity extends BaseActivity {
     @BindView(R.id.rv_images)
     RecyclerView rvImages;
     int currentPosition;
-    List<WelfareResponse.Image> imageList;
+    List<Image> imageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui.album.imagedetail.ImageActivity;
@@ -100,9 +100,9 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         });
 
         mAdapter = new AlbumAdapter(mActivity);
-        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<WelfareResponse.Image>() {
+        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Image>() {
             @Override
-            public void onClick(WelfareResponse.Image image, int position) {
+            public void onClick(Image image, int position) {
                 gotoContentActivity(position);
             }
         });
@@ -114,7 +114,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     private void gotoContentActivity(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);
-        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<WelfareResponse.Image>) mAdapter.getmDataList());
+        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) mAdapter.getmDataList());
         mActivity.openActivity(ImageActivity.class, bundle);
     }
 
@@ -128,14 +128,14 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     }
 
     @Override
-    public void refreshImages(List<WelfareResponse.Image> imageList) {
+    public void refreshImages(List<Image> imageList) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
         mAdapter.clearItems();
         mAdapter.addItems(imageList);
     }
 
     @Override
-    public void showImages(List<WelfareResponse.Image> imageList) {
+    public void showImages(List<Image> imageList) {
         //加载数据
         mAdapter.addItems(imageList);
     }
