@@ -142,6 +142,6 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     @Override
     public void loadFail() {
         pullToRefresh.setRefreshing(false);
-        showErrorAlert(R.string.load_fail);
+        showErrorAlert(R.string.error_msg_load_fail);
     }
 }

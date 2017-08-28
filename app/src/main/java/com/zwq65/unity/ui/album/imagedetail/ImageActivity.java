@@ -133,13 +133,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
         }
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ImageActivity.this.onBackPressed();
-//            }
-//        });
-        //添加了toolbar，重新设置沉浸栏
+        //添加了toolbar，重新设置沉浸式状态栏
         ImmersionBar.with(this).titleBar(toolbar).init();
     }
 
@@ -207,7 +201,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            showMessage(R.string.load_fail);
+                            showMessage(R.string.error_msg_load_fail);
                             pbLoader.setVisibility(GONE);
                             return false;
                         }

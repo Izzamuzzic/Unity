@@ -6,8 +6,7 @@
         <item quantity="other">%d likes</item>
     </plurals>
     <string name="app_name">Unity</string>
-    <string name="some_error_occur">出错了</string>
-    <string name="network_abnormal">网络异常</string>
+    <string name="error_msg_network_abnormal">网络异常</string>
     <string name="no_more_data">没有更多数据了</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,11 +17,11 @@
     <!--@侧边栏-->
     <string name="desperadozck">desperadozck</string>
     <string name="github_website_address">https://github.com/NlRVANA</string>
-    <string name="welfare">福利</string>
-    <string name="setting">设置</string>
-    <string name="out">退出</string>
-    <string name="personal_center">个人中心</string>
-    <string name="my_conllection">我的收藏</string>
+    <string name="title_welfare">福利</string>
+    <string name="title_setting">设置</string>
+    <string name="title_out">退出</string>
+    <string name="title_personal_center">个人中心</string>
+    <string name="title_my_conllection">我的收藏</string>
 
     <!--@LoginActivity-->
     <string name="email">Email</string>
@@ -33,12 +32,12 @@
     <!--@ImageActivity-->
     <string name="loading">正在加载</string>
     <string name="save">保存</string>
-    <string name="load_fail">加载失败</string>
-    <string name="save_success">保存成功</string>
-    <string name="save_fail">保存失败</string>
-    <string name="collect_success">收藏成功</string>
-    <string name="collect_fail">收藏失败</string>
-    <string name="cancel_collect_fail">取消收藏失败</string>
+    <string name="error_msg_load_fail">加载失败</string>
+    <string name="success_msg_save">保存成功</string>
+    <string name="error_msg_save_fail">保存失败</string>
+    <string name="success_msg_collect">收藏成功</string>
+    <string name="error_msg_collect_fail">收藏失败</string>
+    <string name="error_msg_cancel_collect_fail">取消收藏失败</string>
     <string name="rxjava">Rxjava</string>
     <string name="defer">defer</string>
     <string name="rest_video">休息视频</string>

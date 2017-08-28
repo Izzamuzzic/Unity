@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/welfare"
+                android:text="@string/title_welfare"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/personal_center"
+                android:text="@string/title_personal_center"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -152,7 +152,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/setting"
+                android:text="@string/title_setting"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -174,7 +174,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/out"
+                android:text="@string/title_out"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BaiduLoadingView">
-        <attr name="color" format="color" />
-        <attr name="text" format="string" />
+        <attr name="color" format="color"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="LoadingButtonView">
+        <attr name="main_color" format="color"/>
+        <attr name="background_color" format="color"/>
+        <attr name="start_text" format="string"/>
+        <attr name="end_text" format="string"/>
     </declare-styleable>
 
 </resources>

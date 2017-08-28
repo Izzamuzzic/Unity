@@ -9,12 +9,12 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.network.retrofit.response.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.utils.AppFileMgr;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
@@ -75,14 +75,14 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
                     @Override
                     public void accept(@NonNull Bitmap bitmap) throws Exception {
                         getMvpView().hideLoading();
-                        getMvpView().showSuccessAlert(R.string.save_success);
+                        getMvpView().showSuccessAlert(R.string.success_msg_save);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         LogUtils.e(throwable.toString());
                         getMvpView().hideLoading();
-                        getMvpView().showSuccessAlert(R.string.save_fail);
+                        getMvpView().showSuccessAlert(R.string.error_msg_save_fail);
                     }
                 });
     }
@@ -96,14 +96,14 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
                 getMvpView().hideLoading();
-                getMvpView().showSuccessAlert(R.string.collect_success);
+                getMvpView().showSuccessAlert(R.string.success_msg_collect);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 LogUtils.e(throwable.toString());
                 getMvpView().hideLoading();
-                getMvpView().showErrorAlert(R.string.collect_fail);
+                getMvpView().showErrorAlert(R.string.error_msg_collect_fail);
             }
         });
     }
@@ -120,7 +120,7 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 getMvpView().hideLoading();
-                getMvpView().showErrorAlert(R.string.cancel_collect_fail);
+                getMvpView().showErrorAlert(R.string.error_msg_cancel_collect_fail);
             }
         });
     }

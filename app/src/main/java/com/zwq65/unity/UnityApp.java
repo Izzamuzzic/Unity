@@ -7,6 +7,7 @@ import com.facebook.stetho.Stetho;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
+import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
 
 /**
@@ -29,9 +30,28 @@ public class UnityApp extends Application {
         unityApp = this;
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
-
         mApplicationComponent.inject(this);
-        Stetho.initializeWithDefaults(this);//初始化Stetho(可以在chrome中方便地查看app数据库等信息，release时注释掉就ok了)
+        initStetho();
+        initLeakcanary();
+    }
+
+    /**
+     * 初始化Stetho(可以在chrome中方便地查看app数据库等信息,release版本关闭)
+     */
+    private void initStetho() {
+        //仅在debug版本开启
+        if (CommonUtils.isApkInDebug(this)) {
+            Stetho.initializeWithDefaults(this);
+        }
+    }
+
+    private void initLeakcanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
     }
 
     public ApplicationComponent getComponent() {

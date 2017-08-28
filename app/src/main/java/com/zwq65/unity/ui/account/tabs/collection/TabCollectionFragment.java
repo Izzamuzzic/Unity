@@ -56,7 +56,7 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
-                showErrorAlert(R.string.load_fail);
+                showErrorAlert(R.string.error_msg_load_fail);
             }
         });
     }
