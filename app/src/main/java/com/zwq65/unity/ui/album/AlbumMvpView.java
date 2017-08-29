@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.album;
 
-import com.zwq65.unity.data.network.retrofit.response.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.MvpView;
 
 import java.util.List;

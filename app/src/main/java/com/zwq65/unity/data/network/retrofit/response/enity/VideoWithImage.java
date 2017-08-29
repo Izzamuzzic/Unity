@@ -1,4 +1,4 @@
-package com.zwq65.unity.data.network.retrofit.response;
+package com.zwq65.unity.data.network.retrofit.response.enity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,17 +9,17 @@ import android.os.Parcelable;
  */
 
 public class VideoWithImage implements Parcelable {
-    private RestVideoResponse.Video video;
+    private Video video;
     private Image image;
 
 
-    public VideoWithImage(RestVideoResponse.Video video, Image image) {
+    public VideoWithImage(Video video, Image image) {
         this.video = video;
         this.image = image;
     }
 
     protected VideoWithImage(Parcel in) {
-        video = in.readParcelable(RestVideoResponse.Video.class.getClassLoader());
+        video = in.readParcelable(Video.class.getClassLoader());
         image = in.readParcelable(Image.class.getClassLoader());
     }
 
@@ -46,11 +46,11 @@ public class VideoWithImage implements Parcelable {
         }
     };
 
-    public RestVideoResponse.Video getVideo() {
+    public Video getVideo() {
         return video;
     }
 
-    public void setVideo(RestVideoResponse.Video video) {
+    public void setVideo(Video video) {
         this.video = video;
     }
 

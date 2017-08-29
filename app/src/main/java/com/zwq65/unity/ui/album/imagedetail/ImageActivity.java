@@ -22,9 +22,10 @@ import com.bumptech.glide.request.target.Target;
 import com.gyf.barlibrary.ImmersionBar;
 import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui.custom.other.photoview.PhotoView;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +160,7 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        LogUtils.e("isPictureCollect: " + aBoolean);
                         if (cbLove != null) {
                             cbLove.setChecked(aBoolean);
                         }

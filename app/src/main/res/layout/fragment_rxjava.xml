@@ -15,7 +15,7 @@
     <com.zwq65.unity.ui.custom.widget.LoadingButtonView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:background_color="@color/wave2"
+        app:background_color="@color/wave1"
         app:main_color="@color/wave1"
         app:start_text="start"
         />

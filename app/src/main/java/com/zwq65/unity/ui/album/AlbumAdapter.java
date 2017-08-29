@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.ui.custom.widget.RatioImageView;

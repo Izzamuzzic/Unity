@@ -4,7 +4,6 @@ import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
 import com.zwq65.unity.ui._base.BasePresenter;
 
 import javax.inject.Inject;

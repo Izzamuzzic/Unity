@@ -13,7 +13,7 @@ import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.model.Picture;
-import com.zwq65.unity.data.network.retrofit.response.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;

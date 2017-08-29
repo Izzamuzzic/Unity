@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseActivity;
 
 import butterknife.BindView;

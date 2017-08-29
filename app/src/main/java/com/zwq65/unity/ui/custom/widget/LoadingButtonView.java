@@ -1,5 +1,6 @@
 package com.zwq65.unity.ui.custom.widget;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,6 +24,8 @@ import com.zwq65.unity.R;
 public class LoadingButtonView extends View implements View.OnClickListener {
     private int mHeight = DensityUtils.dip2px(getContext(), 200);
     private int mWidth = DensityUtils.dip2px(getContext(), 200);
+    private int strokeWidth = DensityUtils.dip2px(getContext(), 20);
+    private float reduceWidth;
     private int color;
     private int backgroundColor;
     private String startText, endText;
@@ -62,12 +65,13 @@ public class LoadingButtonView extends View implements View.OnClickListener {
 
         textPaint.setColor(Color.WHITE);
         textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        textPaint.setTextAlign(Paint.Align.CENTER);
 
         mPaint.setColor(color);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(20);
+        mPaint.setStrokeWidth(strokeWidth);
 
         path = new Path();
 
@@ -87,7 +91,7 @@ public class LoadingButtonView extends View implements View.OnClickListener {
         if (MeasureSpec.EXACTLY == heightMode) {
             mHeight = height;
         }
-        textPaint.setTextSize(mWidth / 4);
+        textPaint.setTextSize(mWidth / 8);
         setMeasuredDimension(mWidth, mHeight);
     }
 
@@ -112,17 +116,50 @@ public class LoadingButtonView extends View implements View.OnClickListener {
     }
 
     private void startProcess() {
-        path.reset();
-        ValueAnimator animator = ValueAnimator.ofFloat(-90, 270);
-        animator.setDuration(2000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animator1 = ValueAnimator.ofFloat(0, strokeWidth);
+        animator1.setDuration(500);
+        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                angle = (float) animation.getAnimatedValue();
+                reduceWidth = (float) animation.getAnimatedValue();
                 invalidate();
             }
+
         });
-        animator.start();
+        animator1.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //绘制圆弧
+                path.reset();
+                ValueAnimator animator = ValueAnimator.ofFloat(0, 360);
+                animator.setDuration(2000);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        angle = (float) animation.getAnimatedValue();
+                        invalidate();
+                    }
+                });
+                animator.start();
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator1.start();
     }
 
     @Override

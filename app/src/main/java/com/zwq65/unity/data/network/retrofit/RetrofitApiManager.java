@@ -7,24 +7,26 @@ import com.zwq65.unity.data.network.ApiConstants;
 import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.response.Image;
-import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse;
-import com.zwq65.unity.data.network.retrofit.response.RestVideoResponse.Video;
-import com.zwq65.unity.data.network.retrofit.response.VideoWithImage;
-import com.zwq65.unity.data.network.retrofit.response.WelfareResponse;
+import com.zwq65.unity.data.network.retrofit.response.ApiResponse;
+import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
+import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -42,12 +44,12 @@ public class RetrofitApiManager {
     private GankIoApiService gankIoApiService;
     private static volatile RetrofitApiManager apiManager;
 
-    public Disposable getImagesByPage(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getGankIoApiService().getImagesByPage(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    public Flowable<GankApiResponse<List<Image>>> getImagesByPage(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getGankIoApiService().getImagesByPage(page).compose(rxSchedulerHelper()).subscribe(callBack, errorCallBack);
     }
 
-    public Disposable getImagesByPage20(int page, ApiSubscriberCallBack<WelfareResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return getGankIoApiService().getImagesByPage20(page).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    public Disposable getImagesByPage20(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return getGankIoApiService().getImagesByPage20(page).compose(rxSchedulerHelper()).subscribe(callBack, errorCallBack);
     }
 
 //    public Disposable getVideosByPage(int page, ApiSubscriberCallBack<RestVideoResponse> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
@@ -56,15 +58,15 @@ public class RetrofitApiManager {
 
     public Disposable getVideosAndIMagesByPage(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return Observable.zip(getGankIoApiService().getVideosByPage(page), getGankIoApiService().getImagesByPage(page),
-                new BiFunction<RestVideoResponse, WelfareResponse, List<VideoWithImage>>() {
+                new BiFunction<GankApiResponse<List<Video>>, GankApiResponse<List<Image>>, List<VideoWithImage>>() {
                     @Override
-                    public List<VideoWithImage> apply(@NonNull RestVideoResponse restVideoResponse, @NonNull WelfareResponse welfareResponse) throws Exception {
+                    public List<VideoWithImage> apply(@NonNull GankApiResponse<List<Video>> restVideoResponse, @NonNull GankApiResponse<List<Image>> welfareResponse) throws Exception {
                         List<VideoWithImage> videoWithImageList = new ArrayList<>();
 
-                        if (restVideoResponse != null && restVideoResponse.getResults() != null
-                                && welfareResponse != null && welfareResponse.getResults() != null) {
-                            List<Video> videos = restVideoResponse.getResults();
-                            List<Image> images = welfareResponse.getResults();
+                        if (restVideoResponse != null && restVideoResponse.getData() != null
+                                && welfareResponse != null && welfareResponse.getData() != null) {
+                            List<Video> videos = restVideoResponse.getData();
+                            List<Image> images = welfareResponse.getData();
                             for (int i = 0; i < videos.size(); i++) {
                                 if (i < images.size()) {
                                     videoWithImageList.add(new VideoWithImage(videos.get(i), images.get(i)));
@@ -73,7 +75,7 @@ public class RetrofitApiManager {
                         }
                         return videoWithImageList;
                     }
-                }).compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+                }).compose(rxSchedulerHelper()).subscribe(callBack, errorCallBack);
     }
 
 
@@ -116,6 +118,32 @@ public class RetrofitApiManager {
             public ObservableSource apply(@NonNull Observable upstream) {
                 return upstream.subscribeOn(Schedulers.io())
                         .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
+    /**
+     * 统一线程处理(compose简化线程)
+     *
+     * @param <T> 返回数据data实际的 数据
+     * @return 返回数据data实际的 数据
+     */
+    public static <T extends ApiResponse> FlowableTransformer<T, T> rxSchedulerHelper() {
+        return new FlowableTransformer<T, T>() {
+            @Override
+            public Flowable<T> apply(Flowable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io())
+                        .flatMap(new Function<T, Flowable<T>>() {
+                            @Override
+                            public Flowable<T> apply(T t) throws Exception {
+//                                ------返回数据统一处理-------
+//                                if (t != null && "40108".equals(t.getCode())) {
+//                                    throw new NullPointerException("token_is_need_refresh");
+//                                }
+                                return Flowable.just(t);
+                            }
+                        })
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };

@@ -1,4 +1,4 @@
-package com.zwq65.unity.data.network.retrofit.response;
+package com.zwq65.unity.data.network.retrofit.response.enity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
