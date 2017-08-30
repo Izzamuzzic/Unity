@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
@@ -19,7 +20,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * Created by zwq65 on 2017/08/30
  */
-
+@Singleton
 public class AppApiHelper implements ApiHelper {
     private RetrofitApiManager retrofitApiManager;
 
