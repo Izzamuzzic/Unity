@@ -1,8 +1,6 @@
 package com.zwq65.unity.data.network.retrofit.callback;
 
 
-import com.zwq65.unity.data.network.retrofit.response.ApiResponse;
-
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 

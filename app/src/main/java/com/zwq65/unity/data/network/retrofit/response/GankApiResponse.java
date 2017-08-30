@@ -4,7 +4,7 @@ package com.zwq65.unity.data.network.retrofit.response;
  * gank io返回数据基类
  */
 
-public class GankApiResponse<T> extends ApiResponse {
+public class GankApiResponse<T> {
     private boolean error;
 
     public boolean isError() {

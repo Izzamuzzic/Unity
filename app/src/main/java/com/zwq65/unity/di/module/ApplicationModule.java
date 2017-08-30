@@ -22,6 +22,8 @@ import com.zwq65.unity.data.AppDataManager;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.AppDbHelper;
 import com.zwq65.unity.data.db.DbHelper;
+import com.zwq65.unity.data.network.ApiHelper;
+import com.zwq65.unity.data.network.AppApiHelper;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -80,6 +82,12 @@ public class ApplicationModule {
     @Singleton
     DbHelper provideDbHelper(AppDbHelper appDbHelper) {
         return appDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
     }
 
     @Provides

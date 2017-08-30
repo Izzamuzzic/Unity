@@ -1,10 +1,13 @@
 package com.zwq65.unity.ui.album;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
+import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BasePresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,15 +38,15 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(
-                RetrofitApiManager.getInstance().getImagesByPage20(page, new ApiSubscriberCallBack<WelfareResponse>() {
+                getDataManager().getImagesByPage20(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
                     @Override
-                    public void onSuccess(WelfareResponse welfareResponse) {
-                        if (welfareResponse != null && welfareResponse.getResults() != null) {
+                    public void onSuccess(GankApiResponse<List<Image>> welfareResponse) {
+                        if (welfareResponse != null && welfareResponse.getData() != null) {
                             page++;
                             if (isRefresh) {
-                                getMvpView().refreshImages(welfareResponse.getResults());
+                                getMvpView().refreshImages(welfareResponse.getData());
                             } else {
-                                getMvpView().showImages(welfareResponse.getResults());
+                                getMvpView().showImages(welfareResponse.getData());
                             }
                         } else {
                             getMvpView().noMoreData();

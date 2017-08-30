@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.video;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
@@ -38,31 +37,32 @@ public class RestVideoPresenter<V extends RestVideoMvpView> extends BasePresente
     public void loadVideos(final Boolean isRefresh) {
         if (isLoading) return;
         isLoading = true;
-        getCompositeDisposable().add(RetrofitApiManager.getInstance().getVideosAndIMagesByPage(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
-            @Override
-            public void onSuccess(List<VideoWithImage> videoWithImages) {
-                if (videoWithImages != null && videoWithImages.size() > 0) {
-                    isLoading = false;
-                    page++;
-                    if (isRefresh) {
-                        getMvpView().refreshVideos(videoWithImages);
-                    } else {
-                        getMvpView().showVideos(videoWithImages);
+        getCompositeDisposable().add(
+                getDataManager().getVideosAndIMagesByPage(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
+                    @Override
+                    public void onSuccess(List<VideoWithImage> videoWithImages) {
+                        if (videoWithImages != null && videoWithImages.size() > 0) {
+                            isLoading = false;
+                            page++;
+                            if (isRefresh) {
+                                getMvpView().refreshVideos(videoWithImages);
+                            } else {
+                                getMvpView().showVideos(videoWithImages);
+                            }
+                        } else {
+                            if (videoWithImages != null) {
+                                getMvpView().noMoreData();
+                            } else {
+                                getMvpView().loadFail();
+                            }
+                        }
                     }
-                } else {
-                    if (videoWithImages != null) {
-                        getMvpView().noMoreData();
-                    } else {
+                }, new ApiErrorCallBack<Throwable>() {
+                    @Override
+                    public void onFailure(Throwable t) {
+                        isLoading = false;
                         getMvpView().loadFail();
                     }
-                }
-            }
-        }, new ApiErrorCallBack<Throwable>() {
-            @Override
-            public void onFailure(Throwable t) {
-                isLoading = false;
-                getMvpView().loadFail();
-            }
-        }));
+                }));
     }
 }

@@ -20,6 +20,12 @@ import android.content.Context;
 
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.db.model.Picture;
+import com.zwq65.unity.data.network.ApiHelper;
+import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
+import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
+import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
 
@@ -29,6 +35,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -41,14 +48,18 @@ public class AppDataManager implements DataManager {
     private final Context mContext;
     private final DbHelper mDbHelper;
     private final PreferencesHelper mPreferencesHelper;
+    private final ApiHelper mApiHelper;
+
 
     @Inject
     public AppDataManager(@ApplicationContext Context context,
                           DbHelper dbHelper,
-                          PreferencesHelper preferencesHelper) {
+                          PreferencesHelper preferencesHelper,
+                          ApiHelper apiHelper) {
         mContext = context;
         mDbHelper = dbHelper;
         mPreferencesHelper = preferencesHelper;
+        mApiHelper = apiHelper;
     }
 
     @Override
@@ -164,5 +175,15 @@ public class AppDataManager implements DataManager {
                 null,
                 null,
                 null);
+    }
+
+    @Override
+    public Disposable getImagesByPage20(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return mApiHelper.getImagesByPage20(page, callBack, errorCallBack);
+    }
+
+    @Override
+    public Disposable getVideosAndIMagesByPage(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return mApiHelper.getVideosAndIMagesByPage(page, callBack, errorCallBack);
     }
 }

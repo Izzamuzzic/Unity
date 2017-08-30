@@ -17,13 +17,14 @@ package com.zwq65.unity.data;
 
 
 import com.zwq65.unity.data.db.DbHelper;
+import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 
 /**
  * Created by janisharali on 27/01/17.
  */
 
-public interface DataManager extends DbHelper, PreferencesHelper {
+public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 
     void updateApiHeader(Long userId, String accessToken);
 
