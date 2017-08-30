@@ -43,8 +43,7 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
 
-    public static String[] Tabs = new String[]{"收藏", "本地", "喜欢"};
-
+    public static int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +65,9 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
         //设置特殊字体
         FontUtils.getInstance().setTypeface(tvName, FontUtils.Font.Roboto_Bold);
 
-        for (String tabStr : Tabs) {
+        for (int tabStr : Tabs) {
             TabLayout.Tab tab = tlPersonal.newTab();
-            tab.setText(tabStr);
+            tab.setText(getString(tabStr));
             tlPersonal.addTab(tab);
         }
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -97,12 +96,12 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return Tabs[position];
+            return getString(Tabs[position]);
         }
 
         @Override
         public Fragment getItem(int position) {
-            if (getSupportFragmentManager().getFragments() != null)
+            if (getSupportFragmentManager().getFragments() != null) {
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (0 == position && fragment instanceof TabCollectionFragment) {
                         return fragment;
@@ -110,6 +109,7 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
                         return fragment;
                     }
                 }
+            }
             if (1 == position) {
                 return new TabLocalFragment();
             } else {

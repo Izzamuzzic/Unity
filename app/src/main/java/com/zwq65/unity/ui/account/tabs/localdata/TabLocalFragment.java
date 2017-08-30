@@ -12,15 +12,10 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
-import java.io.File;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by zwq65 on 2017/08/22
@@ -57,18 +52,10 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
 
     @Override
     public void initData(Bundle saveInstanceState) {
-        mPresenter.getLocalPictures().subscribe(new Consumer<List<File>>() {
-            @Override
-            public void accept(@NonNull List<File> files) throws Exception {
-                adapter.clearItems();
-                adapter.addItems(files);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                showErrorAlert(R.string.error_msg_load_fail);
-            }
-        });
+        mPresenter.getLocalPictures().subscribe(files -> {
+            adapter.clearItems();
+            adapter.addItems(files);
+        }, throwable -> showErrorAlert(R.string.error_msg_load_fail));
     }
 
 }

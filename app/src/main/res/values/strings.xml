@@ -42,5 +42,14 @@
     <string name="defer">defer</string>
     <string name="rest_video">休息视频</string>
 
+    <!--@AccountActivity-->
+    <string name="collect">收藏</string>
+    <string name="local">本地</string>
+    <string name="like">喜欢</string>
+
+    <!--@ArticleActivity-->
+    <string name="android">Android</string>
+    <string name="ios">Ios</string>
+    <string name="qianduan">前端</string>
 
 </resources>

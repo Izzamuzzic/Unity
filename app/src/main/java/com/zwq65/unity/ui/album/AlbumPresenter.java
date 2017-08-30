@@ -38,7 +38,7 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(
-                getDataManager().getImagesByPage20(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
+                getDataManager().get20Images(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
                     @Override
                     public void onSuccess(GankApiResponse<List<Image>> welfareResponse) {
                         if (welfareResponse != null && welfareResponse.getData() != null) {
@@ -56,7 +56,6 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
                 }, new ApiErrorCallBack<Throwable>() {
                     @Override
                     public void onFailure(Throwable t) {
-                        getMvpView().loadFail(t);
                         isLoading = false;
                     }
                 })

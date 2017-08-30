@@ -38,7 +38,7 @@ public class RestVideoPresenter<V extends RestVideoMvpView> extends BasePresente
         if (isLoading) return;
         isLoading = true;
         getCompositeDisposable().add(
-                getDataManager().getVideosAndIMagesByPage(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
+                getDataManager().getVideosAndIMages(page, new ApiSubscriberCallBack<List<VideoWithImage>>() {
                     @Override
                     public void onSuccess(List<VideoWithImage> videoWithImages) {
                         if (videoWithImages != null && videoWithImages.size() > 0) {
@@ -61,7 +61,6 @@ public class RestVideoPresenter<V extends RestVideoMvpView> extends BasePresente
                     @Override
                     public void onFailure(Throwable t) {
                         isLoading = false;
-                        getMvpView().loadFail();
                     }
                 }));
     }

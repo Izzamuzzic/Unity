@@ -4,6 +4,7 @@ import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
@@ -30,14 +31,32 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Disposable getImagesByPage20(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return retrofitApiManager.getGankIoApiService().getImagesByPage20(page)
+    public Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return retrofitApiManager.getGankIoApiService().get20Images(page)
                 .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
     }
 
     @Override
-    public Disposable getVideosAndIMagesByPage(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return Flowable.zip(retrofitApiManager.getGankIoApiService().getVideosByPage(page), retrofitApiManager.getGankIoApiService().getImagesByPage(page),
+    public Disposable getAndroidArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return retrofitApiManager.getGankIoApiService().getAndroidArticles(page)
+                .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    @Override
+    public Disposable getIosArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return retrofitApiManager.getGankIoApiService().getIosArticles(page)
+                .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    @Override
+    public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return retrofitApiManager.getGankIoApiService().getQianduanArticles(page)
+                .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    @Override
+    public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return Flowable.zip(retrofitApiManager.getGankIoApiService().getVideos(page), retrofitApiManager.getGankIoApiService().getImages(page),
                 (restVideoResponse, welfareResponse) -> {
                     List<VideoWithImage> videoWithImageList = new ArrayList<>();
                     if (restVideoResponse != null && restVideoResponse.getData() != null

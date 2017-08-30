@@ -17,6 +17,7 @@ import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui.account.AccountActivity;
 import com.zwq65.unity.ui.album.AlbumFragment;
+import com.zwq65.unity.ui.article.ArticleFragment;
 import com.zwq65.unity.ui.rxjava.RxjavaFragment;
 import com.zwq65.unity.ui.video.RestVideoFragment;
 import com.zwq65.unity.utils.FontUtils;
@@ -120,6 +121,7 @@ public class MainActivity extends BaseActivity {
                 gotoFragment(new RxjavaFragment());
                 break;
             case R.id.ll_setting:
+                gotoFragment(new ArticleFragment());
                 break;
             case R.id.ll_out:
                 //退出app
