@@ -24,7 +24,7 @@ import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
-import com.zwq65.unity.ui.custom.other.photoview.PhotoView;
+import com.zwq65.unity.ui._custom.other.photoview.PhotoView;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -45,7 +45,6 @@ import static android.view.View.GONE;
 public class ImageActivity extends BaseActivity implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
-    public static final String COLLECTIONS = "COLLECTIONS";
 
     int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list

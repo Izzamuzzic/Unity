@@ -15,7 +15,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
-import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.zwq65.unity.ui.custom.recycleview.XRecyclerView.findMax;
+import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
 /**
  * Created by zwq65 on 2017/08/15

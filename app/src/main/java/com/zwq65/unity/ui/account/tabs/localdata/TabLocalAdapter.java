@@ -17,7 +17,7 @@ import com.bumptech.glide.request.target.Target;
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
-import com.zwq65.unity.ui.custom.widget.RatioImageView;
+import com.zwq65.unity.ui._custom.widget.RatioImageView;
 
 import java.io.File;
 

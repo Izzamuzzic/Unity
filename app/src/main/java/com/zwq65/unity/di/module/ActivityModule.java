@@ -24,9 +24,6 @@ import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.account.AccountMvpPresenter;
 import com.zwq65.unity.ui.account.AccountMvpView;
 import com.zwq65.unity.ui.account.AccountPresenter;
-import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpPresenter;
-import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumMvpView;
-import com.zwq65.unity.ui.account.collectionalbum.CollectionAlbumPresenter;
 import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpPresenter;
 import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpView;
 import com.zwq65.unity.ui.account.tabs.collection.TabCollectionPresenter;
@@ -39,6 +36,8 @@ import com.zwq65.unity.ui.album.AlbumPresenter;
 import com.zwq65.unity.ui.album.imagedetail.ImageMvpPresenter;
 import com.zwq65.unity.ui.album.imagedetail.ImageMvpView;
 import com.zwq65.unity.ui.album.imagedetail.ImagePresenter;
+import com.zwq65.unity.ui.article.ArticleContract;
+import com.zwq65.unity.ui.article.ArticlePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
@@ -80,6 +79,11 @@ public class ActivityModule {
     }
 
     @Provides
+    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
+        return new LinearLayoutManager(activity);
+    }
+
+    @Provides
     @PerActivity
     LoginMvpPresenter<LoginMvpView> provideLoginPresenter(
             LoginPresenter<LoginMvpView> loginPresenter) {
@@ -109,13 +113,6 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    CollectionAlbumMvpPresenter<CollectionAlbumMvpView> provideCollectionAlbumMvpPresenter(
-            CollectionAlbumPresenter<CollectionAlbumMvpView> personalCenterPresenter) {
-        return personalCenterPresenter;
-    }
-
-    @Provides
-    @PerActivity
     TabCollectionMvpPresenter<TabCollectionMvpView> provideTabCollectionMvpPresenter(
             TabCollectionPresenter<TabCollectionMvpView> tabCollectionPresenter) {
         return tabCollectionPresenter;
@@ -136,7 +133,10 @@ public class ActivityModule {
     }
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
-        return new LinearLayoutManager(activity);
+    @PerActivity
+    ArticleContract.IArticlePresenter<ArticleContract.IArticleView> provideIArticlePresenter(
+            ArticlePresenter<ArticleContract.IArticleView> articlePresenter) {
+        return articlePresenter;
     }
+
 }

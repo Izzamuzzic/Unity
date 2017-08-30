@@ -30,6 +30,18 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="text_14_bold_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_15_bold_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="text_16_white">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>

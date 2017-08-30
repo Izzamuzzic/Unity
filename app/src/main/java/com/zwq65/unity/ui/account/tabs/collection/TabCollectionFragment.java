@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui.custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
 import java.util.List;
 

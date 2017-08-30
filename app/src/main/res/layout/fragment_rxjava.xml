@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/defer"/>
 
-    <com.zwq65.unity.ui.custom.widget.LoadingButtonView
+    <com.zwq65.unity.ui._custom.widget.LoadingButtonView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:background_color="@color/wave1"
