@@ -20,7 +20,6 @@ import com.zwq65.unity.data.db.model.DaoSession;
 import com.zwq65.unity.data.db.model.Picture;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -45,43 +44,27 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public Observable<Long> insertPicture(final Picture picture) {
-        return Observable.fromCallable(new Callable<Long>() {
-            @Override
-            public Long call() throws Exception {
-                return mDaoSession.getPictureDao().insertOrReplace(picture);
-            }
-        });
+        return Observable.fromCallable(() -> mDaoSession.getPictureDao().insertOrReplace(picture));
     }
 
     @Override
     public Observable<Long> deletePicture(final String id) {
-        return Observable.fromCallable(new Callable<Long>() {
-            @Override
-            public Long call() throws Exception {
-                mDaoSession.getPictureDao().deleteByKey(id);
-                return 1L;
-            }
+        return Observable.fromCallable(() -> {
+            mDaoSession.getPictureDao().deleteByKey(id);
+            return 1L;
         });
     }
 
     @Override
     public Observable<Boolean> isPictureExist(final String id) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                Picture picture = mDaoSession.getPictureDao().load(id);
-                return picture != null;
-            }
+        return Observable.fromCallable(() -> {
+            Picture picture = mDaoSession.getPictureDao().load(id);
+            return picture != null;
         });
     }
 
     @Override
     public Observable<List<Picture>> getCollectionPictures() {
-        return Observable.fromCallable(new Callable<List<Picture>>() {
-            @Override
-            public List<Picture> call() throws Exception {
-                return mDaoSession.getPictureDao().loadAll();
-            }
-        });
+        return Observable.fromCallable(() -> mDaoSession.getPictureDao().loadAll());
     }
 }
