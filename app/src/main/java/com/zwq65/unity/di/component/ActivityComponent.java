@@ -19,11 +19,12 @@ package com.zwq65.unity.di.component;
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.ui.account.AccountActivity;
-import com.zwq65.unity.ui.account.tabs.collection.TabCollectionFragment;
-import com.zwq65.unity.ui.account.tabs.localdata.TabLocalFragment;
+import com.zwq65.unity.ui.account.tabs.collect.TabCollectionFragment;
+import com.zwq65.unity.ui.account.tabs.local.TabLocalFragment;
 import com.zwq65.unity.ui.album.AlbumFragment;
-import com.zwq65.unity.ui.album.imagedetail.ImageActivity;
+import com.zwq65.unity.ui.album.image.ImageActivity;
 import com.zwq65.unity.ui.article.ArticleFragment;
+import com.zwq65.unity.ui.article.TabArticleFragment;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 import com.zwq65.unity.ui.video.RestVideoFragment;
@@ -55,6 +56,8 @@ public interface ActivityComponent {
     void inject(TabCollectionFragment fragment);
 
     void inject(TabLocalFragment fragment);
+
+    void inject(TabArticleFragment fragment);
 
 
 }

@@ -14,7 +14,6 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.video.watch.WatchActivity;
 
@@ -64,12 +63,7 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
         rvVideos.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rvVideos.getItemAnimator()).setSupportsChangeAnimations(false);
         //上拉刷新監聽
-        pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initData();
-            }
-        });
+        pullToRefresh.setOnRefreshListener(this::initData);
         //下拉加載監聽
         rvVideos.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -97,12 +91,7 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
             }
         });
         mAdapter = new RestVideoAdapter(getContext());
-        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<VideoWithImage>() {
-            @Override
-            public void onClick(VideoWithImage videoWithImage, int position) {
-                gotoWatchActivity(videoWithImage);
-            }
-        });
+        mAdapter.setOnItemClickListener((videoWithImage, position) -> gotoWatchActivity(videoWithImage));
         rvVideos.setAdapter(mAdapter);
     }
 

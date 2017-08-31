@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.localdata;
+package com.zwq65.unity.ui.account.tabs.collect;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -16,10 +15,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.zwq65.unity.R;
+import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._custom.widget.RatioImageView;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,29 +26,28 @@ import butterknife.ButterKnife;
  * Created by zwq65 on 2017/08/14
  */
 
-public class TabLocalAdapter extends BaseRecyclerViewAdapter<File, TabLocalAdapter.ViewHolder> {
+public class TabCollectionAdapter extends BaseRecyclerViewAdapter<Picture, TabCollectionAdapter.ViewHolder> {
 
     private Context context;
-    private int width, height;//item固定尺寸
+    private int width;//item固定尺寸
 
-    TabLocalAdapter(Context context) {
+    TabCollectionAdapter(Context context) {
         this.context = context;
-        height = width = AppScreenMgr.getScreenWidth(context) / 3;//3列排序,宽度为屏幕宽度的1/3,高度与宽度保持一致呈正方形
+        width = AppScreenMgr.getScreenWidth(context) / 3;//3列排序,宽度为屏幕宽度的1/3,高度与宽度保持一致呈正方形
     }
 
     @Override
-    public TabLocalAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TabCollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_tab_collection, parent, false);
-        view.setLayoutParams(new LinearLayout.LayoutParams(width, height));
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final TabLocalAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final TabCollectionAdapter.ViewHolder holder, int position) {
         //添加动画
         setAnimation(holder.itemView, position);
 
-        Glide.with(context).load(mDataList.get(position)).listener(new RequestListener<Drawable>() {
+        Glide.with(context).load(mDataList.get(position).getUrl()).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 return false;

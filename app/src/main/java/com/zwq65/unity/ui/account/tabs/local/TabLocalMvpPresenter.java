@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.localdata;
+package com.zwq65.unity.ui.account.tabs.local;
 
 import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._base.MvpView;

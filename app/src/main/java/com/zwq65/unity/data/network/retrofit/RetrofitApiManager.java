@@ -31,7 +31,7 @@ public class RetrofitApiManager {
     private GankIoApiService gankIoApiService;
 
     @Inject
-    public RetrofitApiManager() {
+    RetrofitApiManager() {
     }
 
     /**

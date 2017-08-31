@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseActivity;
-import com.zwq65.unity.ui.account.tabs.collection.TabCollectionFragment;
-import com.zwq65.unity.ui.account.tabs.localdata.TabLocalFragment;
+import com.zwq65.unity.ui.account.tabs.collect.TabCollectionFragment;
+import com.zwq65.unity.ui.account.tabs.local.TabLocalFragment;
 import com.zwq65.unity.utils.FontUtils;
 
 import javax.inject.Inject;

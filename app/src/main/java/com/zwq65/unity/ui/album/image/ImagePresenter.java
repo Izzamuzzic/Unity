@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.album.imagedetail;
+package com.zwq65.unity.ui.album.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;

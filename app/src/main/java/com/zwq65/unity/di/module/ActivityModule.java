@@ -24,20 +24,22 @@ import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.account.AccountMvpPresenter;
 import com.zwq65.unity.ui.account.AccountMvpView;
 import com.zwq65.unity.ui.account.AccountPresenter;
-import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpPresenter;
-import com.zwq65.unity.ui.account.tabs.collection.TabCollectionMvpView;
-import com.zwq65.unity.ui.account.tabs.collection.TabCollectionPresenter;
-import com.zwq65.unity.ui.account.tabs.localdata.TabLocalMvpPresenter;
-import com.zwq65.unity.ui.account.tabs.localdata.TabLocalMvpView;
-import com.zwq65.unity.ui.account.tabs.localdata.TabLocalPresenter;
+import com.zwq65.unity.ui.account.tabs.collect.TabCollectionMvpPresenter;
+import com.zwq65.unity.ui.account.tabs.collect.TabCollectionMvpView;
+import com.zwq65.unity.ui.account.tabs.collect.TabCollectionPresenter;
+import com.zwq65.unity.ui.account.tabs.local.TabLocalMvpPresenter;
+import com.zwq65.unity.ui.account.tabs.local.TabLocalMvpView;
+import com.zwq65.unity.ui.account.tabs.local.TabLocalPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpPresenter;
 import com.zwq65.unity.ui.album.AlbumMvpView;
 import com.zwq65.unity.ui.album.AlbumPresenter;
-import com.zwq65.unity.ui.album.imagedetail.ImageMvpPresenter;
-import com.zwq65.unity.ui.album.imagedetail.ImageMvpView;
-import com.zwq65.unity.ui.album.imagedetail.ImagePresenter;
+import com.zwq65.unity.ui.album.image.ImageMvpPresenter;
+import com.zwq65.unity.ui.album.image.ImageMvpView;
+import com.zwq65.unity.ui.album.image.ImagePresenter;
 import com.zwq65.unity.ui.article.ArticleContract;
 import com.zwq65.unity.ui.article.ArticlePresenter;
+import com.zwq65.unity.ui.article.TabArticleContract;
+import com.zwq65.unity.ui.article.TabArticlePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
@@ -137,6 +139,13 @@ public class ActivityModule {
     ArticleContract.IArticlePresenter<ArticleContract.IArticleView> provideIArticlePresenter(
             ArticlePresenter<ArticleContract.IArticleView> articlePresenter) {
         return articlePresenter;
+    }
+
+    @Provides
+    @PerActivity
+    TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> provideITabArticlePresenter(
+            TabArticlePresenter<TabArticleContract.ITabArticleView> tabArticlePresenter) {
+        return tabArticlePresenter;
     }
 
 }

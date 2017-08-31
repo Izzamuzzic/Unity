@@ -1,6 +1,8 @@
 package com.zwq65.unity.app;
 
-import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
@@ -15,7 +17,7 @@ import com.zwq65.unity.utils.ToastUtils;
  * Unity
  */
 
-public class UnityApp extends Application {
+public class UnityApp extends MultiDexApplication {
 
     private ApplicationComponent mApplicationComponent;
     private static UnityApp unityApp;
@@ -33,6 +35,12 @@ public class UnityApp extends Application {
         mApplicationComponent.inject(this);
         initStetho();
         initLeakcanary();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        MultiDex.install(newBase);
+        super.attachBaseContext(newBase);
     }
 
     /**

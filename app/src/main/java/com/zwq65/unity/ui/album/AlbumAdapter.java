@@ -61,13 +61,10 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
                 return false;
             }
         }).into(holder.ivBeauty);
-        holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
-                }
+        holder.ivBeauty.setOnClickListener(v -> {
+            if (listener != null) {
+                //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
+                listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
             }
         });
         //添加动画

@@ -78,12 +78,13 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.IAr
         public Fragment getItem(int position) {
             if (getChildFragmentManager().getFragments() != null) {
                 for (Fragment fragment : getChildFragmentManager().getFragments()) {
-                    if (fragment instanceof TabArticleFragment && getString(Tabs[position]).equals(((TabArticleFragment) fragment).mTag)) {
+                    if (fragment instanceof TabArticleFragment &&
+                            Tabs[position] == ((TabArticleFragment) fragment).mType.getValue()) {
                         return fragment;
                     }
                 }
             }
-            return TabArticleFragment.newInstance(getString(Tabs[position]));
+            return TabArticleFragment.newInstance(Tabs[position]);
         }
 
         @Override

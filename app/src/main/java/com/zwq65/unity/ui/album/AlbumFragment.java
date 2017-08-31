@@ -15,9 +15,8 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
-import com.zwq65.unity.ui.album.imagedetail.ImageActivity;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +65,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         rvAlbums.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
         //上拉刷新監聽
-        pullToRefresh.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initData();
-            }
-        });
+        pullToRefresh.setOnRefreshListener(this::initData);
         //下拉加載監聽
         rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -100,12 +94,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         });
 
         mAdapter = new AlbumAdapter(mActivity);
-        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Image>() {
-            @Override
-            public void onClick(Image image, int position) {
-                gotoContentActivity(position);
-            }
-        });
+        mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         rvAlbums.setAdapter(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
         helper.attachToRecyclerView(rvAlbums);

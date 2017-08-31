@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.account.tabs.collection;
+package com.zwq65.unity.ui.account.tabs.collect;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
