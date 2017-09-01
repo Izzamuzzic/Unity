@@ -7,13 +7,17 @@ package com.zwq65.unity.data.network;
 public class ApiConstants {
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
+     * 随机数据: http://gank.io/api/random/data/分类/个数
      * <p>
      * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
      * 请求个数： 数字，大于0
      * 第几页：数字，大于0
      * e.g. http://gank.io/api/data/福利/10/1
      */
-    public static String GANK_IO_HOST = "http://gank.io/api/data/";
+    public static final String GANK_IO_HOST = "http://gank.io/api/";
+    public static final String data = "data/";
+    public static final String random = "random/data/";
+
     public static final String Welfare = "福利/";
     public static final String RestVideo = "休息视频/";
     public static final String Android = "Android/";

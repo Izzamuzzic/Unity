@@ -3,7 +3,7 @@ package com.zwq65.unity.data.network;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 
@@ -17,6 +17,16 @@ import io.reactivex.disposables.Disposable;
 
 public interface ApiHelper {
     /**
+     * 获取随机数目的image'list
+     *
+     * @param callBack      callBack
+     * @param errorCallBack errorCallBack
+     * @return Disposable
+     */
+    Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack,
+                               ApiErrorCallBack<Throwable> errorCallBack);
+
+    /**
      * 获取page页的image'list
      *
      * @param page          页数
@@ -28,6 +38,17 @@ public interface ApiHelper {
                            ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
+     * 同时获取相同数量的image和video实例
+     *
+     * @param page          页数
+     * @param callBack      callBack
+     * @param errorCallBack errorCallBack
+     * @return Disposable
+     */
+    Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack,
+                                  ApiErrorCallBack<Throwable> errorCallBack);
+
+    /**
      * 获取page页的android'list
      *
      * @param page          页数
@@ -35,7 +56,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getAndroidArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack,
+    Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
                                   ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
@@ -46,7 +67,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getIosArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack,
+    Disposable getIosArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
                               ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
@@ -57,17 +78,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getQianduanArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack,
+    Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
                                    ApiErrorCallBack<Throwable> errorCallBack);
 
-    /**
-     * 同时获取相同数量的image和video实例
-     *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
-     */
-    Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack,
-                                  ApiErrorCallBack<Throwable> errorCallBack);
 }

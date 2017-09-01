@@ -43,7 +43,7 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
 
-    public static int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
+    public static final int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

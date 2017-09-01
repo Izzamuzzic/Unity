@@ -55,6 +55,5 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         ((DefaultItemAnimator) rlCollection.getItemAnimator()).setSupportsChangeAnimations(false);
         adapter = new TabCollectionAdapter(getContext());
         rlCollection.setAdapter(adapter);
-
     }
 }

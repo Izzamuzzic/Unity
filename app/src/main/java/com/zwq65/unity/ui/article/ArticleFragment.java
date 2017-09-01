@@ -30,7 +30,7 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.IAr
     @BindView(R.id.vp_artcle)
     ViewPager vpArtcle;
 
-    public static int[] Tabs = new int[]{R.string.android, R.string.ios, R.string.qianduan};
+    public static final int[] Tabs = new int[]{R.string.android, R.string.ios, R.string.qianduan};
 
     private void initView() {
         for (int tabStr : Tabs) {

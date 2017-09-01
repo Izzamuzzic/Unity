@@ -71,7 +71,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
         setAnimation(holder.itemView, position);
     }
 
-    class ViewHolder extends BaseViewHolder<Image> {
+    static class ViewHolder extends BaseViewHolder<Image> {
         @BindView(R.id.iv_beauty)
         RatioImageView ivBeauty;
 

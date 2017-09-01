@@ -12,11 +12,10 @@ import android.view.ViewGroup;
 
 import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.article.detail.ArticalDetailActivity;
-import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
 
@@ -72,7 +71,7 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
+//        setmPresenter(mPresenter);
         return view;
     }
 
@@ -121,10 +120,10 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
         rvArticle.setAdapter(mAdapter);
     }
 
-    private void gotoDetailActivity(Article article) {
+    private void gotoDetailActivity(ArticleWithImage article) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ArticalDetailActivity.ARTICAL, article);
-        mActivity.openActivity(WatchActivity.class, bundle);
+        mActivity.openActivity(ArticalDetailActivity.class, bundle);
     }
 
     public void initData() {
@@ -132,14 +131,14 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
     }
 
     @Override
-    public void refreshData(List<Article> t) {
+    public void refreshData(List<ArticleWithImage> t) {
         pullToRefresh.setRefreshing(false);//取消下拉加载
         mAdapter.clearItems();
         mAdapter.addItems(t);
     }
 
     @Override
-    public void showData(List<Article> t) {
+    public void showData(List<ArticleWithImage> t) {
         mAdapter.addItems(t);
     }
 

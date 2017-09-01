@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.article;
 
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._base.MvpView;
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class TabArticleContract {
     public interface ITabArticleView extends MvpView {
-        void refreshData(List<Article> t);
+        void refreshData(List<ArticleWithImage> t);
 
-        void showData(List<Article> t);
+        void showData(List<ArticleWithImage> t);
 
         void noMoreData();
     }

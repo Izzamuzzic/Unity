@@ -95,8 +95,7 @@ public class MainActivity extends BaseActivity {
                 firstClick = System.currentTimeMillis();
                 showMessage("再按一次退出");
             } else {
-                finish();
-                System.exit(0);
+                exitApp();
             }
         }
     }
@@ -125,10 +124,14 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.ll_out:
                 //退出app
-                finish();
-                System.exit(0);
+                exitApp();
                 break;
         }
+    }
+
+    private void exitApp() {
+        finish();
+        System.exit(0);
     }
 
     /**

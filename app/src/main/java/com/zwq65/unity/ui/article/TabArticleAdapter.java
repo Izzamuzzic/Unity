@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.utils.FontUtils;
@@ -26,7 +27,7 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArticleAdapter.ViewHolder> {
+public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage, TabArticleAdapter.ViewHolder> {
 
     private Context context;
 
@@ -43,15 +44,9 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         FontUtils.getInstance().setTypeface(holder.tvTitle, FontUtils.Font.Roboto_Bold);
-        holder.tvTitle.setText(mDataList.get(position).getDesc());
+        holder.tvTitle.setText(mDataList.get(position).getArticle().getDesc());
         holder.tvTitle.setVisibility(View.INVISIBLE);
-        Object imageUri;
-        if (mDataList.get(position).getImages() != null && mDataList.get(position).getImages().size() > 0) {
-            imageUri = mDataList.get(position).getImages().get(0);
-        } else {
-            imageUri = R.mipmap.bg_header;//默认bg
-        }
-        Glide.with(context).load(imageUri).listener(new RequestListener<Drawable>() {
+        Glide.with(context).load(mDataList.get(position).getImage().getUrl()).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 return false;

@@ -9,7 +9,7 @@ import android.widget.TextView;
  */
 
 public class FontUtils {
-    private static FontUtils instance;
+    private static volatile FontUtils instance;
 
     public enum Font {
         Montserrat_Medium,

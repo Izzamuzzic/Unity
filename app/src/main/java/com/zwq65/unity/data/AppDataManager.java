@@ -24,7 +24,7 @@ import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
@@ -180,27 +180,32 @@ public class AppDataManager implements DataManager {
 
 
     @Override
+    public Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return mApiHelper.getRandomImages(callBack, errorCallBack);
+    }
+
+    @Override
     public Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return mApiHelper.get20Images(page, callBack, errorCallBack);
     }
 
     @Override
-    public Disposable getAndroidArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+    public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return mApiHelper.getVideosAndIMages(page, callBack, errorCallBack);
+    }
+
+    @Override
+    public Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return mApiHelper.getAndroidArticles(page, callBack, errorCallBack);
     }
 
     @Override
-    public Disposable getIosArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+    public Disposable getIosArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return mApiHelper.getIosArticles(page, callBack, errorCallBack);
     }
 
     @Override
-    public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<GankApiResponse<List<Article>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+    public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return mApiHelper.getQianduanArticles(page, callBack, errorCallBack);
-    }
-
-    @Override
-    public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getVideosAndIMages(page, callBack, errorCallBack);
     }
 }

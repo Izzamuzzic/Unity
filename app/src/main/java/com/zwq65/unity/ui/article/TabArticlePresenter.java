@@ -3,8 +3,7 @@ package com.zwq65.unity.ui.article;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.BasePresenter;
 
 import java.util.List;
@@ -50,25 +49,28 @@ public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView> e
             case Android:
                 getCompositeDisposable().add(getDataManager().getAndroidArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
+                break;
             case Ios:
                 getCompositeDisposable().add(getDataManager().getIosArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
+                break;
             case Qianduan:
                 getCompositeDisposable().add(getDataManager().getQianduanArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
+                break;
         }
     }
 
-    private ApiSubscriberCallBack<GankApiResponse<List<Article>>> getApiSubscriberCallBack() {
-        return new ApiSubscriberCallBack<GankApiResponse<List<Article>>>() {
+    private ApiSubscriberCallBack<List<ArticleWithImage>> getApiSubscriberCallBack() {
+        return new ApiSubscriberCallBack<List<ArticleWithImage>>() {
             @Override
-            public void onSuccess(GankApiResponse<List<Article>> data) {
-                if (data.getData() != null) {
+            public void onSuccess(List<ArticleWithImage> data) {
+                if (data != null) {
                     page++;
                     if (isRefresh) {
-                        getMvpView().refreshData(data.getData());
+                        getMvpView().refreshData(data);
                     } else {
-                        getMvpView().showData(data.getData());
+                        getMvpView().showData(data);
                     }
                 } else {
                     getMvpView().noMoreData();

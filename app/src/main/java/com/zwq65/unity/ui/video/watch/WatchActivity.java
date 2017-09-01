@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -43,8 +42,10 @@ public class WatchActivity extends BaseActivity {
 
     private void initView() {
         //set header'background image
-        Glide.with(this).load(videoWithImage.getImage().getUrl()).into(ivTitleBg);
-        collapsingToolbarLayout.setTitle(videoWithImage.getVideo().getDesc());
+        if (videoWithImage != null) {
+            Glide.with(this).load(videoWithImage.getImage().getUrl()).into(ivTitleBg);
+            collapsingToolbarLayout.setTitle(videoWithImage.getVideo().getDesc());
+        }
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
         //setup toolbar
@@ -53,12 +54,7 @@ public class WatchActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WatchActivity.this.onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> WatchActivity.this.onBackPressed());
         //添加了toolbar，重新设置沉浸栏
         ImmersionBar.with(this).titleBar(toolbar).init();
     }
@@ -73,7 +69,10 @@ public class WatchActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                finish();
+                break;
+            default:
+                break;
         }
         return true;
     }

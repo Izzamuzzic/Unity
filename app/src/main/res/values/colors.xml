@@ -7,7 +7,6 @@
     <!--editText线条、radioButton按钮颜色-->
     <color name="colorAccent">#01bcd5</color>
 
-
     <color name="white">#FFFFFF</color>
     <color name="blue">#700260f9</color>
     <color name="light_blue">#890096ff</color>
@@ -21,6 +20,7 @@
 
     <!-- text color-->
     <color name="text_color_dark">#FF4A4A4A</color>
+    <color name="text_color_gray">#A7A8A9</color>
 
     <!-- wave bg color-->
     <color name="wave1">#690096ff</color>
@@ -29,6 +29,8 @@
     <color name="transparent_black">#3a2a2a2a</color>
     <!-- collection nice colors-->
     <color name="picton_blue">#59ABE3</color>
+    <color name="mono_black_bg">#232427</color><!-- mono'custom bg-->
+    <color name="mono_main_color">#16A5AF</color><!-- mono'main color -->
 
     <color name="btn_default_light_normal">#00000000</color>
     <color name="btn_default_light_pressed">#40ffffff</color>
