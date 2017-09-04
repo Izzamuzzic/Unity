@@ -34,8 +34,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 import static android.view.View.GONE;
 
@@ -156,13 +154,10 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 currentPosition = position;
                 setCurrentPage();
 
-                mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(@NonNull Boolean aBoolean) throws Exception {
-                        LogUtils.e("isPictureCollect: " + aBoolean);
-                        if (cbLove != null) {
-                            cbLove.setChecked(aBoolean);
-                        }
+                mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
+                    LogUtils.e("isPictureCollect: " + aBoolean);
+                    if (cbLove != null) {
+                        cbLove.setChecked(aBoolean);
                     }
                 });
                 //改变toolbar标题

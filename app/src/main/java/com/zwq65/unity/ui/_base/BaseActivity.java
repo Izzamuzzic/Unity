@@ -32,7 +32,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -75,6 +74,14 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     private Unbinder mUnBinder;
     private FragmentManager fragmentManager;
 
+    public void setUnBinder(Unbinder unBinder) {
+        mUnBinder = unBinder;
+    }
+
+    public ActivityComponent getActivityComponent() {
+        return mActivityComponent;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void setContentView(int layoutResID) {
@@ -87,6 +94,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
         ImmersionBar.with(this).fitsSystemWindows(false).init();
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void bindViews() {
@@ -119,13 +127,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
                 .build();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
     @Override
     protected void onResume() {
         LogUtils.i(TAG, "onResume");
@@ -146,10 +147,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         }
         super.onDestroy();
         ImmersionBar.with(this).destroy();//不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
-    }
-
-    public ActivityComponent getActivityComponent() {
-        return mActivityComponent;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -312,7 +309,4 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
 //        finish();
     }
 
-    public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
-    }
 }

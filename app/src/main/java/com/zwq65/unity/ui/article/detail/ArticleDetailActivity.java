@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.video.watch;
+package com.zwq65.unity.ui.article.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +7,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
+import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
@@ -23,35 +29,64 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 视频播放
- */
-public class WatchActivity extends BaseActivity {
-    //intent'key value
-    public static final String VIDEO_WITH_IMAGE = "VideoWithImage";
-    VideoWithImage videoWithImage;
+public class ArticleDetailActivity extends BaseActivity {
+    public static final String ARTICAL = "ARTICAL";
+
+    ArticleWithImage articleWithImage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.iv_title_bg)
     ImageView ivTitleBg;
+    @BindView(R.id.wv_article)
+    WebView wvArticle;
+    @BindView(R.id.pb_loader)
+    MKLoader pbLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentViewWithoutInject(R.layout.activity_watch);
+        setContentViewWithoutInject(R.layout.activity_article_detail);
         setUnBinder(ButterKnife.bind(this));
         initData();
         initView();
     }
 
     private void initView() {
+        initToolBar();
         //set header'background image
-        if (videoWithImage != null) {
-            Glide.with(this).load(videoWithImage.getImage().getUrl()).into(ivTitleBg);
-            collapsingToolbarLayout.setTitle(videoWithImage.getVideo().getDesc());
+        if (articleWithImage != null) {
+            Glide.with(this).load(articleWithImage.getImage().getUrl()).into(ivTitleBg);
+            collapsingToolbarLayout.setTitle(articleWithImage.getArticle().getDesc());
+            //WebView
+            wvArticle.getSettings().setJavaScriptEnabled(true);
+            wvArticle.getSettings().setDomStorageEnabled(true);
+            wvArticle.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            wvArticle.getSettings().setAppCacheEnabled(true);
+
+            wvArticle.setWebChromeClient(new WebChromeClient() {
+                @Override
+                public void onProgressChanged(WebView view, int newProgress) {
+                    super.onProgressChanged(view, newProgress);
+                    if (newProgress == 100) {
+                        pbLoader.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            wvArticle.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    return true;
+                }
+            });
+            wvArticle.loadUrl(articleWithImage.getArticle().getUrl());
         }
+    }
+
+    private void initToolBar() {
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
         //setup toolbar
@@ -60,7 +95,7 @@ public class WatchActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> WatchActivity.this.onBackPressed());
+        toolbar.setNavigationOnClickListener(v -> ArticleDetailActivity.this.onBackPressed());
         //添加了toolbar，重新设置沉浸栏
         ImmersionBar.with(this).titleBar(toolbar).init();
     }
@@ -68,7 +103,32 @@ public class WatchActivity extends BaseActivity {
     private void initData() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        videoWithImage = bundle.getParcelable(VIDEO_WITH_IMAGE);
+        articleWithImage = bundle.getParcelable(ARTICAL);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (wvArticle != null) {
+            wvArticle.onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (wvArticle != null) {
+            wvArticle.onPause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (wvArticle != null) {
+            wvArticle.removeAllViews();
+            wvArticle.destroy();
+        }
     }
 
     @Override
@@ -95,7 +155,7 @@ public class WatchActivity extends BaseActivity {
 
     private void gotoContentActivity() {
         List<Image> images = new ArrayList<>(1);
-        images.add(videoWithImage.getImage());
+        images.add(articleWithImage.getImage());
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);

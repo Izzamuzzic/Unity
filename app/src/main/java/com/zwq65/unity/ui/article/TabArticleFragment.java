@@ -15,7 +15,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.article.detail.ArticalDetailActivity;
+import com.zwq65.unity.ui.article.detail.ArticleDetailActivity;
 
 import java.util.List;
 
@@ -122,8 +122,8 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
 
     private void gotoDetailActivity(ArticleWithImage article) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ArticalDetailActivity.ARTICAL, article);
-        mActivity.openActivity(ArticalDetailActivity.class, bundle);
+        bundle.putParcelable(ArticleDetailActivity.ARTICAL, article);
+        mActivity.openActivity(ArticleDetailActivity.class, bundle);
     }
 
     public void initData() {
