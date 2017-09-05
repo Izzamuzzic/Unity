@@ -17,12 +17,12 @@ import com.zwq65.unity.utils.ToastUtils;
  * Unity
  */
 
-public class UnityApp extends MultiDexApplication {
+public class App extends MultiDexApplication {
 
     private ApplicationComponent mApplicationComponent;
-    private static UnityApp unityApp;
+    private static App unityApp;
 
-    public static UnityApp getInstance() {
+    public static App getInstance() {
         return unityApp;
     }
 

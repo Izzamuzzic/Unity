@@ -41,7 +41,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.jingewenku.abrahamcaijin.commonutil.AppNetworkMgr;
 import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
-import com.zwq65.unity.app.UnityApp;
+import com.zwq65.unity.app.App;
 import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.di.component.DaggerActivityComponent;
 import com.zwq65.unity.di.module.ActivityModule;
@@ -123,7 +123,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         super.onCreate(savedInstanceState);
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
-                .applicationComponent(((UnityApp) getApplication()).getComponent())
+                .applicationComponent(((App) getApplication()).getComponent())
                 .build();
     }
 

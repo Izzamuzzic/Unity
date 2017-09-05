@@ -18,7 +18,7 @@ package com.zwq65.unity.di.component;
 import android.app.Application;
 import android.content.Context;
 
-import com.zwq65.unity.app.UnityApp;
+import com.zwq65.unity.app.App;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.di.ApplicationContext;
 import com.zwq65.unity.di.module.ApplicationModule;
@@ -34,7 +34,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-    void inject(UnityApp app);
+    void inject(App app);
 
     @ApplicationContext
     Context context();

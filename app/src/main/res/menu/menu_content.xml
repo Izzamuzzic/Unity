@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_collect_bg_image"
         android:orderInCategory="100"
-        android:title="查看背景图"
+        android:title="查看美图"
         app:showAsAction="never"/>
 </menu>

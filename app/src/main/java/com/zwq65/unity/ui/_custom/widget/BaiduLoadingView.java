@@ -74,12 +74,9 @@ public class BaiduLoadingView extends View {
         valueAnimator.setDuration(1000);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                currentPercent = animation.getAnimatedFraction();
-                invalidate();
-            }
+        valueAnimator.addUpdateListener(animation -> {
+            currentPercent = animation.getAnimatedFraction();
+            invalidate();
         });
         valueAnimator.start();
 

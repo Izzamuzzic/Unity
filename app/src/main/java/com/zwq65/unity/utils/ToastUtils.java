@@ -2,7 +2,7 @@ package com.zwq65.unity.utils;
 
 import android.widget.Toast;
 
-import com.zwq65.unity.app.UnityApp;
+import com.zwq65.unity.app.App;
 
 /**
  * Created by zwq65 on 2017/05/08.
@@ -14,7 +14,7 @@ public class ToastUtils {
 
     public static void makeText(String message, int duration) {
         if (toast == null) {
-            toast = Toast.makeText(UnityApp.getInstance(), message, duration);
+            toast = Toast.makeText(App.getInstance(), message, duration);
         } else {
             toast.setText(message);
             toast.setDuration(duration);

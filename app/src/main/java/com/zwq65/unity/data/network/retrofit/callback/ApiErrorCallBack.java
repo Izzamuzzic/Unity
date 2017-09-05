@@ -1,6 +1,6 @@
 package com.zwq65.unity.data.network.retrofit.callback;
 
-import com.zwq65.unity.app.UnityApp;
+import com.zwq65.unity.app.App;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -20,9 +20,9 @@ public abstract class ApiErrorCallBack<T extends Throwable> implements Consumer<
     public void accept(@NonNull T t) throws Exception {
         if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException) {
             //网络异常（超时、连接、未识别域名...）
-            UnityApp.showShortToast("网络异常");
+            App.showShortToast("网络异常");
         } else {
-            UnityApp.showShortToast(t.toString());
+            App.showShortToast(t.toString());
         }
         onFailure(t);
     }
