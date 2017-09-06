@@ -38,7 +38,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseFragment extends Fragment implements MvpView {
-    private final String TAG = getClass().getSimpleName();
+    public final String TAG = getClass().getSimpleName();
     public BaseActivity mActivity;
     private Unbinder mUnBinder;
     private MvpPresenter mPresenter;

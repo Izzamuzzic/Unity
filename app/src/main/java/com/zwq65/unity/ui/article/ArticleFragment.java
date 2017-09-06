@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.utils.LogUtils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -76,14 +79,18 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.IAr
 
         @Override
         public Fragment getItem(int position) {
-            if (getChildFragmentManager().getFragments() != null) {
-                for (Fragment fragment : getChildFragmentManager().getFragments()) {
+            LogUtils.e(TAG, "position:" + position);
+            List<Fragment> fragments = getChildFragmentManager().getFragments();
+            if (fragments != null) {
+                for (Fragment fragment : fragments) {
                     if (fragment instanceof TabArticleFragment &&
                             Tabs[position] == ((TabArticleFragment) fragment).mType.getValue()) {
+                        LogUtils.e(TAG, "instanceof");
                         return fragment;
                     }
                 }
             }
+            LogUtils.e(TAG, "newInstance");
             return TabArticleFragment.newInstance(Tabs[position]);
         }
 

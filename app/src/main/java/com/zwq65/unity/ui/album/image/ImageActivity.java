@@ -1,5 +1,6 @@
 package com.zwq65.unity.ui.album.image;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui._custom.other.photoview.PhotoView;
-import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,8 @@ import static android.view.View.GONE;
 public class ImageActivity extends BaseActivity implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
+    private static final int SAVE_MEIZHI = 1;
+
 
     int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list
@@ -82,10 +84,11 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 break;
             case R.id.action_save:
                 //保存大图
+                requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);//请求获取权限
                 mPresenter.savePicture(this, imageList.get(currentPosition));
                 break;
             case R.id.menu_cb_love:
@@ -139,6 +142,10 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
      * 设置当前页数
      */
     private void setCurrentPage() {
+        if (pageSize <= 1) {
+            tvCurrentPage.setVisibility(View.GONE);
+            return;
+        }
         tvCurrentPage.setText(currentPosition + 1 + " / " + pageSize);
     }
 
@@ -154,8 +161,8 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 currentPosition = position;
                 setCurrentPage();
 
+                //当前图片是否已被用户收藏
                 mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
-                    LogUtils.e("isPictureCollect: " + aBoolean);
                     if (cbLove != null) {
                         cbLove.setChecked(aBoolean);
                     }

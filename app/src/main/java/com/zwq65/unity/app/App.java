@@ -6,6 +6,7 @@ import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.di.module.ApplicationModule;
@@ -33,6 +34,7 @@ public class App extends MultiDexApplication {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         mApplicationComponent.inject(this);
+        initBugly();
         initStetho();
         initLeakcanary();
     }
@@ -41,6 +43,13 @@ public class App extends MultiDexApplication {
     protected void attachBaseContext(Context newBase) {
         MultiDex.install(newBase);
         super.attachBaseContext(newBase);
+    }
+
+    /**
+     * 初始化bugly
+     */
+    private void initBugly() {
+        CrashReport.initCrashReport(getApplicationContext(), "d60b53237b", false);
     }
 
     /**

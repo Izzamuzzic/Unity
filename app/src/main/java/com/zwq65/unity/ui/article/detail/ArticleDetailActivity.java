@@ -1,10 +1,14 @@
 package com.zwq65.unity.ui.article.detail;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,8 +43,8 @@ public class ArticleDetailActivity extends BaseActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.iv_title_bg)
     ImageView ivTitleBg;
-    @BindView(R.id.wv_article)
-    WebView wvArticle;
+    @BindView(R.id.webview)
+    WebView webview;
     @BindView(R.id.pb_loader)
     MKLoader pbLoader;
 
@@ -60,12 +64,12 @@ public class ArticleDetailActivity extends BaseActivity {
             Glide.with(this).load(articleWithImage.getImage().getUrl()).into(ivTitleBg);
             collapsingToolbarLayout.setTitle(articleWithImage.getArticle().getDesc());
             //WebView
-            wvArticle.getSettings().setJavaScriptEnabled(true);
-            wvArticle.getSettings().setDomStorageEnabled(true);
-            wvArticle.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-            wvArticle.getSettings().setAppCacheEnabled(true);
+            webview.getSettings().setJavaScriptEnabled(true);
+            webview.getSettings().setDomStorageEnabled(true);
+            webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            webview.getSettings().setAppCacheEnabled(true);
 
-            wvArticle.setWebChromeClient(new WebChromeClient() {
+            webview.setWebChromeClient(new WebChromeClient() {
                 @Override
                 public void onProgressChanged(WebView view, int newProgress) {
                     super.onProgressChanged(view, newProgress);
@@ -75,14 +79,14 @@ public class ArticleDetailActivity extends BaseActivity {
                 }
             });
 
-            wvArticle.setWebViewClient(new WebViewClient() {
+            webview.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     view.loadUrl(url);
                     return true;
                 }
             });
-            wvArticle.loadUrl(articleWithImage.getArticle().getUrl());
+            webview.loadUrl(articleWithImage.getArticle().getUrl());
         }
     }
 
@@ -109,25 +113,25 @@ public class ArticleDetailActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (wvArticle != null) {
-            wvArticle.onResume();
+        if (webview != null) {
+            webview.onResume();
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (wvArticle != null) {
-            wvArticle.onPause();
+        if (webview != null) {
+            webview.onPause();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (wvArticle != null) {
-            wvArticle.removeAllViews();
-            wvArticle.destroy();
+        if (webview != null) {
+            webview.removeAllViews();
+            webview.destroy();
         }
     }
 
@@ -147,10 +151,32 @@ public class ArticleDetailActivity extends BaseActivity {
                 //查看背景图
                 gotoContentActivity();
                 break;
+            case R.id.action_refresh:
+                webview.reload();
+                break;
+            case R.id.action_copy_link:
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("Url", webview.getUrl());
+                clipboardManager.setPrimaryClip(clipData);
+                showSuccessAlert(R.string.sucess_msg_copy);
+                break;
+            case R.id.action_open_browser:
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webview.getUrl()));
+                startActivity(intent);
+                break;
             default:
                 break;
         }
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webview.canGoBack()) {
+            webview.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void gotoContentActivity() {

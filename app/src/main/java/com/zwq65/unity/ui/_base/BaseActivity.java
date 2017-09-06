@@ -59,7 +59,7 @@ import butterknife.Unbinder;
 
 public class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
 
-    private final String TAG = getClass().getSimpleName();
+    public final String TAG = getClass().getSimpleName();
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -157,9 +157,27 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     }
 
     @TargetApi(Build.VERSION_CODES.M)
+    public void requestPermissionsSafely(String permission, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] permissions = new String[]{permission};
+            requestPermissionsSafely(permissions, requestCode);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
     public boolean hasPermission(String permission) {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
                 checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void openActivity(Class<?> cls) {
+        openActivity(cls, null);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.right_in_back, R.anim.right_out_back);//add animation
     }
 
     public void openActivity(Class<?> cls, Bundle bundle) {
@@ -169,10 +187,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
         if (bundle != null)
             intent.putExtras(bundle);
         startActivity(intent);
-    }
-
-    public void openActivity(Class<?> cls) {
-        openActivity(cls, null);
+        overridePendingTransition(R.anim.right_in, R.anim.right_out);//add animation
     }
 
     @Override

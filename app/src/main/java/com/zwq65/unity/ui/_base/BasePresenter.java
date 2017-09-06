@@ -52,7 +52,8 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onDetach() {
-        mCompositeDisposable.dispose();
+        //这里不使用dispose(),而用clear();dispose()之后会阻止一切事务,不可复用;clear()只会停止当前事务,仍可继续复用。
+        mCompositeDisposable.clear();
         mMvpView = null;
     }
 

@@ -59,8 +59,9 @@ public class RatioImageView extends ImageView {
             // TODO: 现在只支持固定宽度
             if (width > 0) {
                 height = (int) ((float) width / ratio);
+            } else if (height > 0) {
+                width = (int) ((float) height * ratio);
             }
-
             setMeasuredDimension(width, height);
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);

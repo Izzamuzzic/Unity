@@ -181,6 +181,9 @@
 -dontwarn cn.sharesdk.**
 -dontwarn **.R$*
 
+## bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
 ####################zxing#####################
 -keep class com.google.zxing.** {*;}
 -dontwarn com.google.zxing.**

@@ -71,7 +71,7 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-//        setmPresenter(mPresenter);
+        setmPresenter(mPresenter);
         return view;
     }
 

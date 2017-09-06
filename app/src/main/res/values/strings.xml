@@ -53,5 +53,10 @@
     <string name="qianduan">前端</string>
 
     <string name="introduce"><![CDATA[每天一张精选妹纸图、一个精选小视频（视频源地址播放），一篇程序猿精选干货。(主页中点击妹纸打开妹纸大图，点击文字打开干货页面)\n\n数据内容来源于代码家的 http://gank.io。\n\n\n\n\n\n\n\n\n\n\n\n\n\n]]></string>
+    <string name="watch_image">查看美图</string>
+    <string name="refresh">刷新</string>
+    <string name="copy_link">复制链接</string>
+    <string name="open_by_browser">浏览器打开</string>
+    <string name="sucess_msg_copy">链接复制成功</string>
 
 </resources>

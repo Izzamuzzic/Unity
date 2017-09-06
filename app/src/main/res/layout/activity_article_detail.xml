@@ -32,7 +32,7 @@
                 app:mk_type="LineSpinner"/>
 
             <WebView
-                android:id="@+id/wv_article"
+                android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </FrameLayout>
