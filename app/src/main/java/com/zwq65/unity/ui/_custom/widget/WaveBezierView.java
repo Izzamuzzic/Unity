@@ -55,12 +55,9 @@ public class WaveBezierView extends View {
         animator.setDuration(4000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                currPercent = (float) animation.getAnimatedValue();
-                invalidate();
-            }
+        animator.addUpdateListener(animation -> {
+            currPercent = (float) animation.getAnimatedValue();
+            invalidate();
         });
         animator.start();
     }

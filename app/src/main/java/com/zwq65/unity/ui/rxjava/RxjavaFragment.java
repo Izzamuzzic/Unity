@@ -4,18 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 
-import java.util.concurrent.Callable;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 
 /**
  * Created by zwq65 on 2017/08/10
@@ -23,8 +16,6 @@ import io.reactivex.ObservableSource;
  */
 
 public class RxjavaFragment extends BaseFragment {
-    @BindView(R.id.tv_defer)
-    Button tvDefer;
 
     @Override
     public View inflateView(LayoutInflater inflater, ViewGroup container) {
@@ -38,25 +29,4 @@ public class RxjavaFragment extends BaseFragment {
 
     }
 
-
-    @OnClick(R.id.tv_defer)
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_defer:
-                defer();
-                break;
-        }
-    }
-
-    /**
-     * defer操作符
-     */
-    private void defer() {
-        Observable.defer(new Callable<ObservableSource<?>>() {
-            @Override
-            public ObservableSource<?> call() throws Exception {
-                return null;
-            }
-        });
-    }
 }
