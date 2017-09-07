@@ -60,11 +60,12 @@ public final class CommonUtils {
 
     public static String getImageStorePath() {
         String path;
-        if (AppFileMgr.getSdCardIsEnable()) {
-            path = AppFileMgr.getSdCardPath();
-        } else {
-            path = AppFileMgr.getDataPath();
-        }
+//        if (AppFileMgr.getSdCardIsEnable()) {
+//            LogUtils.w("AppFileMgr.getSdCardIsEnable()==true");
+//            path = AppFileMgr.getSdCardPath();
+//        } else {
+            path = AppFileMgr.getDataAbsolutePath();
+//        }
         path = path + "Unity" + File.separator + "image" + File.separator;
         return path;
     }

@@ -125,7 +125,8 @@ public class MyChartView extends View {
 
     private void linePath(SparseArray<Float> array, Canvas canvas, Paint paint) {
         mPath.reset();
-        mPath.moveTo(0, getmHeight(array.get(1)));
+        mPath.moveTo(0,mHeight);
+        mPath.lineTo(0, getmHeight(array.get(1)));
         int size = array.size();
         float x, y;
         for (int i = 2; i < size + 1; i++) {
