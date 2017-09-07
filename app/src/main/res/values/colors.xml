@@ -31,7 +31,9 @@
 
     <!--color com.zwq65.unity.ui._custom.widget.MyChartView-->
     <color name="chart_red">#ff6060</color>
+    <color name="chart_red_trans">#87ff6060</color>
     <color name="chart_blue">#259D9E</color>
+    <color name="chart_blue_trans">#94259d9e</color>
     <color name="chart_text_color">#888888</color>
     <color name="chart_line_color">#a9a3a3</color>
 

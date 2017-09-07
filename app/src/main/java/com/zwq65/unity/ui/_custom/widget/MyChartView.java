@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.CornerPathEffect;
 import android.graphics.DashPathEffect;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -76,9 +78,15 @@ public class MyChartView extends View {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         redPaint.setStrokeCap(Paint.Cap.ROUND);
         bluePaint.setStrokeCap(Paint.Cap.ROUND);
-        redPaint.setStyle(Paint.Style.STROKE);
-        bluePaint.setStyle(Paint.Style.STROKE);
+        redPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        bluePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         linePaint.setStyle(Paint.Style.STROKE);
+
+        //设置阴影
+        bluePaint.setShader(new LinearGradient(mWidth / 2, 0, mWidth / 2, mHeight, colorBlue,
+                ContextCompat.getColor(context, R.color.chart_blue_trans), Shader.TileMode.CLAMP));
+        redPaint.setShader(new LinearGradient(mWidth / 2, 0, mWidth / 2, mHeight, colorRed,
+                ContextCompat.getColor(context, R.color.chart_red_trans), Shader.TileMode.CLAMP));
 
         //设置宽度
         redPaint.setStrokeWidth(DensityUtils.dip2px(getContext(), 3));
@@ -128,6 +136,8 @@ public class MyChartView extends View {
 //            canvas.drawCircle(x, y, DensityUtils.dip2px(getContext(), 2), paint);
             LogUtils.i("linePath", "x:" + x + "  y:" + y);
         }
+        mPath.rLineTo(0, mHeight);
+        mPath.close();
         canvas.drawPath(mPath, paint);
     }
 
