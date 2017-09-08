@@ -26,14 +26,14 @@
     <color name="transparent_black">#3a2a2a2a</color>
 
     <!--color com.zwq65.unity.ui._custom.widget.WaveBezierView-->
-    <color name="wave1">#690096ff</color>
+    <color name="wave1">#8b0096ff</color>
     <color name="wave2">#360096ff</color>
 
     <!--color com.zwq65.unity.ui._custom.widget.MyChartView-->
-    <color name="chart_red">#ff6060</color>
-    <color name="chart_red_trans">#87ff6060</color>
-    <color name="chart_blue">#259D9E</color>
-    <color name="chart_blue_trans">#94259d9e</color>
+    <color name="chart_red">#beff6060</color>
+    <color name="chart_red_trans">#5aff6060</color>
+    <color name="chart_blue">#be259d9e</color>
+    <color name="chart_blue_trans">#5a259d9e</color>
     <color name="chart_text_color">#888888</color>
     <color name="chart_line_color">#a9a3a3</color>
 

@@ -23,7 +23,7 @@ import com.zwq65.unity.utils.LogUtils;
  * Created by zwq65 on 2017/09/07
  */
 
-public class MyChartView extends View {
+public class MyChartView2 extends View {
 
     private Context context;
     private SparseArray<Float> array1, array2;
@@ -34,15 +34,15 @@ public class MyChartView extends View {
     private Paint linePaint, textPaint, redPaint, bluePaint;
     private Path mPath;
 
-    public MyChartView(Context context) {
+    public MyChartView2(Context context) {
         this(context, null);
     }
 
-    public MyChartView(Context context, @Nullable AttributeSet attrs) {
+    public MyChartView2(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyChartView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MyChartView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         initData();
