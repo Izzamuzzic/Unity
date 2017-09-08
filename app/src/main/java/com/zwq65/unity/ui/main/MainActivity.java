@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity {
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        gotoFragment(new TestFragment());
+        gotoFragment(new AlbumFragment());
     }
 
     private long firstClick;

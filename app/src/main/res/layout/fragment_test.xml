@@ -6,6 +6,7 @@
               android:orientation="vertical">
 
     <com.zwq65.unity.ui._custom.widget.MyChartView2
+        android:id="@+id/myChartView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
