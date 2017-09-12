@@ -14,7 +14,8 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
-import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
@@ -22,11 +23,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 视频播放
  */
-public class WatchActivity extends BaseActivity {
+public class WatchActivity extends BaseViewActivity {
     //intent'key value
     public static final String VIDEO_WITH_IMAGE = "VideoWithImage";
     VideoWithImage videoWithImage;
@@ -38,15 +40,33 @@ public class WatchActivity extends BaseActivity {
     ImageView ivTitleBg;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentViewWithoutInject(R.layout.activity_watch);
-        setUnBinder(ButterKnife.bind(this));
-        initData();
-        initView();
+    public MvpPresenter setmPresenter() {
+        return null;
     }
 
-    private void initView() {
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_watch;
+    }
+
+    @Override
+    public Boolean initBaseTooBar() {
+        return null;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        videoWithImage = bundle.getParcelable(VIDEO_WITH_IMAGE);
+    }
+
+    @Override
+    public void initView() {
         //set header'background image
         if (videoWithImage != null) {
             Glide.with(this).load(videoWithImage.getImage().getUrl()).into(ivTitleBg);
@@ -65,10 +85,8 @@ public class WatchActivity extends BaseActivity {
         ImmersionBar.with(this).titleBar(toolbar).init();
     }
 
-    private void initData() {
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        videoWithImage = bundle.getParcelable(VIDEO_WITH_IMAGE);
+    @Override
+    public void initData() {
     }
 
     @Override

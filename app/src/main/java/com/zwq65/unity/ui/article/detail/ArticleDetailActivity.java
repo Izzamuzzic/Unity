@@ -24,7 +24,8 @@ import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
@@ -32,8 +33,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class ArticleDetailActivity extends BaseActivity {
+public class ArticleDetailActivity extends BaseViewActivity {
     public static final String ARTICAL = "ARTICAL";
 
     ArticleWithImage articleWithImage;
@@ -49,15 +51,33 @@ public class ArticleDetailActivity extends BaseActivity {
     MKLoader pbLoader;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentViewWithoutInject(R.layout.activity_article_detail);
-        setUnBinder(ButterKnife.bind(this));
-        initData();
-        initView();
+    public MvpPresenter setmPresenter() {
+        return null;
     }
 
-    private void initView() {
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_article_detail;
+    }
+
+    @Override
+    public Boolean initBaseTooBar() {
+        return false;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        articleWithImage = bundle.getParcelable(ARTICAL);
+    }
+
+    @Override
+    public void initView() {
         initToolBar();
         //set header'background image
         if (articleWithImage != null) {
@@ -90,6 +110,10 @@ public class ArticleDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void initData() {
+    }
+
     private void initToolBar() {
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
@@ -102,12 +126,6 @@ public class ArticleDetailActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(v -> ArticleDetailActivity.this.onBackPressed());
         //添加了toolbar，重新设置沉浸栏
         ImmersionBar.with(this).titleBar(toolbar).init();
-    }
-
-    private void initData() {
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        articleWithImage = bundle.getParcelable(ARTICAL);
     }
 
     @Override

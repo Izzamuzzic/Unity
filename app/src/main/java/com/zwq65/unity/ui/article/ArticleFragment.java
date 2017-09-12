@@ -20,11 +20,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/30
  */
-public class ArticleFragment extends BaseFragment implements ArticleContract.IArticleView {
+public class ArticleFragment extends BaseFragment<ArticleContract.IArticleView, ArticleContract.IArticlePresenter<ArticleContract.IArticleView>>
+        implements ArticleContract.IArticleView {
 
     @Inject
     ArticleContract.IArticlePresenter<ArticleContract.IArticleView> mPresenter;
@@ -35,7 +37,25 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.IAr
 
     public static final int[] Tabs = new int[]{R.string.android, R.string.ios, R.string.qianduan};
 
-    private void initView() {
+    @Override
+    public ArticleContract.IArticlePresenter<ArticleContract.IArticleView> setmPresenter() {
+        getActivityComponent().inject(this);
+        mPresenter.onAttach(this);
+        return mPresenter;
+    }
+
+    @Override
+    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_article, container, false);
+    }
+
+    @Override
+    public Unbinder setUnBinder(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void initView() {
         for (int tabStr : Tabs) {
             TabLayout.Tab tab = tabType.newTab();
             tab.setText(getString(tabStr));
@@ -46,17 +66,6 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.IAr
         vpArtcle.setOffscreenPageLimit(0);
         //将tabLayout与ViewPager绑定
         tabType.setupWithViewPager(vpArtcle);
-    }
-
-    @Override
-    public View inflateView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_article, container, false);
-        setUnBinder(ButterKnife.bind(this, view));
-        getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
-        initView();
-        return view;
     }
 
     @Override

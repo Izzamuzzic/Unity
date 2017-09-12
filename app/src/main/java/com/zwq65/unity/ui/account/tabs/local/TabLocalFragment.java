@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/22
@@ -31,17 +33,24 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
     TabLocalAdapter adapter;
 
     @Override
-    public View inflateView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_tab_local, container, false);
-        setUnBinder(ButterKnife.bind(this, view));
+    public MvpPresenter setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
-        initView();
-        return view;
+        return mPresenter;
     }
 
-    private void initView() {
+    @Override
+    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_tab_local, container, false);
+    }
+
+    @Override
+    public Unbinder setUnBinder(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void initView() {
         rlLocal.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         rlLocal.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rlLocal.addItemDecoration(new MyItemDecoration());//item间隔

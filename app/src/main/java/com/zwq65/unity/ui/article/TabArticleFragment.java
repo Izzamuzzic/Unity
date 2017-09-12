@@ -23,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
@@ -30,7 +31,8 @@ import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
  * Created by zwq65 on 2017/08/30
  */
 
-public class TabArticleFragment extends BaseFragment implements TabArticleContract.ITabArticleView {
+public class TabArticleFragment extends BaseFragment<TabArticleContract.ITabArticleView, TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView>>
+        implements TabArticleContract.ITabArticleView {
     public static final String TECH_TAG = "tag";
     public Type mType;
     TabArticleAdapter mAdapter;
@@ -66,23 +68,24 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
     }
 
     @Override
-    public View inflateView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_tab_article, container, false);
-        setUnBinder(ButterKnife.bind(this, view));
+    public TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
-        return view;
+        return mPresenter;
     }
 
     @Override
-    public void initData(Bundle saveInstanceState) {
-        getType();
-        initView();
-        initData();
+    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_tab_article, container, false);
     }
 
-    private void initView() {
+    @Override
+    public Unbinder setUnBinder(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void initView() {
         rvArticle.setLayoutManager(new LinearLayoutManager(getContext()));
         rvArticle.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rvArticle.addItemDecoration(new MyItemDecoration());//item间隔
@@ -120,15 +123,22 @@ public class TabArticleFragment extends BaseFragment implements TabArticleContra
         rvArticle.setAdapter(mAdapter);
     }
 
+    @Override
+    public void initData(Bundle saveInstanceState) {
+        getType();
+        initData();
+    }
+
+    public void initData() {
+        mPresenter.init();
+    }
+
     private void gotoDetailActivity(ArticleWithImage article) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ArticleDetailActivity.ARTICAL, article);
         mActivity.openActivity(ArticleDetailActivity.class, bundle);
     }
 
-    public void initData() {
-        mPresenter.init();
-    }
 
     @Override
     public void refreshData(List<ArticleWithImage> t) {

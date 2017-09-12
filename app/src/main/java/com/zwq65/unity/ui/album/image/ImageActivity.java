@@ -24,7 +24,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui._custom.other.photoview.PhotoView;
 
 import java.util.ArrayList;
@@ -34,13 +34,14 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static android.view.View.GONE;
 
 /**
  * 查看大图Activity
  */
-public class ImageActivity extends BaseActivity implements ImageMvpView {
+public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresenter<ImageMvpView>> implements ImageMvpView {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
     private static final int SAVE_MEIZHI = 1;
@@ -61,14 +62,47 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
     AppCompatCheckBox cbLove;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentViewWithoutInject(R.layout.activity_image);//不绑定toolBar
-        setUnBinder(ButterKnife.bind(this));
+    public ImageMvpPresenter<ImageMvpView> setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        initData();
-        initView();
+        return mPresenter;
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_image;
+    }
+
+    @Override
+    public Boolean initBaseTooBar() {
+        return null;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        currentPosition = bundle.getInt(POSITION);
+        imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        if (imageList == null) {
+            imageList = new ArrayList<>();
+        }
+        pageSize = imageList.size();
+    }
+
+    @Override
+    public void initView() {
+        initToolbar();
+        setCurrentPage();
+        initViewPager();
+    }
+
+    @Override
+    public void initData() {
     }
 
     @Override
@@ -101,29 +135,6 @@ public class ImageActivity extends BaseActivity implements ImageMvpView {
                 break;
         }
         return true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        mPresenter.onDetach();
-        super.onDestroy();
-    }
-
-    private void initData() {
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        currentPosition = bundle.getInt(POSITION);
-        imageList = bundle.getParcelableArrayList(IMAGE_LIST);
-        if (imageList == null) {
-            imageList = new ArrayList<>();
-        }
-        pageSize = imageList.size();
-    }
-
-    private void initView() {
-        initToolbar();
-        setCurrentPage();
-        initViewPager();
     }
 
     private void initToolbar() {

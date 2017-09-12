@@ -29,4 +29,5 @@ public interface MvpPresenter<V extends MvpView> {
 
     void onDetach();
 
+    boolean isViewAttached();
 }

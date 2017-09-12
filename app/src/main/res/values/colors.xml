@@ -5,18 +5,12 @@
     <!--状态栏颜色-->
     <color name="colorPrimaryDark">#21425d</color>
     <!--editText线条、radioButton按钮颜色-->
-    <color name="colorAccent">#01bcd5</color>
+    <color name="colorAccent">#c801bcd5</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="blue">#700260f9</color>
-    <color name="light_blue">#890096ff</color>
-    <color name="primary_blue">#0096ff</color>
     <color name="dark_gray">#696969</color>
-
-    <color name="fab_color_pressed">#007787</color>
-    <color name="fab_color_shadow">#44000000</color>
     <color name="transparent">#00000000</color>
-    <color name="red_alert">#c8ec4444</color>
+    <color name="warn_color">#c8f9bf3b</color>
 
     <!-- text color-->
     <color name="text_color_dark">#FF4A4A4A</color>
@@ -37,7 +31,7 @@
     <color name="chart_text_color">#888888</color>
     <color name="chart_line_color">#a9a3a3</color>
 
-    <!-- collection nice colors-->
+    <!-- collect nice colors-->
     <color name="picton_blue">#59ABE3</color>
     <color name="mono_black_bg">#232427</color><!-- mono'custom bg-->
     <color name="mono_main_color">#16A5AF</color><!-- mono'main color -->

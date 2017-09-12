@@ -6,17 +6,19 @@ import android.support.v7.widget.RecyclerView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.MvpPresenter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.zwq65.unity.ui.album.image.ImageActivity.IMAGE_LIST;
 import static com.zwq65.unity.ui.album.image.ImageActivity.POSITION;
 
-public class SwipeImageActivity extends BaseActivity {
+public class SwipeImageActivity extends BaseViewActivity {
 
     @BindView(R.id.rv_images)
     RecyclerView rvImages;
@@ -24,17 +26,39 @@ public class SwipeImageActivity extends BaseActivity {
     List<Image> imageList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_swipe_image);
-        setUnBinder(ButterKnife.bind(this));
-        initData();
+    public MvpPresenter setmPresenter() {
+        return null;
     }
 
-    private void initData() {
-        Intent intent = getIntent();
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_swipe_image;
+    }
+
+    @Override
+    public Boolean initBaseTooBar() {
+        return null;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);
         imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

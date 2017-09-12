@@ -42,14 +42,14 @@ import butterknife.Unbinder;
 
 public abstract class BaseDialog extends DialogFragment implements DialogMvpView {
 
-    private BaseActivity mActivity;
+    private BaseViewActivity mActivity;
     private Unbinder mUnBinder;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BaseActivity) {
-            BaseActivity mActivity = (BaseActivity) context;
+        if (context instanceof BaseViewActivity) {
+            BaseViewActivity mActivity = (BaseViewActivity) context;
             this.mActivity = mActivity;
             mActivity.onFragmentAttached();
         }
@@ -111,36 +111,11 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
         }
     }
 
-    @Override
-    public boolean isNetworkConnected() {
-        if (mActivity != null) {
-            return mActivity.isNetworkConnected();
-        }
-        return false;
-    }
 
     @Override
     public void onDetach() {
         mActivity = null;
         super.onDetach();
-    }
-
-    @Override
-    public void hideKeyboard() {
-        if (mActivity != null) {
-            mActivity.hideKeyboard();
-        }
-    }
-
-    @Override
-    public void openActivityOnTokenExpire() {
-        if (mActivity != null) {
-            mActivity.openActivityOnTokenExpire();
-        }
-    }
-
-    public BaseActivity getBaseActivity() {
-        return mActivity;
     }
 
     public ActivityComponent getActivityComponent() {
@@ -199,7 +174,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     @Override
     public void dismissDialog(String tag) {
         dismiss();
-        getBaseActivity().onFragmentDetached(tag);
+        mActivity.onFragmentDetached(tag);
     }
 
     @Override

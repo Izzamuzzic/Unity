@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.account;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseActivity;
+import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui.account.tabs.collect.TabCollectionFragment;
 import com.zwq65.unity.ui.account.tabs.local.TabLocalFragment;
 import com.zwq65.unity.utils.FontUtils;
@@ -21,13 +21,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/07
  * 个人中心
  */
 
-public class AccountActivity extends BaseActivity implements AccountMvpView {
+public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvpPresenter<AccountMvpView>> implements AccountMvpView {
 
     @Inject
     AccountMvpPresenter<AccountMvpView> mPresenter;
@@ -46,22 +47,34 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     public static final int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentViewWithoutInject(R.layout.activity_personal_center);
-        setUnBinder(ButterKnife.bind(this));
+    public AccountMvpPresenter<AccountMvpView> setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        initView();
+        return mPresenter;
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.onDetach();
+    public int setLayoutId() {
+        return R.layout.activity_personal_center;
     }
 
-    private void initView() {
+    @Override
+    public Boolean initBaseTooBar() {
+        return null;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
+
+    }
+
+    @Override
+    public void initView() {
         //设置特殊字体
         FontUtils.getInstance().setTypeface(tvName, FontUtils.Font.Roboto_Bold);
 
@@ -75,6 +88,11 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
         vpPersonal.setOffscreenPageLimit(0);
         //将tabLayout与ViewPager绑定
         tlPersonal.setupWithViewPager(vpPersonal);
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick(R.id.iv_back)

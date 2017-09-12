@@ -21,6 +21,9 @@ package com.zwq65.unity.ui._base;
 
 import com.zwq65.unity.data.DataManager;
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -34,8 +37,8 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     private final DataManager mDataManager;
     private final CompositeDisposable mCompositeDisposable;
-
-    private V mMvpView;
+    //MvpView接口类型的弱引用
+    private Reference<V> mViewRef;
 
     @Inject
     public BasePresenter(
@@ -47,22 +50,23 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onAttach(V mvpView) {
-        mMvpView = mvpView;
+        mViewRef = new WeakReference<>(mvpView);
     }
 
     @Override
     public void onDetach() {
         //这里不使用dispose(),而用clear();dispose()之后会阻止一切事务,不可复用;clear()只会停止当前事务,仍可继续复用。
         mCompositeDisposable.clear();
-        mMvpView = null;
+        mViewRef.clear();
+        mViewRef = null;
     }
 
     public boolean isViewAttached() {
-        return mMvpView != null;
+        return mViewRef != null && mViewRef.get() != null;
     }
 
     public V getMvpView() {
-        return mMvpView;
+        return mViewRef.get();
     }
 
     public CompositeDisposable getCompositeDisposable() {

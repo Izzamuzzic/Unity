@@ -2,7 +2,7 @@ package com.zwq65.unity.utils;
 
 import android.widget.Toast;
 
-import com.zwq65.unity.app.App;
+import com.zwq65.unity.App;
 
 /**
  * Created by zwq65 on 2017/05/08.

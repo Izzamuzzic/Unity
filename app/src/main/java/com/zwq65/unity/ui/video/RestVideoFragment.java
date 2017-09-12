@@ -23,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
@@ -42,22 +43,24 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
     RestVideoAdapter mAdapter;
 
     @Override
-    public View inflateView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_rest_video, container, false);
-        setUnBinder(ButterKnife.bind(this, view));
+    public RestVideoMvpPresenter<RestVideoMvpView> setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
-        return view;
+        return mPresenter;
     }
 
     @Override
-    public void initData(Bundle saveInstanceState) {
-        initView();
-        initData();
+    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_rest_video, container, false);
     }
 
-    private void initView() {
+    @Override
+    public Unbinder setUnBinder(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void initView() {
         rvVideos.setLayoutManager(new LinearLayoutManager(getContext()));
         rvVideos.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rvVideos.addItemDecoration(new MyItemDecoration());//item间隔
@@ -95,14 +98,19 @@ public class RestVideoFragment extends BaseFragment implements RestVideoMvpView 
         rvVideos.setAdapter(mAdapter);
     }
 
-    private void gotoWatchActivity(VideoWithImage videoWithImage) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(WatchActivity.VIDEO_WITH_IMAGE, videoWithImage);
-        mActivity.openActivity(WatchActivity.class, bundle);
+    @Override
+    public void initData(Bundle saveInstanceState) {
+        initData();
     }
 
     public void initData() {
         mPresenter.init();
+    }
+
+    private void gotoWatchActivity(VideoWithImage videoWithImage) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(WatchActivity.VIDEO_WITH_IMAGE, videoWithImage);
+        mActivity.openActivity(WatchActivity.class, bundle);
     }
 
     @Override

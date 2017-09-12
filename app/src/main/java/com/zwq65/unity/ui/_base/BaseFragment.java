@@ -37,9 +37,9 @@ import butterknife.Unbinder;
  * Fragment基类
  */
 
-public abstract class BaseFragment extends Fragment implements MvpView {
+public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>> extends Fragment implements MvpView {
     public final String TAG = getClass().getSimpleName();
-    public BaseActivity mActivity;
+    public BaseViewActivity mActivity;
     private Unbinder mUnBinder;
     private MvpPresenter mPresenter;
     private ProgressDialog mProgressDialog;
@@ -48,63 +48,69 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(false);
+        LogUtils.i(TAG, "onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView");
-        return inflateView(inflater, container);
+        View view = inflateLayout(inflater, container);
+        mPresenter = setmPresenter();
+        mUnBinder = setUnBinder(view);
+        initView();
+        return view;
     }
 
     @Override
     public void onResume() {
-        LogUtils.i(TAG, "onResume");
         super.onResume();
+        LogUtils.i(TAG, "onResume");
     }
 
     @Override
     public void onPause() {
-        LogUtils.i(TAG, "onPause");
         super.onPause();
+        LogUtils.i(TAG, "onPause");
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        LogUtils.i(TAG, "onActivityCreated");
         initData(savedInstanceState);
         super.onActivityCreated(savedInstanceState);
+        LogUtils.i(TAG, "onActivityCreated");
     }
 
     @Override
     public void onAttach(Context context) {
-        LogUtils.i(TAG, "onAttach");
         super.onAttach(context);
-        if (context instanceof BaseActivity) {
-            BaseActivity activity = (BaseActivity) context;
+        if (context instanceof BaseViewActivity) {
+            BaseViewActivity activity = (BaseViewActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
+        LogUtils.i(TAG, "onAttach");
     }
 
     @Override
     public void onDetach() {
-        LogUtils.i(TAG, "onDetach");
         mActivity = null;
-        if (mPresenter != null) {
+        if (mPresenter != null && mPresenter.isViewAttached()) {
             mPresenter.onDetach();
             mPresenter = null;
         }
         super.onDetach();
+        mActivity.onFragmentDetached(TAG);
+        LogUtils.i(TAG, "onDetach");
     }
 
     @Override
     public void onDestroyView() {
-        LogUtils.i(TAG, "onDestroyView");
         super.onDestroyView();
         if (mUnBinder != null) {
             mUnBinder.unbind();
             mUnBinder = null;
         }
+        LogUtils.i(TAG, "onDestroyView");
     }
 
     @Override
@@ -144,28 +150,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public boolean isNetworkConnected() {
-        if (mActivity != null) {
-            return mActivity.isNetworkConnected();
-        }
-        return false;
-    }
-
-    @Override
-    public void hideKeyboard() {
-        if (mActivity != null) {
-            mActivity.hideKeyboard();
-        }
-    }
-
-    @Override
-    public void openActivityOnTokenExpire() {
-        if (mActivity != null) {
-            mActivity.openActivityOnTokenExpire();
-        }
-    }
-
-    @Override
     public void showErrorAlert(@StringRes int resId) {
         if (mActivity != null) {
             mActivity.showErrorAlert(resId);
@@ -200,19 +184,24 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         return null;
     }
 
-    public BaseActivity getBaseActivity() {
-        return mActivity;
-    }
+    /**
+     * @return mPresenter
+     */
+    public abstract T setmPresenter();
 
-    public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
-    }
+    /**
+     * @param inflater  LayoutInflater
+     * @param container ViewGroup
+     * @return fragment'layout
+     */
+    public abstract View inflateLayout(LayoutInflater inflater, ViewGroup container);
 
-    public void setmPresenter(MvpPresenter mPresenter) {
-        this.mPresenter = mPresenter;
-    }
+    /**
+     * @return mUnBinder(An unbinder contract that will unbind views when called)
+     */
+    public abstract Unbinder setUnBinder(View view);
 
-    public abstract View inflateView(LayoutInflater inflater, ViewGroup container);
+    public abstract void initView();
 
     public abstract void initData(Bundle saveInstanceState);
 

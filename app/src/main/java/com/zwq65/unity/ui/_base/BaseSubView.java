@@ -87,29 +87,6 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
         }
     }
 
-    @Override
-    public void hideKeyboard() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideKeyboard();
-        }
-    }
-
-    @Override
-    public boolean isNetworkConnected() {
-        if (mParentMvpView != null) {
-            return mParentMvpView.isNetworkConnected();
-        }
-        return false;
-    }
-
-    @Override
-    public void openActivityOnTokenExpire() {
-        if (mParentMvpView != null) {
-            mParentMvpView.openActivityOnTokenExpire();
-        }
-    }
-
-
     protected abstract void bindViewsAndSetOnClickListeners();
 
     protected abstract void setUp();

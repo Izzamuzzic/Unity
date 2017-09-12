@@ -1,6 +1,6 @@
 package com.zwq65.unity.data.network.retrofit.callback;
 
-import com.zwq65.unity.app.App;
+import com.zwq65.unity.App;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;

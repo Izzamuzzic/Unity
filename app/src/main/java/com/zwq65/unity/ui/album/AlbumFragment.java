@@ -15,6 +15,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
@@ -44,21 +46,23 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     AlbumAdapter mAdapter;
 
     @Override
-    public View inflateView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_album, container, false);
-        setUnBinder(ButterKnife.bind(this, view));
+    public MvpPresenter setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
-        setmPresenter(mPresenter);
-        initView();
-        return view;
+        return mPresenter;
     }
 
     @Override
-    public void initData(Bundle saveInstanceState) {
-        initData();
+    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_album, container, false);
     }
 
+    @Override
+    public Unbinder setUnBinder(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
     public void initView() {
         rvAlbums.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         rvAlbums.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
@@ -98,6 +102,11 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
         rvAlbums.setAdapter(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
         helper.attachToRecyclerView(rvAlbums);
+    }
+
+    @Override
+    public void initData(Bundle saveInstanceState) {
+        initData();
     }
 
     private void gotoContentActivity(int position) {

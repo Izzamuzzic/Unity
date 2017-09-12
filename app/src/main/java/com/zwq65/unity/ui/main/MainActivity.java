@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.main;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,8 +12,9 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseActivity;
 import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.account.AccountActivity;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.article.ArticleFragment;
@@ -22,17 +22,15 @@ import com.zwq65.unity.ui.test.TestFragment;
 import com.zwq65.unity.ui.video.RestVideoFragment;
 import com.zwq65.unity.utils.FontUtils;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.annotations.NonNull;
+import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseViewActivity {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -57,29 +55,48 @@ public class MainActivity extends BaseActivity {
 
     Disposable disposable;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setUnBinder(ButterKnife.bind(this));
-        initDrawer();
-        addToolbarDoubleClick();
+    public MvpPresenter setmPresenter() {
+        return null;
     }
 
-    /**
-     * 将drawerLayout、toolBar绑定
-     */
-    private void initDrawer() {
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public Boolean initBaseTooBar() {
+        return true;
+    }
+
+    @Override
+    public Unbinder setUnBinder() {
+        return ButterKnife.bind(this);
+    }
+
+    @Override
+    public void dealIntent(Intent intent) {
+
+    }
+
+    @Override
+    public void initView() {
         //设置字体
         FontUtils.getInstance().setTypeface(tvAccountName, FontUtils.Font.Montserrat_Medium);
         FontUtils.getInstance().setTypeface(tvAccountWebsiteAddress, FontUtils.Font.Montserrat_Medium);
-
+        //将drawerLayout、toolBar绑定
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         gotoFragment(new AlbumFragment());
+        addToolbarDoubleClick();
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     private long firstClick;
@@ -139,19 +156,14 @@ public class MainActivity extends BaseActivity {
      */
     public void addToolbarDoubleClick() {
         //buffer: 定期收集Observable的数据放进一个数据包裹，然后发射这些数据包裹，而不是一次发射一个值
-        //判断500ms内，如果接受到2次的点击事件，则视为用户双击操作
+        //判断500ms内，如果接受到2次的点击事件，则判定为双击操作
         if (getToolbar() != null) {
-            disposable = RxView.clicks(getToolbar()).buffer(500, TimeUnit.MILLISECONDS, 2).subscribe(new Consumer<List<Object>>() {
-                @Override
-                public void accept(@NonNull List<Object> objects) throws Exception {
-                    if (objects.size() == 2) {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        for (Fragment fragment : fragmentManager.getFragments()) {
-                            if (fragment.isVisible() && fragment instanceof BaseFragment) {
-                                ((BaseFragment) fragment).onToolbarClick();
-                            }
-                        }
-                    }
+            disposable = RxView.clicks(getToolbar()).buffer(500, TimeUnit.MILLISECONDS, 2).subscribe(objects -> {
+                if (objects.size() == 2) {
+                    FragmentManager fragmentManager1 = getSupportFragmentManager();
+                    fragmentManager1.getFragments().stream()
+                            .filter(fragment -> fragment.isVisible() && fragment instanceof BaseFragment)
+                            .forEachOrdered(fragment -> ((BaseFragment) fragment).onToolbarClick());
                 }
             });
         }

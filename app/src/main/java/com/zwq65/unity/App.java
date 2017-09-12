@@ -1,4 +1,4 @@
-package com.zwq65.unity.app;
+package com.zwq65.unity;
 
 import android.content.Context;
 import android.support.multidex.MultiDex;

@@ -32,8 +32,6 @@ public interface MvpView {
 
     void hideLoading();
 
-    void openActivityOnTokenExpire();
-
     void showErrorAlert(@StringRes int resId);
 
     void showErrorAlert(String message);
@@ -45,9 +43,5 @@ public interface MvpView {
     void showMessage(@StringRes int resId);
 
     void showMessage(String message);
-
-    boolean isNetworkConnected();
-
-    void hideKeyboard();
 
 }
