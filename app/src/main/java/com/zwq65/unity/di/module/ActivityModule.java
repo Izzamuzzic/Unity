@@ -43,6 +43,9 @@ import com.zwq65.unity.ui.article.TabArticlePresenter;
 import com.zwq65.unity.ui.login.LoginMvpPresenter;
 import com.zwq65.unity.ui.login.LoginMvpView;
 import com.zwq65.unity.ui.login.LoginPresenter;
+import com.zwq65.unity.ui.test.TestMvpPresenter;
+import com.zwq65.unity.ui.test.TestMvpView;
+import com.zwq65.unity.ui.test.TestPresenter;
 import com.zwq65.unity.ui.video.RestVideoMvpPresenter;
 import com.zwq65.unity.ui.video.RestVideoMvpView;
 import com.zwq65.unity.ui.video.RestVideoPresenter;
@@ -146,6 +149,13 @@ public class ActivityModule {
     TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> provideITabArticlePresenter(
             TabArticlePresenter<TabArticleContract.ITabArticleView> tabArticlePresenter) {
         return tabArticlePresenter;
+    }
+
+    @Provides
+    @PerActivity
+    TestMvpPresenter<TestMvpView> provideTestMvpPresenter(
+            TestPresenter<TestMvpView> testPresenter) {
+        return testPresenter;
     }
 
 }

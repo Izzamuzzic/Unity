@@ -10,7 +10,7 @@ import javax.inject.Inject
  */
 
 class TestPresenter<V : TestMvpView> @Inject
-constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable, override val property: Int) : BasePresenter<V>(dataManager, compositeDisposable), TestMvpPresnter<V> {
+constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable, override val property: Int) : BasePresenter<V>(dataManager, compositeDisposable), TestMvpPresenter<V> {
     override fun test() {
         super.test()
     }

@@ -27,6 +27,7 @@ import com.zwq65.unity.ui.article.ArticleFragment;
 import com.zwq65.unity.ui.article.TabArticleFragment;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.main.MainActivity;
+import com.zwq65.unity.ui.test.TestFragment;
 import com.zwq65.unity.ui.video.RestVideoFragment;
 
 import dagger.Component;
@@ -58,6 +59,8 @@ public interface ActivityComponent {
     void inject(TabLocalFragment fragment);
 
     void inject(TabArticleFragment fragment);
+
+    void inject(TestFragment fragment);
 
 
 }
