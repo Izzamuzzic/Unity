@@ -62,5 +62,4 @@ public interface ActivityComponent {
 
     void inject(TestFragment fragment);
 
-
 }

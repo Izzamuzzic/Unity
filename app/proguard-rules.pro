@@ -25,10 +25,19 @@
 #-renamesourcefileattribute SourceFile
 #-------------------------------------------基本不用动区域--------------------------------------------
 #---------------------------------基本指令区----------------------------------
+#指定压缩级别
 -optimizationpasses 5
+#不跳过非公共的库的类成员
 -dontskipnonpubliclibraryclassmembers
 -printmapping proguardMapping.txt
+#混淆时采用的算法
 -optimizations !code/simplification/cast,!field/*,!class/merging/*
+#把混淆类中的方法名也混淆了
+-useuniqueclassmembernames
+#优化时允许访问并修改有修饰符的类和类的成员
+-allowaccessmodification
+#将文件来源重命名为“SourceFile”字符串
+-renamesourcefileattribute SourceFile
 -keepattributes *Annotation*,InnerClasses
 -keepattributes Signature
 -keepattributes SourceFile,LineNumberTable
@@ -63,7 +72,7 @@
 -keepclassmembers class * extends android.app.Activity {
    public void *(android.view.View);
 }
-
+#保持所有实现 Serializable 接口的类成员
 -keepclassmembers class * implements java.io.Serializable {
     static final long serialVersionUID;
     private static final java.io.ObjectStreamField[] serialPersistentFields;
@@ -72,6 +81,16 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
+#Fragment不需要在AndroidManifest.xml中注册，需要额外保护下
+-keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.app.Fragment
+
+#保持测试相关的代码
+-dontnote junit.framework.**
+-dontnote junit.runner.**
+-dontwarn android.test.**
+-dontwarn android.support.test.**
+-dontwarn org.junit.**
 -keep class **.R$* {
  *;
 }
@@ -87,7 +106,7 @@
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
-#// natvie 方法不混淆
+#natvie 方法不混淆
 -keepclasseswithmembernames class * {
     native <methods>;
 }
@@ -96,8 +115,6 @@
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
-
-#----------------------------------------------------------------------------
 
 #---------------------------------webview------------------------------------
 -keepclassmembers class fqcn.of.javascript.interface.for.Webview {
@@ -110,10 +127,19 @@
 -keepclassmembers class * extends android.webkit.WebViewClient {
     public void *(android.webkit.WebView, jav.lang.String);
 }
-#----------------------------------------------------------------------------
-#---------------------------------------------------------------------------------------------------
+
 #---------------------------------实体类---------------------------------
--keep class [com.zwq65.unity].** { *; }
+-keep public class **.*model*.** {*;}
+-keep public class **.*enity*.** {*;}
+
+#---------------------------------反射相关的类和方法-----------------------
+
+
+#---------------------------------与js互相调用的类------------------------
+
+
+#---------------------------------自定义View的类------------------------
+-keep class com.zwq65.unity.ui.custom.widget.**  {*;}
 
 #---------------------------------第三方包-------------------------------
 
@@ -192,9 +218,6 @@
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
 
-## okhttp
--dontwarn com.squareup.okhttp.**
--keep class com.squareup.okhttp.{*;}
 #retrofit
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
@@ -210,10 +233,6 @@
 -keep class com.kennyc.view.** { *; }
 -dontwarn com.kennyc.view.*
 
-# universal-image-loader 混淆
--dontwarn com.nostra13.universalimageloader.**
--keep class com.nostra13.universalimageloader.** { *; }
-
 #ormlite
 -keep class com.j256.**
 -keepclassmembers class com.j256.** { *; }
@@ -222,7 +241,6 @@
 -keep interface com.j256.**
 -keepclassmembers interface com.j256.** { *; }
 #umeng
-# ========= 友盟 =================
 -dontshrink
 -dontoptimize
 -dontwarn com.google.android.maps.**
@@ -355,9 +373,9 @@ public void xxxxxx(**);
 -keep public class android.support.design.R$* { *; }
 #-------------------------------------------------------------------------
 
-# picasso
--keep class com.squareup.picasso.** {*; }
--dontwarn com.squareup.picasso.**
+## picasso
+#-keep class com.squareup.picasso.** {*; }
+#-dontwarn com.squareup.picasso.**
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -373,15 +391,15 @@ public void xxxxxx(**);
     public static Java.lang.String TABLENAME;
 }
 -keep class **$Properties
-# #  ############### volley混淆  ###############
-# # -------------------------------------------
--keep class com.android.volley.** {*;}
--keep class com.android.volley.toolbox.** {*;}
--keep class com.android.volley.Response$* { *; }
--keep class com.android.volley.Request$* { *; }
--keep class com.android.volley.RequestQueue$* { *; }
--keep class com.android.volley.toolbox.HurlStack$* { *; }
--keep class com.android.volley.toolbox.ImageLoader$* { *; }
+## #  ############### volley混淆  ###############
+## # -------------------------------------------
+#-keep class com.android.volley.** {*;}
+#-keep class com.android.volley.toolbox.** {*;}
+#-keep class com.android.volley.Response$* { *; }
+#-keep class com.android.volley.Request$* { *; }
+#-keep class com.android.volley.RequestQueue$* { *; }
+#-keep class com.android.volley.toolbox.HurlStack$* { *; }
+#-keep class com.android.volley.toolbox.ImageLoader$* { *; }
 
 #jpush极光推送
 -dontwarn cn.jpush.**
@@ -393,18 +411,18 @@ public void xxxxxx(**);
 -keep public class com.ikoding.app.biz.dataobject.** { *;}
 -keepattributes *Annotation*
 
-#log4j
--dontwarn org.apache.log4j.**
--keep class  org.apache.log4j.** { *;}
-#下面几行 是环信即时通信的代码混淆
--keep class com.easemob.** {*;}
--keep class org.jivesoftware.** {*;}
--dontwarn  com.easemob.**
+##log4j
+#-dontwarn org.apache.log4j.**
+#-keep class  org.apache.log4j.** { *;}
+##下面几行 是环信即时通信的代码混淆
+#-keep class com.easemob.** {*;}
+#-keep class org.jivesoftware.** {*;}
+#-dontwarn  com.easemob.**
 
-#融云
--keepclassmembers class fqcn.of.javascript.interface.for.webview {
- public *;
-}
+##融云
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+# public *;
+#}
 
 -keepattributes Exceptions,InnerClasses
 
@@ -427,23 +445,14 @@ public void xxxxxx(**);
 -dontwarn org.eclipse.jdt.annotation.**
 
 -keep class com.ultrapower.** {*;}
-#高徳地图
--dontwarn com.amap.api.**
--dontwarn com.a.a.**
--dontwarn com.autonavi.**
--keep class com.amap.api.**  {*;}
--keep class com.autonavi.**  {*;}
--keep class com.a.a.**  {*;}
-#---------------------------------反射相关的类和方法-----------------------
+##高徳地图
+#-dontwarn com.amap.api.**
+#-dontwarn com.a.a.**
+#-dontwarn com.autonavi.**
+#-keep class com.amap.api.**  {*;}
+#-keep class com.autonavi.**  {*;}
+#-keep class com.a.a.**  {*;}
 
-#---------------------------------与js互相调用的类------------------------
-
-#---------------------------------自定义View的类------------------------
--keep class com.zwq65.unity.ui.custom.widget.**  {*;}
-
-#SuperID
-#由*郭宇翔*贡献混淆代码
-#作者Github地址：https://github.com/yourtion
 -keep class **.R$* {*;}
 -keep class com.isnc.facesdk.aty.**{*;}
 -keep class com.isnc.facesdk.**{*;}
@@ -475,19 +484,10 @@ public void xxxxxx(**);
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-
-#litepal
--dontwarn org.litepal.
--keep class org.litepal.* { ; }
--keep enum org.litepal.*
--keep interface org.litepal. { ; }
--keep public class  extends org.litepal.
--keepattributes Annotation
--keepclassmembers class * extends org.litepal.crud.DataSupport{*;}
-
-#fastJson
--dontwarn com.alibaba.fastjson.**
--keep class com.alibaba.fastjson.** { *; }
+#
+##fastJson
+#-dontwarn com.alibaba.fastjson.**
+#-keep class com.alibaba.fastjson.** { *; }
 
 # Okio
 -dontwarn com.squareup.**

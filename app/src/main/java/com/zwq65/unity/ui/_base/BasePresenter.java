@@ -60,7 +60,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         mViewRef.clear();
         mViewRef = null;
     }
-
+    @Override
     public boolean isViewAttached() {
         return mViewRef != null && mViewRef.get() != null;
     }

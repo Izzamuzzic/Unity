@@ -59,5 +59,6 @@
     <string name="open_by_browser">浏览器打开</string>
     <string name="sucess_msg_copy">链接复制成功</string>
     <string name="test">测试</string>
+    <string name="exit">退出</string>
 
 </resources>

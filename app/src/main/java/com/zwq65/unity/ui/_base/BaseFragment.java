@@ -93,13 +93,13 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
 
     @Override
     public void onDetach() {
+        mActivity.onFragmentDetached(TAG);
         mActivity = null;
         if (mPresenter != null && mPresenter.isViewAttached()) {
             mPresenter.onDetach();
             mPresenter = null;
         }
         super.onDetach();
-        mActivity.onFragmentDetached(TAG);
         LogUtils.i(TAG, "onDetach");
     }
 

@@ -5,8 +5,15 @@
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-    <com.zwq65.unity.ui._custom.widget.MyChartView2
-        android:id="@+id/myChartView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test"/>
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"/>
 </LinearLayout>
