@@ -9,7 +9,6 @@ import android.widget.Button;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.MvpPresenter;
-import com.zwq65.unity.utils.LogUtils;
 
 import javax.inject.Inject;
 
@@ -50,7 +49,7 @@ public class TestFragment extends BaseFragment implements TestMvpView {
     @Override
     public void initView() {
         btnTest.setOnClickListener(v -> {
-            mPresenter.test().subscribe(aLong -> LogUtils.i("test", "---------" + aLong));
+            mPresenter.test();
         });
         btnExit.setOnClickListener(v -> getFragmentManager().beginTransaction().remove(this).commit());
     }

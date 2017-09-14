@@ -2,19 +2,15 @@ package com.zwq65.unity.ui.album;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yalantis.phoenix.PullToRefreshView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._base.BaseRefreshFragment;
 import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.album.image.ImageActivity;
@@ -24,26 +20,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
 /**
  * Created by zwq65 on 2017/08/07
  * gank.io开源美图
  */
 
-public class AlbumFragment extends BaseFragment implements AlbumMvpView {
-    @BindView(R.id.rv_albums)
-    RecyclerView rvAlbums;
-    @BindView(R.id.pull_to_refresh)
-    PullToRefreshView pullToRefresh;
+public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMvpView<Image> {
 
     @Inject
-    AlbumMvpPresenter<AlbumMvpView> mPresenter;
-    AlbumAdapter mAdapter;
+    AlbumMvpPresenter<AlbumMvpView<Image>> mPresenter;
+    AlbumAdapter<Image> mAdapter;
 
     @Override
     public MvpPresenter setmPresenter() {
@@ -64,48 +53,21 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
 
     @Override
     public void initView() {
-        rvAlbums.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        rvAlbums.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        rvAlbums.addItemDecoration(new MyItemDecoration());//item间隔
-        ((DefaultItemAnimator) rvAlbums.getItemAnimator()).setSupportsChangeAnimations(false);
-        //上拉刷新監聽
-        pullToRefresh.setOnRefreshListener(this::initData);
-        //下拉加載監聽
-        rvAlbums.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    RecyclerView.LayoutManager layoutManager = rvAlbums.getLayoutManager();
-                    int lastVisibleItemPosition;
-                    if (layoutManager instanceof GridLayoutManager) {
-                        lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                        int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
-                        ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
-                        lastVisibleItemPosition = findMax(into);
-                    } else {
-                        lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    }
-                    if (layoutManager.getChildCount() > 0
-                            && lastVisibleItemPosition >= layoutManager.getItemCount() - 1
-                            && layoutManager.getItemCount() > layoutManager.getChildCount()) {
-                        //onLoadMore
-                        mPresenter.loadImages(false);
-                    }
-                }
-            }
-        });
-
+        super.initView();
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
+        mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
+        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter = new AlbumAdapter(mActivity);
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
-        rvAlbums.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
-        helper.attachToRecyclerView(rvAlbums);
+        helper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
     public void initData(Bundle saveInstanceState) {
+        super.initData(saveInstanceState);
         initData();
     }
 
@@ -118,7 +80,7 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
 
     @Override
     public void onToolbarClick() {
-        rvAlbums.smoothScrollToPosition(0);
+        mRecyclerView.smoothScrollToPosition(0);
     }
 
     public void initData() {
@@ -126,26 +88,27 @@ public class AlbumFragment extends BaseFragment implements AlbumMvpView {
     }
 
     @Override
-    public void refreshImages(List<Image> imageList) {
-        pullToRefresh.setRefreshing(false);//取消下拉加载
+    public void requestDataRefresh() {
+        super.requestDataRefresh();
+        initData();
+    }
+
+    @Override
+    public void requestDataLoad() {
+        super.requestDataLoad();
+        mPresenter.loadImages(false);
+    }
+
+    @Override
+    public void refreshData(List<Image> list) {
+        super.refreshData(list);
         mAdapter.clearItems();
-        mAdapter.addItems(imageList);
+        mAdapter.addItems(list);
     }
 
     @Override
-    public void showImages(List<Image> imageList) {
-        //加载数据
-        mAdapter.addItems(imageList);
-    }
-
-    @Override
-    public void loadFail(Throwable t) {
-        pullToRefresh.setRefreshing(false);//取消下拉加载
-    }
-
-    @Override
-    public void noMoreData() {
-        pullToRefresh.setRefreshing(false);//取消下拉加载
-        showErrorAlert(R.string.no_more_data);
+    public void loadData(List<Image> list) {
+        super.loadData(list);
+        mAdapter.addItems(list);
     }
 }

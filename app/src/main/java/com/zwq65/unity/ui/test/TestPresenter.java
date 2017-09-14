@@ -1,9 +1,8 @@
 package com.zwq65.unity.ui.test;
 
-import android.support.annotation.NonNull;
-
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.ui._base.BasePresenter;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +21,8 @@ public class TestPresenter<V extends TestMvpView> extends BasePresenter<V> imple
         super(dataManager, compositeDisposable);
     }
 
-    @NonNull
     @Override
-    public Observable<Long> test() {
-        return Observable.interval(1, TimeUnit.SECONDS);
+    public void test() {
+        Observable.interval(1, TimeUnit.SECONDS).subscribe(aLong -> LogUtils.i("test", "---------" + aLong));
     }
 }

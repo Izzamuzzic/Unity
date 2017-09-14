@@ -17,9 +17,8 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/07/19
  */
 
-public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> implements AlbumMvpPresenter<V> {
+public class AlbumPresenter<V extends AlbumMvpView<Image>> extends BasePresenter<V> implements AlbumMvpPresenter<V> {
     private int page;
-    private boolean isLoading;
 
     @Inject
     AlbumPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
@@ -29,14 +28,11 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
     @Override
     public void init() {
         page = 1;
-        isLoading = false;
         loadImages(true);
     }
 
     @Override
     public void loadImages(final Boolean isRefresh) {
-        if (isLoading) return;
-        isLoading = true;
         getCompositeDisposable().add(
                 getDataManager().get20Images(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
                     @Override
@@ -44,19 +40,18 @@ public class AlbumPresenter<V extends AlbumMvpView> extends BasePresenter<V> imp
                         if (welfareResponse != null && welfareResponse.getData() != null) {
                             page++;
                             if (isRefresh) {
-                                getMvpView().refreshImages(welfareResponse.getData());
+                                getMvpView().refreshData(welfareResponse.getData());
                             } else {
-                                getMvpView().showImages(welfareResponse.getData());
+                                getMvpView().loadData(welfareResponse.getData());
                             }
                         } else {
                             getMvpView().noMoreData();
                         }
-                        isLoading = false;
                     }
                 }, new ApiErrorCallBack<Throwable>() {
                     @Override
                     public void onFailure(Throwable t) {
-                        isLoading = false;
+                        getMvpView().loadFail(t);
                     }
                 })
         );

@@ -20,7 +20,7 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/07/20
  */
 
-class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
+class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, AlbumAdapter.ViewHolder> {
 
     private Context context;
 
@@ -42,21 +42,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
     @Override
     public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
 
-        Glide.with(context).load(mDataList.get(position).getUrl())
-//                .listener(new RequestListener<Drawable>() {
-//            @Override
-//            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                //设置图片自适应宽高
-//                holder.ivBeauty.setOriginalSize(resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
-//                return false;
-//            }
-//        })
-                .into(holder.ivBeauty);
+        Glide.with(context).load(mDataList.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(v -> {
             if (listener != null) {
                 //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
@@ -67,7 +53,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
         setAnimation(holder.itemView, position);
     }
 
-    static class ViewHolder extends BaseViewHolder<Image> {
+    class ViewHolder extends BaseViewHolder<T> {
         @BindView(R.id.iv_beauty)
         RatioImageView ivBeauty;
 
@@ -76,7 +62,7 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
         }
 
         @Override
-        public void bindViewData(Image data) {
+        public void bindViewData(T data) {
 
         }
     }

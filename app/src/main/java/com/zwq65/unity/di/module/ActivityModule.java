@@ -19,6 +19,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.di.ActivityContext;
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.account.AccountMvpPresenter;
@@ -97,8 +98,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    AlbumMvpPresenter<AlbumMvpView> provideAlbumPresenter(
-            AlbumPresenter<AlbumMvpView> albumPresenter) {
+    AlbumMvpPresenter<AlbumMvpView<Image>> provideAlbumPresenter(
+            AlbumPresenter<AlbumMvpView<Image>> albumPresenter) {
         return albumPresenter;
     }
 
