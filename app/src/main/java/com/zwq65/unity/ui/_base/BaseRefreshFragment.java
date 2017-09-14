@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -31,7 +32,13 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
     @Override
     public void initView() {
         //上拉刷新監聽
-        mSwipeRefreshLayout.setOnRefreshListener(this::requestDataRefresh);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            if (isRefreshing) {
+                return;
+            }
+            isRefreshing = true;
+            requestDataRefresh();
+        });
         //下拉加載監聽
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -53,6 +60,10 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
                             && lastVisibleItemPosition >= layoutManager.getItemCount() - 1
                             && layoutManager.getItemCount() > layoutManager.getChildCount()) {
                         //onLoadMore
+                        if (isLoading) {
+                            return;
+                        }
+                        isLoading = true;
                         requestDataLoad();
                     }
                 }
@@ -69,25 +80,20 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
     /**
      * 刷新数据(子类复写该方法)
      */
-    public void requestDataRefresh() {
-        isRefreshing = true;
-    }
+    public abstract void requestDataRefresh();
 
     /**
      * 加载数据(子类复写该方法)
      */
-    public void requestDataLoad() {
-        if (isLoading) {
-            return;
-        }
-        isLoading = true;
-    }
+    public abstract void requestDataLoad();
 
     public void setRefresh(boolean refresh) {
+        LogUtils.e("refresh:" + refresh + "  isRefreshing:" + isRefreshing);
         if (mSwipeRefreshLayout == null || refresh == isRefreshing) {
             return;
         }
         if (refresh) {
+            isRefreshing = true;
             mSwipeRefreshLayout.setRefreshing(true);
         } else {
             isRefreshing = false;
@@ -107,6 +113,7 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
 
     @Override
     public void refreshData(List<T> list) {
+        LogUtils.e(" setRefresh(false);");
         setRefresh(false);
     }
 
