@@ -2,6 +2,7 @@ package com.zwq65.unity.ui._base.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by jingbin on 2016/11/25
  * RecyclerView.ViewHolder基类
  */
-public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V> {
+public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> extends RecyclerView.Adapter<V> {
 
     public String TAG = getClass().getSimpleName();
 
@@ -30,7 +31,7 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
         return mDataList;
     }
 
-    public T getItemData(int position) {
+    public T getItem(int position) {
         return (position >= 0 && position < mDataList.size()) ? mDataList.get(position) : null;
     }
 
@@ -111,9 +112,23 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
     }
 
     @Override
+    public final V onCreateViewHolder(ViewGroup parent, int viewType) {
+        V viewHolder = OnCreateViewHolder(parent, viewType);
+        //itemView 的点击事件
+        if (listener != null) {
+            viewHolder.itemView.setOnClickListener(v -> listener.onClick(mDataList.get(viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition()));
+        }
+        return viewHolder;
+    }
+
+    public abstract V OnCreateViewHolder(ViewGroup parent, int viewType);
+
+    @Override
     public void onBindViewHolder(V holder, int position) {
         //添加动画
         setAnimation(holder.itemView, position);
+        //绘制数据ui
+        holder.setData(getItem(position));
     }
 
     protected void setAnimation(View viewToAnimate, int position) {

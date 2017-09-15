@@ -148,7 +148,6 @@ public class ActivityModule {
     }
 
     @Provides
-    @PerActivity
     TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> provideITabArticlePresenter(
             TabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> tabArticlePresenter) {
         return tabArticlePresenter;

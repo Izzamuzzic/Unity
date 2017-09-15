@@ -109,10 +109,6 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
         isLoading = loading;
     }
 
-    public void setRequestFinish() {
-        isRefreshing = false;
-        isLoading = false;
-    }
 
     @Override
     public void refreshData(List<T> list) {
@@ -126,11 +122,13 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
 
     @Override
     public void loadFail(Throwable t) {
-        setRequestFinish();
+        setRefresh(false);
+        setLoading(false);
     }
 
     @Override
     public void noMoreData() {
-        setRequestFinish();
+        setRefresh(false);
+        setLoading(false);
     }
 }

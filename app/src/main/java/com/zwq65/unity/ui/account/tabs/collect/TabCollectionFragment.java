@@ -54,7 +54,7 @@ public class TabCollectionFragment extends BaseFragment implements TabCollection
         rlCollection.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rlCollection.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rlCollection.getItemAnimator()).setSupportsChangeAnimations(false);
-        adapter = new TabCollectionAdapter(getContext());
+        adapter = new TabCollectionAdapter();
         rlCollection.setAdapter(adapter);
     }
 

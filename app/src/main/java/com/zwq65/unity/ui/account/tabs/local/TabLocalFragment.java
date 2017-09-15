@@ -55,7 +55,7 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
         rlLocal.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         rlLocal.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) rlLocal.getItemAnimator()).setSupportsChangeAnimations(false);
-        adapter = new TabLocalAdapter(getContext());
+        adapter = new TabLocalAdapter();
         rlLocal.setAdapter(adapter);
     }
 

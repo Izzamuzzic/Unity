@@ -14,7 +14,7 @@
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/white"
         app:tabMode="fixed"
-        app:tabTextColor="@color/text_color_gray"/>
+        app:tabTextColor="@color/selector_tab_color"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_artcle"

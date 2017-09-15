@@ -1,10 +1,7 @@
 package com.zwq65.unity.ui.video;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,63 +15,53 @@ import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
+import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.utils.FontUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by zwq65 on 2017/08/15
  */
 
 public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, RestVideoAdapter.ViewHolder> {
-    private Context context;
-
-    public RestVideoAdapter(Context context) {
-        this.context = context;
-    }
 
     @Override
-    public RestVideoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_rest_video, parent, false);
-        return new RestVideoAdapter.ViewHolder(view);
+    public ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RestVideoAdapter.ViewHolder(parent);
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-        FontUtils.getInstance().setTypeface(holder.tvVideoTitle, FontUtils.Font.Roboto_Bold);
-        holder.tvVideoTitle.setText(mDataList.get(position).getVideo().getDesc());
-        holder.tvVideoTitle.setVisibility(View.INVISIBLE);
-        Glide.with(context).load(mDataList.get(position).getImage().getUrl()).listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                holder.tvVideoTitle.setVisibility(View.VISIBLE);
-                return false;
-            }
-        }).into(holder.ivBeauty);
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
-            }
-        });
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_beauty)
+    class ViewHolder extends BaseViewHolder<VideoWithImage> {
         ImageView ivBeauty;
-        @BindView(R.id.tv_video_title)
         TextView tvVideoTitle;
 
-        ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        ViewHolder(ViewGroup parent) {
+            super(parent, R.layout.adapter_rest_video);
+            ivBeauty = $(R.id.iv_beauty);
+            tvVideoTitle = $(R.id.tv_video_title);
+        }
+
+        @Override
+        public void setData(VideoWithImage data) {
+            FontUtils.getInstance().setTypeface(tvVideoTitle, FontUtils.Font.Roboto_Bold);
+            tvVideoTitle.setText(data.getVideo().getDesc());
+            tvVideoTitle.setVisibility(View.INVISIBLE);
+            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    tvVideoTitle.setVisibility(View.VISIBLE);
+                    return false;
+                }
+            }).into(ivBeauty);
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
+                    listener.onClick(mDataList.get(getLayoutPosition()), getLayoutPosition());
+                }
+            });
         }
     }
 }

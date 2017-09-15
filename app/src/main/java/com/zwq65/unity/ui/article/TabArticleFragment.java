@@ -80,7 +80,7 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage> im
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        mAdapter = new TabArticleAdapter(getContext());
+        mAdapter = new TabArticleAdapter();
         mAdapter.setOnItemClickListener((article, position) -> gotoDetailActivity(article));
         mRecyclerView.setAdapter(mAdapter);
     }

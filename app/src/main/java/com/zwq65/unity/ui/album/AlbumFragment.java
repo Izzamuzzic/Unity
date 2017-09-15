@@ -32,7 +32,7 @@ public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMv
 
     @Inject
     AlbumMvpPresenter<AlbumMvpView<Image>> mPresenter;
-    AlbumAdapter<Image> mAdapter;
+    AlbumAdapter mAdapter;
 
     @Override
     public MvpPresenter setmPresenter() {
@@ -58,7 +58,7 @@ public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMv
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        mAdapter = new AlbumAdapter<>(mActivity);
+        mAdapter = new AlbumAdapter();
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         mRecyclerView.setAdapter(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
