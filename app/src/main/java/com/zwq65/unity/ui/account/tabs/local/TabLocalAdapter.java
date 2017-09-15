@@ -47,9 +47,7 @@ public class TabLocalAdapter extends BaseRecyclerViewAdapter<File, TabLocalAdapt
 
     @Override
     public void onBindViewHolder(final TabLocalAdapter.ViewHolder holder, int position) {
-        //添加动画
-        setAnimation(holder.itemView, position);
-
+        super.onBindViewHolder(holder, position);
         Glide.with(context).load(mDataList.get(position)).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -63,13 +61,10 @@ public class TabLocalAdapter extends BaseRecyclerViewAdapter<File, TabLocalAdapt
                 return false;
             }
         }).into(holder.ivBeauty);
-        holder.ivBeauty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
-                }
+        holder.ivBeauty.setOnClickListener(v -> {
+            if (listener != null) {
+                //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
+                listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
             }
         });
     }

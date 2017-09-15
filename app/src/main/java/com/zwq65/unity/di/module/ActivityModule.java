@@ -19,7 +19,9 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
+import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.di.ActivityContext;
 import com.zwq65.unity.di.PerActivity;
 import com.zwq65.unity.ui.account.AccountMvpPresenter;
@@ -133,8 +135,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    RestVideoMvpPresenter<RestVideoMvpView> provideRestVideoMvpPresenter(
-            RestVideoPresenter<RestVideoMvpView> restVideoPresenter) {
+    RestVideoMvpPresenter<RestVideoMvpView<VideoWithImage>> provideRestVideoMvpPresenter(
+            RestVideoPresenter<RestVideoMvpView<VideoWithImage>> restVideoPresenter) {
         return restVideoPresenter;
     }
 
@@ -147,8 +149,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> provideITabArticlePresenter(
-            TabArticlePresenter<TabArticleContract.ITabArticleView> tabArticlePresenter) {
+    TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> provideITabArticlePresenter(
+            TabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> tabArticlePresenter) {
         return tabArticlePresenter;
     }
 

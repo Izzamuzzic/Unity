@@ -41,16 +41,14 @@ class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, AlbumAdap
 
     @Override
     public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
-
+        super.onBindViewHolder(holder, position);
         Glide.with(context).load(mDataList.get(position).getUrl()).into(holder.ivBeauty);
         holder.ivBeauty.setOnClickListener(v -> {
             if (listener != null) {
-                //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
+                //使用getLayoutPosition(),为了保证动态添加、移动或删除item时position值的正确性.
                 listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
             }
         });
-        //添加动画
-        setAnimation(holder.itemView, position);
     }
 
     class ViewHolder extends BaseViewHolder<T> {
@@ -59,11 +57,6 @@ class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, AlbumAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-        }
-
-        @Override
-        public void bindViewData(T data) {
-
         }
     }
 }

@@ -16,11 +16,10 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView> extends BasePresenter<V>
+public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView<ArticleWithImage>> extends BasePresenter<V>
         implements TabArticleContract.ITabArticlePresenter<V> {
     private TabArticleFragment.Type type;
     private int page;
-    private boolean isLoading;
     private boolean isRefresh;
 
     @Inject
@@ -36,14 +35,11 @@ public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView> e
     @Override
     public void init() {
         page = 1;
-        isLoading = false;
         loadDatas(true);
     }
 
     @Override
     public void loadDatas(Boolean isRefresh) {
-        if (isLoading) return;
-        isLoading = true;
         this.isRefresh = isRefresh;
         switch (type) {
             case Android:
@@ -70,12 +66,11 @@ public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView> e
                     if (isRefresh) {
                         getMvpView().refreshData(data);
                     } else {
-                        getMvpView().showData(data);
+                        getMvpView().loadData(data);
                     }
                 } else {
                     getMvpView().noMoreData();
                 }
-                isLoading = false;
             }
         };
     }
@@ -84,7 +79,7 @@ public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView> e
         return new ApiErrorCallBack<Throwable>() {
             @Override
             public void onFailure(Throwable t) {
-                isLoading = false;
+                getMvpView().loadFail(t);
             }
         };
     }

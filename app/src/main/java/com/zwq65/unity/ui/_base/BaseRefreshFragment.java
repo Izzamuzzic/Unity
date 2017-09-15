@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -77,6 +76,11 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
         setRefresh(true);
     }
 
+    @Override
+    public void onToolbarClick() {
+        mRecyclerView.smoothScrollToPosition(0);
+    }
+
     /**
      * 刷新数据(子类复写该方法)
      */
@@ -88,7 +92,6 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
     public abstract void requestDataLoad();
 
     public void setRefresh(boolean refresh) {
-        LogUtils.e("refresh:" + refresh + "  isRefreshing:" + isRefreshing);
         if (mSwipeRefreshLayout == null || refresh == isRefreshing) {
             return;
         }
@@ -113,7 +116,6 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
 
     @Override
     public void refreshData(List<T> list) {
-        LogUtils.e(" setRefresh(false);");
         setRefresh(false);
     }
 

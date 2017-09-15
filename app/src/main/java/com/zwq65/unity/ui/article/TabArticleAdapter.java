@@ -43,6 +43,7 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
         FontUtils.getInstance().setTypeface(holder.tvTitle, FontUtils.Font.Roboto_Bold);
         holder.tvTitle.setText(mDataList.get(position).getArticle().getDesc());
         holder.tvTitle.setVisibility(View.INVISIBLE);
@@ -64,8 +65,6 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
                 listener.onClick(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition());
             }
         });
-        //添加动画
-        setAnimation(holder.itemView, position);
     }
 
     static class ViewHolder extends BaseViewHolder<Article> {
@@ -78,9 +77,5 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
             super(view);
         }
 
-        @Override
-        public void bindViewData(Article data) {
-
-        }
     }
 }

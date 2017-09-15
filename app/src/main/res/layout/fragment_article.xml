@@ -12,7 +12,7 @@
         android:layout_gravity="bottom"
         app:tabBackground="@color/colorPrimary"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/text_color_gray"
+        app:tabIndicatorColor="@color/white"
         app:tabMode="fixed"
         app:tabTextColor="@color/text_color_gray"/>
 

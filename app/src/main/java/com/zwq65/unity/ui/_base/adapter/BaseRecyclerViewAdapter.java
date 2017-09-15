@@ -112,9 +112,7 @@ public abstract class BaseRecyclerViewAdapter<T, V extends RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(V holder, int position) {
-        if (holder instanceof BaseViewHolder) {
-            ((BaseViewHolder) holder).bindViewData(getItemData(position));
-        }
+        //添加动画
         setAnimation(holder.itemView, position);
     }
 

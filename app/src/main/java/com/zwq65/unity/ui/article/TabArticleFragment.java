@@ -9,16 +9,15 @@ import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
-import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._base.BaseRefreshFragment;
+import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui._custom.recycleview.XRecyclerView;
 import com.zwq65.unity.ui.article.detail.ArticleDetailActivity;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -26,16 +25,13 @@ import butterknife.Unbinder;
  * Created by zwq65 on 2017/08/30
  */
 
-public class TabArticleFragment extends BaseFragment<TabArticleContract.ITabArticleView, TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView>>
-        implements TabArticleContract.ITabArticleView {
+public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage> implements TabArticleContract.ITabArticleView<ArticleWithImage> {
+
     public static final String TECH_TAG = "tag";
     public Type mType;
     TabArticleAdapter mAdapter;
     @Inject
-    TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> mPresenter;
-
-    @BindView(R.id.rv_article)
-    XRecyclerView rvArticle;
+    TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> mPresenter;
 
     enum Type {
         Android(R.string.android),
@@ -61,7 +57,7 @@ public class TabArticleFragment extends BaseFragment<TabArticleContract.ITabArti
     }
 
     @Override
-    public TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView> setmPresenter() {
+    public MvpPresenter setmPresenter() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
         return mPresenter;
@@ -79,19 +75,31 @@ public class TabArticleFragment extends BaseFragment<TabArticleContract.ITabArti
 
     @Override
     public void initView() {
-        rvArticle.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvArticle.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        rvArticle.addItemDecoration(new MyItemDecoration());//item间隔
-        ((DefaultItemAnimator) rvArticle.getItemAnimator()).setSupportsChangeAnimations(false);
+        super.initView();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
+        mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
+        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter = new TabArticleAdapter(getContext());
         mAdapter.setOnItemClickListener((article, position) -> gotoDetailActivity(article));
-        rvArticle.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initData(Bundle saveInstanceState) {
+        super.initData(saveInstanceState);
         getType();
         initData();
+    }
+
+    @Override
+    public void requestDataRefresh() {
+        initData();
+    }
+
+    @Override
+    public void requestDataLoad() {
+        mPresenter.loadDatas(false);
     }
 
     public void initData() {
@@ -104,25 +112,17 @@ public class TabArticleFragment extends BaseFragment<TabArticleContract.ITabArti
         mActivity.openActivity(ArticleDetailActivity.class, bundle);
     }
 
-
     @Override
-    public void refreshData(List<ArticleWithImage> t) {
-        rvArticle.refreshComplete();//取消下拉加载
-//        pullToRefresh.setRefreshing(false);
+    public void refreshData(List<ArticleWithImage> list) {
+        super.refreshData(list);
         mAdapter.clearItems();
-        mAdapter.addItems(t);
+        mAdapter.addItems(list);
     }
 
     @Override
-    public void showData(List<ArticleWithImage> t) {
-        mAdapter.addItems(t);
-    }
-
-    @Override
-    public void noMoreData() {
-        rvArticle.refreshComplete();//取消下拉加载
-//        pullToRefresh.setRefreshing(false);//取消下拉加载
-        showErrorAlert(R.string.no_more_data);
+    public void loadData(List<ArticleWithImage> list) {
+        super.loadData(list);
+        mAdapter.addItems(list);
     }
 
     private void getType() {

@@ -78,11 +78,6 @@ public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMv
         mActivity.openActivity(ImageActivity.class, bundle);
     }
 
-    @Override
-    public void onToolbarClick() {
-        mRecyclerView.smoothScrollToPosition(0);
-    }
-
     public void initData() {
         mPresenter.init();
     }
