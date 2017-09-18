@@ -41,12 +41,13 @@ import butterknife.Unbinder;
  * activity基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActivity {
 
     public final String TAG = getClass().getSimpleName();
     private FragmentManager fragmentManager;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
+    private P mPresenter;
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -56,14 +57,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView
-        try {
-            int layoutId = getLayoutId();
-            if (layoutId != 0) {
-                setContentView(layoutId);
-                mUnBinder = ButterKnife.bind(this);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        int layoutId = getLayoutId();
+        if (layoutId != 0) {
+            setContentView(layoutId);
+            mUnBinder = ButterKnife.bind(this);
         }
         //init DaggerActivityComponent
         mActivityComponent = DaggerActivityComponent.builder()
@@ -95,6 +92,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mUnBinder != null) {
             mUnBinder.unbind();
             mUnBinder = null;
+        }
+        if (mPresenter != null && mPresenter.isViewAttached()) {
+            mPresenter.onDetach();
+            mPresenter = null;
         }
     }
 
