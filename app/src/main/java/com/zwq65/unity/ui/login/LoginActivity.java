@@ -49,11 +49,6 @@ public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresen
     }
 
     @Override
-    public Unbinder setUnBinder() {
-        return ButterKnife.bind(this);
-    }
-
-    @Override
     public void dealIntent(Intent intent) {
 
     }

@@ -71,11 +71,6 @@ public class MainActivity extends BaseViewActivity {
     }
 
     @Override
-    public Unbinder setUnBinder() {
-        return ButterKnife.bind(this);
-    }
-
-    @Override
     public void dealIntent(Intent intent) {
 
     }

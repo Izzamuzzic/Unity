@@ -64,11 +64,6 @@ public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvp
     }
 
     @Override
-    public Unbinder setUnBinder() {
-        return ButterKnife.bind(this);
-    }
-
-    @Override
     public void dealIntent(Intent intent) {
 
     }

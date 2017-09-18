@@ -55,11 +55,6 @@ public class WatchActivity extends BaseViewActivity {
     }
 
     @Override
-    public Unbinder setUnBinder() {
-        return ButterKnife.bind(this);
-    }
-
-    @Override
     public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         videoWithImage = bundle.getParcelable(VIDEO_WITH_IMAGE);

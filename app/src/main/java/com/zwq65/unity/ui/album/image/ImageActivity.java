@@ -79,11 +79,6 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
     }
 
     @Override
-    public Unbinder setUnBinder() {
-        return ButterKnife.bind(this);
-    }
-
-    @Override
     public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         currentPosition = bundle.getInt(POSITION);

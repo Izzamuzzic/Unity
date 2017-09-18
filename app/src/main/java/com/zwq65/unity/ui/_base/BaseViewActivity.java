@@ -36,18 +36,27 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //init toolbar
         if (initBaseTooBar() != null && initBaseTooBar()) {
             setupBaseToolbar();
         } else {
             //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
             ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
+        //set up presenter
+        mPresenter = setmPresenter();
+        //deal intent if exist
         if (getIntent() != null) {
             dealIntent(getIntent());
         }
         initView();
         initData();
     }
+
+    /**
+     * @return mPresenter
+     */
+    public abstract T setmPresenter();
 
     /**
      * @return 是否加载BaseToolBar
