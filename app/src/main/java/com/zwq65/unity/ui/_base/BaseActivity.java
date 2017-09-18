@@ -17,21 +17,24 @@ package com.zwq65.unity.ui._base;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.zwq65.unity.R;
 import com.zwq65.unity.App;
+import com.zwq65.unity.R;
 import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.di.component.DaggerActivityComponent;
 import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.utils.LogUtils;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by janisharali on 27/01/17
@@ -43,6 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final String TAG = getClass().getSimpleName();
     private FragmentManager fragmentManager;
     private ActivityComponent mActivityComponent;
+    private Unbinder mUnBinder;
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -51,12 +55,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView
+        try {
+            int layoutId = getLayoutId();
+            if (layoutId != 0) {
+                setContentView(layoutId);
+                mUnBinder = ButterKnife.bind(this);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //init DaggerActivityComponent
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((App) getApplication()).getComponent())
                 .build();
         LogUtils.i(TAG, "onCreate");
     }
+
+    @LayoutRes
+    public abstract int getLayoutId();
 
     @Override
     protected void onResume() {
@@ -72,8 +90,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         LogUtils.i(TAG, "onDestroy");
+        super.onDestroy();
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+            mUnBinder = null;
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -90,12 +112,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             requestPermissionsSafely(permissions, requestCode);
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    public boolean hasPermission(String permission) {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
-    }
+//
+//    @TargetApi(Build.VERSION_CODES.M)
+//    public boolean hasPermission(String permission) {
+//        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+//                checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+//    }
 
     public void openActivity(Class<?> cls) {
         openActivity(cls, null);

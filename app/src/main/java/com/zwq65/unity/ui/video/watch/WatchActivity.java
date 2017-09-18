@@ -45,7 +45,7 @@ public class WatchActivity extends BaseViewActivity {
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_watch;
     }
 

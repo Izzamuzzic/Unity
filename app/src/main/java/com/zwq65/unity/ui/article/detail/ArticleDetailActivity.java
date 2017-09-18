@@ -56,7 +56,7 @@ public class ArticleDetailActivity extends BaseViewActivity {
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_article_detail;
     }
 

@@ -39,7 +39,7 @@ public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresen
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_login;
     }
 

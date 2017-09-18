@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.album;
 
-import android.view.ViewGroup;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.zwq65.unity.R;
@@ -8,7 +8,8 @@ import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.ui._custom.widget.RatioImageView;
-import com.zwq65.unity.utils.LogUtils;
+
+import butterknife.BindView;
 
 
 /**
@@ -18,21 +19,25 @@ import com.zwq65.unity.utils.LogUtils;
 class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
 
     @Override
-    public ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent);
+    public ViewHolder getHolder(View v, int viewType) {
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_album;
     }
 
     class ViewHolder extends BaseViewHolder<Image> {
+        @BindView(R.id.iv_beauty)
         RatioImageView ivBeauty;
 
-        public ViewHolder(ViewGroup parent) {
-            super(parent, R.layout.adapter_album);
-            ivBeauty = $(R.id.iv_beauty);
+        public ViewHolder(View view) {
+            super(view);
         }
 
         @Override
         public void setData(Image data) {
-            LogUtils.i(TAG, "data.getUrl():" + data.getUrl());
             Glide.with(getContext()).load(data.getUrl()).into(ivBeauty);
         }
     }

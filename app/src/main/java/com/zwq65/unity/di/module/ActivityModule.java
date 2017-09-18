@@ -147,6 +147,12 @@ public class ActivityModule {
         return articlePresenter;
     }
 
+    /**
+     * 不使用注解{@link com.zwq65.unity.di.PerActivity @PerActivity},因为该presenter作用于多个fragment，不可唯一。
+     *
+     * @param tabArticlePresenter tabArticlePresenter
+     * @return tabArticlePresenter
+     */
     @Provides
     TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> provideITabArticlePresenter(
             TabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>> tabArticlePresenter) {

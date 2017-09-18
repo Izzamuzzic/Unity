@@ -54,7 +54,7 @@ public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvp
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_personal_center;
     }
 

@@ -33,12 +33,10 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
 
     protected T mPresenter;
     private ProgressDialog mProgressDialog;
-    private Unbinder mUnBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(setLayoutId());
         if (initBaseTooBar() != null && initBaseTooBar()) {
             setupBaseToolbar();
         } else {
@@ -46,7 +44,6 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
             ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
         mPresenter = setmPresenter();
-        mUnBinder = setUnBinder();
         if (getIntent() != null) {
             dealIntent(getIntent());
         }
@@ -58,11 +55,6 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
      * @return mPresenter
      */
     public abstract T setmPresenter();
-
-    /**
-     * @return LayoutId
-     */
-    public abstract int setLayoutId();
 
     /**
      * @return 是否加载BaseToolBar
@@ -108,10 +100,6 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
         if (mPresenter != null && mPresenter.isViewAttached()) {
             mPresenter.onDetach();
             mPresenter = null;
-        }
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
-            mUnBinder = null;
         }
         super.onDestroy();
         //不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态

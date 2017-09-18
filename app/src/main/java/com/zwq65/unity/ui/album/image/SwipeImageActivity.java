@@ -31,7 +31,7 @@ public class SwipeImageActivity extends BaseViewActivity {
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_swipe_image;
     }
 

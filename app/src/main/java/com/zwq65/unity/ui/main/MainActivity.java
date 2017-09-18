@@ -61,7 +61,7 @@ public class MainActivity extends BaseViewActivity {
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_main;
     }
 

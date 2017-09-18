@@ -1,6 +1,7 @@
 package com.zwq65.unity.ui._base.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -113,7 +114,8 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
 
     @Override
     public final V onCreateViewHolder(ViewGroup parent, int viewType) {
-        V viewHolder = OnCreateViewHolder(parent, viewType);
+        View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);
+        V viewHolder = getHolder(view, viewType);
         //itemView 的点击事件
         if (listener != null) {
             viewHolder.itemView.setOnClickListener(v -> listener.onClick(mDataList.get(viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition()));
@@ -121,7 +123,22 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
         return viewHolder;
     }
 
-    public abstract V OnCreateViewHolder(ViewGroup parent, int viewType);
+    /**
+     * 子类实现提供holder
+     *
+     * @param v        ViewHolder'view
+     * @param viewType viewType
+     * @return
+     */
+    public abstract V getHolder(View v, int viewType);
+
+    /**
+     * 提供Item的布局
+     *
+     * @param viewType viewType
+     * @return resLayoutId
+     */
+    public abstract int getLayoutId(int viewType);
 
     @Override
     public void onBindViewHolder(V holder, int position) {

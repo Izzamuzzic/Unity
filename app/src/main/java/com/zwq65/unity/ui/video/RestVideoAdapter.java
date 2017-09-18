@@ -3,7 +3,6 @@ package com.zwq65.unity.ui.video;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +17,8 @@ import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.utils.FontUtils;
 
+import butterknife.BindView;
+
 /**
  * Created by zwq65 on 2017/08/15
  */
@@ -25,18 +26,23 @@ import com.zwq65.unity.utils.FontUtils;
 public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, RestVideoAdapter.ViewHolder> {
 
     @Override
-    public ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RestVideoAdapter.ViewHolder(parent);
+    public ViewHolder getHolder(View v, int viewType) {
+        return null;
+    }
+
+    @Override
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_rest_video;
     }
 
     class ViewHolder extends BaseViewHolder<VideoWithImage> {
+        @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
+        @BindView(R.id.tv_video_title)
         TextView tvVideoTitle;
 
-        ViewHolder(ViewGroup parent) {
-            super(parent, R.layout.adapter_rest_video);
-            ivBeauty = $(R.id.iv_beauty);
-            tvVideoTitle = $(R.id.tv_video_title);
+        public ViewHolder(View view) {
+            super(view);
         }
 
         @Override
@@ -56,12 +62,6 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
                     return false;
                 }
             }).into(ivBeauty);
-            itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    //使用getLayoutPosition(),为了保证动态添加和删除时position值的正确性.
-                    listener.onClick(mDataList.get(getLayoutPosition()), getLayoutPosition());
-                }
-            });
         }
     }
 }

@@ -69,7 +69,7 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
     }
 
     @Override
-    public int setLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_image;
     }
 
