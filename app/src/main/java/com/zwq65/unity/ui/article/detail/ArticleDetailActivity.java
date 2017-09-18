@@ -94,7 +94,8 @@ public class ArticleDetailActivity extends BaseViewActivity {
                 public void onProgressChanged(WebView view, int newProgress) {
                     super.onProgressChanged(view, newProgress);
                     if (newProgress == 100) {
-                        pbLoader.setVisibility(View.GONE);
+                        if (pbLoader != null)
+                            pbLoader.setVisibility(View.GONE);
                     }
                 }
             });

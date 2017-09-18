@@ -44,17 +44,14 @@ public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView<Ar
         this.isRefresh = isRefresh;
         switch (type) {
             case Android:
-                LogUtils.e("Android:" + toString());
                 getCompositeDisposable().add(getDataManager().getAndroidArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
                 break;
             case Ios:
-                LogUtils.e("Ios" + toString());
                 getCompositeDisposable().add(getDataManager().getIosArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
                 break;
             case Qianduan:
-                LogUtils.e("Qianduan" + toString());
                 getCompositeDisposable().add(getDataManager().getQianduanArticles(page, getApiSubscriberCallBack(),
                         getApiErrorCallBack()));
                 break;
