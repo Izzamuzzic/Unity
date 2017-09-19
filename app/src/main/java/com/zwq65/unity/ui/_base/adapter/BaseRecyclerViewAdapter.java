@@ -24,9 +24,44 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
      * 标记使用动画的final item'position，加载过的item不用动画
      */
     private int lastPosition = -1;
+    private List<T> mDataList = new ArrayList<>();
+    private OnItemClickListener<T> listener;
 
-    protected List<T> mDataList = new ArrayList<>();
-    protected OnItemClickListener<T> listener;
+    @Override
+    public final V onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);
+        V viewHolder = getHolder(view, viewType);
+        //itemView 的点击事件
+        if (listener != null) {
+            viewHolder.itemView.setOnClickListener(v -> listener.onClick(mDataList.get(viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition()));
+        }
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(V holder, int position) {
+        //添加动画
+        setAnimation(holder.itemView, position);
+        //绘制数据ui
+        holder.setData(getItem(position));
+    }
+
+    /**
+     * 提供Item的布局
+     *
+     * @param viewType viewType
+     * @return resLayoutId
+     */
+    public abstract int getLayoutId(int viewType);
+
+    /**
+     * 子类实现提供holder
+     *
+     * @param v        ViewHolder'view
+     * @param viewType viewType
+     * @return V
+     */
+    public abstract V getHolder(View v, int viewType);
 
     public List<T> getmDataList() {
         return mDataList;
@@ -39,18 +74,6 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
     @Override
     public int getItemCount() {
         return mDataList == null ? 0 : mDataList.size();
-    }
-
-    /**
-     * 移除某一条记录
-     *
-     * @param position 移除数据的position
-     */
-    public void removeItem(int position) {
-        if (position >= 0 && position < mDataList.size()) {
-            mDataList.remove(position);
-            notifyItemRemoved(position);
-        }
     }
 
     /**
@@ -76,14 +99,12 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
     }
 
     /**
-     * 移除所有记录
+     * 批量添加记录
+     *
+     * @param data 需要加入的数据结构
      */
-    public void clearItems() {
-        int size = mDataList.size();
-        if (size > 0) {
-            mDataList.clear();
-            notifyItemRangeRemoved(0, size);
-        }
+    public void addItems(List<T> data) {
+        addItems(data, mDataList.size());
     }
 
     /**
@@ -100,55 +121,33 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
     }
 
     /**
-     * 批量添加记录
+     * 移除某一条记录
      *
-     * @param data 需要加入的数据结构
+     * @param position 移除数据的position
      */
-    public void addItems(List<T> data) {
-        addItems(data, mDataList.size());
+    public void removeItem(int position) {
+        if (position >= 0 && position < mDataList.size()) {
+            mDataList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    /**
+     * 移除所有记录
+     */
+    public void clearItems() {
+        int size = mDataList.size();
+        if (size > 0) {
+            mDataList.clear();
+            notifyItemRangeRemoved(0, size);
+        }
     }
 
     public void setOnItemClickListener(OnItemClickListener<T> listener) {
         this.listener = listener;
     }
 
-    @Override
-    public final V onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);
-        V viewHolder = getHolder(view, viewType);
-        //itemView 的点击事件
-        if (listener != null) {
-            viewHolder.itemView.setOnClickListener(v -> listener.onClick(mDataList.get(viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition()));
-        }
-        return viewHolder;
-    }
-
-    /**
-     * 子类实现提供holder
-     *
-     * @param v        ViewHolder'view
-     * @param viewType viewType
-     * @return
-     */
-    public abstract V getHolder(View v, int viewType);
-
-    /**
-     * 提供Item的布局
-     *
-     * @param viewType viewType
-     * @return resLayoutId
-     */
-    public abstract int getLayoutId(int viewType);
-
-    @Override
-    public void onBindViewHolder(V holder, int position) {
-        //添加动画
-        setAnimation(holder.itemView, position);
-        //绘制数据ui
-        holder.setData(getItem(position));
-    }
-
-    protected void setAnimation(View viewToAnimate, int position) {
+    private void setAnimation(View viewToAnimate, int position) {
         if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.slide_in_right);
             viewToAnimate.startAnimation(animation);
@@ -159,11 +158,11 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> ex
     @Override
     public void onViewDetachedFromWindow(V holder) {
         super.onViewDetachedFromWindow(holder);
+        //移除动画,节省资源
         holder.itemView.clearAnimation();
     }
 
     public interface OnItemClickListener<T> {
         void onClick(T t, int position);
     }
-
 }

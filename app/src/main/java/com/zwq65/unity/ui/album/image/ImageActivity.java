@@ -33,8 +33,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import static android.view.View.GONE;
 
@@ -92,12 +90,13 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
     @Override
     public void initView() {
         initToolbar();
-        setCurrentPage();
         initViewPager();
+        setCurrentPage();
     }
 
     @Override
     public void initData() {
+        //empty
     }
 
     @Override
@@ -106,6 +105,13 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
         //找到checkbox设置下样式
         cbLove = (AppCompatCheckBox) menu.findItem(R.id.menu_cb_love).getActionView();
         cbLove.setButtonDrawable(R.drawable.selector_ic_love);
+        cbLove.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                mPresenter.collectPicture(imageList.get(currentPosition));
+            } else {
+                mPresenter.cancelCollectPicture(imageList.get(currentPosition));
+            }
+        });
         return true;
     }
 
@@ -119,14 +125,6 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
                 //保存大图
                 requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);//请求获取权限
                 mPresenter.savePicture(this, imageList.get(currentPosition));
-                break;
-            case R.id.menu_cb_love:
-                //收藏、取消收藏 图片
-                if (cbLove.isChecked()) {
-                    mPresenter.collectPicture(imageList.get(currentPosition));
-                } else {
-                    mPresenter.cancelCollectPicture(imageList.get(currentPosition));
-                }
                 break;
         }
         return true;
@@ -148,11 +146,22 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
      * 设置当前页数
      */
     private void setCurrentPage() {
+        //改变toolbar标题为图片desc
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(imageList.get(currentPosition).getDesc());
+        }
+        //当前页码
         if (pageSize <= 1) {
             tvCurrentPage.setVisibility(View.GONE);
-            return;
+        } else {
+            tvCurrentPage.setText(currentPosition + 1 + " / " + pageSize);
         }
-        tvCurrentPage.setText(currentPosition + 1 + " / " + pageSize);
+        //当前图片是否已被用户收藏
+        mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
+            if (cbLove != null) {
+                cbLove.setChecked(aBoolean);
+            }
+        });
     }
 
     private void initViewPager() {
@@ -166,17 +175,6 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
                 //滑动改变当前页数
                 currentPosition = position;
                 setCurrentPage();
-
-                //当前图片是否已被用户收藏
-                mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
-                    if (cbLove != null) {
-                        cbLove.setChecked(aBoolean);
-                    }
-                });
-                //改变toolbar标题
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(imageList.get(currentPosition).getDesc());
-                }
             }
         });
     }

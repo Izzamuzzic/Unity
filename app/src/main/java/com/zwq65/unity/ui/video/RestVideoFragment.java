@@ -3,9 +3,6 @@ package com.zwq65.unity.ui.video;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
@@ -17,9 +14,6 @@ import com.zwq65.unity.ui.video.watch.WatchActivity;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**
@@ -41,13 +35,8 @@ public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage> imple
     }
 
     @Override
-    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_rest_video, container, false);
-    }
-
-    @Override
-    public Unbinder setUnBinder(View view) {
-        return ButterKnife.bind(this, view);
+    public int getLayoutId() {
+        return R.layout.fragment_rest_video;
     }
 
     @Override

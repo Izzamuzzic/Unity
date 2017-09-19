@@ -41,5 +41,10 @@ public interface ApplicationComponent {
 
     Application application();
 
+    /**
+     * 为依赖{@link ApplicationComponent}的子Component提供依赖(子Component可以通过{@code getDataManager()}提供DataManager的Provider)
+     *
+     * @return DataManager
+     */
     DataManager getDataManager();
 }

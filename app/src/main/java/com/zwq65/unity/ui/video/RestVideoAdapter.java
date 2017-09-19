@@ -26,13 +26,13 @@ import butterknife.BindView;
 public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, RestVideoAdapter.ViewHolder> {
 
     @Override
-    public ViewHolder getHolder(View v, int viewType) {
-        return null;
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_rest_video;
     }
 
     @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.adapter_rest_video;
+    public ViewHolder getHolder(View v, int viewType) {
+        return null;
     }
 
     class ViewHolder extends BaseViewHolder<VideoWithImage> {

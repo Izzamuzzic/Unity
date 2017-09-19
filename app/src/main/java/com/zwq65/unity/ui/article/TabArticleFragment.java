@@ -3,9 +3,6 @@ package com.zwq65.unity.ui.article;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
@@ -17,9 +14,6 @@ import com.zwq65.unity.ui.article.detail.ArticleDetailActivity;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/30
@@ -48,9 +42,9 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage> im
         }
     }
 
-    public static TabArticleFragment newInstance(int type) {
+    public static TabArticleFragment newInstance(String type) {
         Bundle args = new Bundle();
-        args.putInt(TECH_TAG, type);
+        args.putString(TECH_TAG, type);
         TabArticleFragment fragment = new TabArticleFragment();
         fragment.setArguments(args);
         return fragment;
@@ -64,13 +58,8 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage> im
     }
 
     @Override
-    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_tab_article, container, false);
-    }
-
-    @Override
-    public Unbinder setUnBinder(View view) {
-        return ButterKnife.bind(this, view);
+    public int getLayoutId() {
+        return R.layout.fragment_tab_article;
     }
 
     @Override
@@ -126,15 +115,16 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage> im
     }
 
     private void getType() {
-        int type = getArguments().getInt(TECH_TAG);
+        String type = getArguments().getString(TECH_TAG);
+        assert type != null;
         switch (type) {
-            case R.string.android:
+            case "Android":
                 mType = Type.Android;
                 break;
-            case R.string.ios:
+            case "Ios":
                 mType = Type.Ios;
                 break;
-            case R.string.qianduan:
+            case "前端":
                 mType = Type.Qianduan;
                 break;
             default:

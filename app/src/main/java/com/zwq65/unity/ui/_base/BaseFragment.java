@@ -18,6 +18,7 @@ package com.zwq65.unity.ui._base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
@@ -54,9 +56,9 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView");
-        View view = inflateLayout(inflater, container);
+        View view = inflater.inflate(getLayoutId(), container, false);
         mPresenter = setmPresenter();
-        mUnBinder = setUnBinder(view);
+        mUnBinder = ButterKnife.bind(this, view);
         initView();
         return view;
     }
@@ -93,13 +95,13 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
 
     @Override
     public void onDetach() {
+        super.onDetach();
         mActivity.onFragmentDetached(TAG);
         mActivity = null;
         if (mPresenter != null && mPresenter.isViewAttached()) {
             mPresenter.onDetach();
             mPresenter = null;
         }
-        super.onDetach();
         LogUtils.i(TAG, "onDetach");
     }
 
@@ -190,16 +192,11 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     public abstract T setmPresenter();
 
     /**
-     * @param inflater  LayoutInflater
-     * @param container ViewGroup
-     * @return fragment'layout
+     * @return fragment'ResLayoutId
      */
-    public abstract View inflateLayout(LayoutInflater inflater, ViewGroup container);
+    @LayoutRes
+    public abstract int getLayoutId();
 
-    /**
-     * @return mUnBinder(An unbinder contract that will unbind views when called)
-     */
-    public abstract Unbinder setUnBinder(View view);
 
     public abstract void initView();
 

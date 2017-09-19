@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
@@ -19,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/07
@@ -42,13 +36,8 @@ public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMv
     }
 
     @Override
-    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_album, container, false);
-    }
-
-    @Override
-    public Unbinder setUnBinder(View view) {
-        return ButterKnife.bind(this, view);
+    public int getLayoutId() {
+        return R.layout.fragment_album;
     }
 
     @Override

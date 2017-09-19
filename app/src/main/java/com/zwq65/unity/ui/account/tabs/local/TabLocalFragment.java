@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
@@ -16,8 +13,6 @@ import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/22
@@ -40,13 +35,8 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
     }
 
     @Override
-    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_tab_local, container, false);
-    }
-
-    @Override
-    public Unbinder setUnBinder(View view) {
-        return ButterKnife.bind(this, view);
+    public int getLayoutId() {
+        return R.layout.fragment_tab_local;
     }
 
     @Override

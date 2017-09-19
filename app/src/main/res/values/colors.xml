@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--actionBar栏颜色 不能添加透明通道-->
-    <color name="colorPrimary">#d02d5d82</color>
+    <color name="colorPrimary">#e62d5d82</color>
     <!--状态栏颜色-->
-    <color name="colorPrimaryDark">#21425d</color>
+    <color name="colorPrimaryDark">#e621425d</color>
     <!--editText线条、radioButton按钮颜色-->
-    <color name="colorAccent">#c801bcd5</color>
+    <color name="colorAccent">#e601bcd5</color>
 
     <color name="white">#FFFFFF</color>
     <color name="dark_gray">#696969</color>
     <color name="transparent">#00000000</color>
-    <color name="warn_color">#c8f9bf3b</color>
+    <color name="warn_color">#e6f9bf3b</color>
 
     <!-- text color-->
     <color name="text_color_dark">#FF4A4A4A</color>

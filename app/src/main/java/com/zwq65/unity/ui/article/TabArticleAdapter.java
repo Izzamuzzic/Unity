@@ -26,13 +26,13 @@ import butterknife.BindView;
 public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage, TabArticleAdapter.ViewHolder> {
 
     @Override
-    public ViewHolder getHolder(View v, int viewType) {
-        return new ViewHolder(v);
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_article;
     }
 
     @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.adapter_article;
+    public ViewHolder getHolder(View v, int viewType) {
+        return new ViewHolder(v);
     }
 
     static class ViewHolder extends BaseViewHolder<ArticleWithImage> {

@@ -17,15 +17,14 @@ import butterknife.BindView;
  */
 
 class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
+    @Override
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_album;
+    }
 
     @Override
     public ViewHolder getHolder(View v, int viewType) {
         return new ViewHolder(v);
-    }
-
-    @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.adapter_album;
     }
 
     class ViewHolder extends BaseViewHolder<Image> {

@@ -2,13 +2,8 @@ package com.zwq65.unity.ui.album.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
@@ -23,10 +18,10 @@ import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -51,17 +46,7 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
                     @Override
                     public Bitmap apply(@NonNull Image image) throws Exception {
                         try {
-                            bitmap = Glide.with(context).asBitmap().load(image.getUrl()).listener(new RequestListener<Bitmap>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                                    return false;
-                                }
-                            }).submit().get();
+                            bitmap = Glide.with(context).asBitmap().load(image.getUrl()).submit().get();
                         } catch (InterruptedException | ExecutionException e) {
                             e.printStackTrace();
                         }
@@ -71,57 +56,43 @@ public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> imp
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Bitmap>() {
-                    @Override
-                    public void accept(@NonNull Bitmap bitmap) throws Exception {
-                        getMvpView().hideLoading();
-                        getMvpView().showSuccessAlert(R.string.success_msg_save);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        LogUtils.e(throwable.toString());
-                        getMvpView().hideLoading();
-                        getMvpView().showSuccessAlert(R.string.error_msg_save_fail);
-                    }
+                .subscribe(bitmap -> {
+                    getMvpView().hideLoading();
+                    getMvpView().showSuccessAlert(R.string.success_msg_save);
+                }, throwable -> {
+                    LogUtils.e(throwable.toString());
+                    getMvpView().hideLoading();
+                    getMvpView().showSuccessAlert(R.string.error_msg_save_fail);
                 });
     }
 
     @Override
     public void collectPicture(Image image) {
-        getMvpView().showLoading();
-        Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
-                image.getSource(), image.getType(), image.getUrl(), image.getWho());
-        getDataManager().insertPicture(picture).subscribe(new Consumer<Long>() {
+        isPictureCollect(image).filter(aBoolean -> !aBoolean).flatMap(new Function<Boolean, ObservableSource<Long>>() {
             @Override
-            public void accept(@NonNull Long aLong) throws Exception {
-                getMvpView().hideLoading();
-                getMvpView().showSuccessAlert(R.string.success_msg_collect);
+            public ObservableSource<Long> apply(@NonNull Boolean aBoolean) throws Exception {
+                Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
+                        image.getSource(), image.getType(), image.getUrl(), image.getWho());
+                //显示加载框
+                getMvpView().showLoading();
+                return getDataManager().insertPicture(picture);
             }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                LogUtils.e(throwable.toString());
-                getMvpView().hideLoading();
-                getMvpView().showErrorAlert(R.string.error_msg_collect_fail);
-            }
+        }).subscribe(aLong -> {
+            getMvpView().showSuccessAlert(R.string.success_msg_collect);
+            getMvpView().hideLoading();
+        }, throwable -> {
+            LogUtils.e(throwable.toString());
+            getMvpView().hideLoading();
+            getMvpView().showErrorAlert(R.string.error_msg_collect_fail);
         });
     }
 
     @Override
     public void cancelCollectPicture(Image image) {
         getMvpView().showLoading();
-        getDataManager().deletePicture(image.get_id()).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(@NonNull Long aLong) throws Exception {
-                getMvpView().hideLoading();
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                getMvpView().hideLoading();
-                getMvpView().showErrorAlert(R.string.error_msg_cancel_collect_fail);
-            }
+        getDataManager().deletePicture(image.get_id()).subscribe(aLong -> getMvpView().hideLoading(), throwable -> {
+            getMvpView().hideLoading();
+            getMvpView().showErrorAlert(R.string.error_msg_cancel_collect_fail);
         });
     }
 

@@ -1,9 +1,6 @@
 package com.zwq65.unity.ui.test;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zwq65.unity.R;
@@ -13,8 +10,6 @@ import com.zwq65.unity.ui._base.MvpPresenter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/09/13
@@ -37,20 +32,13 @@ public class TestFragment extends BaseFragment implements TestMvpView {
     }
 
     @Override
-    public View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_test, container, false);
-    }
-
-    @Override
-    public Unbinder setUnBinder(View view) {
-        return ButterKnife.bind(this, view);
+    public int getLayoutId() {
+        return R.layout.fragment_test;
     }
 
     @Override
     public void initView() {
-        btnTest.setOnClickListener(v -> {
-            mPresenter.test();
-        });
+        btnTest.setOnClickListener(v -> mPresenter.test());
         btnExit.setOnClickListener(v -> getFragmentManager().beginTransaction().remove(this).commit());
     }
 

@@ -18,13 +18,13 @@ import butterknife.BindView;
 public class TabCollectionAdapter extends BaseRecyclerViewAdapter<Picture, TabCollectionAdapter.ViewHolder> {
 
     @Override
-    public ViewHolder getHolder(View v, int viewType) {
-        return new ViewHolder(v);
+    public int getLayoutId(int viewType) {
+        return R.layout.adapter_tab_collection;
     }
 
     @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.adapter_tab_collection;
+    public ViewHolder getHolder(View v, int viewType) {
+        return new ViewHolder(v);
     }
 
     class ViewHolder extends BaseViewHolder<Picture> {
