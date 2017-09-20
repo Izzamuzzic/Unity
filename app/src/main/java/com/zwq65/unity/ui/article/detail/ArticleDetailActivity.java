@@ -17,10 +17,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
-import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
@@ -33,7 +33,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class ArticleDetailActivity extends BaseViewActivity {
     public static final String ARTICAL = "ARTICAL";
@@ -47,8 +46,8 @@ public class ArticleDetailActivity extends BaseViewActivity {
     ImageView ivTitleBg;
     @BindView(R.id.webview)
     WebView webview;
-    @BindView(R.id.pb_loader)
-    MKLoader pbLoader;
+    @BindView(R.id.progressbar)
+    ProgressBar progressbar;
 
     @Override
     public MvpPresenter setmPresenter() {
@@ -88,9 +87,11 @@ public class ArticleDetailActivity extends BaseViewActivity {
                 @Override
                 public void onProgressChanged(WebView view, int newProgress) {
                     super.onProgressChanged(view, newProgress);
-                    if (newProgress == 100) {
-                        if (pbLoader != null)
-                            pbLoader.setVisibility(View.GONE);
+                    progressbar.setProgress(newProgress);
+                    if (newProgress >= 100) {
+                        progressbar.setVisibility(View.GONE);
+                    } else {
+                        progressbar.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -202,4 +203,10 @@ public class ArticleDetailActivity extends BaseViewActivity {
         openActivity(ImageActivity.class, bundle);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }
