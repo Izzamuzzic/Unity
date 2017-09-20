@@ -8,10 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.tapadoo.alerter.Alerter;
@@ -157,11 +154,11 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
     public void showMessage(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+//        View sbView = snackbar.getView();
+//        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
+//        TextView textView = (TextView) sbView
+//                .findViewById(android.support.design.R.id.snackbar_text);
+//        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
     }
 

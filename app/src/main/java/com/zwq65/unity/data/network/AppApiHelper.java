@@ -33,19 +33,17 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return retrofitApiManager.getGankIoApiService().getRandomImages()
-                .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+        return composeSchduler(retrofitApiManager.getGankIoApiService().getRandomImages(), callBack, errorCallBack);
     }
 
     @Override
     public Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return retrofitApiManager.getGankIoApiService().get20Images(page)
-                .compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+        return composeSchduler(retrofitApiManager.getGankIoApiService().get20Images(page), callBack, errorCallBack);
     }
 
     @Override
     public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return Flowable.zip(retrofitApiManager.getGankIoApiService().getVideos(page), retrofitApiManager.getGankIoApiService().getRandomImages(),
+        return composeSchduler(Flowable.zip(retrofitApiManager.getGankIoApiService().getVideos(page), retrofitApiManager.getGankIoApiService().getRandomImages(),
                 (restVideoResponse, welfareResponse) -> {
                     List<VideoWithImage> videoWithImageList = new ArrayList<>();
                     if (restVideoResponse != null && restVideoResponse.getData() != null
@@ -59,7 +57,7 @@ public class AppApiHelper implements ApiHelper {
                         }
                     }
                     return videoWithImageList;
-                }).compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+                }), callBack, errorCallBack);
     }
 
     @Override
@@ -79,7 +77,7 @@ public class AppApiHelper implements ApiHelper {
 
     private Disposable zipArticleWithImage(Flowable<GankApiResponse<List<Article>>> flowable,
                                            ApiSubscriberCallBack<List<ArticleWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return Flowable.zip(flowable, retrofitApiManager.getGankIoApiService().getRandomImages(),
+        return composeSchduler(Flowable.zip(flowable, retrofitApiManager.getGankIoApiService().getRandomImages(),
                 (listGankApiResponse, welfareResponse) -> {
                     List<ArticleWithImage> articleWithImageList = new ArrayList<>();
                     if (listGankApiResponse != null && listGankApiResponse.getData() != null
@@ -93,7 +91,19 @@ public class AppApiHelper implements ApiHelper {
                         }
                     }
                     return articleWithImageList;
-                }).compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+                }), callBack, errorCallBack);
     }
 
+    /**
+     * 统一线程调度
+     *
+     * @param flowable      api请求Flowable
+     * @param callBack      success回调
+     * @param errorCallBack error回调
+     * @param <T>           返回类型泛型
+     * @return Disposable
+     */
+    private <T> Disposable composeSchduler(Flowable<T> flowable, ApiSubscriberCallBack<T> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
+        return flowable.compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
 }

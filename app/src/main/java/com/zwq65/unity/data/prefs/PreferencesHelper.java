@@ -15,36 +15,17 @@
 
 package com.zwq65.unity.data.prefs;
 
-import com.zwq65.unity.data.DataManager;
-
 /**
  * Created by janisharali on 27/01/17.
  */
 
 public interface PreferencesHelper {
 
-    void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
+    Boolean getDayNightmode();
 
-    int getCurrentUserLoggedInMode();
-
-    Long getCurrentUserId();
-
-    void setCurrentUserId(Long userId);
-
-    String getCurrentUserName();
-
-    void setCurrentUserName(String userName);
-
-    String getCurrentUserEmail();
-
-    void setCurrentUserEmail(String email);
-
-    String getCurrentUserProfilePicUrl();
-
-    void setCurrentUserProfilePicUrl(String profilePicUrl);
-
-    String getAccessToken();
-
-    void setAccessToken(String accessToken);
+    /**
+     * @param isNightmode 是否夜间模式
+     */
+    void setDayNightmode(Boolean isNightmode);
 
 }

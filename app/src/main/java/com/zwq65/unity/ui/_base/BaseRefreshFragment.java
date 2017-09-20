@@ -31,6 +31,7 @@ public abstract class BaseRefreshFragment<T> extends BaseFragment implements Ref
     @Override
     public void initView() {
         //上拉刷新監聽
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             if (isRefreshing) {
                 return;

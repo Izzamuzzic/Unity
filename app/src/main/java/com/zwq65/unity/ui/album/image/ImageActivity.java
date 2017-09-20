@@ -130,6 +130,14 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SAVE_MEIZHI) {
+
+        }
+    }
+
     private void initToolbar() {
         //setup toolbar
         setSupportActionBar(toolbar);

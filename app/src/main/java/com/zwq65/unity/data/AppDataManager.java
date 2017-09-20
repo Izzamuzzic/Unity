@@ -54,24 +54,35 @@ public class AppDataManager implements DataManager {
 
     @Inject
     public AppDataManager(@ApplicationContext Context context,
-                          DbHelper dbHelper,
                           PreferencesHelper preferencesHelper,
+                          DbHelper dbHelper,
                           ApiHelper apiHelper) {
         mContext = context;
-        mDbHelper = dbHelper;
         mPreferencesHelper = preferencesHelper;
+        mDbHelper = dbHelper;
         mApiHelper = apiHelper;
     }
 
+    /***************************************************  AppDataManager  **************************************************************/
+
     @Override
-    public String getAccessToken() {
-        return mPreferencesHelper.getAccessToken();
+    public void updateApiHeader(Long userId, String accessToken) {
+
+    }
+
+    /***************************************************  PreferencesHelper  ************************************************************/
+
+    @Override
+    public Boolean getDayNightmode() {
+        return mPreferencesHelper.getDayNightmode();
     }
 
     @Override
-    public void setAccessToken(String accessToken) {
-        mPreferencesHelper.setAccessToken(accessToken);
+    public void setDayNightmode(Boolean isNightmode) {
+        mPreferencesHelper.setDayNightmode(isNightmode);
     }
+
+    /*****************************************************  DbHelper  *****************************************************************/
 
     @Override
     public Observable<Long> insertPicture(Picture picture) {
@@ -93,91 +104,7 @@ public class AppDataManager implements DataManager {
         return mDbHelper.getCollectionPictures();
     }
 
-    @Override
-    public int getCurrentUserLoggedInMode() {
-        return mPreferencesHelper.getCurrentUserLoggedInMode();
-    }
-
-    @Override
-    public void setCurrentUserLoggedInMode(LoggedInMode mode) {
-        mPreferencesHelper.setCurrentUserLoggedInMode(mode);
-    }
-
-    @Override
-    public Long getCurrentUserId() {
-        return mPreferencesHelper.getCurrentUserId();
-    }
-
-    @Override
-    public void setCurrentUserId(Long userId) {
-        mPreferencesHelper.setCurrentUserId(userId);
-    }
-
-    @Override
-    public String getCurrentUserName() {
-        return mPreferencesHelper.getCurrentUserName();
-    }
-
-    @Override
-    public void setCurrentUserName(String userName) {
-        mPreferencesHelper.setCurrentUserName(userName);
-    }
-
-    @Override
-    public String getCurrentUserEmail() {
-        return mPreferencesHelper.getCurrentUserEmail();
-    }
-
-    @Override
-    public void setCurrentUserEmail(String email) {
-        mPreferencesHelper.setCurrentUserEmail(email);
-    }
-
-    @Override
-    public String getCurrentUserProfilePicUrl() {
-        return mPreferencesHelper.getCurrentUserProfilePicUrl();
-    }
-
-    @Override
-    public void setCurrentUserProfilePicUrl(String profilePicUrl) {
-        mPreferencesHelper.setCurrentUserProfilePicUrl(profilePicUrl);
-    }
-
-    @Override
-    public void updateUserInfo(
-            String accessToken,
-            Long userId,
-            LoggedInMode loggedInMode,
-            String userName,
-            String email,
-            String profilePicPath) {
-
-        setAccessToken(accessToken);
-        setCurrentUserId(userId);
-        setCurrentUserLoggedInMode(loggedInMode);
-        setCurrentUserName(userName);
-        setCurrentUserEmail(email);
-        setCurrentUserProfilePicUrl(profilePicPath);
-
-        updateApiHeader(userId, accessToken);
-    }
-
-    @Override
-    public void updateApiHeader(Long userId, String accessToken) {
-
-    }
-
-    @Override
-    public void setUserAsLoggedOut() {
-        updateUserInfo(
-                null,
-                null,
-                DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
-                null,
-                null,
-                null);
-    }
-
+    /*****************************************************  ApiHelper  *****************************************************************/
 
     @Override
     public Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
@@ -208,4 +135,5 @@ public class AppDataManager implements DataManager {
     public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
         return mApiHelper.getQianduanArticles(page, callBack, errorCallBack);
     }
+
 }
