@@ -27,12 +27,12 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.adapter_rest_video;
+        return R.layout.item_rest_video;
     }
 
     @Override
     public ViewHolder getHolder(View v, int viewType) {
-        return null;
+        return new ViewHolder(v);
     }
 
     class ViewHolder extends BaseViewHolder<VideoWithImage> {

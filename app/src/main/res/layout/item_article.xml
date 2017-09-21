@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:background="@color/cardview_bg_color"
     android:layout_margin="@dimen/cardview_default_elevation"
     android:orientation="vertical"
     app:cardCornerRadius="@dimen/cardview_default_radius">
 
     <ImageView
-        android:id="@+id/iv_beauty"
+        android:id="@+id/iv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
     <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
     <TextView
-        android:id="@+id/tv_video_title"
+        android:id="@+id/tv_title"
         style="@style/text_16_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -27,7 +27,7 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.adapter_article;
+        return R.layout.item_article;
     }
 
     @Override

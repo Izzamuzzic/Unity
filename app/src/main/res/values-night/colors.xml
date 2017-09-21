@@ -11,11 +11,8 @@
     <color name="dark_gray">#696969</color>
     <color name="transparent">#00000000</color>
     <color name="warn_color">#e6f9bf3b</color>
-
     <!-- background color-->
-
-    <color name="cardview_bg_color">#FFFFFF</color>
-
+    <color name="cardview_bg_color">#e63c3f41</color>
     <!-- text color-->
     <color name="text_color_dark">#FF4A4A4A</color>
     <color name="text_color_gray">#A7A8A9</color>

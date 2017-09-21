@@ -19,7 +19,7 @@ public class TabCollectionAdapter extends BaseRecyclerViewAdapter<Picture, TabCo
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.adapter_tab_collection;
+        return R.layout.item_tab_collection;
     }
 
     @Override

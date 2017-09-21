@@ -19,7 +19,7 @@ import butterknife.BindView;
 class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.adapter_album;
+        return R.layout.item_album;
     }
 
     @Override

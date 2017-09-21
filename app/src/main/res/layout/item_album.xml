@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/cardview_default_elevation"
+    android:background="@color/cardview_bg_color"
     android:orientation="vertical"
     app:cardCornerRadius="@dimen/cardview_default_radius">
 

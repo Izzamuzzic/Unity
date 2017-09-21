@@ -1,10 +1,12 @@
 package com.zwq65.unity.ui.main;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -24,13 +26,13 @@ import com.zwq65.unity.utils.FontUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends BaseViewActivity {
+public class MainActivity extends BaseViewActivity implements MainMvpView {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -54,10 +56,14 @@ public class MainActivity extends BaseViewActivity {
     LinearLayout llVideo;
 
     Disposable disposable;
+    @Inject
+    MainMvpPresenter<MainMvpView> mPresenter;
 
     @Override
     public MvpPresenter setmPresenter() {
-        return null;
+        getActivityComponent().inject(this);
+        mPresenter.onAttach(this);
+        return mPresenter;
     }
 
     @Override
@@ -112,7 +118,7 @@ public class MainActivity extends BaseViewActivity {
         }
     }
 
-    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_video, R.id.ll_test, R.id.ll_setting, R.id.ll_out})
+    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_video, R.id.ll_test, R.id.ll_setting, R.id.ll_out, R.id.fab})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
@@ -138,7 +144,37 @@ public class MainActivity extends BaseViewActivity {
                 //退出app
                 exitApp();
                 break;
+            case R.id.fab:
+                //获取应用当前的主题
+                switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        //当前为夜间模式，切换为日间模式
+                        mPresenter.setNightMode(false);
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        mPresenter.setNightMode(true);
+                        break;
+                }
+                setDayNightMode(mPresenter.getNightMode());
+                //fixme Nougat not showing animation
+                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+                recreate();
+                break;
+            default:
+                break;
         }
+    }
+
+    /**
+     * 设置app主题模式
+     *
+     * @param nightMode 是否夜间
+     */
+    public void setDayNightMode(boolean nightMode) {
+        if (nightMode)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     private void exitApp() {
