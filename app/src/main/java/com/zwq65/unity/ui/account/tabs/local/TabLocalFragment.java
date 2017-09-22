@@ -7,7 +7,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
 import javax.inject.Inject;
@@ -19,7 +18,7 @@ import butterknife.BindView;
  * 本地保存相册
  */
 
-public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
+public class TabLocalFragment extends BaseFragment<TabLocalMvpView, TabLocalMvpPresenter<TabLocalMvpView>> implements TabLocalMvpView {
 
     @Inject
     TabLocalMvpPresenter<TabLocalMvpView> mPresenter;
@@ -28,10 +27,8 @@ public class TabLocalFragment extends BaseFragment implements TabLocalMvpView {
     TabLocalAdapter adapter;
 
     @Override
-    public MvpPresenter setmPresenter() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

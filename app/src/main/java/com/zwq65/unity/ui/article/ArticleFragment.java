@@ -12,8 +12,6 @@ import com.zwq65.unity.ui._base.adapter.BaseViewPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 /**
@@ -22,8 +20,6 @@ import butterknife.BindView;
 public class ArticleFragment extends BaseFragment<ArticleContract.IArticleView, ArticleContract.IArticlePresenter<ArticleContract.IArticleView>>
         implements ArticleContract.IArticleView {
 
-    @Inject
-    ArticleContract.IArticlePresenter<ArticleContract.IArticleView> mPresenter;
     @BindView(R.id.tab_type)
     TabLayout tabType;
     @BindView(R.id.vp_artcle)
@@ -33,10 +29,8 @@ public class ArticleFragment extends BaseFragment<ArticleContract.IArticleView, 
     private List<Fragment> fragments;
 
     @Override
-    public ArticleContract.IArticlePresenter<ArticleContract.IArticleView> setmPresenter() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

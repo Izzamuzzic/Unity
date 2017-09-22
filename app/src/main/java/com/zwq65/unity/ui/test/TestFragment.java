@@ -5,9 +5,6 @@ import android.widget.Button;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.MvpPresenter;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -15,20 +12,15 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/09/13
  */
 
-public class TestFragment extends BaseFragment implements TestMvpView {
-
-    @Inject
-    TestMvpPresenter<TestMvpView> mPresenter;
+public class TestFragment extends BaseFragment<TestMvpView, TestMvpPresenter<TestMvpView>> implements TestMvpView {
     @BindView(R.id.btn_test)
     Button btnTest;
     @BindView(R.id.btn_exit)
     Button btnExit;
 
     @Override
-    public MvpPresenter setmPresenter() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

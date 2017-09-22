@@ -30,8 +30,6 @@ import com.zwq65.unity.ui._custom.other.photoview.PhotoView;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 import static android.view.View.GONE;
@@ -47,8 +45,8 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
 
     int currentPosition, pageSize;//当前显示的大图position
     List<Image> imageList;//图片list
-    @Inject
-    ImageMvpPresenter<ImageMvpView> mPresenter;
+//    @Inject
+//    ImageMvpPresenter<ImageMvpView> mPresenter;
 
     @BindView(R.id.vp_images)
     ViewPager vpImages;
@@ -60,10 +58,8 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
     AppCompatCheckBox cbLove;
 
     @Override
-    public ImageMvpPresenter<ImageMvpView> setmPresenter() {
+    public void injectActivityComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

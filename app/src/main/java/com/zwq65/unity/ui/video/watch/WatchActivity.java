@@ -15,15 +15,12 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseViewActivity;
-import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 视频播放
@@ -39,9 +36,10 @@ public class WatchActivity extends BaseViewActivity {
     @BindView(R.id.iv_title_bg)
     ImageView ivTitleBg;
 
+
     @Override
-    public MvpPresenter setmPresenter() {
-        return null;
+    public void injectActivityComponent() {
+        //no need
     }
 
     @Override

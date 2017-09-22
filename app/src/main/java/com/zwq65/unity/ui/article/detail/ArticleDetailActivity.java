@@ -25,7 +25,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
-import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
@@ -49,10 +48,11 @@ public class ArticleDetailActivity extends BaseViewActivity {
     @BindView(R.id.progressbar)
     ProgressBar progressbar;
 
+
     @Override
-    public MvpPresenter setmPresenter() {
-        return null;
+    public void injectActivityComponent() {
     }
+
 
     @Override
     public int getLayoutId() {

@@ -14,6 +14,9 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.CommonUtils;
+import com.zwq65.unity.utils.LogUtils;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,26 +25,28 @@ import butterknife.ButterKnife;
  * Created by zwq65 on 2017/09/12
  */
 
-public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter<V>> extends BaseActivity implements MvpView, BaseFragment.Callback {
+public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter<V>> extends BaseActivity implements MvpView, BaseFragment.Callback {
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    protected T mPresenter;
     private ProgressDialog mProgressDialog;
+    @Inject
+    public P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        injectActivityComponent();
+        if (mPresenter != null) {
+            mPresenter.onAttach((V) this);
+        }
         //init toolbar
         if (initBaseTooBar() != null && initBaseTooBar()) {
             setupBaseToolbar();
         } else {
-            //不含toolbar的activity，采用fitsSystemWindows(false)实现沉浸式
+            //不含toolbar的activity，采用fitsSystemWindows(false)方式实现沉浸栏
             ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
-        //set up presenter
-        mPresenter = setmPresenter();
         //deal intent if exist
         if (getIntent() != null) {
             dealIntent(getIntent());
@@ -53,7 +58,7 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
     /**
      * @return mPresenter
      */
-    public abstract T setmPresenter();
+    public abstract void injectActivityComponent();
 
     /**
      * @return 是否加载BaseToolBar
@@ -92,13 +97,18 @@ public abstract class BaseViewActivity<V extends MvpView, T extends MvpPresenter
         super.onDestroy();
         //不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
         ImmersionBar.with(this).destroy();
+        //解绑presenter
+        if (mPresenter != null && mPresenter.isViewAttached()) {
+            LogUtils.e("mPresenter.onDetach()");
+            mPresenter.onDetach();
+            mPresenter = null;
+        }
     }
 
     @Nullable
     public Toolbar getToolbar() {
         return toolbar;
     }
-
 
     @Override
     public void showLoading() {

@@ -30,6 +30,8 @@ import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -43,8 +45,10 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     public final String TAG = getClass().getSimpleName();
     public BaseViewActivity mActivity;
     private Unbinder mUnBinder;
-    private MvpPresenter mPresenter;
     private ProgressDialog mProgressDialog;
+
+    @Inject
+    public T mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +61,6 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView");
         View view = inflater.inflate(getLayoutId(), container, false);
-        mPresenter = setmPresenter();
         mUnBinder = ButterKnife.bind(this, view);
         initView();
         return view;
@@ -89,6 +92,11 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
             BaseViewActivity activity = (BaseViewActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
+        }
+        //inject component
+        injectComponent();
+        if (mPresenter != null) {
+            mPresenter.onAttach((V) this);
         }
         LogUtils.i(TAG, "onAttach");
     }
@@ -187,9 +195,9 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     }
 
     /**
-     * @return mPresenter
+     * inject Component
      */
-    public abstract T setmPresenter();
+    public abstract void injectComponent();
 
     /**
      * @return fragment'ResLayoutId

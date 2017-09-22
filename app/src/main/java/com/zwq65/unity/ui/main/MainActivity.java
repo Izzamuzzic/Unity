@@ -16,7 +16,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.BaseViewActivity;
-import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui.account.AccountActivity;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.article.ArticleFragment;
@@ -26,13 +25,11 @@ import com.zwq65.unity.utils.FontUtils;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends BaseViewActivity implements MainMvpView {
+public class MainActivity extends BaseViewActivity<MainMvpView, MainMvpPresenter<MainMvpView>> implements MainMvpView {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -56,14 +53,10 @@ public class MainActivity extends BaseViewActivity implements MainMvpView {
     LinearLayout llVideo;
 
     Disposable disposable;
-    @Inject
-    MainMvpPresenter<MainMvpView> mPresenter;
 
     @Override
-    public MvpPresenter setmPresenter() {
+    public void injectActivityComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override
@@ -179,7 +172,7 @@ public class MainActivity extends BaseViewActivity implements MainMvpView {
 
     private void exitApp() {
         finish();
-        System.exit(0);
+//        System.exit(0);
     }
 
     /**

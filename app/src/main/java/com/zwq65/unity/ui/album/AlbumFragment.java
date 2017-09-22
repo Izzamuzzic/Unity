@@ -8,31 +8,23 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
-import com.zwq65.unity.ui._base.MvpPresenter;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 /**
  * Created by zwq65 on 2017/08/07
  * gank.io开源美图
  */
 
-public class AlbumFragment extends BaseRefreshFragment<Image> implements AlbumMvpView<Image> {
-
-    @Inject
-    AlbumMvpPresenter<AlbumMvpView<Image>> mPresenter;
+public class AlbumFragment extends BaseRefreshFragment<Image, AlbumMvpView<Image>, AlbumMvpPresenter<AlbumMvpView<Image>>> implements AlbumMvpView<Image> {
     AlbumAdapter mAdapter;
 
     @Override
-    public MvpPresenter setmPresenter() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

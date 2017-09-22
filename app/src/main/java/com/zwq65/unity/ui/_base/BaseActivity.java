@@ -41,13 +41,12 @@ import butterknife.Unbinder;
  * activity基类
  */
 
-public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public final String TAG = getClass().getSimpleName();
     private FragmentManager fragmentManager;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
-    private P mPresenter;
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -67,6 +66,8 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((App) getApplication()).getComponent())
                 .build();
+        //set up presenter
+//     mPresenter = setmPresenter();
         LogUtils.i(TAG, "onCreate");
     }
 
@@ -92,10 +93,6 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         if (mUnBinder != null) {
             mUnBinder.unbind();
             mUnBinder = null;
-        }
-        if (mPresenter != null && mPresenter.isViewAttached()) {
-            mPresenter.onDetach();
-            mPresenter = null;
         }
     }
 

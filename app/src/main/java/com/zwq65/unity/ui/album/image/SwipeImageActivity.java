@@ -7,13 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
-import com.zwq65.unity.ui._base.MvpPresenter;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import static com.zwq65.unity.ui.album.image.ImageActivity.IMAGE_LIST;
 import static com.zwq65.unity.ui.album.image.ImageActivity.POSITION;
@@ -25,9 +22,10 @@ public class SwipeImageActivity extends BaseViewActivity {
     int currentPosition;
     List<Image> imageList;
 
+
     @Override
-    public MvpPresenter setmPresenter() {
-        return null;
+    public void injectActivityComponent() {
+        //no need
     }
 
     @Override

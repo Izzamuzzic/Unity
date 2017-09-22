@@ -16,12 +16,8 @@ import com.zwq65.unity.ui.account.tabs.collect.TabCollectionFragment;
 import com.zwq65.unity.ui.account.tabs.local.TabLocalFragment;
 import com.zwq65.unity.utils.FontUtils;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by zwq65 on 2017/08/07
@@ -29,9 +25,6 @@ import butterknife.Unbinder;
  */
 
 public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvpPresenter<AccountMvpView>> implements AccountMvpView {
-
-    @Inject
-    AccountMvpPresenter<AccountMvpView> mPresenter;
 
     @BindView(R.id.tv_name)
     TextView tvName;
@@ -47,10 +40,8 @@ public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvp
     public static final int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
 
     @Override
-    public AccountMvpPresenter<AccountMvpView> setmPresenter() {
+    public void injectActivityComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override

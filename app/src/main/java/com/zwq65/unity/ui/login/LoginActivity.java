@@ -10,12 +10,8 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui.main.MainActivity;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresenter<LoginMvpView>> implements LoginMvpView {
 
@@ -28,14 +24,9 @@ public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresen
     @BindView(R.id.btn_signup)
     TextView btnSignup;
 
-    @Inject
-    LoginMvpPresenter<LoginMvpView> mPresenter;
-
     @Override
-    public LoginMvpPresenter<LoginMvpView> setmPresenter() {
+    public void injectActivityComponent() {
         getActivityComponent().inject(this);
-        mPresenter.onAttach(this);
-        return mPresenter;
     }
 
     @Override
