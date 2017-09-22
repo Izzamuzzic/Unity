@@ -55,7 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView
         int layoutId = getLayoutId();
         if (layoutId != 0) {
             setContentView(layoutId);
@@ -66,8 +65,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((App) getApplication()).getComponent())
                 .build();
-        //set up presenter
-//     mPresenter = setmPresenter();
         LogUtils.i(TAG, "onCreate");
     }
 
@@ -110,7 +107,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             requestPermissionsSafely(permissions, requestCode);
         }
     }
-//
+
 //    @TargetApi(Build.VERSION_CODES.M)
 //    public boolean hasPermission(String permission) {
 //        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||

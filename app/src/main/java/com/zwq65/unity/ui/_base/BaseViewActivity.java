@@ -40,14 +40,12 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
         }
-        //init toolbar
         if (initBaseTooBar() != null && initBaseTooBar()) {
             setupBaseToolbar();
         } else {
             //不含toolbar的activity，采用fitsSystemWindows(false)方式实现沉浸栏
             ImmersionBar.with(this).fitsSystemWindows(false).init();
         }
-        //deal intent if exist
         if (getIntent() != null) {
             dealIntent(getIntent());
         }
@@ -99,7 +97,6 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
         ImmersionBar.with(this).destroy();
         //解绑presenter
         if (mPresenter != null && mPresenter.isViewAttached()) {
-            LogUtils.e("mPresenter.onDetach()");
             mPresenter.onDetach();
             mPresenter = null;
         }

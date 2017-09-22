@@ -88,15 +88,14 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        injectComponent();
+        if (mPresenter != null) {
+            mPresenter.onAttach((V) this);
+        }
         if (context instanceof BaseViewActivity) {
             BaseViewActivity activity = (BaseViewActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
-        }
-        //inject component
-        injectComponent();
-        if (mPresenter != null) {
-            mPresenter.onAttach((V) this);
         }
         LogUtils.i(TAG, "onAttach");
     }

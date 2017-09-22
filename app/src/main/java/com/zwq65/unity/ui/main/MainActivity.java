@@ -172,7 +172,7 @@ public class MainActivity extends BaseViewActivity<MainMvpView, MainMvpPresenter
 
     private void exitApp() {
         finish();
-//        System.exit(0);
+        System.exit(0);
     }
 
     /**

@@ -9,8 +9,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 /**
@@ -21,8 +19,6 @@ public class TabCollectionFragment extends BaseFragment<TabCollectionMvpView, Ta
     @BindView(R.id.rl_collection)
     RecyclerView rlCollection;
 
-    @Inject
-    TabCollectionMvpPresenter<TabCollectionMvpView> mPresenter;
     TabCollectionAdapter adapter;
 
     @Override

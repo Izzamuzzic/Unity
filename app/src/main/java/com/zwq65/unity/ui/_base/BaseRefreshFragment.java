@@ -19,7 +19,8 @@ import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
  * Created by zwq65 on 2017/09/14
  */
 
-public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P extends MvpPresenter<V>> extends BaseFragment<V, P> implements RefreshMvpView<T> {
+public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P extends MvpPresenter<V>> extends BaseFragment<V, P>
+        implements RefreshMvpView<T> {
     @BindView(R.id.swipeRefreshLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.recyclerView)
@@ -109,7 +110,6 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     public void setLoading(boolean loading) {
         isLoading = loading;
     }
-
 
     @Override
     public void refreshData(List<T> list) {

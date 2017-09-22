@@ -9,8 +9,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 /**
@@ -20,8 +18,6 @@ import butterknife.BindView;
 
 public class TabLocalFragment extends BaseFragment<TabLocalMvpView, TabLocalMvpPresenter<TabLocalMvpView>> implements TabLocalMvpView {
 
-    @Inject
-    TabLocalMvpPresenter<TabLocalMvpView> mPresenter;
     @BindView(R.id.rl_local)
     RecyclerView rlLocal;
     TabLocalAdapter adapter;
