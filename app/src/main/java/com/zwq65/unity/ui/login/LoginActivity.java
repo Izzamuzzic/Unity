@@ -25,7 +25,7 @@ public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresen
     TextView btnSignup;
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
     }
 

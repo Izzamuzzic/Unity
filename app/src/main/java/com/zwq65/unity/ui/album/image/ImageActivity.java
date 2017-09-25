@@ -58,7 +58,7 @@ public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresen
     AppCompatCheckBox cbLove;
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
     }
 

@@ -55,7 +55,7 @@ public class MainActivity extends BaseViewActivity<MainMvpView, MainMvpPresenter
     Disposable disposable;
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
     }
 

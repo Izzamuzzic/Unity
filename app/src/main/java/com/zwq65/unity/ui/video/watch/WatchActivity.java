@@ -38,7 +38,7 @@ public class WatchActivity extends BaseViewActivity {
 
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         //no need
     }
 

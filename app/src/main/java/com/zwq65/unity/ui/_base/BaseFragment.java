@@ -88,14 +88,17 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        injectComponent();
-        if (mPresenter != null) {
-            mPresenter.onAttach((V) this);
-        }
+        //init mActivity
         if (context instanceof BaseViewActivity) {
             BaseViewActivity activity = (BaseViewActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
+        }
+        //inject component
+        injectComponent();
+        //Presenter attach the view
+        if (mPresenter != null) {
+            mPresenter.onAttach((V) this);
         }
         LogUtils.i(TAG, "onAttach");
     }
@@ -124,8 +127,8 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
 
     @Override
     public void onDestroy() {
-        LogUtils.i(TAG, "onDestroy");
         super.onDestroy();
+        LogUtils.i(TAG, "onDestroy");
     }
 
     public void onToolbarClick() {

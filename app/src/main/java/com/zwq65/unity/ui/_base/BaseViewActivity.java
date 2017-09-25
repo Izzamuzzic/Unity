@@ -14,7 +14,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.CommonUtils;
-import com.zwq65.unity.utils.LogUtils;
 
 import javax.inject.Inject;
 
@@ -36,7 +35,7 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        injectActivityComponent();
+        injectComponent();
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
         }
@@ -54,9 +53,9 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
     }
 
     /**
-     * @return mPresenter
+     * inject activity component
      */
-    public abstract void injectActivityComponent();
+    public abstract void injectComponent();
 
     /**
      * @return 是否加载BaseToolBar

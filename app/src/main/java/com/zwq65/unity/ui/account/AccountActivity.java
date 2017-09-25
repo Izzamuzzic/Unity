@@ -40,7 +40,7 @@ public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvp
     public static final int[] Tabs = new int[]{R.string.collect, R.string.local, R.string.like};
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
     }
 

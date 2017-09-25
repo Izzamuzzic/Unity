@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ArticleDetailActivity extends BaseViewActivity {
     public static final String ARTICAL = "ARTICAL";
@@ -48,11 +47,9 @@ public class ArticleDetailActivity extends BaseViewActivity {
     @BindView(R.id.progressbar)
     ProgressBar progressbar;
 
-
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
     }
-
 
     @Override
     public int getLayoutId() {
@@ -201,12 +198,5 @@ public class ArticleDetailActivity extends BaseViewActivity {
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);
         openActivity(ImageActivity.class, bundle);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -24,7 +24,7 @@ public class SwipeImageActivity extends BaseViewActivity {
 
 
     @Override
-    public void injectActivityComponent() {
+    public void injectComponent() {
         //no need
     }
 
