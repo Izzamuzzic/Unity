@@ -15,9 +15,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/08/14
  */
 
-public class TabCollectionPresenter<V extends TabCollectionMvpView> extends BasePresenter<V> implements TabCollectionMvpPresenter<V> {
+public class TabCollectionPresenter<V extends TabCollectionContract.View> extends BasePresenter<V> implements TabCollectionContract.Presenter<V> {
     @Inject
-    public TabCollectionPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    TabCollectionPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

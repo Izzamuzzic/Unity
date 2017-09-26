@@ -5,7 +5,6 @@ import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.utils.LogUtils;
 
 import java.util.List;
 
@@ -17,14 +16,14 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticlePresenter<V extends TabArticleContract.ITabArticleView<ArticleWithImage>> extends BasePresenter<V>
-        implements TabArticleContract.ITabArticlePresenter<V> {
+public class TabArticlePresenter<V extends TabArticleContract.View<ArticleWithImage>> extends BasePresenter<V>
+        implements TabArticleContract.Presenter<V> {
     private TabArticleFragment.Type type;
     private int page;
     private boolean isRefresh;
 
     @Inject
-    public TabArticlePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    TabArticlePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

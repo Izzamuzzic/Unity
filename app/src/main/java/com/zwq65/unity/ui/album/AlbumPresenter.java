@@ -17,7 +17,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/07/19
  */
 
-public class AlbumPresenter<V extends AlbumMvpView<Image>> extends BasePresenter<V> implements AlbumMvpPresenter<V> {
+public class AlbumPresenter<V extends AlbumContract.View<Image>> extends BasePresenter<V> implements AlbumContract.Presenter<V> {
     private int page;
 
     @Inject

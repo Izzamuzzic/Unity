@@ -24,7 +24,8 @@ import butterknife.OnClick;
  * 个人中心
  */
 
-public class AccountActivity extends BaseViewActivity<AccountMvpView, AccountMvpPresenter<AccountMvpView>> implements AccountMvpView {
+public class AccountActivity<V extends AccountContract.View> extends BaseViewActivity<V, AccountContract.Presenter<V>>
+        implements AccountContract.View {
 
     @BindView(R.id.tv_name)
     TextView tvName;

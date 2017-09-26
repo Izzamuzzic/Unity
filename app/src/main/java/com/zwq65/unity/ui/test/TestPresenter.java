@@ -2,6 +2,7 @@ package com.zwq65.unity.ui.test;
 
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.ui._base.BasePresenter;
+import com.zwq65.unity.ui._base.MvpView;
 import com.zwq65.unity.utils.LogUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -15,9 +16,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/09/13
  */
 
-public class TestPresenter<V extends TestMvpView> extends BasePresenter<V> implements TestMvpPresenter<V> {
+public class TestPresenter<V extends MvpView> extends BasePresenter<V> implements TestContract.Presenter<V> {
     @Inject
-    public TestPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    TestPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

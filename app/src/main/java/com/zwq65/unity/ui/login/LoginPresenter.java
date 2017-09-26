@@ -11,10 +11,10 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/06/29.
  */
 
-public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> implements LoginMvpPresenter<V> {
+public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<V> implements LoginContract.Presenter<V> {
 
     @Inject
-    public LoginPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    LoginPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

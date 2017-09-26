@@ -24,7 +24,6 @@ public class DLAnimView extends View {
     private Paint paint;
     private final int POINT = 50;
     private int width, height;
-    private boolean isF = true;
 
     private ArrayList<Circle> circles = new ArrayList<>();
 
@@ -174,7 +173,7 @@ public class DLAnimView extends View {
                 handler.postDelayed(this, 5);
             }
         };
-        handler.postDelayed(runnable, 0);
+        handler.post(runnable);
 
     }
 }

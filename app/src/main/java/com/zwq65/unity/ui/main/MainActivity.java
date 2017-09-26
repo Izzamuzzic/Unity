@@ -29,7 +29,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends BaseViewActivity<MainMvpView, MainMvpPresenter<MainMvpView>> implements MainMvpView {
+public class MainActivity<V extends MainContract.View> extends BaseViewActivity<V, MainContract.Presenter<V>>
+        implements MainContract.View {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;

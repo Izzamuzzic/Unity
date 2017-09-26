@@ -16,11 +16,12 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 201/08/15
  */
 
-public class RestVideoPresenter<V extends RestVideoMvpView<VideoWithImage>> extends BasePresenter<V> implements RestVideoMvpPresenter<V> {
+public class RestVideoPresenter<V extends RestVideoContract.View<VideoWithImage>> extends BasePresenter<V>
+        implements RestVideoContract.Presenter<V> {
     private int page;
 
     @Inject
-    public RestVideoPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    RestVideoPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

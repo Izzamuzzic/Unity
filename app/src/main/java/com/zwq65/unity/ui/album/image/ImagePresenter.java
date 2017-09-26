@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by zwq65 on 2017/08/01
  */
 
-public class ImagePresenter<V extends ImageMvpView> extends BasePresenter<V> implements ImageMvpPresenter<V> {
+public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<V> implements ImageContract.Presenter<V> {
     @Inject
     ImagePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);

@@ -37,7 +37,8 @@ import static android.view.View.GONE;
 /**
  * 查看大图Activity
  */
-public class ImageActivity extends BaseViewActivity<ImageMvpView, ImageMvpPresenter<ImageMvpView>> implements ImageMvpView {
+public class ImageActivity<V extends ImageContract.View> extends BaseViewActivity<V, ImageContract.Presenter<V>>
+        implements ImageContract.View {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
     private static final int SAVE_MEIZHI = 1;

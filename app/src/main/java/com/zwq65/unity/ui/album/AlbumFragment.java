@@ -19,7 +19,8 @@ import java.util.List;
  * gank.io开源美图
  */
 
-public class AlbumFragment extends BaseRefreshFragment<Image, AlbumMvpView<Image>, AlbumMvpPresenter<AlbumMvpView<Image>>> implements AlbumMvpView<Image> {
+public class AlbumFragment<V extends AlbumContract.View<Image>> extends BaseRefreshFragment<Image, V,
+        AlbumContract.Presenter<V>> implements AlbumContract.View<Image> {
     AlbumAdapter mAdapter;
 
     @Override

@@ -12,7 +12,7 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/09/13
  */
 
-public class TestFragment extends BaseFragment<TestMvpView, TestMvpPresenter<TestMvpView>> implements TestMvpView {
+public class TestFragment<V extends TestContract.View> extends BaseFragment<V, TestContract.Presenter<V>> implements TestContract.View {
     @BindView(R.id.btn_test)
     Button btnTest;
     @BindView(R.id.btn_exit)

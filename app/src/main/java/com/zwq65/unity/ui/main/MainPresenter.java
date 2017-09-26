@@ -11,9 +11,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/09/21
  */
 
-public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> implements MainMvpPresenter<V> {
+public class MainPresenter<V extends MainContract.View> extends BasePresenter<V> implements MainContract.Presenter<V> {
     @Inject
-    public MainPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
+    MainPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);
     }
 

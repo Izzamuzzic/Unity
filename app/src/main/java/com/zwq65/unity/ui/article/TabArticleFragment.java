@@ -16,9 +16,8 @@ import java.util.List;
  * Created by zwq65 on 2017/08/30
  */
 
-public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage, TabArticleContract.ITabArticleView<ArticleWithImage>,
-        TabArticleContract.ITabArticlePresenter<TabArticleContract.ITabArticleView<ArticleWithImage>>>
-        implements TabArticleContract.ITabArticleView<ArticleWithImage> {
+public class TabArticleFragment<V extends TabArticleContract.View<ArticleWithImage>> extends BaseRefreshFragment<ArticleWithImage, V,
+        TabArticleContract.Presenter<V>> implements TabArticleContract.View<ArticleWithImage> {
 
     public static final String TECH_TAG = "tag";
     public Type mType;

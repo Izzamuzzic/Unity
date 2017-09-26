@@ -13,7 +13,8 @@ import com.zwq65.unity.ui.main.MainActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseViewActivity<LoginMvpView, LoginMvpPresenter<LoginMvpView>> implements LoginMvpView {
+public class LoginActivity<V extends LoginContract.View> extends BaseViewActivity<V, LoginContract.Presenter<V>>
+        implements LoginContract.View {
 
     @BindView(R.id.et_email)
     EditText etEmail;

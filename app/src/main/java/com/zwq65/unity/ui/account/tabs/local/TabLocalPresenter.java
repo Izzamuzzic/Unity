@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by zwq65 on 2017/08/22
  */
 
-public class TabLocalPresenter<V extends TabLocalMvpView> extends BasePresenter<V> implements TabLocalMvpPresenter<V> {
+public class TabLocalPresenter<V extends TabLocalContract.View> extends BasePresenter<V> implements TabLocalContract.Presenter<V> {
     @Inject
     TabLocalPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
         super(dataManager, compositeDisposable);

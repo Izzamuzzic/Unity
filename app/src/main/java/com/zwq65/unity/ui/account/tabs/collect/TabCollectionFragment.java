@@ -15,7 +15,8 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/08/11
  * 收藏图片相册
  */
-public class TabCollectionFragment extends BaseFragment<TabCollectionMvpView, TabCollectionMvpPresenter<TabCollectionMvpView>> implements TabCollectionMvpView {
+public class TabCollectionFragment<V extends TabCollectionContract.View> extends BaseFragment<V,
+        TabCollectionContract.Presenter<V>> implements TabCollectionContract.View {
     @BindView(R.id.rl_collection)
     RecyclerView rlCollection;
 

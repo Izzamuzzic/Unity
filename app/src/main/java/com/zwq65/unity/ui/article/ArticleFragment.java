@@ -17,8 +17,8 @@ import butterknife.BindView;
 /**
  * Created by zwq65 on 2017/08/30
  */
-public class ArticleFragment extends BaseFragment<ArticleContract.IArticleView, ArticleContract.IArticlePresenter<ArticleContract.IArticleView>>
-        implements ArticleContract.IArticleView {
+public class ArticleFragment<V extends ArticleContract.View> extends BaseFragment<V, ArticleContract.Presenter<V>>
+        implements ArticleContract.View {
 
     @BindView(R.id.tab_type)
     TabLayout tabType;

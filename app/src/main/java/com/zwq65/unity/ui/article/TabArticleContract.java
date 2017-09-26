@@ -11,10 +11,10 @@ import com.zwq65.unity.ui._base.RefreshMvpView;
  */
 
 public class TabArticleContract {
-    public interface ITabArticleView<T extends ArticleWithImage> extends RefreshMvpView<T> {
+    public interface View<T extends ArticleWithImage> extends RefreshMvpView<T> {
     }
 
-    public interface ITabArticlePresenter<V extends MvpView> extends MvpPresenter<V> {
+    public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void setType(TabArticleFragment.Type type);
 
         void init();

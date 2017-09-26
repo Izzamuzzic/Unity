@@ -18,6 +18,8 @@ import java.util.List;
 public class RandomPointLineView extends View {
 
     private Paint mPaint;
+    private static final int POINT_NUM = 50;
+    private int mWidth, mHeight;
     private List<Integer> points;
 
     public RandomPointLineView(Context context) {
@@ -34,6 +36,15 @@ public class RandomPointLineView extends View {
     }
 
     private void init() {
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
     }
 }

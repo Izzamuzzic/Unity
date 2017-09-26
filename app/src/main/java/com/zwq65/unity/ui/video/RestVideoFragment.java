@@ -17,8 +17,8 @@ import java.util.List;
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage, RestVideoMvpView<VideoWithImage>,
-        RestVideoMvpPresenter<RestVideoMvpView<VideoWithImage>>> implements RestVideoMvpView<VideoWithImage> {
+public class RestVideoFragment<V extends RestVideoContract.View<VideoWithImage>> extends BaseRefreshFragment<VideoWithImage, V,
+        RestVideoContract.Presenter<V>> implements RestVideoContract.View<VideoWithImage> {
 
     RestVideoAdapter mAdapter;
 

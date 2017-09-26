@@ -16,7 +16,8 @@ import butterknife.BindView;
  * 本地保存相册
  */
 
-public class TabLocalFragment extends BaseFragment<TabLocalMvpView, TabLocalMvpPresenter<TabLocalMvpView>> implements TabLocalMvpView {
+public class TabLocalFragment<V extends TabLocalContract.View> extends BaseFragment<V, TabLocalContract.Presenter<V>>
+        implements TabLocalContract.View {
 
     @BindView(R.id.rl_local)
     RecyclerView rlLocal;
