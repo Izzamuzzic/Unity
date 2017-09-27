@@ -2,23 +2,24 @@ package com.zwq65.unity;
 
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
-import com.zwq65.unity.di.module.ApplicationModule;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 
 /**
  * Created by zwq65 on 2017/06/28.
  * Unity
  */
 
-public class App extends MultiDexApplication {
+public class App extends DaggerApplication {
 
     private ApplicationComponent mApplicationComponent;
     private static App unityApp;
@@ -31,18 +32,21 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         unityApp = this;
-        mApplicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this)).build();
-        mApplicationComponent.inject(this);
         initBugly();
         initStetho();
         initLeakcanary();
     }
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        MultiDex.install(newBase);
-        super.attachBaseContext(newBase);
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        ApplicationComponent appComponent = DaggerApplicationComponent.builder().application(this).build();
+        appComponent.inject(this);
+        return appComponent;
+    }
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**

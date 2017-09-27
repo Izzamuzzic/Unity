@@ -24,33 +24,24 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
-import com.zwq65.unity.App;
 import com.zwq65.unity.R;
-import com.zwq65.unity.di.component.ActivityComponent;
-import com.zwq65.unity.di.component.DaggerActivityComponent;
-import com.zwq65.unity.di.module.ActivityModule;
 import com.zwq65.unity.utils.LogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * Created by janisharali on 27/01/17
  * activity基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     public final String TAG = getClass().getSimpleName();
     private FragmentManager fragmentManager;
-    private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
-
-    public ActivityComponent getActivityComponent() {
-        return mActivityComponent;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,12 +50,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (layoutId != 0) {
             setContentView(layoutId);
             mUnBinder = ButterKnife.bind(this);
+            if (mUnBinder == Unbinder.EMPTY) {
+                LogUtils.e(TAG, "mUnBinder == Unbinder.EMPTY");
+            }
         }
-        //init DaggerActivityComponent
-        mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .applicationComponent(((App) getApplication()).getComponent())
-                .build();
         LogUtils.i(TAG, "onCreate");
     }
 

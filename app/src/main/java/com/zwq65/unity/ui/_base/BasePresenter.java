@@ -12,12 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-
 package com.zwq65.unity.ui._base;
-
-/**
- * Created by janisharali on 27/01/17.
- */
 
 import com.zwq65.unity.data.DataManager;
 
@@ -33,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * onAttach() and onDetach(). It also handles keeping a reference to the mvpView that
  * can be accessed from the children classes by calling getMvpView().
  */
-public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
+public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 
     private final DataManager mDataManager;
     private final CompositeDisposable mCompositeDisposable;
@@ -60,6 +55,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         mViewRef.clear();
         mViewRef = null;
     }
+
     @Override
     public boolean isViewAttached() {
         return mViewRef != null && mViewRef.get() != null;

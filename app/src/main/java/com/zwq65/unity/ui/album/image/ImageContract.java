@@ -3,8 +3,7 @@ package com.zwq65.unity.ui.album.image;
 import android.content.Context;
 
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.MvpPresenter;
-import com.zwq65.unity.ui._base.MvpView;
+import com.zwq65.unity.ui._base.BaseContract;
 
 import io.reactivex.Observable;
 
@@ -16,11 +15,11 @@ import io.reactivex.Observable;
  * ================================================
  */
 public interface ImageContract {
-    interface View extends MvpView {
+    interface View extends BaseContract.View {
 
     }
 
-    interface Presenter<V extends MvpView> extends MvpPresenter<V> {
+    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
         /**
          * @param context context
          * @param image   保存图片到本地

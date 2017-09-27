@@ -36,12 +36,6 @@ public class WatchActivity extends BaseViewActivity {
     @BindView(R.id.iv_title_bg)
     ImageView ivTitleBg;
 
-
-    @Override
-    public void injectComponent() {
-        //no need
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_watch;

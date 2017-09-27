@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.test
 
-import com.zwq65.unity.ui._base.MvpPresenter
-import com.zwq65.unity.ui._base.MvpView
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
  *================================================
@@ -12,9 +11,9 @@ import com.zwq65.unity.ui._base.MvpView
  */
 public interface TestContract {
 
-    interface View : MvpView
+    interface View :BaseContract.View
 
-    interface Presenter<V : MvpView> : MvpPresenter<V> {
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
         fun test()
     }
 }

@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.account;
 
-import com.zwq65.unity.ui._base.MvpPresenter;
-import com.zwq65.unity.ui._base.MvpView;
+import com.zwq65.unity.ui._base.BaseContract;
 
 /**
  * ================================================
@@ -11,11 +10,11 @@ import com.zwq65.unity.ui._base.MvpView;
  * ================================================
  */
 public interface AccountContract {
-    interface View extends MvpView {
+    interface View extends BaseContract.View {
 
     }
 
-    interface Presenter<V extends MvpView> extends MvpPresenter<V> {
+    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
 
     }
 }

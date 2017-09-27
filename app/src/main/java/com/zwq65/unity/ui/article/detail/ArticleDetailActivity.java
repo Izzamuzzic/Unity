@@ -48,10 +48,6 @@ public class ArticleDetailActivity extends BaseViewActivity {
     ProgressBar progressbar;
 
     @Override
-    public void injectComponent() {
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_article_detail;
     }

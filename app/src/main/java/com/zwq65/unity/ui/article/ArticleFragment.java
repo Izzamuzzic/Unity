@@ -17,7 +17,7 @@ import butterknife.BindView;
 /**
  * Created by zwq65 on 2017/08/30
  */
-public class ArticleFragment<V extends ArticleContract.View> extends BaseFragment<V, ArticleContract.Presenter<V>>
+public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleContract.Presenter<ArticleContract.View>>
         implements ArticleContract.View {
 
     @BindView(R.id.tab_type)
@@ -27,11 +27,6 @@ public class ArticleFragment<V extends ArticleContract.View> extends BaseFragmen
 
     public static final String[] Tabs = new String[]{"Android", "Ios", "前端"};
     private List<Fragment> fragments;
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
 
     @Override
     public int getLayoutId() {

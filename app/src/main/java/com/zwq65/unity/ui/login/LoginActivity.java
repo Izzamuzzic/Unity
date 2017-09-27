@@ -13,7 +13,7 @@ import com.zwq65.unity.ui.main.MainActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity<V extends LoginContract.View> extends BaseViewActivity<V, LoginContract.Presenter<V>>
+public class LoginActivity extends BaseViewActivity<LoginContract.View, LoginContract.Presenter<LoginContract.View>>
         implements LoginContract.View {
 
     @BindView(R.id.et_email)
@@ -26,18 +26,13 @@ public class LoginActivity<V extends LoginContract.View> extends BaseViewActivit
     TextView btnSignup;
 
     @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_login;
     }
 
     @Override
     public Boolean initBaseTooBar() {
-        return true;
+        return false;
     }
 
     @Override

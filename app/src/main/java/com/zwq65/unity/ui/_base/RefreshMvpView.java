@@ -6,7 +6,7 @@ import java.util.List;
  * Created by zwq65 on 2017/09/14
  */
 
-public interface RefreshMvpView<T> extends MvpView {
+public interface RefreshMvpView<T> extends BaseContract.View {
 
     void refreshData(List<T> list);//刷新数据
 

@@ -37,7 +37,7 @@ import static android.view.View.GONE;
 /**
  * 查看大图Activity
  */
-public class ImageActivity<V extends ImageContract.View> extends BaseViewActivity<V, ImageContract.Presenter<V>>
+public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageContract.Presenter<ImageContract.View>>
         implements ImageContract.View {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
@@ -57,11 +57,6 @@ public class ImageActivity<V extends ImageContract.View> extends BaseViewActivit
     Toolbar toolbar;
 
     AppCompatCheckBox cbLove;
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
 
     @Override
     public int getLayoutId() {

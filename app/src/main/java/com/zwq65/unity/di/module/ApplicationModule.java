@@ -35,64 +35,65 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by janisharali on 27/01/17.
+ * This is a Dagger module. We use this to bind our Application class as a Context in the AppComponent
+ * By using Dagger Android we do not need to pass our Application instance to any module,
+ * we simply need to expose our Application as Context.
+ * One of the advantages of Dagger.Android is that your
+ * Application & Activities are provided into your graph for you.
+ * {@link
+ * com.zwq65.unity.di.component.ApplicationComponent}.
  */
-
 @Module
-public class ApplicationModule {
-
-    private final Application mApplication;
-
-    public ApplicationModule(Application application) {
-        mApplication = application;
-    }
+public abstract class ApplicationModule {
 
     @Provides
     @ApplicationContext
-    Context provideContext() {
-        return mApplication;
+    static Context provideContext(Application application) {
+        return application;
     }
 
     @Provides
-    Application provideApplication() {
-        return mApplication;
+    static CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
     }
 
     @Provides
     @DatabaseInfo
-    String provideDatabaseName() {
+    static String provideDatabaseName() {
         return AppConstants.DB_NAME;
     }
 
     @Provides
     @PreferenceInfo
-    String providePreferenceName() {
+    static String providePreferenceName() {
         return AppConstants.PREF_NAME;
     }
 
     @Provides
     @Singleton
-    DataManager provideDataManager(AppDataManager appDataManager) {
+    static DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
     }
 
     @Provides
     @Singleton
-    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+    static DbHelper provideDbHelper(AppDbHelper appDbHelper) {
         return appDbHelper;
     }
 
     @Provides
     @Singleton
-    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+    static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
         return appApiHelper;
     }
 
     @Provides
     @Singleton
-    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+    static PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
         return appPreferencesHelper;
     }
+
 }

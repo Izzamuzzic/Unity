@@ -24,7 +24,7 @@ package com.zwq65.unity.ui._base;
  * pattern must implement. Generally this interface will be extended by a more specific interface
  * that then usually will be implemented by an Activity or Fragment.
  */
-public interface SubMvpView extends MvpView {
+public interface SubMvpView extends BaseContract.View {
 
     void onCreate();
 
@@ -38,5 +38,5 @@ public interface SubMvpView extends MvpView {
 
     void onDestroy();
 
-    void attachParentMvpView(MvpView mvpView);
+    void attachParentMvpView(BaseContract.View mvpView);
 }

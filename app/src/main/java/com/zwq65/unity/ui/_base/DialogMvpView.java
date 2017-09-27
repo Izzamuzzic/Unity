@@ -19,7 +19,7 @@ package com.zwq65.unity.ui._base;
  * Created by janisharali on 24/05/17.
  */
 
-public interface DialogMvpView extends MvpView {
+public interface DialogMvpView extends BaseContract.View {
 
     void dismissDialog(String tag);
 }

@@ -1,8 +1,7 @@
 package com.zwq65.unity.ui.video;
 
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
-import com.zwq65.unity.ui._base.MvpPresenter;
-import com.zwq65.unity.ui._base.MvpView;
+import com.zwq65.unity.ui._base.BaseContract;
 import com.zwq65.unity.ui._base.RefreshMvpView;
 
 /**
@@ -17,7 +16,7 @@ public interface RestVideoContract {
 
     }
 
-    interface Presenter<V extends MvpView> extends MvpPresenter<V> {
+    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
         void init();
 
         /**

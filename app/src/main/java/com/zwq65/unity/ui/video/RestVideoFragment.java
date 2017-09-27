@@ -17,15 +17,10 @@ import java.util.List;
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoFragment<V extends RestVideoContract.View<VideoWithImage>> extends BaseRefreshFragment<VideoWithImage, V,
-        RestVideoContract.Presenter<V>> implements RestVideoContract.View<VideoWithImage> {
+public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage,RestVideoContract.View<VideoWithImage>,
+        RestVideoContract.Presenter<RestVideoContract.View<VideoWithImage>>> implements RestVideoContract.View<VideoWithImage> {
 
     RestVideoAdapter mAdapter;
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
 
     @Override
     public int getLayoutId() {

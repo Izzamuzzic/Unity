@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
  * Created by zwq65 on 2017/09/12
  */
 
-public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter<V>> extends BaseActivity implements MvpView, BaseFragment.Callback {
+public abstract class BaseViewActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>>
+        extends BaseActivity implements BaseContract.View, BaseFragment.Callback {
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -35,7 +36,6 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        injectComponent();
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
         }
@@ -51,11 +51,6 @@ public abstract class BaseViewActivity<V extends MvpView, P extends MvpPresenter
         initView();
         initData();
     }
-
-    /**
-     * inject activity component
-     */
-    public abstract void injectComponent();
 
     /**
      * @return 是否加载BaseToolBar

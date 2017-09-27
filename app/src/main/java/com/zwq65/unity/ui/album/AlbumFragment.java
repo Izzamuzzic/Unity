@@ -15,18 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zwq65 on 2017/08/07
- * gank.io开源美图
+ * ================================================
+ * <p>gank.io开源美图
+ * Created by NIRVANA on 2017/08/07
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
-public class AlbumFragment<V extends AlbumContract.View<Image>> extends BaseRefreshFragment<Image, V,
-        AlbumContract.Presenter<V>> implements AlbumContract.View<Image> {
+public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View<Image>,
+        AlbumContract.Presenter<AlbumContract.View<Image>>> implements AlbumContract.View<Image> {
     AlbumAdapter mAdapter;
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
 
     @Override
     public int getLayoutId() {

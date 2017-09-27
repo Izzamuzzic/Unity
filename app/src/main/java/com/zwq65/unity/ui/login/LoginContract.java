@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui.login;
 
-import com.zwq65.unity.ui._base.MvpPresenter;
-import com.zwq65.unity.ui._base.MvpView;
+import com.zwq65.unity.ui._base.BaseContract;
 
 /**
  * ================================================
@@ -11,13 +10,13 @@ import com.zwq65.unity.ui._base.MvpView;
  * ================================================
  */
 public interface LoginContract {
-    interface View extends MvpView {
+    interface View extends BaseContract.View {
         void openMainActivity();
 
         void openRegisterActivity();
     }
 
-    interface Presenter<V extends MvpView> extends MvpPresenter<V> {
+    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
         void login(String account, String password);
 
         void register();

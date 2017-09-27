@@ -16,8 +16,8 @@ import java.util.List;
  * Created by zwq65 on 2017/08/30
  */
 
-public class TabArticleFragment<V extends TabArticleContract.View<ArticleWithImage>> extends BaseRefreshFragment<ArticleWithImage, V,
-        TabArticleContract.Presenter<V>> implements TabArticleContract.View<ArticleWithImage> {
+public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage, TabArticleContract.View<ArticleWithImage>,
+        TabArticleContract.Presenter<TabArticleContract.View<ArticleWithImage>>> implements TabArticleContract.View<ArticleWithImage> {
 
     public static final String TECH_TAG = "tag";
     public Type mType;
@@ -44,11 +44,6 @@ public class TabArticleFragment<V extends TabArticleContract.View<ArticleWithIma
         TabArticleFragment fragment = new TabArticleFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
     }
 
     @Override

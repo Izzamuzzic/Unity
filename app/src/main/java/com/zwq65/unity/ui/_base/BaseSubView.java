@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseSubView extends ViewGroup implements SubMvpView {
 
-    private MvpView mParentMvpView;
+    private BaseContract.View mParentMvpView;
 
     public BaseSubView(Context context) {
         super(context);
@@ -48,7 +48,7 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
     }
 
     @Override
-    public void attachParentMvpView(MvpView mvpView) {
+    public void attachParentMvpView(BaseContract.View mvpView) {
         mParentMvpView = mvpView;
     }
 

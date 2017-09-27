@@ -21,12 +21,10 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zwq65.unity.di.component.ActivityComponent;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
@@ -34,6 +32,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.support.DaggerFragment;
 
 
 /**
@@ -41,7 +40,8 @@ import butterknife.Unbinder;
  * Fragment基类
  */
 
-public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>> extends Fragment implements MvpView {
+public abstract class BaseFragment<V extends BaseContract.View, T extends BaseContract.Presenter<V>> extends DaggerFragment
+        implements BaseContract.View {
     public final String TAG = getClass().getSimpleName();
     public BaseViewActivity mActivity;
     private Unbinder mUnBinder;
@@ -94,8 +94,6 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
-        //inject component
-        injectComponent();
         //Presenter attach the view
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
@@ -137,7 +135,9 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
     @Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this.getContext());
+        if (mActivity != null) {
+            mProgressDialog = CommonUtils.showLoadingDialog(mActivity);
+        }
     }
 
     @Override
@@ -188,18 +188,6 @@ public abstract class BaseFragment<V extends MvpView, T extends MvpPresenter<V>>
             mActivity.showSuccessAlert(message);
         }
     }
-
-    public ActivityComponent getActivityComponent() {
-        if (mActivity != null) {
-            return mActivity.getActivityComponent();
-        }
-        return null;
-    }
-
-    /**
-     * inject Component
-     */
-    public abstract void injectComponent();
 
     /**
      * @return fragment'ResLayoutId

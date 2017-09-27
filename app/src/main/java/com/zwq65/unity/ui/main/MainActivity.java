@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity<V extends MainContract.View> extends BaseViewActivity<V, MainContract.Presenter<V>>
+public class MainActivity extends BaseViewActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 
     @BindView(R.id.drawer_layout)
@@ -54,11 +54,6 @@ public class MainActivity<V extends MainContract.View> extends BaseViewActivity<
     LinearLayout llVideo;
 
     Disposable disposable;
-
-    @Override
-    public void injectComponent() {
-        getActivityComponent().inject(this);
-    }
 
     @Override
     public int getLayoutId() {
@@ -150,7 +145,6 @@ public class MainActivity<V extends MainContract.View> extends BaseViewActivity<
                         break;
                 }
                 setDayNightMode(mPresenter.getNightMode());
-                //fixme Nougat not showing animation
                 getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
                 recreate();
                 break;
