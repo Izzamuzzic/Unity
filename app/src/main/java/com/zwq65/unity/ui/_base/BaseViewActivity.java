@@ -17,17 +17,12 @@ import com.zwq65.unity.utils.CommonUtils;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by zwq65 on 2017/09/12
  */
 
 public abstract class BaseViewActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>>
         extends BaseActivity implements BaseContract.View, BaseFragment.Callback {
-    @Nullable
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private ProgressDialog mProgressDialog;
     @Inject
@@ -75,7 +70,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupBaseToolbar() {
-        ButterKnife.bind(this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);
