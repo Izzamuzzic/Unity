@@ -15,7 +15,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
-import com.zwq65.unity.utils.FontUtils;
 
 import butterknife.BindView;
 
@@ -47,7 +46,6 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
 
         @Override
         public void setData(Article data) {
-            FontUtils.getInstance().setTypeface(tvTitle, FontUtils.Font.Roboto_Bold);
             tvTitle.setText(data.getDesc());
             tvTitle.setVisibility(View.INVISIBLE);
             Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {

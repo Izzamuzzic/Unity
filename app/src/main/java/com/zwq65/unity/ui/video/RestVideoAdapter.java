@@ -15,7 +15,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
-import com.zwq65.unity.utils.FontUtils;
 
 import butterknife.BindView;
 
@@ -47,7 +46,6 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
 
         @Override
         public void setData(Video data) {
-            FontUtils.getInstance().setTypeface(tvVideoTitle, FontUtils.Font.Roboto_Bold);
             tvVideoTitle.setText(data.getDesc());
             tvVideoTitle.setVisibility(View.INVISIBLE);
             Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {

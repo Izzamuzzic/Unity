@@ -18,7 +18,7 @@ package com.zwq65.unity.ui._base.adapter;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,11 +26,11 @@ import java.util.List;
 
 /**
  * ================================================
- * 基类 {@link FragmentStatePagerAdapter}
+ * 基类 {@link FragmentPagerAdapter}
  * <p>
  * ================================================
  */
-public class BaseViewPagerAdapter extends FragmentStatePagerAdapter {
+public class BaseViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> mList;
     private CharSequence[] mTitles;
 
