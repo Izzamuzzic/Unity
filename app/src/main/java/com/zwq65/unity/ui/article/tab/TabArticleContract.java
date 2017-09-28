@@ -1,6 +1,6 @@
-package com.zwq65.unity.ui.article;
+package com.zwq65.unity.ui.article.tab;
 
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.BaseContract;
 import com.zwq65.unity.ui._base.RefreshMvpView;
 
@@ -10,7 +10,7 @@ import com.zwq65.unity.ui._base.RefreshMvpView;
  */
 
 public class TabArticleContract {
-    public interface View<T extends ArticleWithImage> extends RefreshMvpView<T> {
+    public interface View<T extends Article> extends RefreshMvpView<T> {
     }
 
     public interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {

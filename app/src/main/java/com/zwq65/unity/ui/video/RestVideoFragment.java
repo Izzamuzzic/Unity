@@ -5,9 +5,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ import java.util.List;
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage,RestVideoContract.View<VideoWithImage>,
-        RestVideoContract.Presenter<RestVideoContract.View<VideoWithImage>>> implements RestVideoContract.View<VideoWithImage> {
+public class RestVideoFragment extends BaseRefreshFragment<Video,RestVideoContract.View<Video>,
+        RestVideoContract.Presenter<RestVideoContract.View<Video>>> implements RestVideoContract.View<Video> {
 
     RestVideoAdapter mAdapter;
 
@@ -34,7 +35,7 @@ public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage,RestVi
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter = new RestVideoAdapter();
-        mAdapter.setOnItemClickListener((videoWithImage, position) -> gotoWatchActivity(videoWithImage));
+        mAdapter.setOnItemClickListener((video, position) -> gotoWatchActivity(video));
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -59,21 +60,21 @@ public class RestVideoFragment extends BaseRefreshFragment<VideoWithImage,RestVi
         mPresenter.init();
     }
 
-    private void gotoWatchActivity(VideoWithImage videoWithImage) {
+    private void gotoWatchActivity(Video video) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(WatchActivity.VIDEO_WITH_IMAGE, videoWithImage);
+        bundle.putParcelable(WatchActivity.VIDEO, video);
         mActivity.openActivity(WatchActivity.class, bundle);
     }
 
     @Override
-    public void refreshData(List<VideoWithImage> list) {
+    public void refreshData(List<Video> list) {
         super.refreshData(list);
         mAdapter.clearItems();
         mAdapter.addItems(list);
     }
 
     @Override
-    public void loadData(List<VideoWithImage> list) {
+    public void loadData(List<Video> list) {
         super.loadData(list);
         mAdapter.addItems(list);
     }

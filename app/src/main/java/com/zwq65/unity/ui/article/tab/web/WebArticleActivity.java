@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.article.web;
+package com.zwq65.unity.ui.article.tab.web;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -22,7 +22,7 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui.album.image.ImageActivity;
@@ -36,7 +36,7 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
         WebArticleContract.Presenter<WebArticleContract.View>> implements WebArticleContract.View {
     public static final String ARTICAL = "ARTICAL";
 
-    ArticleWithImage articleWithImage;
+    Article article;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbarLayout)
@@ -61,16 +61,16 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
     @Override
     public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
-        articleWithImage = bundle.getParcelable(ARTICAL);
+        article = bundle.getParcelable(ARTICAL);
     }
 
     @Override
     public void initView() {
         initToolBar();
         //set header'background image
-        if (articleWithImage != null) {
-            Glide.with(this).load(articleWithImage.getImage().getUrl()).into(ivTitleBg);
-            collapsingToolbarLayout.setTitle(articleWithImage.getArticle().getDesc());
+        if (article != null) {
+            Glide.with(this).load(article.getImageUrl()).into(ivTitleBg);
+            collapsingToolbarLayout.setTitle(article.getDesc());
             //WebView
             webview.getSettings().setJavaScriptEnabled(true);
             webview.getSettings().setDomStorageEnabled(true);
@@ -97,7 +97,7 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
                     return true;
                 }
             });
-            webview.loadUrl(articleWithImage.getArticle().getUrl());
+            webview.loadUrl(article.getUrl());
         }
     }
 
@@ -190,7 +190,9 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
 
     private void gotoContentActivity() {
         List<Image> images = new ArrayList<>(1);
-        images.add(articleWithImage.getImage());
+        Image image = new Image();
+        image.setUrl(article.getImageUrl());
+        images.add(image);
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);

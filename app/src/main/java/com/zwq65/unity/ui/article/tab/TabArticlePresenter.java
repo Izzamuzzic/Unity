@@ -1,9 +1,9 @@
-package com.zwq65.unity.ui.article;
+package com.zwq65.unity.ui.article.tab;
 
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.BasePresenter;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticlePresenter<V extends TabArticleContract.View<ArticleWithImage>> extends BasePresenter<V>
+public class TabArticlePresenter<V extends TabArticleContract.View<Article>> extends BasePresenter<V>
         implements TabArticleContract.Presenter<V> {
     private TabArticleFragment.Type type;
     private int page;
@@ -57,10 +57,10 @@ public class TabArticlePresenter<V extends TabArticleContract.View<ArticleWithIm
         }
     }
 
-    private ApiSubscriberCallBack<List<ArticleWithImage>> getApiSubscriberCallBack() {
-        return new ApiSubscriberCallBack<List<ArticleWithImage>>() {
+    private ApiSubscriberCallBack<List<Article>> getApiSubscriberCallBack() {
+        return new ApiSubscriberCallBack<List<Article>>() {
             @Override
-            public void onSuccess(List<ArticleWithImage> data) {
+            public void onSuccess(List<Article> data) {
                 if (data != null) {
                     page++;
                     if (isRefresh) {

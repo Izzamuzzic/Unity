@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.article.web;
+package com.zwq65.unity.ui.article.tab.web;
 
 import com.zwq65.unity.ui._base.BaseContract;
 

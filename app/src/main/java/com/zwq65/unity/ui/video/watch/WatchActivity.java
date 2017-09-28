@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui.album.image.ImageActivity;
 
@@ -28,8 +28,8 @@ import butterknife.BindView;
 public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchContract.Presenter<WatchContract.View>>
         implements WatchContract.View {
     //intent'key value
-    public static final String VIDEO_WITH_IMAGE = "VideoWithImage";
-    VideoWithImage videoWithImage;
+    public static final String VIDEO = "VIDEO";
+    Video video;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbarLayout)
@@ -50,15 +50,15 @@ public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchCon
     @Override
     public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
-        videoWithImage = bundle.getParcelable(VIDEO_WITH_IMAGE);
+        video = bundle.getParcelable(VIDEO);
     }
 
     @Override
     public void initView() {
         //set header'background image
-        if (videoWithImage != null) {
-            Glide.with(this).load(videoWithImage.getImage().getUrl()).into(ivTitleBg);
-            collapsingToolbarLayout.setTitle(videoWithImage.getVideo().getDesc());
+        if (video != null) {
+            Glide.with(this).load(video.getImageUrl()).into(ivTitleBg);
+            collapsingToolbarLayout.setTitle(video.getDesc());
         }
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
@@ -101,7 +101,9 @@ public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchCon
 
     private void gotoContentActivity() {
         List<Image> images = new ArrayList<>(1);
-        images.add(videoWithImage.getImage());
+        Image image = new Image();
+        image.setUrl(video.getImageUrl());
+        images.add(image);
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);

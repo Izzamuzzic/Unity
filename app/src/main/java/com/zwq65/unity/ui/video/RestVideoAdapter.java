@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.utils.FontUtils;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, RestVideoAdapter.ViewHolder> {
+public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAdapter.ViewHolder> {
 
     @Override
     public int getLayoutId(int viewType) {
@@ -35,7 +35,7 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
         return new ViewHolder(v);
     }
 
-    class ViewHolder extends BaseViewHolder<VideoWithImage> {
+    class ViewHolder extends BaseViewHolder<Video> {
         @BindView(R.id.iv_beauty)
         ImageView ivBeauty;
         @BindView(R.id.tv_video_title)
@@ -46,11 +46,11 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<VideoWithImage, Re
         }
 
         @Override
-        public void setData(VideoWithImage data) {
+        public void setData(Video data) {
             FontUtils.getInstance().setTypeface(tvVideoTitle, FontUtils.Font.Roboto_Bold);
-            tvVideoTitle.setText(data.getVideo().getDesc());
+            tvVideoTitle.setText(data.getDesc());
             tvVideoTitle.setVisibility(View.INVISIBLE);
-            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
+            Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;

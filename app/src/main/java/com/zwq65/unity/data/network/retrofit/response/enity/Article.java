@@ -33,6 +33,8 @@ public class Article implements Parcelable {
     private boolean used;
     private String who;
     private List<String> images;
+    //set value,show it as background
+    private String imageUrl;
 
     public String get_id() {
         return _id;
@@ -114,6 +116,14 @@ public class Article implements Parcelable {
         this.images = images;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -131,6 +141,7 @@ public class Article implements Parcelable {
         dest.writeByte(this.used ? (byte) 1 : (byte) 0);
         dest.writeString(this.who);
         dest.writeStringList(this.images);
+        dest.writeString(this.imageUrl);
     }
 
     public Article() {
@@ -147,9 +158,10 @@ public class Article implements Parcelable {
         this.used = in.readByte() != 0;
         this.who = in.readString();
         this.images = in.createStringArrayList();
+        this.imageUrl = in.readString();
     }
 
-    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
         @Override
         public Article createFromParcel(Parcel source) {
             return new Article(source);

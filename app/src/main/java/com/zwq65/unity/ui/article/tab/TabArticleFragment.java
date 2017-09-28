@@ -1,14 +1,14 @@
-package com.zwq65.unity.ui.article;
+package com.zwq65.unity.ui.article.tab;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.article.web.WebArticleActivity;
+import com.zwq65.unity.ui.article.tab.web.WebArticleActivity;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import java.util.List;
  * Created by zwq65 on 2017/08/30
  */
 
-public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage, TabArticleContract.View<ArticleWithImage>,
-        TabArticleContract.Presenter<TabArticleContract.View<ArticleWithImage>>> implements TabArticleContract.View<ArticleWithImage> {
+public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleContract.View<Article>,
+        TabArticleContract.Presenter<TabArticleContract.View<Article>>> implements TabArticleContract.View<Article> {
 
     public static final String TECH_TAG = "tag";
     public Type mType;
@@ -84,21 +84,21 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage, Ta
         mPresenter.init();
     }
 
-    private void gotoDetailActivity(ArticleWithImage article) {
+    private void gotoDetailActivity(Article article) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WebArticleActivity.ARTICAL, article);
         mActivity.openActivity(WebArticleActivity.class, bundle);
     }
 
     @Override
-    public void refreshData(List<ArticleWithImage> list) {
+    public void refreshData(List<Article> list) {
         super.refreshData(list);
         mAdapter.clearItems();
         mAdapter.addItems(list);
     }
 
     @Override
-    public void loadData(List<ArticleWithImage> list) {
+    public void loadData(List<Article> list) {
         super.loadData(list);
         mAdapter.addItems(list);
     }

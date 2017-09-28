@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.article;
+package com.zwq65.unity.ui.article.tab;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.utils.FontUtils;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage, TabArticleAdapter.ViewHolder> {
+public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArticleAdapter.ViewHolder> {
 
     @Override
     public int getLayoutId(int viewType) {
@@ -35,7 +35,7 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
         return new ViewHolder(v);
     }
 
-    static class ViewHolder extends BaseViewHolder<ArticleWithImage> {
+    static class ViewHolder extends BaseViewHolder<Article> {
         @BindView(R.id.iv_background)
         ImageView ivBackground;
         @BindView(R.id.tv_title)
@@ -46,11 +46,11 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<ArticleWithImage,
         }
 
         @Override
-        public void setData(ArticleWithImage data) {
+        public void setData(Article data) {
             FontUtils.getInstance().setTypeface(tvTitle, FontUtils.Font.Roboto_Bold);
-            tvTitle.setText(data.getArticle().getDesc());
+            tvTitle.setText(data.getDesc());
             tvTitle.setVisibility(View.INVISIBLE);
-            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
+            Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;

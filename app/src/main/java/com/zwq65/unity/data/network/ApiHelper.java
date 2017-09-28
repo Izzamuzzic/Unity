@@ -3,9 +3,9 @@ package com.zwq65.unity.data.network;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<VideoWithImage>> callBack,
+    Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<Video>> callBack,
                                   ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
@@ -56,7 +56,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
+    Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
                                   ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
@@ -67,7 +67,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getIosArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
+    Disposable getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
                               ApiErrorCallBack<Throwable> errorCallBack);
 
     /**
@@ -78,7 +78,7 @@ public interface ApiHelper {
      * @param errorCallBack errorCallBack
      * @return Disposable
      */
-    Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<ArticleWithImage>> callBack,
+    Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
                                    ApiErrorCallBack<Throwable> errorCallBack);
 
 }

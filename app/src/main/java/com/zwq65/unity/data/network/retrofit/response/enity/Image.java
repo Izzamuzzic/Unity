@@ -19,14 +19,13 @@ public class Image implements Parcelable {
      * used : true
      * who : 代码家
      */
-
     private String _id;
     private String createdAt;
-    private String desc;
+    private String desc;//描述文字
     private String publishedAt;
     private String source;
     private String type;
-    private String url;
+    private String url;//图片链接
     private boolean used;
     private String who;
     private int width;
@@ -157,7 +156,7 @@ public class Image implements Parcelable {
         this.height = in.readInt();
     }
 
-    public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
+    public static final Creator<Image> CREATOR = new Creator<Image>() {
         @Override
         public Image createFromParcel(Parcel source) {
             return new Image(source);

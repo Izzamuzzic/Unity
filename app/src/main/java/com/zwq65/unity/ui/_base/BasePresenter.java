@@ -31,6 +31,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 
     private final DataManager mDataManager;
+    //detach view时，mCompositeDisposable来停止当前所有事务，节省资源
     private final CompositeDisposable mCompositeDisposable;
     //MvpView接口类型的弱引用
     private Reference<V> mViewRef;

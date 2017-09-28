@@ -3,8 +3,8 @@ package com.zwq65.unity.ui.video.watch;
 
 import com.zwq65.unity.di.ActivityScoped;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
 
 /**
@@ -17,6 +17,6 @@ import dagger.Provides;
 @Module
 public abstract class WatchModule {
     @ActivityScoped
-    @Provides
-    abstract WatchContract.Presenter providerWatchPresenter(WatchPresenter watchPresenter);
+    @Binds
+    abstract WatchContract.Presenter<WatchContract.View> providerWatchPresenter(WatchPresenter<WatchContract.View> watchPresenter);
 }

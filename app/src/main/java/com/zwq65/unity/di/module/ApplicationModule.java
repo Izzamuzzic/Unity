@@ -24,6 +24,7 @@ import com.zwq65.unity.data.db.AppDbHelper;
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.network.AppApiHelper;
+import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -88,6 +89,12 @@ public abstract class ApplicationModule {
     @Singleton
     static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
         return appApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    static RetrofitApiManager provideRetrofitApiManager() {
+        return new RetrofitApiManager();
     }
 
     @Provides

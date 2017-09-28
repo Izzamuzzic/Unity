@@ -1,6 +1,6 @@
-package com.zwq65.unity.ui.article;
+package com.zwq65.unity.ui.article.tab;
 
-import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,6 +21,6 @@ public abstract class TabArticleModule {
      * @return tabArticlePresenter
      */
     @Binds
-    abstract TabArticleContract.Presenter<TabArticleContract.View<ArticleWithImage>> provideTabArticlePresenter(
-            TabArticlePresenter<TabArticleContract.View<ArticleWithImage>> tabArticlePresenter);
+    abstract TabArticleContract.Presenter<TabArticleContract.View<Article>> provideTabArticlePresenter(
+            TabArticlePresenter<TabArticleContract.View<Article>> tabArticlePresenter);
 }

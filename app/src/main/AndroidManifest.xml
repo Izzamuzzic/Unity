@@ -53,7 +53,7 @@
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.album.image.ImageActivity"/>
         <activity android:name=".ui.account.AccountActivity"/>
-        <activity android:name=".ui.article.web.WebArticleActivity"/>
+        <activity android:name=".ui.article.tab.web.WebArticleActivity"/>
     </application>
 
 </manifest>

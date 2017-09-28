@@ -19,7 +19,6 @@ public class Video  implements Parcelable {
      * used : true
      * who : LHF
      */
-
     private String _id;
     private String createdAt;
     private String desc;
@@ -29,23 +28,49 @@ public class Video  implements Parcelable {
     private String url;
     private boolean used;
     private String who;
+    //set value,show it as background
+    private String imageUrl;
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.desc);
+        dest.writeString(this.publishedAt);
+        dest.writeString(this.source);
+        dest.writeString(this.type);
+        dest.writeString(this.url);
+        dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+        dest.writeString(this.who);
+        dest.writeString(this.imageUrl);
+    }
+
+    public Video() {
+    }
 
     protected Video(Parcel in) {
-        _id = in.readString();
-        createdAt = in.readString();
-        desc = in.readString();
-        publishedAt = in.readString();
-        source = in.readString();
-        type = in.readString();
-        url = in.readString();
-        used = in.readByte() != 0;
-        who = in.readString();
+        this._id = in.readString();
+        this.createdAt = in.readString();
+        this.desc = in.readString();
+        this.publishedAt = in.readString();
+        this.source = in.readString();
+        this.type = in.readString();
+        this.url = in.readString();
+        this.used = in.readByte() != 0;
+        this.who = in.readString();
+        this.imageUrl = in.readString();
     }
 
     public static final Creator<Video> CREATOR = new Creator<Video>() {
         @Override
-        public Video createFromParcel(Parcel in) {
-            return new Video(in);
+        public Video createFromParcel(Parcel source) {
+            return new Video(source);
         }
 
         @Override
@@ -126,21 +151,11 @@ public class Video  implements Parcelable {
         this.who = who;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_id);
-        dest.writeString(createdAt);
-        dest.writeString(desc);
-        dest.writeString(publishedAt);
-        dest.writeString(source);
-        dest.writeString(type);
-        dest.writeString(url);
-        dest.writeByte((byte) (used ? 1 : 0));
-        dest.writeString(who);
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

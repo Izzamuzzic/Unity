@@ -1,6 +1,6 @@
 package com.zwq65.unity.ui.video;
 
-import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
+import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.di.FragmentScoped;
 
 import dagger.Binds;
@@ -17,6 +17,6 @@ import dagger.Module;
 public abstract class RestVideoModule {
     @FragmentScoped
     @Binds
-    abstract RestVideoContract.Presenter<RestVideoContract.View<VideoWithImage>> provideRestVidePresenter(
-            RestVideoPresenter<RestVideoContract.View<VideoWithImage>> restVideoPresenter);
+    abstract RestVideoContract.Presenter<RestVideoContract.View<Video>> provideRestVidePresenter(
+            RestVideoPresenter<RestVideoContract.View<Video>> restVideoPresenter);
 }

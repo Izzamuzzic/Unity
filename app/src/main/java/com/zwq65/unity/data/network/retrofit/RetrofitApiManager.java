@@ -9,8 +9,6 @@ import com.zwq65.unity.utils.LogUtils;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,10 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiManager {
     private GankIoApiService gankIoApiService;
-
-    @Inject
-    RetrofitApiManager() {
-    }
 
     /**
      * @return gank.io'api

@@ -35,7 +35,11 @@ import butterknife.BindView;
 import static android.view.View.GONE;
 
 /**
- * 查看大图Activity
+ * ================================================
+ * <p> 查看大图
+ * Created by NIRVANA on 2017/09/27
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageContract.Presenter<ImageContract.View>>
         implements ImageContract.View {
@@ -43,20 +47,16 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     public static final String IMAGE_LIST = "IMAGE_LIST";
     private static final int SAVE_MEIZHI = 1;
 
-
-    int currentPosition, pageSize;//当前显示的大图position
-    List<Image> imageList;//图片list
-//    @Inject
-//    ImageMvpPresenter<ImageMvpView> mPresenter;
-
     @BindView(R.id.vp_images)
     ViewPager vpImages;
     @BindView(R.id.tv_current_page)
     TextView tvCurrentPage;//当前页数
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     AppCompatCheckBox cbLove;
+
+    int currentPosition, pageSize;//当前显示的大图position
+    List<Image> imageList;//图片list
 
     @Override
     public int getLayoutId() {
@@ -148,7 +148,9 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     private void setCurrentPage() {
         //改变toolbar标题为图片desc
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(imageList.get(currentPosition).getDesc());
+            if (imageList.get(currentPosition).getDesc() != null) {
+                getSupportActionBar().setTitle(imageList.get(currentPosition).getDesc());
+            }
         }
         //当前页码
         if (pageSize <= 1) {

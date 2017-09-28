@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.adapter.BaseViewPagerAdapter;
+import com.zwq65.unity.ui.article.tab.TabArticleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
