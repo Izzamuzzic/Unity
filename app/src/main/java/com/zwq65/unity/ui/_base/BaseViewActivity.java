@@ -168,4 +168,8 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
     public void onFragmentDetached(String tag) {
 
     }
+
+    public <T> T $(int _id) {
+        return (T) findViewById(_id);
+    }
 }

@@ -46,12 +46,12 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     FrameLayout flMain;
     @BindView(R.id.ll_test)
     LinearLayout llTest;
+    @BindView(R.id.ll_video)
+    LinearLayout llVideo;
     @BindView(R.id.tv_account_name)
     TextView tvAccountName;
     @BindView(R.id.tv_account_website_address)
     TextView tvAccountWebsiteAddress;
-    @BindView(R.id.ll_video)
-    LinearLayout llVideo;
 
     Disposable disposable;
 
