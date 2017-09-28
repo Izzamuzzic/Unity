@@ -1,4 +1,4 @@
-package com.zwq65.unity.ui.article.detail;
+package com.zwq65.unity.ui.article.web;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -32,7 +32,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class ArticleDetailActivity extends BaseViewActivity {
+public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View,
+        WebArticleContract.Presenter<WebArticleContract.View>> implements WebArticleContract.View {
     public static final String ARTICAL = "ARTICAL";
 
     ArticleWithImage articleWithImage;
@@ -49,7 +50,7 @@ public class ArticleDetailActivity extends BaseViewActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_article_detail;
+        return R.layout.activity_web_article;
     }
 
     @Override
@@ -113,7 +114,7 @@ public class ArticleDetailActivity extends BaseViewActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> ArticleDetailActivity.this.onBackPressed());
+        toolbar.setNavigationOnClickListener(v -> WebArticleActivity.this.onBackPressed());
         //添加了toolbar，重新设置沉浸栏
         ImmersionBar.with(this).titleBar(toolbar).init();
     }

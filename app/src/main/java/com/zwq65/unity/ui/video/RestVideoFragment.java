@@ -8,7 +8,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.VideoWithImage;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
 

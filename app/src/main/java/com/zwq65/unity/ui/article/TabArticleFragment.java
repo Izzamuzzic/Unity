@@ -8,7 +8,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.ArticleWithImage;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
 import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.article.detail.ArticleDetailActivity;
+import com.zwq65.unity.ui.article.web.WebArticleActivity;
 
 import java.util.List;
 
@@ -86,8 +86,8 @@ public class TabArticleFragment extends BaseRefreshFragment<ArticleWithImage, Ta
 
     private void gotoDetailActivity(ArticleWithImage article) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ArticleDetailActivity.ARTICAL, article);
-        mActivity.openActivity(ArticleDetailActivity.class, bundle);
+        bundle.putParcelable(WebArticleActivity.ARTICAL, article);
+        mActivity.openActivity(WebArticleActivity.class, bundle);
     }
 
     @Override

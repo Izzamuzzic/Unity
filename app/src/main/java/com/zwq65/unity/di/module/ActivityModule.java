@@ -23,12 +23,16 @@ import com.zwq65.unity.ui.album.image.ImageActivity;
 import com.zwq65.unity.ui.album.image.ImageModule;
 import com.zwq65.unity.ui.article.ArticleProvider;
 import com.zwq65.unity.ui.article.TabArticleProvider;
+import com.zwq65.unity.ui.article.web.WebArticleActivity;
+import com.zwq65.unity.ui.article.web.WebArticleModule;
 import com.zwq65.unity.ui.login.LoginActivity;
 import com.zwq65.unity.ui.login.LoginModule;
 import com.zwq65.unity.ui.main.MainActivity;
 import com.zwq65.unity.ui.main.MainModule;
 import com.zwq65.unity.ui.test.TestProvider;
 import com.zwq65.unity.ui.video.RestVideoProvider;
+import com.zwq65.unity.ui.video.watch.WatchActivity;
+import com.zwq65.unity.ui.video.watch.WatchModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -61,5 +65,13 @@ public abstract class ActivityModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = LoginModule.class)
     abstract LoginActivity loginActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = WebArticleModule.class)
+    abstract WebArticleActivity webArticleActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = WatchModule.class)
+    abstract WatchActivity watchActivity();
 
 }

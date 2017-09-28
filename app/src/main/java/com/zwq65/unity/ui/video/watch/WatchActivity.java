@@ -25,7 +25,8 @@ import butterknife.BindView;
 /**
  * 视频播放
  */
-public class WatchActivity extends BaseViewActivity {
+public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchContract.Presenter<WatchContract.View>>
+        implements WatchContract.View {
     //intent'key value
     public static final String VIDEO_WITH_IMAGE = "VideoWithImage";
     VideoWithImage videoWithImage;
