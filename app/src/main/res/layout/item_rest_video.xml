@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:layout_margin="@dimen/cardview_default_elevation"
     android:background="@color/cardview_bg_color"
     android:orientation="vertical"
     app:cardCornerRadius="@dimen/cardview_default_radius">
@@ -15,14 +14,27 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
-    <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
-    <TextView
-        android:id="@+id/tv_video_title"
-        style="@style/text_16_white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="@dimen/defult_margin"
-        android:ellipsize="end"
-        android:maxLines="3"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_16_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/defult_margin"
+            android:ellipsize="end"
+            android:maxLines="3"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_title"
+            android:layout_marginStart="@dimen/defult_margin"
+            android:src="@mipmap/icon_quote_white"/>
+    </RelativeLayout>
+
 </android.support.v7.widget.CardView>

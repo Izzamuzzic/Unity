@@ -54,6 +54,7 @@
         <activity android:name=".ui.album.image.ImageActivity"/>
         <activity android:name=".ui.account.AccountActivity"/>
         <activity android:name=".ui.article.tab.web.WebArticleActivity"/>
+        <activity android:name=".ui.video.watch.WatchActivity"/>
     </application>
 
 </manifest>
