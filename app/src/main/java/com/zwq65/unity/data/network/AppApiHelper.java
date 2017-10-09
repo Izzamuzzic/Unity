@@ -50,7 +50,7 @@ public class AppApiHelper implements ApiHelper {
                         List<Image> images = welfareResponse.getData();
                         for (int i = 0; i < videos.size(); i++) {
                             if (i < images.size()) {
-                                videos.get(i).setImageUrl(images.get(i).getUrl());
+                                videos.get(i).setImage(images.get(i));
                             }
                         }
                         images = null;
@@ -87,7 +87,7 @@ public class AppApiHelper implements ApiHelper {
                         List<Image> images = welfareResponse.getData();
                         for (int i = 0; i < articles.size(); i++) {
                             if (i < images.size()) {
-                                articles.get(i).setImageUrl(images.get(i).getUrl());
+                                articles.get(i).setImage(images.get(i));
                             }
                         }
                         images = null;

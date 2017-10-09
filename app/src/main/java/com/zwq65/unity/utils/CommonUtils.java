@@ -70,4 +70,19 @@ public final class CommonUtils {
         return path;
     }
 
+    /**
+     * 用于取得recycleView当前最大的position以判断是否许需要加载
+     *
+     * @param lastPositions recycleView底部的position数组
+     * @return 最大的position
+     */
+    public static int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
 }

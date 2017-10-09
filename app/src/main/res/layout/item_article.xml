@@ -14,9 +14,13 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
+    <!--background="@drawable/shape_item_shadow",避免图片背景太亮导致文字显示不清晰 -->
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_item_shadow"
+        android:padding="@dimen/defult_padding">
 
         <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
         <TextView
@@ -24,8 +28,8 @@
             style="@style/text_16_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="@dimen/defult_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/defult_margin"
             android:ellipsize="end"
             android:maxLines="3"/>
 
@@ -33,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/tv_title"
-            android:layout_marginStart="@dimen/defult_margin"
             android:src="@mipmap/icon_quote_white"/>
     </RelativeLayout>
 

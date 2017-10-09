@@ -57,7 +57,7 @@ public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchCon
     public void initView() {
         //set header'background image
         if (video != null) {
-            Glide.with(this).load(video.getImageUrl()).into(ivTitleBg);
+            Glide.with(this).load(video.getImage().getUrl()).into(ivTitleBg);
             collapsingToolbarLayout.setTitle(video.getDesc());
         }
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
@@ -101,9 +101,7 @@ public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchCon
 
     private void gotoContentActivity() {
         List<Image> images = new ArrayList<>(1);
-        Image image = new Image();
-        image.setUrl(video.getImageUrl());
-        images.add(image);
+        images.add(video.getImage());
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);

@@ -26,7 +26,7 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.item_rest_video;
+        return R.layout.item_article;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
     }
 
     class ViewHolder extends BaseViewHolder<Video> {
-        @BindView(R.id.iv_beauty)
-        ImageView ivBeauty;
+        @BindView(R.id.iv_background)
+        ImageView ivBackground;
         @BindView(R.id.tv_title)
         TextView tvTitle;
 
@@ -48,7 +48,7 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
         public void setData(Video data) {
             tvTitle.setText(data.getDesc());
             tvTitle.setVisibility(View.INVISIBLE);
-            Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {
+            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;
@@ -59,7 +59,7 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
                     tvTitle.setVisibility(View.VISIBLE);
                     return false;
                 }
-            }).into(ivBeauty);
+            }).into(ivBackground);
         }
     }
 }

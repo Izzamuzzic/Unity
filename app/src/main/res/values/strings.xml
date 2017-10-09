@@ -61,4 +61,7 @@
     <string name="test">测试</string>
     <string name="exit">退出</string>
 
+    <string name="listview_loading">正在加载…</string>
+    <string name="nomore_loading">没有更多数据了</string>
+
 </resources>

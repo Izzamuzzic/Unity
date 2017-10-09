@@ -29,8 +29,7 @@ public class Video  implements Parcelable {
     private boolean used;
     private String who;
     //set value,show it as background
-    private String imageUrl;
-
+    private Image image;
 
     @Override
     public int describeContents() {
@@ -48,7 +47,7 @@ public class Video  implements Parcelable {
         dest.writeString(this.url);
         dest.writeByte(this.used ? (byte) 1 : (byte) 0);
         dest.writeString(this.who);
-        dest.writeString(this.imageUrl);
+        dest.writeParcelable(this.image, flags);
     }
 
     public Video() {
@@ -64,7 +63,7 @@ public class Video  implements Parcelable {
         this.url = in.readString();
         this.used = in.readByte() != 0;
         this.who = in.readString();
-        this.imageUrl = in.readString();
+        this.image = in.readParcelable(Image.class.getClassLoader());
     }
 
     public static final Creator<Video> CREATOR = new Creator<Video>() {
@@ -151,11 +150,11 @@ public class Video  implements Parcelable {
         this.who = who;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

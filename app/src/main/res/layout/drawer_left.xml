@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:background="@android:color/white">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +23,10 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@mipmap/ic_avatar" />
+                android:src="@mipmap/ic_avatar"/>
 
             <TextView
                 android:id="@+id/tv_account_name"
@@ -34,7 +35,7 @@
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:text="@string/desperadozck"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tv_account_website_address"
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/github_website_address"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <LinearLayout
@@ -58,37 +59,14 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_welfare" />
+                android:src="@mipmap/ic_welfare"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_welfare"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_personal_center"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_personal_center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_personal_center"
-                android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -103,14 +81,14 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_video" />
+                android:src="@mipmap/ic_video"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rest_video"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -125,14 +103,14 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_test" />
+                android:src="@mipmap/ic_test"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -147,14 +125,14 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_setting" />
+                android:src="@mipmap/ic_setting"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_setting"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -169,14 +147,14 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_out" />
+                android:src="@mipmap/ic_out"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_out"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

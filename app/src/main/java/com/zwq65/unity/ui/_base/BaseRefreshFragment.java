@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.utils.CommonUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
-
-import static com.zwq65.unity.ui._custom.recycleview.XRecyclerView.findMax;
 
 /**
  * Created by zwq65 on 2017/09/14
@@ -53,7 +52,7 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
                     } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                         int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
-                        lastVisibleItemPosition = findMax(into);
+                        lastVisibleItemPosition = CommonUtils.findMax(into);
                     } else {
                         lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                     }

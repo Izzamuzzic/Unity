@@ -2,8 +2,10 @@ package com.zwq65.unity.ui.article.tab;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +26,7 @@ import butterknife.BindView;
 
 public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArticleAdapter.ViewHolder> {
 
+
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_article;
@@ -37,6 +40,8 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
     static class ViewHolder extends BaseViewHolder<Article> {
         @BindView(R.id.iv_background)
         ImageView ivBackground;
+        @BindView(R.id.rl_title)
+        RelativeLayout mRlTitle;
         @BindView(R.id.tv_title)
         TextView tvTitle;
 
@@ -48,7 +53,8 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
         public void setData(Article data) {
             tvTitle.setText(data.getDesc());
             tvTitle.setVisibility(View.INVISIBLE);
-            Glide.with(getContext()).load(data.getImageUrl()).listener(new RequestListener<Drawable>() {
+            mRlTitle.setBackground(null);
+            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;
@@ -57,6 +63,7 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
                 @Override
                 public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                     tvTitle.setVisibility(View.VISIBLE);
+                    mRlTitle.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_item_shadow));
                     return false;
                 }
             }).into(ivBackground);

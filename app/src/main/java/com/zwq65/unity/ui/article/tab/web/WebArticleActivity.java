@@ -69,7 +69,7 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
         initToolBar();
         //set header'background image
         if (article != null) {
-            Glide.with(this).load(article.getImageUrl()).into(ivTitleBg);
+            Glide.with(this).load(article.getImage().getUrl()).into(ivTitleBg);
             collapsingToolbarLayout.setTitle(article.getDesc());
             //WebView
             webview.getSettings().setJavaScriptEnabled(true);
@@ -190,9 +190,7 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
 
     private void gotoContentActivity() {
         List<Image> images = new ArrayList<>(1);
-        Image image = new Image();
-        image.setUrl(article.getImageUrl());
-        images.add(image);
+        images.add(article.getImage());
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, 0);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) images);

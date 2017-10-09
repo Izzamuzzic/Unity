@@ -34,7 +34,56 @@ public class Article implements Parcelable {
     private String who;
     private List<String> images;
     //set value,show it as background
-    private String imageUrl;
+    private Image image;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.desc);
+        dest.writeString(this.publishedAt);
+        dest.writeString(this.source);
+        dest.writeString(this.type);
+        dest.writeString(this.url);
+        dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+        dest.writeString(this.who);
+        dest.writeStringList(this.images);
+        dest.writeParcelable(this.image, flags);
+    }
+
+    public Article() {
+    }
+
+    protected Article(Parcel in) {
+        this._id = in.readString();
+        this.createdAt = in.readString();
+        this.desc = in.readString();
+        this.publishedAt = in.readString();
+        this.source = in.readString();
+        this.type = in.readString();
+        this.url = in.readString();
+        this.used = in.readByte() != 0;
+        this.who = in.readString();
+        this.images = in.createStringArrayList();
+        this.image = in.readParcelable(Image.class.getClassLoader());
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel source) {
+            return new Article(source);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 
     public String get_id() {
         return _id;
@@ -116,60 +165,11 @@ public class Article implements Parcelable {
         this.images = images;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(Image image) {
+        this.image = image;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this._id);
-        dest.writeString(this.createdAt);
-        dest.writeString(this.desc);
-        dest.writeString(this.publishedAt);
-        dest.writeString(this.source);
-        dest.writeString(this.type);
-        dest.writeString(this.url);
-        dest.writeByte(this.used ? (byte) 1 : (byte) 0);
-        dest.writeString(this.who);
-        dest.writeStringList(this.images);
-        dest.writeString(this.imageUrl);
-    }
-
-    public Article() {
-    }
-
-    protected Article(Parcel in) {
-        this._id = in.readString();
-        this.createdAt = in.readString();
-        this.desc = in.readString();
-        this.publishedAt = in.readString();
-        this.source = in.readString();
-        this.type = in.readString();
-        this.url = in.readString();
-        this.used = in.readByte() != 0;
-        this.who = in.readString();
-        this.images = in.createStringArrayList();
-        this.imageUrl = in.readString();
-    }
-
-    public static final Creator<Article> CREATOR = new Creator<Article>() {
-        @Override
-        public Article createFromParcel(Parcel source) {
-            return new Article(source);
-        }
-
-        @Override
-        public Article[] newArray(int size) {
-            return new Article[size];
-        }
-    };
 }

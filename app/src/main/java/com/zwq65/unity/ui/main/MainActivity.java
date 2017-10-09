@@ -2,6 +2,7 @@ package com.zwq65.unity.ui.main;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +27,9 @@ import com.zwq65.unity.utils.FontUtils;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends BaseViewActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
@@ -36,8 +39,6 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     DrawerLayout drawerLayout;
     @BindView(R.id.ll_welfare)
     LinearLayout llWelfare;
-    @BindView(R.id.ll_personal_center)
-    LinearLayout llPersonalCenter;
     @BindView(R.id.ll_setting)
     LinearLayout llSetting;
     @BindView(R.id.ll_out)
@@ -52,8 +53,11 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     TextView tvAccountName;
     @BindView(R.id.tv_account_website_address)
     TextView tvAccountWebsiteAddress;
+    @BindView(R.id.iv_avatar)
+    CircleImageView ivAvatar;
 
     Disposable disposable;
+
 
     @Override
     public int getLayoutId() {
@@ -107,7 +111,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         }
     }
 
-    @OnClick({R.id.ll_welfare, R.id.ll_personal_center, R.id.ll_video, R.id.ll_test, R.id.ll_setting, R.id.ll_out, R.id.fab})
+    @OnClick({R.id.iv_avatar, R.id.tv_account_name, R.id.ll_welfare, R.id.ll_video, R.id.ll_test, R.id.ll_setting, R.id.ll_out, R.id.fab})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
@@ -115,7 +119,8 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 //gank.io福利
                 gotoFragment(new AlbumFragment());
                 break;
-            case R.id.ll_personal_center:
+            case R.id.iv_avatar:
+            case R.id.tv_account_name:
                 //个人中心
                 openActivity(AccountActivity.class);
                 break;
@@ -198,5 +203,12 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         if (disposable != null) {
             disposable.dispose();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
