@@ -12,9 +12,12 @@ public class FontUtils {
     private static volatile FontUtils instance;
 
     public enum Font {
-        Montserrat_Medium,
-        Roboto_Medium,
-        Roboto_Bold
+        //方正宋刻本秀楷简体
+        FZSongKeBenXiuKai,
+        //方正悠黑_504L
+        FZYouH_504L,
+        //方正悠黑_508R
+        FZYouH_508R
     }
 
     public static FontUtils getInstance() {
@@ -37,14 +40,14 @@ public class FontUtils {
     public void setTypeface(TextView textView, Font font) {
         Typeface typeface = null;
         switch (font) {
-            case Montserrat_Medium:
-                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/Montserrat-Medium.ttf");
+            case FZSongKeBenXiuKai:
+                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/FZSongKeBenXiuKai.TTF");
                 break;
-            case Roboto_Medium:
-                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/Roboto-Medium.ttf");
+            case FZYouH_504L:
+                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/FZYouH_504L.otf");
                 break;
-            case Roboto_Bold:
-                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/Roboto-Bold.ttf");
+            case FZYouH_508R:
+                typeface = Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/FZYouH_508R.ttf");
                 break;
             default:
                 break;

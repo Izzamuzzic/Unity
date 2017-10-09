@@ -77,8 +77,8 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     @Override
     public void initView() {
         //设置字体
-        FontUtils.getInstance().setTypeface(tvAccountName, FontUtils.Font.Montserrat_Medium);
-        FontUtils.getInstance().setTypeface(tvAccountWebsiteAddress, FontUtils.Font.Montserrat_Medium);
+        FontUtils.getInstance().setTypeface(tvAccountName, FontUtils.Font.FZSongKeBenXiuKai);
+        FontUtils.getInstance().setTypeface(tvAccountWebsiteAddress, FontUtils.Font.FZSongKeBenXiuKai);
         //将drawerLayout、toolBar绑定
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);

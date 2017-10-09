@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.utils.FontUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,8 +22,6 @@ import butterknife.OnClick;
 public class AccountActivity extends BaseViewActivity<AccountContract.View, AccountContract.Presenter<AccountContract.View>>
         implements AccountContract.View {
 
-    @BindView(R.id.tv_name)
-    TextView tvName;
     @BindView(R.id.tl_personal)
     TabLayout tlPersonal;
     @BindView(R.id.vp_personal)
@@ -31,10 +30,14 @@ public class AccountActivity extends BaseViewActivity<AccountContract.View, Acco
     ImageView ivBack;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
+    @BindView(R.id.tv_account_name)
+    TextView mTvAccountName;
+    @BindView(R.id.tv_account_website_address)
+    TextView mTvAccountWebsiteAddress;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_personal_center;
+        return R.layout.activity_account;
     }
 
     @Override
@@ -49,6 +52,8 @@ public class AccountActivity extends BaseViewActivity<AccountContract.View, Acco
 
     @Override
     public void initView() {
+        FontUtils.getInstance().setTypeface(mTvAccountName, FontUtils.Font.FZYouH_508R);
+        FontUtils.getInstance().setTypeface(mTvAccountWebsiteAddress, FontUtils.Font.FZYouH_508R);
     }
 
     @Override

@@ -25,7 +25,7 @@
         <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
         <TextView
             android:id="@+id/tv_title"
-            style="@style/text_16_white"
+            style="@style/text_15_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

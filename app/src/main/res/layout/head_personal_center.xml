@@ -25,7 +25,7 @@
         android:src="@mipmap/ic_avatar"/>
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_account_name"
         style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,4 +33,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/defult_margin"
         android:text="@string/desperadozck"/>
+
+    <TextView
+        android:id="@+id/tv_account_website_address"
+        style="@style/text_14_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_account_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/defult_margin"
+        android:text="@string/github_website_address"/>
 </RelativeLayout>
