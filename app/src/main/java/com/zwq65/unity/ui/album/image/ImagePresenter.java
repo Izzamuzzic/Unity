@@ -58,11 +58,11 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {
                     getMvpView().hideLoading();
-                    getMvpView().showSuccessAlert(R.string.success_msg_save);
+                    getMvpView().showMessage(R.string.success_msg_save);
                 }, throwable -> {
                     LogUtils.e(throwable.toString());
                     getMvpView().hideLoading();
-                    getMvpView().showSuccessAlert(R.string.error_msg_save_fail);
+                    getMvpView().showError(R.string.error_msg_save_fail);
                 });
     }
 
@@ -78,12 +78,12 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
                 return getDataManager().insertPicture(picture);
             }
         }).subscribe(aLong -> {
-            getMvpView().showSuccessAlert(R.string.success_msg_collect);
+            getMvpView().showMessage(R.string.success_msg_collect);
             getMvpView().hideLoading();
         }, throwable -> {
             LogUtils.e(throwable.toString());
             getMvpView().hideLoading();
-            getMvpView().showErrorAlert(R.string.error_msg_collect_fail);
+            getMvpView().showError(R.string.error_msg_collect_fail);
         });
     }
 
@@ -92,7 +92,7 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
         getMvpView().showLoading();
         getDataManager().deletePicture(image.get_id()).subscribe(aLong -> getMvpView().hideLoading(), throwable -> {
             getMvpView().hideLoading();
-            getMvpView().showErrorAlert(R.string.error_msg_cancel_collect_fail);
+            getMvpView().showError(R.string.error_msg_cancel_collect_fail);
         });
     }
 

@@ -12,6 +12,8 @@ import com.zwq65.unity.ui.article.tab.web.WebArticleActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by zwq65 on 2017/08/30
  */
@@ -21,7 +23,8 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
 
     public static final String TECH_TAG = "tag";
     public Type mType;
-    TabArticleAdapter mAdapter;
+    @Inject
+    TabArticleAdapter<Article> mAdapter;
 
     enum Type {
         Android(R.string.android),
@@ -58,7 +61,6 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        mAdapter = new TabArticleAdapter();
         mAdapter.setOnItemClickListener((article, position) -> gotoDetailActivity(article));
         mRecyclerView.setAdapter(mAdapter);
     }

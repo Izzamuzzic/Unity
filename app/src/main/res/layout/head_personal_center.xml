@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/activity_header_height"
     android:background="@drawable/bg_gradient_personal_center">
@@ -13,7 +14,7 @@
         android:id="@+id/iv_back"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="@dimen/defult_margin"
+        android:layout_marginStart="@dimen/margin_defult"
         android:layout_marginTop="@dimen/activity_vertical_margin_no_statusbar"
         android:src="@mipmap/ic_arrow_back_white_24dp"/>
 
@@ -24,23 +25,24 @@
         android:layout_centerInParent="true"
         android:src="@mipmap/ic_avatar"/>
 
-    <TextView
+    <com.zwq65.unity.ui._custom.widget.FontTextView
         android:id="@+id/tv_account_name"
         style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_avatar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/defult_margin"
-        android:text="@string/desperadozck"/>
+        android:layout_marginTop="@dimen/margin_defult"
+        android:text="@string/desperadozck"
+        app:fonts="fz_youhei_508r"/>
 
-    <TextView
-        android:id="@+id/tv_account_website_address"
+    <com.zwq65.unity.ui._custom.widget.FontTextView
         style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_account_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/defult_margin"
-        android:text="@string/github_website_address"/>
+        android:layout_marginTop="@dimen/margin_defult"
+        android:text="@string/github_website_address"
+        app:fonts="fz_youhei_508r"/>
 </RelativeLayout>

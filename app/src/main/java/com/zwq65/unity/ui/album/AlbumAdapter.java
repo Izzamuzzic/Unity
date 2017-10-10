@@ -9,6 +9,8 @@ import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 import com.zwq65.unity.ui._custom.widget.RatioImageView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 
@@ -16,7 +18,11 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/07/20
  */
 
-class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolder> {
+class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, AlbumAdapter.ViewHolder> {
+    @Inject
+    AlbumAdapter() {
+    }
+
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_album;
@@ -27,16 +33,16 @@ class AlbumAdapter extends BaseRecyclerViewAdapter<Image, AlbumAdapter.ViewHolde
         return new ViewHolder(v);
     }
 
-    class ViewHolder extends BaseViewHolder<Image> {
+    class ViewHolder extends BaseViewHolder<T> {
         @BindView(R.id.iv_beauty)
         RatioImageView ivBeauty;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
         }
 
         @Override
-        public void setData(Image data) {
+        public void setData(T data) {
             Glide.with(getContext()).load(data.getUrl()).into(ivBeauty);
         }
     }

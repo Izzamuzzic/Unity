@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -28,22 +29,24 @@
                 android:layout_height="60dp"
                 android:src="@mipmap/ic_avatar"/>
 
-            <TextView
+            <com.zwq65.unity.ui._custom.widget.FontTextView
                 android:id="@+id/tv_account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:text="@string/desperadozck"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                app:fonts="fz_songkebenxiukai"/>
 
-            <TextView
+            <com.zwq65.unity.ui._custom.widget.FontTextView
                 android:id="@+id/tv_account_website_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/github_website_address"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                app:fonts="fz_songkebenxiukai"/>
         </LinearLayout>
 
         <LinearLayout
@@ -70,6 +73,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_news"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_news"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_news"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_video"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -86,29 +111,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rest_video"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_test"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_test"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test"
+                android:text="@string/title_rest_video"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"/>
         </LinearLayout>

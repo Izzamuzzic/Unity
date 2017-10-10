@@ -14,6 +14,8 @@ import com.zwq65.unity.ui.album.image.ImageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * ================================================
  * <p>gank.io开源美图
@@ -23,7 +25,8 @@ import java.util.List;
  */
 public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View<Image>,
         AlbumContract.Presenter<AlbumContract.View<Image>>> implements AlbumContract.View<Image> {
-    AlbumAdapter mAdapter;
+    @Inject
+    AlbumAdapter<Image> mAdapter;
 
     @Override
     public int getLayoutId() {
@@ -37,7 +40,6 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        mAdapter = new AlbumAdapter();
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         mRecyclerView.setAdapter(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听

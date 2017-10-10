@@ -8,10 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.tapadoo.alerter.Alerter;
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.CommonUtils;
 
@@ -110,54 +112,38 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
     }
 
     @Override
-    public void showErrorAlert(@StringRes int resId) {
-        showErrorAlert(getString(resId));
-    }
-
-    @Override
-    public void showSuccessAlert(@StringRes int resId) {
-        showSuccessAlert(getString(resId));
-    }
-
-    @Override
     public void showMessage(@StringRes int resId) {
         showMessage(getString(resId));
-    }
-
-    @Override
-    public void showErrorAlert(String message) {
-        Alerter.create(this)
-                .setBackgroundColorRes(R.color.warn_color)
-                .enableSwipeToDismiss()
-                .setDuration(1000)
-                .setTitle("出错了")
-                .setText(message)
-                .show();
-    }
-
-    @Override
-    public void showSuccessAlert(String message) {
-        Alerter.create(this)
-                .setBackgroundColorRes(R.color.colorAccent)
-                .enableSwipeToDismiss()
-                .setDuration(1000)
-                .setTitle("提示")
-                .setText(message)
-                .show();
     }
 
     @Override
     public void showMessage(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
-//        View sbView = snackbar.getView();
-//        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
-//        TextView textView = (TextView) sbView
-//                .findViewById(android.support.design.R.id.snackbar_text);
-//        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
+        TextView textView = (TextView) sbView
+                .findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
     }
 
+    @Override
+    public void showError(@StringRes int resId) {
+        showError(getString(resId));
+    }
+
+    @Override
+    public void showError(String message) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                message, Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.warn_color));
+        TextView textView = (TextView) sbView
+                .findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+        snackbar.show();
+    }
 
     @Override
     public void onFragmentAttached() {

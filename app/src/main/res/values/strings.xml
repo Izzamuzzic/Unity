@@ -18,6 +18,9 @@
     <string name="desperadozck">desperadozck</string>
     <string name="github_website_address">https://github.com/NlRVANA</string>
     <string name="title_welfare">福利</string>
+    <string name="title_rest_video">休息视频</string>
+    <string name="title_test">测试</string>
+    <string name="title_news">干货</string>
     <string name="title_setting">设置</string>
     <string name="title_out">退出</string>
     <string name="title_personal_center">个人中心</string>
@@ -40,7 +43,7 @@
     <string name="error_msg_cancel_collect_fail">取消收藏失败</string>
     <string name="rxjava">Rxjava</string>
     <string name="defer">defer</string>
-    <string name="rest_video">休息视频</string>
+
 
     <!--@AccountActivity-->
     <string name="collect">收藏</string>

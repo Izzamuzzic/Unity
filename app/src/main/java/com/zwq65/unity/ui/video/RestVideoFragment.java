@@ -12,15 +12,18 @@ import com.zwq65.unity.ui.video.watch.WatchActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoFragment extends BaseRefreshFragment<Video,RestVideoContract.View<Video>,
+public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContract.View<Video>,
         RestVideoContract.Presenter<RestVideoContract.View<Video>>> implements RestVideoContract.View<Video> {
 
-    RestVideoAdapter mAdapter;
+    @Inject
+    RestVideoAdapter<Video> mAdapter;
 
     @Override
     public int getLayoutId() {
@@ -34,7 +37,6 @@ public class RestVideoFragment extends BaseRefreshFragment<Video,RestVideoContra
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
         mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        mAdapter = new RestVideoAdapter();
         mAdapter.setOnItemClickListener((video, position) -> gotoWatchActivity(video));
         mRecyclerView.setAdapter(mAdapter);
     }

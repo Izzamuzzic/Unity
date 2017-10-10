@@ -10,13 +10,19 @@ import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 /**
  * Created by zwq65 on 2017/08/15
  */
 
-public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAdapter.ViewHolder> {
+public class RestVideoAdapter<T extends Video> extends BaseRecyclerViewAdapter<T, RestVideoAdapter.ViewHolder> {
+
+    @Inject
+    RestVideoAdapter() {
+    }
 
     @Override
     public int getLayoutId(int viewType) {
@@ -28,18 +34,18 @@ public class RestVideoAdapter extends BaseRecyclerViewAdapter<Video, RestVideoAd
         return new ViewHolder(v);
     }
 
-    class ViewHolder extends BaseViewHolder<Video> {
+    class ViewHolder extends BaseViewHolder<T> {
         @BindView(R.id.iv_background)
         ImageView ivBackground;
         @BindView(R.id.tv_title)
         TextView tvTitle;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
         }
 
         @Override
-        public void setData(Video data) {
+        public void setData(T data) {
             tvTitle.setText(data.getDesc());
 //            FontUtils.getInstance().setTypeface(tvTitle, FontUtils.Font.FZYouH_504L);
             Glide.with(getContext()).load(data.getImage().getUrl()).into(ivBackground);

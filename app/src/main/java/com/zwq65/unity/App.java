@@ -5,6 +5,7 @@ import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
@@ -21,7 +22,6 @@ import dagger.android.DaggerApplication;
 
 public class App extends DaggerApplication {
 
-    private ApplicationComponent mApplicationComponent;
     private static App unityApp;
 
     public static App getInstance() {
@@ -37,6 +37,10 @@ public class App extends DaggerApplication {
         initLeakcanary();
     }
 
+    /**
+     * return an {@link AndroidInjector} for the concrete {@link
+     * DaggerApplication}. Typically, that injector is a {@link dagger.Component}.
+     */
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         ApplicationComponent appComponent = DaggerApplicationComponent.builder().application(this).build();
@@ -66,22 +70,16 @@ public class App extends DaggerApplication {
         }
     }
 
+    /**
+     * 初始化Leakcanary(内存泄漏检测工具)
+     */
     private void initLeakcanary() {
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this);
-    }
-
-    public ApplicationComponent getComponent() {
-        return mApplicationComponent;
-    }
-
-    // Needed to replace the component with a test specific one
-    public void setComponent(ApplicationComponent applicationComponent) {
-        mApplicationComponent = applicationComponent;
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public static void showShortToast(String msg) {

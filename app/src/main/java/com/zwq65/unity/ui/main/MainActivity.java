@@ -2,7 +2,7 @@ package com.zwq65.unity.ui.main;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,14 +20,12 @@ import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui.account.AccountActivity;
 import com.zwq65.unity.ui.album.AlbumFragment;
 import com.zwq65.unity.ui.article.ArticleFragment;
-import com.zwq65.unity.ui.test.TestFragment;
 import com.zwq65.unity.ui.video.RestVideoFragment;
-import com.zwq65.unity.utils.FontUtils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.disposables.Disposable;
@@ -45,14 +43,12 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     LinearLayout llOut;
     @BindView(R.id.fl_main)
     FrameLayout flMain;
-    @BindView(R.id.ll_test)
-    LinearLayout llTest;
+    @BindView(R.id.ll_news)
+    LinearLayout llNews;
     @BindView(R.id.ll_video)
     LinearLayout llVideo;
     @BindView(R.id.tv_account_name)
     TextView tvAccountName;
-    @BindView(R.id.tv_account_website_address)
-    TextView tvAccountWebsiteAddress;
     @BindView(R.id.iv_avatar)
     CircleImageView ivAvatar;
 
@@ -76,9 +72,6 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
 
     @Override
     public void initView() {
-        //设置字体
-        FontUtils.getInstance().setTypeface(tvAccountName, FontUtils.Font.FZSongKeBenXiuKai);
-        FontUtils.getInstance().setTypeface(tvAccountWebsiteAddress, FontUtils.Font.FZSongKeBenXiuKai);
         //将drawerLayout、toolBar绑定
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -111,7 +104,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         }
     }
 
-    @OnClick({R.id.iv_avatar, R.id.tv_account_name, R.id.ll_welfare, R.id.ll_video, R.id.ll_test, R.id.ll_setting, R.id.ll_out, R.id.fab})
+    @OnClick({R.id.iv_avatar, R.id.tv_account_name, R.id.ll_welfare, R.id.ll_video, R.id.ll_news, R.id.ll_setting, R.id.ll_out, R.id.fab})
     public void onViewClicked(View view) {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
@@ -124,12 +117,12 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 //个人中心
                 openActivity(AccountActivity.class);
                 break;
+            case R.id.ll_news:
+                gotoFragment(new ArticleFragment());
+                break;
             case R.id.ll_video:
                 //休息视频
                 gotoFragment(new RestVideoFragment());
-                break;
-            case R.id.ll_test:
-                gotoFragment(new TestFragment());
                 break;
             case R.id.ll_setting:
                 gotoFragment(new ArticleFragment());
@@ -180,14 +173,19 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
      */
     public void addToolbarDoubleClick() {
         //buffer: 定期收集Observable的数据放进一个数据包裹，然后发射这些数据包裹，而不是一次发射一个值
-        //判断500ms内，如果接受到2次的点击事件，则判定为双击操作
+        //判断500ms内，如果接受到2次的点击事件，则视为用户双击操作
         if (getToolbar() != null) {
             disposable = RxView.clicks(getToolbar()).buffer(500, TimeUnit.MILLISECONDS, 2).subscribe(objects -> {
                 if (objects.size() == 2) {
-                    FragmentManager fragmentManager1 = getSupportFragmentManager();
-                    fragmentManager1.getFragments().stream()
-                            .filter(fragment -> fragment.isVisible() && fragment instanceof BaseFragment)
-                            .forEachOrdered(fragment -> ((BaseFragment) fragment).onToolbarClick());
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    List<Fragment> fragmentList = fragmentManager.getFragments();
+                    if (fragmentList != null && fragmentList.size() > 0) {
+                        for (Fragment fragment : fragmentList) {
+                            if (fragment.isVisible() && fragment instanceof BaseFragment) {
+                                ((BaseFragment) fragment).onToolbarClick();
+                            }
+                        }
+                    }
                 }
             });
         }
@@ -203,12 +201,5 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         if (disposable != null) {
             disposable.dispose();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

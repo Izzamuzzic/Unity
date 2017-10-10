@@ -21,6 +21,8 @@ import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
+import static android.R.id.message;
+
 /**
  * Created by janisharali on 27/01/17.
  * 自定义view基类
@@ -66,24 +68,32 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
         }
     }
 
-    @Override
-    public void showErrorAlert(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showErrorAlert(resId);
-        }
-    }
-
-    @Override
-    public void showSuccessAlert(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showSuccessAlert(resId);
-        }
-    }
 
     @Override
     public void showMessage(@StringRes int resId) {
         if (mParentMvpView != null) {
             mParentMvpView.showMessage(resId);
+        }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        if (mParentMvpView != null) {
+            mParentMvpView.showMessage(message);
+        }
+    }
+
+    @Override
+    public void showError(@StringRes int resId) {
+        if (mParentMvpView != null) {
+            mParentMvpView.showError(resId);
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        if (mParentMvpView != null) {
+            mParentMvpView.showError(message);
         }
     }
 

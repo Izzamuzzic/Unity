@@ -16,22 +16,25 @@
 
     <!--background="@drawable/shape_item_shadow",避免图片背景太亮导致文字显示不清晰 -->
     <RelativeLayout
-        android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_item_shadow"
-        android:padding="@dimen/defult_padding">
+        android:padding="@dimen/activity_horizontal_padding">
 
         <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
-        <TextView
+        <com.zwq65.unity.ui._custom.widget.FontTextView
             android:id="@+id/tv_title"
             style="@style/text_15_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/defult_margin"
+            android:layout_marginEnd="@dimen/margin_vertical_title"
+            android:layout_marginTop="@dimen/margin_defult_tiny"
             android:ellipsize="end"
-            android:maxLines="3"/>
+            android:maxLines="3"
+            android:textStyle="bold"
+            app:fonts="fz_youhei_504l"
+            />
 
         <ImageView
             android:layout_width="wrap_content"

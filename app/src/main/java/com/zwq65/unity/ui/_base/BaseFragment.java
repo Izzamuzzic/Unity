@@ -162,30 +162,16 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
     }
 
     @Override
-    public void showErrorAlert(@StringRes int resId) {
+    public void showError(@StringRes int resId) {
         if (mActivity != null) {
-            mActivity.showErrorAlert(resId);
+            mActivity.showError(resId);
         }
     }
 
     @Override
-    public void showErrorAlert(String message) {
+    public void showError(String message) {
         if (mActivity != null) {
-            mActivity.showErrorAlert(message);
-        }
-    }
-
-    @Override
-    public void showSuccessAlert(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showSuccessAlert(resId);
-        }
-    }
-
-    @Override
-    public void showSuccessAlert(String message) {
-        if (mActivity != null) {
-            mActivity.showSuccessAlert(message);
+            mActivity.showError(message);
         }
     }
 

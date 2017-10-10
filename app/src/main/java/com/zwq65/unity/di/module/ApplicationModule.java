@@ -18,6 +18,7 @@ package com.zwq65.unity.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zwq65.unity.data.AppDataManager;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.AppDbHelper;
@@ -25,6 +26,7 @@ import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.network.AppApiHelper;
 import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
+import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -32,11 +34,16 @@ import com.zwq65.unity.di.DatabaseInfo;
 import com.zwq65.unity.di.PreferenceInfo;
 import com.zwq65.unity.utils.AppConstants;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * This is a Dagger module. We use this to bind our Application class as a Context in the AppComponent
@@ -68,9 +75,9 @@ public abstract class ApplicationModule {
     }
 
     @Provides
-    @PreferenceInfo
-    static String providePreferenceName() {
-        return AppConstants.PREF_NAME;
+    @Singleton
+    static DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+        return appDbHelper;
     }
 
     @Provides
@@ -80,21 +87,9 @@ public abstract class ApplicationModule {
     }
 
     @Provides
-    @Singleton
-    static DbHelper provideDbHelper(AppDbHelper appDbHelper) {
-        return appDbHelper;
-    }
-
-    @Provides
-    @Singleton
-    static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
-        return appApiHelper;
-    }
-
-    @Provides
-    @Singleton
-    static RetrofitApiManager provideRetrofitApiManager() {
-        return new RetrofitApiManager();
+    @PreferenceInfo
+    static String providePreferenceName() {
+        return AppConstants.PREF_NAME;
     }
 
     @Provides
@@ -103,4 +98,40 @@ public abstract class ApplicationModule {
         return appPreferencesHelper;
     }
 
+    @Provides
+    @Singleton
+    static OkHttpClient provideOkHttpClient() {
+        return new OkHttpClient.Builder()
+                // HeadInterceptor实现了Interceptor，用来往Request Header添加一些业务相关数据，如APP版本，token信息
+//                .addInterceptor(new HeadInterceptor())
+                .addInterceptor(new RetrofitApiManager.MyInterceptor())
+                // 连接超时时间设置
+                .connectTimeout(10, TimeUnit.SECONDS)
+                // 读取超时时间设置
+                .readTimeout(10, TimeUnit.SECONDS)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    static Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(GankIoApiService.GANK_IO_HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient);
+        return builder.build();
+    }
+
+    @Provides
+    @Singleton
+    static GankIoApiService provideGankIoApiService(Retrofit retrofit) {
+        return retrofit.create(GankIoApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
+    }
 }

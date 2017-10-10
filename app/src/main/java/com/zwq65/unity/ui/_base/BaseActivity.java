@@ -50,9 +50,6 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
         if (layoutId != 0) {
             setContentView(layoutId);
             mUnBinder = ButterKnife.bind(this);
-            if (mUnBinder == Unbinder.EMPTY) {
-                LogUtils.e(TAG, "mUnBinder == Unbinder.EMPTY");
-            }
         }
         LogUtils.i(TAG, "onCreate");
     }

@@ -167,7 +167,7 @@ public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                 ClipData clipData = ClipData.newPlainText("Url", webview.getUrl());
                 clipboardManager.setPrimaryClip(clipData);
-                showSuccessAlert(R.string.sucess_msg_copy);
+                showMessage(R.string.sucess_msg_copy);
                 break;
             case R.id.action_open_browser:
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webview.getUrl()));

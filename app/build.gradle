@@ -116,8 +116,6 @@ dependencies {
 
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
     compile 'com.gyf.barlibrary:barlibrary:2.2.5'
-    //alerter 一款好看的弹出提示框
-    compile 'com.tapadoo.android:alerter:2.0.0'
     //logger log日志打印帮助类
     compile 'com.orhanobut:logger:1.15'
     //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
@@ -137,8 +135,8 @@ dependencies {
     //multidex
     compile 'com.android.support:multidex:1.0.1'
     //LeakCanary: A memory leak detection library for Android and Java.
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

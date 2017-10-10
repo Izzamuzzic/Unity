@@ -10,5 +10,12 @@
         <attr name="start_text" format="string"/>
         <attr name="end_text" format="string"/>
     </declare-styleable>
+    <declare-styleable name="FontTextView">
+        <attr name="fonts" format="enum">
+            <enum name="fz_songkebenxiukai" value="1"/>
+            <enum name="fz_youhei_504l" value="2"/>
+            <enum name="fz_youhei_508r" value="3"/>
+        </attr>
+    </declare-styleable>
 
 </resources>

@@ -16,7 +16,7 @@ import java.util.List;
  * Created by jingbin on 2016/11/25
  * RecyclerView.ViewHolder基类
  */
-public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder<T>> extends RecyclerView.Adapter<V> {
+public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder> extends RecyclerView.Adapter<V> {
 
     public String TAG = getClass().getSimpleName();
 

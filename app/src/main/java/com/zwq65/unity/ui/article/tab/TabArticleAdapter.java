@@ -1,22 +1,16 @@
 package com.zwq65.unity.ui.article.tab;
 
-import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -24,8 +18,10 @@ import butterknife.BindView;
  * Created by zwq65 on 2017/08/31
  */
 
-public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArticleAdapter.ViewHolder> {
-
+public class TabArticleAdapter<T extends Article> extends BaseRecyclerViewAdapter<T, TabArticleAdapter.ViewHolder> {
+    @Inject
+    TabArticleAdapter() {
+    }
 
     @Override
     public int getLayoutId(int viewType) {
@@ -37,36 +33,20 @@ public class TabArticleAdapter extends BaseRecyclerViewAdapter<Article, TabArtic
         return new ViewHolder(v);
     }
 
-    static class ViewHolder extends BaseViewHolder<Article> {
+    class ViewHolder extends BaseViewHolder<T> {
         @BindView(R.id.iv_background)
         ImageView ivBackground;
-        @BindView(R.id.rl_title)
-        RelativeLayout mRlTitle;
         @BindView(R.id.tv_title)
         TextView tvTitle;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
         }
 
         @Override
-        public void setData(Article data) {
+        public void setData(T data) {
             tvTitle.setText(data.getDesc());
-            tvTitle.setVisibility(View.INVISIBLE);
-            mRlTitle.setBackground(null);
-            Glide.with(getContext()).load(data.getImage().getUrl()).listener(new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    return false;
-                }
-
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    tvTitle.setVisibility(View.VISIBLE);
-                    mRlTitle.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_item_shadow));
-                    return false;
-                }
-            }).into(ivBackground);
+            Glide.with(getContext()).load(data.getImage().getUrl()).into(ivBackground);
         }
 
     }

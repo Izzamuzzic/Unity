@@ -68,34 +68,6 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     }
 
     @Override
-    public void showErrorAlert(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showErrorAlert(resId);
-        }
-    }
-
-    @Override
-    public void showErrorAlert(String message) {
-        if (mActivity != null) {
-            mActivity.showErrorAlert(message);
-        }
-    }
-
-    @Override
-    public void showSuccessAlert(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showSuccessAlert(resId);
-        }
-    }
-
-    @Override
-    public void showSuccessAlert(String message) {
-        if (mActivity != null) {
-            mActivity.showSuccessAlert(message);
-        }
-    }
-
-    @Override
     public void showMessage(@StringRes int resId) {
         if (mActivity != null) {
             mActivity.showMessage(resId);
@@ -109,6 +81,19 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
         }
     }
 
+    @Override
+    public void showError(@StringRes int resId) {
+        if (mActivity != null) {
+            mActivity.showError(resId);
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        if (mActivity != null) {
+            mActivity.showError(message);
+        }
+    }
 
     @Override
     public void onDetach() {

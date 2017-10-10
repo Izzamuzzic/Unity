@@ -1,6 +1,7 @@
 package com.zwq65.unity.data.network;
 
 import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
+import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
@@ -22,26 +23,26 @@ import io.reactivex.disposables.Disposable;
  */
 @Singleton
 public class AppApiHelper implements ApiHelper {
-    private RetrofitApiManager retrofitApiManager;
+    private GankIoApiService gankIoApiService;
 
     @Inject
-    public AppApiHelper(RetrofitApiManager retrofitApiManager) {
-        this.retrofitApiManager = retrofitApiManager;
+    public AppApiHelper(GankIoApiService gankIoApiService) {
+        this.gankIoApiService = gankIoApiService;
     }
 
     @Override
     public Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return composeSchduler(retrofitApiManager.getGankIoApiService().getRandomImages(), callBack, errorCallBack);
+        return composeSchduler(gankIoApiService.getRandomImages(), callBack, errorCallBack);
     }
 
     @Override
     public Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return composeSchduler(retrofitApiManager.getGankIoApiService().get20Images(page), callBack, errorCallBack);
+        return composeSchduler(gankIoApiService.get20Images(page), callBack, errorCallBack);
     }
 
     @Override
     public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<Video>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return composeSchduler(Flowable.zip(retrofitApiManager.getGankIoApiService().getVideos(page), retrofitApiManager.getGankIoApiService().getRandomImages(),
+        return composeSchduler(Flowable.zip(gankIoApiService.getVideos(page), gankIoApiService.getRandomImages(),
                 (restVideoResponse, welfareResponse) -> {
                     List<Video> videos = new ArrayList<>();
                     if (restVideoResponse != null && restVideoResponse.getData() != null
@@ -63,22 +64,22 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return zipArticleWithImage(retrofitApiManager.getGankIoApiService().getAndroidArticles(page), callBack, errorCallBack);
+        return zipArticleWithImage(gankIoApiService.getAndroidArticles(page), callBack, errorCallBack);
     }
 
     @Override
     public Disposable getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return zipArticleWithImage(retrofitApiManager.getGankIoApiService().getIosArticles(page), callBack, errorCallBack);
+        return zipArticleWithImage(gankIoApiService.getIosArticles(page), callBack, errorCallBack);
     }
 
     @Override
     public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return zipArticleWithImage(retrofitApiManager.getGankIoApiService().getQianduanArticles(page), callBack, errorCallBack);
+        return zipArticleWithImage(gankIoApiService.getQianduanArticles(page), callBack, errorCallBack);
     }
 
     private Disposable zipArticleWithImage(Flowable<GankApiResponse<List<Article>>> flowable,
                                            ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return composeSchduler(Flowable.zip(flowable, retrofitApiManager.getGankIoApiService().getRandomImages(),
+        return composeSchduler(Flowable.zip(flowable, gankIoApiService.getRandomImages(),
                 (listGankApiResponse, welfareResponse) -> {
                     List<Article> articles = new ArrayList<>();
                     if (listGankApiResponse != null && listGankApiResponse.getData() != null

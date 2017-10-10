@@ -21,18 +21,13 @@ public interface BaseContract {
 
         void hideLoading();
 
-        void showErrorAlert(@StringRes int resId);
-
-        void showErrorAlert(String message);
-
-        void showSuccessAlert(@StringRes int resId);
-
-        void showSuccessAlert(String message);
-
         void showMessage(@StringRes int resId);
 
         void showMessage(String message);
 
+        void showError(@StringRes int resId);
+
+        void showError(String message);
     }
 
     /**
