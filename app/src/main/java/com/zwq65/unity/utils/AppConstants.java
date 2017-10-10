@@ -1,30 +1,32 @@
 /*
- * Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *    Copyright [2017] [NIRVANA PRIVATE LIMITED]
  *
- *     https://mindorks.com/license/apache-v2
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package com.zwq65.unity.utils;
 
 /**
- * Created by amitshekhar on 08/01/17.
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/29
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public final class AppConstants {
 
     public static final String DB_NAME = "unity.db";
     public static final String PREF_NAME = "unity_pref";
-
-    public static final long NULL_INDEX = -1L;
 
     private AppConstants() {
         // This utility class is not publicly instantiable
