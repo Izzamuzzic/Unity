@@ -31,9 +31,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
- * Created by zwq65 on 2017/08/15
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/15.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class RestVideoAdapter<T extends Video> extends BaseRecyclerViewAdapter<T, RestVideoAdapter.ViewHolder> {
 
     @Inject

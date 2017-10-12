@@ -28,6 +28,14 @@ import android.widget.TextView;
 
 import com.zwq65.unity.R;
 
+/**
+ * ================================================
+ * recycleview加载更多的footview
+ * <p>
+ * Created by NIRVANA on 2017/07/28.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public class LoadingMoreFooter extends LinearLayout {
 
     public final static int STATE_LOADING = 0;

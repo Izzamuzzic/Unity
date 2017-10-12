@@ -31,9 +31,13 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by zwq65 on 2017/09/14
+ * ================================================
+ * some view that has handle of refresh  should extends {@link BaseRefreshFragment}
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P extends BaseContract.Presenter<V>> extends BaseFragment<V, P>
         implements RefreshMvpView<T> {
     @BindView(R.id.swipeRefreshLayout)

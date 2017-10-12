@@ -21,9 +21,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by zwq65 on 2017/07/20
+ * ================================================
+ * 自定义recycleview{@link android.support.v7.widget.RecyclerView.ItemDecoration},添加分割线
+ * <p>
+ * Created by NIRVANA on 2017/07/20.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class MyItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * @param outRect 边界

@@ -39,7 +39,12 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
+ * ================================================
  * 视频播放
+ * <p>
+ * Created by NIRVANA on 2017/06/29.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchContract.Presenter<WatchContract.View>>
         implements WatchContract.View {

@@ -36,9 +36,13 @@ import com.zwq65.unity.utils.CommonUtils;
 import javax.inject.Inject;
 
 /**
- * Created by zwq65 on 2017/09/12
+ * ================================================
+ * Mvp架构下的activity基类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseViewActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>>
         extends BaseActivity implements BaseContract.View, BaseFragment.Callback {
     Toolbar toolbar;

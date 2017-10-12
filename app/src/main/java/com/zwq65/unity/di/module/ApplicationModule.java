@@ -26,8 +26,8 @@ import com.zwq65.unity.data.db.AppDbHelper;
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.network.AppApiHelper;
-import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
+import com.zwq65.unity.data.network.retrofit.interceptor.MyInterceptor;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -105,7 +105,7 @@ public abstract class ApplicationModule {
         return new OkHttpClient.Builder()
                 // HeadInterceptor实现了Interceptor，用来往Request Header添加一些业务相关数据，如APP版本，token信息
 //                .addInterceptor(new HeadInterceptor())
-                .addInterceptor(new RetrofitApiManager.MyInterceptor())
+                .addInterceptor(new MyInterceptor())
                 // 连接超时时间设置
                 .connectTimeout(10, TimeUnit.SECONDS)
                 // 读取超时时间设置

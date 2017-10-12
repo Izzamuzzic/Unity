@@ -34,10 +34,13 @@ import butterknife.Unbinder;
 import dagger.android.support.DaggerAppCompatActivity;
 
 /**
- * Created by janisharali on 27/01/17
+ * ================================================
  * activity基类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     public final String TAG = getClass().getSimpleName();

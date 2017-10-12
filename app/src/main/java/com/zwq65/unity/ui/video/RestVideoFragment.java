@@ -30,11 +30,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 /**
- * Created by zwq65 on 2017/08/15
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/15.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContract.View<Video>,
         RestVideoContract.Presenter<RestVideoContract.View<Video>>> implements RestVideoContract.View<Video> {
 

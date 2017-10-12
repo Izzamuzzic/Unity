@@ -28,6 +28,8 @@ import java.util.List;
  * ================================================
  * 基类 {@link FragmentPagerAdapter}
  * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
 public class BaseViewPagerAdapter extends FragmentPagerAdapter {

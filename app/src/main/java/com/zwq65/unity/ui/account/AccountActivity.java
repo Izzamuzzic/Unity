@@ -29,10 +29,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by zwq65 on 2017/08/07
+ * ================================================
  * 个人中心
+ * <p>
+ * Created by NIRVANA on 2017/08/07
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class AccountActivity extends BaseViewActivity<AccountContract.View, AccountContract.Presenter<AccountContract.View>>
         implements AccountContract.View {
 

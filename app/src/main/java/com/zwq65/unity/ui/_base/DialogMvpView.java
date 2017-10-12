@@ -16,10 +16,14 @@
 
 package com.zwq65.unity.ui._base;
 
-/**
- * Created by janisharali on 24/05/17.
- */
 
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/05/24
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public interface DialogMvpView extends BaseContract.View {
 
     void dismissDialog(String tag);

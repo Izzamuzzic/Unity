@@ -25,9 +25,12 @@ import com.zwq65.unity.ui._base.BaseFragment;
 import butterknife.BindView;
 
 /**
- * Created by zwq65 on 2017/09/13
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/13.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class TestFragment extends BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>> implements TestContract.View {
     @BindView(R.id.btn_test)
     Button btnTest;

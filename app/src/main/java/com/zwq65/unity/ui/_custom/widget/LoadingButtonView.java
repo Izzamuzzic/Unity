@@ -34,9 +34,13 @@ import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
 
 /**
- * Created by zwq65 on 2017/08/28
+ * ================================================
+ * 自定义view（带加载进度的圆形按钮）
+ * <p>
+ * Created by NIRVANA on 2017/07/13.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class LoadingButtonView extends View implements View.OnClickListener {
     private int mHeight = DensityUtils.dip2px(getContext(), 200);
     private int mWidth = DensityUtils.dip2px(getContext(), 200);

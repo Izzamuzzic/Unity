@@ -30,9 +30,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/07/19
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/07/20
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class AlbumPresenter<V extends AlbumContract.View<Image>> extends BasePresenter<V> implements AlbumContract.Presenter<V> {
     private int page;
 

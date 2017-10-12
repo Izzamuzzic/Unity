@@ -31,9 +31,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleContract.View<Article>,
         TabArticleContract.Presenter<TabArticleContract.View<Article>>> implements TabArticleContract.View<Article> {
 

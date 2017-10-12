@@ -35,12 +35,14 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
 
-
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
  * Fragment基类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseFragment<V extends BaseContract.View, T extends BaseContract.Presenter<V>> extends DaggerFragment
         implements BaseContract.View {
     public final String TAG = getClass().getSimpleName();

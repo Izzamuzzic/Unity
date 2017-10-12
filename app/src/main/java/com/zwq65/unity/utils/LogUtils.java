@@ -21,6 +21,13 @@ import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/29
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public class LogUtils {
     public static void i(String tag, String msg) {
         Log.i(tag, msg);

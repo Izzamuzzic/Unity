@@ -24,9 +24,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/08/07
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/07
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class AccountPresenter<V extends AccountContract.View> extends BasePresenter<V> implements AccountContract.Presenter<V> {
     @Inject
     AccountPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {

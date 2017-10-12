@@ -28,7 +28,13 @@ import com.zwq65.unity.ui.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/06/29.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public class LoginActivity extends BaseViewActivity<LoginContract.View, LoginContract.Presenter<LoginContract.View>>
         implements LoginContract.View {
 

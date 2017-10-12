@@ -24,9 +24,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/09/21
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/06/29.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class MainPresenter<V extends MainContract.View> extends BasePresenter<V> implements MainContract.Presenter<V> {
     @Inject
     MainPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {

@@ -42,9 +42,12 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by zwq65 on 2017/08/01
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/01
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<V> implements ImageContract.Presenter<V> {
     @Inject
     ImagePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {

@@ -26,10 +26,13 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.annotations.NonNull;
 
 /**
- * Created by zwq65 on 2017/07/25
+ * ================================================
  * 封装的api接口error回调类
+ * <p>
+ * Created by NIRVANA on 2017/05/03.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class ApiErrorCallBack<T extends Throwable> implements Consumer<T> {
 
     @Override

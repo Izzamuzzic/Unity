@@ -16,7 +16,6 @@
 
 package com.zwq65.unity.data.network;
 
-import com.zwq65.unity.data.network.retrofit.RetrofitApiManager;
 import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
 import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
@@ -32,10 +31,18 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * 网络访问实体类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 @Singleton
 public class AppApiHelper implements ApiHelper {
@@ -125,6 +132,24 @@ public class AppApiHelper implements ApiHelper {
      * @return Disposable
      */
     private <T> Disposable composeSchduler(Flowable<T> flowable, ApiSubscriberCallBack<T> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return flowable.compose(RetrofitApiManager.schedulersTransformer()).subscribe(callBack, errorCallBack);
+        return flowable.compose(schedulersTransformer()).subscribe(callBack, errorCallBack);
+    }
+
+    /**
+     * 统一线程处理(compose简化线程)
+     *
+     * @param <T> 返回数据data实际的 数据
+     * @return 返回数据data实际的 数据
+     */
+    public static <T> FlowableTransformer<T, T> schedulersTransformer() {
+        return new FlowableTransformer<T, T>() {
+            @Override
+            public Flowable<T> apply(Flowable<T> upstream) {
+                return upstream
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
     }
 }

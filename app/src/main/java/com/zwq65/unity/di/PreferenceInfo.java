@@ -22,9 +22,12 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/01/27
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PreferenceInfo {

@@ -31,9 +31,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
- * Created by zwq65 on 2017/08/31
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class TabArticleAdapter<T extends Article> extends BaseRecyclerViewAdapter<T, TabArticleAdapter.ViewHolder> {
     @Inject
     TabArticleAdapter() {

@@ -41,7 +41,7 @@ import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
-import com.zwq65.unity.ui._custom.other.photoview.PhotoView;
+import com.zwq65.unity.ui._custom.photoview.PhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,8 @@ import static android.view.View.GONE;
 
 /**
  * ================================================
- * <p> 查看大图
+ * 查看大图
+ * <p>
  * Created by NIRVANA on 2017/09/27
  * Contact with <zwq651406441@gmail.com>
  * ================================================
@@ -218,10 +219,10 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
         public Object instantiateItem(ViewGroup container, final int position) {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
-            PhotoView ivImage = (PhotoView) view.findViewById(R.id.iv_image);
+            PhotoView ivImage = view.findViewById(R.id.iv_image);
 
             final Image image = imageList.get(position);
-            final MKLoader pbLoader = (MKLoader) view.findViewById(R.id.pb_loader);
+            final MKLoader pbLoader = view.findViewById(R.id.pb_loader);
             Glide.with(ImageActivity.this).load(image.getUrl())
                     .listener(new RequestListener<Drawable>() {
                         @Override

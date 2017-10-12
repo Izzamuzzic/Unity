@@ -32,10 +32,13 @@ import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 
 /**
- * Created by zwq65 on 2017/06/28.
- * Unity
+ * ================================================
+ * unity Application
+ * <p>
+ * Created by NIRVANA on 2017/06/28.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class App extends DaggerApplication {
 
     private static App unityApp;

@@ -22,7 +22,6 @@ import com.zwq65.unity.di.ActivityScoped;
 import dagger.Binds;
 import dagger.Module;
 
-
 /**
  * ================================================
  * <p>

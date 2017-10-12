@@ -29,11 +29,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-
 /**
- * Created by zwq65 on 2017/07/20
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/07/20
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, AlbumAdapter.ViewHolder> {
     @Inject
     AlbumAdapter() {

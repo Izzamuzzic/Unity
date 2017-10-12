@@ -21,10 +21,13 @@ import android.widget.Toast;
 import com.zwq65.unity.App;
 
 /**
- * Created by zwq65 on 2017/05/08.
- * 防止多次调用弹出toast
+ * ================================================
+ * 防止多次调用弹出toast,统一以{@link ToastUtils}显示Toast
+ * <p>
+ * Created by NIRVANA on 2017/09/29
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class ToastUtils {
     private static Toast toast;
 

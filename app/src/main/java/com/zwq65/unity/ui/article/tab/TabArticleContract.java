@@ -22,9 +22,12 @@ import com.zwq65.unity.ui._base.RefreshMvpView;
 
 
 /**
- * Created by zwq65 on 2017/08/31
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class TabArticleContract {
     public interface View<T extends Article> extends RefreshMvpView<T> {
     }

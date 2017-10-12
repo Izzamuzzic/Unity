@@ -32,7 +32,11 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleContract.Presenter<ArticleContract.View>>
         implements ArticleContract.View {

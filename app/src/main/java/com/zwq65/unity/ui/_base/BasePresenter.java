@@ -25,9 +25,14 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
+ * ================================================
  * Base class that implements the Presenter interface and provides a base implementation for
  * onAttach() and onDetach(). It also handles keeping a reference to the mvpView that
  * can be accessed from the children classes by calling getMvpView().
+ * <p>
+ * Created by NIRVANA on 2017/09/27
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 

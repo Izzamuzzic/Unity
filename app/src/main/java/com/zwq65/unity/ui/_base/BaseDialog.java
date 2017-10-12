@@ -36,9 +36,13 @@ import android.widget.RelativeLayout;
 import butterknife.Unbinder;
 
 /**
- * Created by janisharali on 24/05/17.
+ * ================================================
+ * 所有{@link DialogFragment}都必须继承{@link BaseDialog}
+ * <p>
+ * Created by NIRVANA on 2017/05/24
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseDialog extends DialogFragment implements DialogMvpView {
 
     private BaseViewActivity mActivity;

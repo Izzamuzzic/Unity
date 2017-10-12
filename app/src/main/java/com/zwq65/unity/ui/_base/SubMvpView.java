@@ -17,13 +17,14 @@
 package com.zwq65.unity.ui._base;
 
 /**
- * Created by janisharali on 27/01/17.
- */
-
-/**
+ * ================================================
  * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
  * pattern must implement. Generally this interface will be extended by a more specific interface
  * that then usually will be implemented by an Activity or Fragment.
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public interface SubMvpView extends BaseContract.View {
 

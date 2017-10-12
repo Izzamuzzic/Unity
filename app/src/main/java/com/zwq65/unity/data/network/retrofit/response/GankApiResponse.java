@@ -17,9 +17,13 @@
 package com.zwq65.unity.data.network.retrofit.response;
 
 /**
+ * ================================================
  * gank io返回数据基类
+ * <p>
+ * Created by NIRVANA on 2017/05/03.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class GankApiResponse<T> {
     private boolean error;
 

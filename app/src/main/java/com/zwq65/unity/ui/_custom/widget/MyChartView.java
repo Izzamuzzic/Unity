@@ -34,11 +34,14 @@ import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.LogUtils;
 
-
 /**
- * Created by zwq65 on 2017/09/07
+ * ================================================
+ * 自定义表格
+ * <p>
+ * Created by NIRVANA on 2017/09/07
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class MyChartView extends View {
 
     private Context context;

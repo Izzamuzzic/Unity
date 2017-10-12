@@ -29,8 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jingbin on 2016/11/25
+ * ================================================
  * RecyclerView.ViewHolder基类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder> extends RecyclerView.Adapter<V> {
 

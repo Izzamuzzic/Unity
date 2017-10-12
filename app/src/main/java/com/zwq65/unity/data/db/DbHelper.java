@@ -25,9 +25,13 @@ import io.reactivex.Observable;
 
 
 /**
- * Created by janisharali on 08/12/16.
+ * ================================================
+ * 网络访问接口
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public interface DbHelper {
 
     Observable<Long> insertPicture(final Picture picture);

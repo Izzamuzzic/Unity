@@ -19,7 +19,11 @@ package com.zwq65.unity.ui.article;
 import com.zwq65.unity.ui._base.BaseContract;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public interface ArticleContract {
     interface View extends BaseContract.View {

@@ -22,13 +22,14 @@ import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-import static android.R.id.message;
-
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
  * 自定义view基类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class BaseSubView extends ViewGroup implements SubMvpView {
 
     private BaseContract.View mParentMvpView;

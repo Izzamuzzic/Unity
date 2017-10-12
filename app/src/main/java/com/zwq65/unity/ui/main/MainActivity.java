@@ -46,6 +46,13 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/06/29.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public class MainActivity extends BaseViewActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 

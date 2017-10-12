@@ -17,9 +17,13 @@
 package com.zwq65.unity.data.prefs;
 
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
+ * SharedPreferences {@link android.content.SharedPreferences}读写接口
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public interface PreferencesHelper {
 
     Boolean getDayNightmode();

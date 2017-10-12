@@ -22,16 +22,19 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 
-
 /**
+ * ================================================
  * M为这个itemView对应的model。
  * 使用RecyclerArrayAdapter就一定要用这个ViewHolder。
  * 这个ViewHolder将ItemView与Adapter解耦。
  * 推荐子类继承第二个构造函数。并将子类的构造函数设为一个ViewGroup parent。
  * 然后这个ViewHolder就完全独立。adapter在new的时候只需将parentView传进来。View的生成与管理由ViewHolder执行。
  * 实现setData来实现UI修改。Adapter会在onCreateViewHolder里自动调用。
- * <p>
  * 在一些特殊情况下，只能在setData里设置监听。
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 abstract public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 

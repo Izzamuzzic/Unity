@@ -40,10 +40,13 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by janisharali on 27/01/17.
- * 本地数据操作类
+ * ================================================
+ * 本地数据、网络访问操作类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Singleton
 public class AppDataManager implements DataManager {
 

@@ -20,9 +20,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by zwq65 on 2017/08/25
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/30
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class Image implements Parcelable {
     /**
      * _id : 596ea620421aa90c9203d3bc

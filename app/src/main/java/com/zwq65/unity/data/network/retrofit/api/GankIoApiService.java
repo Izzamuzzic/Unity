@@ -29,10 +29,13 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 /**
- * gank io'api
- * Created by zwq65 on 2017/05/03.
+ * ================================================
+ * gank io'apiService
+ * <p>
+ * Created by NIRVANA on 2017/05/03.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public interface GankIoApiService {
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页

@@ -30,10 +30,13 @@ import android.view.animation.LinearInterpolator;
 
 import com.zwq65.unity.R;
 
-
 /**
- * Created by zwq65 on 2017/03/06.
+ * ================================================
  * 波浪view
+ * <p>
+ * Created by NIRVANA on 2017/03/06
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class WaveBezierView extends View {
 

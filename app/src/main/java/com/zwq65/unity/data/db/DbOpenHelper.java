@@ -28,9 +28,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by janisharali on 08/12/16.
+ * ================================================
+ * 本地数据库帮助类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Singleton
 public class DbOpenHelper extends DaoMaster.OpenHelper {
 

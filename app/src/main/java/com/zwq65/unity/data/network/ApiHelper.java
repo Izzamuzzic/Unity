@@ -27,10 +27,15 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
-/**
- * Created by zwq65 on 2017/08/30
- */
 
+/**
+ * ================================================
+ * 网络访问接口
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public interface ApiHelper {
     /**
      * 获取随机数目的image'list

@@ -21,10 +21,13 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by zwq65 on 2017/07/25
+ * ================================================
  * 封装的api接口resonse回调类
+ * <p>
+ * Created by NIRVANA on 2017/05/03.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public abstract class ApiSubscriberCallBack<T> implements Consumer<T> {
 
     @Override

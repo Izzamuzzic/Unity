@@ -20,7 +20,7 @@ import android.support.annotation.StringRes;
 
 /**
  * ================================================
- * <p> BaseContract
+ * <p>
  * Created by NIRVANA on 2017/09/27
  * Contact with <zwq651406441@gmail.com>
  * ================================================

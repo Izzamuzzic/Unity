@@ -29,9 +29,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 201/08/15
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/15.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class RestVideoPresenter<V extends RestVideoContract.View<Video>> extends BasePresenter<V>
         implements RestVideoContract.Presenter<V> {
     private int page;

@@ -28,9 +28,12 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/09/13
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/13.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class TestPresenter<V extends TestContract.View> extends BasePresenter<V> implements TestContract.Presenter<V> {
     @Inject
     TestPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {

@@ -24,9 +24,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/06/29.
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/06/29.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<V> implements LoginContract.Presenter<V> {
 
     @Inject

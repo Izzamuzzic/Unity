@@ -23,7 +23,15 @@ import java.lang.annotation.Target;
 
 import javax.inject.Scope;
 
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/01/27
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-public @interface FragmentScoped {}
+public @interface FragmentScoped {
+}

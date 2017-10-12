@@ -19,9 +19,12 @@ package com.zwq65.unity.ui._base;
 import java.util.List;
 
 /**
- * Created by zwq65 on 2017/09/14
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/14.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public interface RefreshMvpView<T> extends BaseContract.View {
 
     void refreshData(List<T> list);//刷新数据

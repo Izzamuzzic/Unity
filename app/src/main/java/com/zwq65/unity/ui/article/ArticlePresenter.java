@@ -25,7 +25,11 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
 public class ArticlePresenter<V extends ArticleContract.View> extends BasePresenter<V> implements ArticleContract.Presenter<V> {
     @Inject

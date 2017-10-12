@@ -27,12 +27,14 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 
-
 /**
- * Created by janisharali on 08/12/16.
+ * ================================================
  * databese操作帮助类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Singleton
 public class AppDbHelper implements DbHelper {
 

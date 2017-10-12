@@ -25,9 +25,12 @@ import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by zwq65 on 2017/08/01
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/01
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Entity(nameInDb = "Picture")
 public class Picture implements Parcelable{
     @Id

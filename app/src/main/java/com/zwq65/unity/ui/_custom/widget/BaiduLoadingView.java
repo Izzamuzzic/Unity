@@ -33,12 +33,14 @@ import android.view.animation.LinearInterpolator;
 import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
 
-
 /**
- * Created by zwq65 on 2017/07/13.
+ * ================================================
  * 自定义view（仿百度贴吧加载球）
+ * <p>
+ * Created by NIRVANA on 2017/07/13.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class BaiduLoadingView extends View {
 
     private int mHeight = DensityUtils.dip2px(getContext(), 50);

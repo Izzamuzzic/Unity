@@ -22,9 +22,12 @@ import android.os.Parcelable;
 import java.util.List;
 
 /**
- * Created by zwq65 on 2017/08/30
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/30
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public class Article implements Parcelable {
     /**
      * _id : 59a4ea09421aa901b9dc4652

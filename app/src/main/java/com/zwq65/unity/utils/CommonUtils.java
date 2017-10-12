@@ -27,7 +27,13 @@ import com.zwq65.unity.R;
 
 import java.io.File;
 
-
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/01/27
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public final class CommonUtils {
 
     private CommonUtils() {

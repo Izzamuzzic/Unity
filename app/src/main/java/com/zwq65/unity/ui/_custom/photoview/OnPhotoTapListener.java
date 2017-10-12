@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.other.photoview;
+package com.zwq65.unity.ui._custom.photoview;
 
 import android.widget.ImageView;
 

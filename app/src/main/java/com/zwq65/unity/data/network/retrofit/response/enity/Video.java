@@ -20,10 +20,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by zwq65 on 2017/08/29
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/30
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
-public class Video  implements Parcelable {
+public class Video implements Parcelable {
     /**
      * _id : 59906c33421aa90f4919c7e1
      * createdAt : 2017-08-13T23:11:47.518Z

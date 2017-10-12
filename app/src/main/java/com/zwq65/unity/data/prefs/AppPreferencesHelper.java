@@ -26,9 +26,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
+ * SharedPreferences {@link android.content.SharedPreferences}读写类
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 @Singleton
 public class AppPreferencesHelper implements PreferencesHelper {
 

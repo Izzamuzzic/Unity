@@ -48,6 +48,13 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/04
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
+ */
 public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View,
         WebArticleContract.Presenter<WebArticleContract.View>> implements WebArticleContract.View {
     public static final String ARTICAL = "ARTICAL";

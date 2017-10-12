@@ -22,9 +22,13 @@ import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 
 /**
- * Created by janisharali on 27/01/17.
+ * ================================================
+ * data model
+ * <p>
+ * Created by NIRVANA on 2017/01/27.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-
 public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 
     /**
