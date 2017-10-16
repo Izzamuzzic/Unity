@@ -30,7 +30,6 @@
         <attr name="fonts" format="enum">
             <enum name="fz_songkebenxiukai" value="1"/>
             <enum name="fz_youhei_504l" value="2"/>
-            <enum name="fz_youhei_508r" value="3"/>
         </attr>
     </declare-styleable>
 

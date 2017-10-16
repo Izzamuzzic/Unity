@@ -136,4 +136,6 @@ dependencies {
     compile "com.abrahamcaijin.commonutil:CommonUtil:1.0.0"
     //BRVAH:Powerful and flexible RecyclerAdapter
     compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28"
+    //Custom fonts in Android the easy way
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }

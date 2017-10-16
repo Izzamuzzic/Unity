@@ -38,7 +38,7 @@
         android:padding="@dimen/activity_horizontal_padding">
 
         <!-- 限制titile最大显示3行，超出部分以...标识在尾部-->
-        <com.zwq65.unity.ui._custom.widget.FontTextView
+        <TextView
             android:id="@+id/tv_title"
             style="@style/text_15_white"
             android:layout_width="wrap_content"
@@ -48,8 +48,8 @@
             android:layout_marginTop="@dimen/margin_defult_tiny"
             android:ellipsize="end"
             android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.Text.youhei"
             android:textStyle="bold"
-            app:fonts="fz_youhei_504l"
             />
 
         <ImageView

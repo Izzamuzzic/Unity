@@ -17,7 +17,6 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/activity_header_height"
     android:background="@drawable/bg_gradient_personal_center">
@@ -41,7 +40,7 @@
         android:layout_centerInParent="true"
         android:src="@mipmap/ic_avatar"/>
 
-    <com.zwq65.unity.ui._custom.widget.FontTextView
+    <TextView
         android:id="@+id/tv_account_name"
         style="@style/text_14_white"
         android:layout_width="wrap_content"
@@ -50,9 +49,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_defult"
         android:text="@string/desperadozck"
-        app:fonts="fz_youhei_508r"/>
+        android:textAppearance="@style/TextViewCustomFontXiukai"
+        />
 
-    <com.zwq65.unity.ui._custom.widget.FontTextView
+    <TextView
         style="@style/text_14_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,5 +60,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_defult"
         android:text="@string/github_website_address"
-        app:fonts="fz_youhei_508r"/>
+        android:textAppearance="@style/TextViewCustomFontXiukai"
+        />
 </RelativeLayout>

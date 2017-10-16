@@ -17,6 +17,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:fontPath="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -45,24 +46,26 @@
                 android:layout_height="60dp"
                 android:src="@mipmap/ic_avatar"/>
 
-            <com.zwq65.unity.ui._custom.widget.FontTextView
+            <TextView
                 android:id="@+id/tv_account_name"
+                style="@style/TextViewCustomFontXiukai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:text="@string/desperadozck"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
-                app:fonts="fz_songkebenxiukai"/>
+                />
 
-            <com.zwq65.unity.ui._custom.widget.FontTextView
+            <TextView
                 android:id="@+id/tv_account_website_address"
+                style="@style/TextViewCustomFontXiukai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/github_website_address"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
-                app:fonts="fz_songkebenxiukai"/>
+                />
         </LinearLayout>
 
         <LinearLayout

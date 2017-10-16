@@ -36,6 +36,21 @@
         <item name="@android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
+    <style name="TextAppearance.Text.youhei" parent="android:TextAppearance">
+        <item name="fontPath">fonts/FZYouH_504L.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.xiukai" parent="android:TextAppearance">
+        <item name="fontPath">fonts/FZSongKeBenXiuKai.TTF</item>
+    </style>
+
+    <style name="TextViewCustomFontYouhei">
+        <item name="fontPath">fonts/FZYouH_504L.otf</item>
+    </style>
+
+    <style name="TextViewCustomFontXiukai">
+        <item name="fontPath">fonts/FZSongKeBenXiuKai.TTF</item>
+    </style>
 
     <style name="text_14_white">
         <item name="android:textColor">@color/white</item>

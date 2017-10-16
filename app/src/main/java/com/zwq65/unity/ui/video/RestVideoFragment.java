@@ -52,8 +52,10 @@ public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContr
     public void initView() {
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
+        //item加载动画（默认）
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        //item间隔线
+        mRecyclerView.addItemDecoration(new MyItemDecoration());
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((video, position) -> gotoWatchActivity(video));
         mRecyclerView.setAdapter(mAdapter);

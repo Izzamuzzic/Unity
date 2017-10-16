@@ -28,8 +28,11 @@ import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
 
+import javax.inject.Inject;
+
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * ================================================
@@ -40,6 +43,9 @@ import dagger.android.DaggerApplication;
  * ================================================
  */
 public class App extends DaggerApplication {
+
+    @Inject
+    CalligraphyConfig mCalligraphyConfig;
 
     private static App unityApp;
 
@@ -54,6 +60,7 @@ public class App extends DaggerApplication {
         initBugly();
         initStetho();
         initLeakcanary();
+        CalligraphyConfig.initDefault(mCalligraphyConfig);
     }
 
     /**
@@ -67,6 +74,7 @@ public class App extends DaggerApplication {
         return appComponent;
     }
 
+    @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);

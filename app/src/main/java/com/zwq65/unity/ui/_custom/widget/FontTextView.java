@@ -33,6 +33,7 @@ import com.zwq65.unity.R;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
+@Deprecated
 public class FontTextView extends AppCompatTextView {
     public FontTextView(Context context) {
         super(context);
@@ -56,7 +57,7 @@ public class FontTextView extends AppCompatTextView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FontTextView);
         int fontAttrs = typedArray.getInt(R.styleable.FontTextView_fonts, 1);
         typedArray.recycle();
-        String customFont = "fonts/FZYouH_504L.otf";
+        String customFont;
         switch (fontAttrs) {
             case 1:
                 customFont = "fonts/FZSongKeBenXiuKai.TTF";
@@ -64,8 +65,8 @@ public class FontTextView extends AppCompatTextView {
             case 2:
                 customFont = "fonts/FZYouH_504L.otf";
                 break;
-            case 3:
-                customFont = "fonts/FZYouH_508R.ttf";
+            default:
+                customFont = "fonts/FZYouH_504L.otf";
                 break;
         }
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), customFont);
