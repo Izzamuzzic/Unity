@@ -17,7 +17,6 @@ package com.zwq65.unity.ui._base;
 
 import com.zwq65.unity.data.DataManager;
 
-import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 import javax.inject.Inject;
@@ -37,10 +36,14 @@ import io.reactivex.disposables.CompositeDisposable;
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 
     private final DataManager mDataManager;
-    //detach view时，mCompositeDisposable来停止当前所有事务，节省资源
+    /**
+     * detach view时，mCompositeDisposable来停止当前所有事务，节省资源
+     */
     private final CompositeDisposable mCompositeDisposable;
-    //MvpView接口类型的弱引用
-    private Reference<V> mViewRef;
+    /**
+     * MvpView接口类型的弱引用
+     */
+    private WeakReference<V> mViewRef;
 
     @Inject
     public BasePresenter(
