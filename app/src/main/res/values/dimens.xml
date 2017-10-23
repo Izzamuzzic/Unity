@@ -41,5 +41,6 @@
     <dimen name="activity_header_height">200dp</dimen>
 
     <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="scrollbar_size">4dp</dimen>
 
 </resources>
