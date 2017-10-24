@@ -75,7 +75,7 @@ public class RotateAvatarView extends View {
         mCamera = new Camera();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mAnimator = ObjectAnimator.ofInt(this, "degree", 0, ROTATE_DEGREE);
-        mAnimator.setDuration(5000);
+        mAnimator.setDuration(2500);
         mAnimator.setRepeatCount(ValueAnimator.INFINITE);
         mAnimator.setRepeatMode(ValueAnimator.REVERSE);
     }
@@ -112,8 +112,10 @@ public class RotateAvatarView extends View {
         }
         mCamera.save();
         mCamera.rotateX(degree);
+        //第二步:恢复到原来位置
         canvas.translate(centerX, centerY);
         mCamera.applyToCanvas(canvas);
+        //第一步(canvas的变换方法需倒着写):移动到原点进行旋转以达到轴心旋转的目的
         canvas.translate(-centerX, -centerY);
         mCamera.restore();
         canvas.drawBitmap(mAvatar, left, top, mPaint);
