@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.widget;
+package com.zwq65.unity.ui._custom.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

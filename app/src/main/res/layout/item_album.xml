@@ -25,7 +25,7 @@
     android:orientation="vertical"
     app:cardCornerRadius="@dimen/cardview_default_radius">
 
-    <com.zwq65.unity.ui._custom.widget.RatioImageView
+    <com.zwq65.unity.ui._custom.view.RatioImageView
         android:id="@+id/iv_beauty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

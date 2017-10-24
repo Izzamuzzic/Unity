@@ -58,6 +58,9 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
         LogUtils.i(TAG, "onCreate");
     }
 
+    /**
+     * @return Resource ID to be inflated
+     */
     @LayoutRes
     public abstract int getLayoutId();
 

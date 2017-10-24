@@ -148,30 +148,40 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 gotoFragment(new RestVideoFragment());
                 break;
             case R.id.ll_setting:
-                gotoFragment(new ArticleFragment());
+                showError("开发中...＜(▰˘◡˘▰)");
                 break;
             case R.id.ll_out:
                 //退出app
                 exitApp();
                 break;
             case R.id.fab:
-                //获取应用当前的主题
-                switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
-                    case Configuration.UI_MODE_NIGHT_YES:
-                        //当前为夜间模式，切换为日间模式
-                        mPresenter.setNightMode(false);
-                        break;
-                    case Configuration.UI_MODE_NIGHT_NO:
-                        mPresenter.setNightMode(true);
-                        break;
-                }
-                setDayNightMode(mPresenter.getNightMode());
-                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-                recreate();
+                setDayNightMode();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 设置白天/黑夜主题
+     * TODO: 2017/10/24 有bug,找机会修复(｡◕ˇ∀ˇ◕)
+     */
+    private void setDayNightMode() {
+        //获取应用当前的主题
+        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                //当前为夜间模式，切换为日间模式
+                mPresenter.setNightMode(false);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                mPresenter.setNightMode(true);
+                break;
+            default:
+                break;
+        }
+        setDayNightMode(mPresenter.getNightMode());
+        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+        recreate();
     }
 
     /**
@@ -180,10 +190,11 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
      * @param nightMode 是否夜间
      */
     public void setDayNightMode(boolean nightMode) {
-        if (nightMode)
+        if (nightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     private void exitApp() {

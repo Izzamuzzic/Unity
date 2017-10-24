@@ -23,7 +23,7 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter;
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder;
-import com.zwq65.unity.ui._custom.widget.RatioImageView;
+import com.zwq65.unity.ui._custom.view.RatioImageView;
 
 import javax.inject.Inject;
 

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.widget;
+package com.zwq65.unity.ui._custom.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.utils.LogUtils;
 
 /**
  * ================================================
@@ -45,6 +46,7 @@ public class WaveBezierView extends View {
     private float currPercent;
     private int mScreenHeight;
     private int mScreenWidth;
+    private ValueAnimator animator;
 
     public WaveBezierView(Context context) {
         super(context);
@@ -56,6 +58,11 @@ public class WaveBezierView extends View {
 
     public WaveBezierView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+        startAnim();
+    }
+
+    private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
@@ -66,11 +73,10 @@ public class WaveBezierView extends View {
                 ContextCompat.getColor(context, R.color.wave1), Shader.TileMode.CLAMP);
         mPaint.setShader(shader1);
         mPaint2.setShader(shader1);
-        startAnim();
     }
 
     private void startAnim() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
+        animator = ValueAnimator.ofFloat(0, 1);
         animator.setDuration(4000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
@@ -78,7 +84,20 @@ public class WaveBezierView extends View {
             currPercent = (float) animation.getAnimatedValue();
             invalidate();
         });
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        LogUtils.e("onAttachedToWindow()");
+        super.onAttachedToWindow();
         animator.start();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        LogUtils.e("onDetachedFromWindow()");
+        super.onDetachedFromWindow();
+        animator.end();
     }
 
     @Override

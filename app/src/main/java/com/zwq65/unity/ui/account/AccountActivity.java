@@ -17,8 +17,6 @@
 package com.zwq65.unity.ui.account;
 
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -39,10 +37,6 @@ import butterknife.OnClick;
 public class AccountActivity extends BaseViewActivity<AccountContract.View, AccountContract.Presenter<AccountContract.View>>
         implements AccountContract.View {
 
-    @BindView(R.id.tl_personal)
-    TabLayout tlPersonal;
-    @BindView(R.id.vp_personal)
-    ViewPager vpPersonal;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.iv_avatar)
@@ -77,6 +71,8 @@ public class AccountActivity extends BaseViewActivity<AccountContract.View, Acco
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
+                break;
+            default:
                 break;
         }
     }

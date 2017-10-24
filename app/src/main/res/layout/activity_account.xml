@@ -15,28 +15,17 @@
   ~    limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/head_personal_center" />
+    <include layout="@layout/head_personal_center"/>
 
-    <!-- TabLayout+ViewPager -->
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tl_personal"
-        android:layout_width="match_parent"
+    <com.zwq65.unity.ui._custom.view.RotateAvatarView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabBackground="@color/wave2"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabIndicatorHeight="@dimen/tab_indicator_height"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_personal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center"/>
 
 </LinearLayout>
