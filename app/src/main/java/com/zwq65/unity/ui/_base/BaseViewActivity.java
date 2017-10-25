@@ -78,7 +78,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
     }
 
     /**
-     * @return 是否加载BaseToolBar
+     * @return 是否加载默认ToolBar
      */
     public abstract Boolean initBaseTooBar();
 
@@ -89,7 +89,6 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
 
     /**
      * 初始化View
-     * 进行findViewById
      */
     public abstract void initView();
 

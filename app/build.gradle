@@ -39,7 +39,7 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
-            // 发布生产版本时，直接跑releaseAppRelease包，签名过的生产包就会打在out文件夹
+            // 发布生产版本时，BuildVariant直接选择release，签名过的生产包就会生成在build/outputs/apk文件夹
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

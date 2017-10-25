@@ -29,7 +29,6 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.utils.LogUtils;
 
 /**
  * ================================================
@@ -88,14 +87,12 @@ public class WaveBezierView extends View {
 
     @Override
     protected void onAttachedToWindow() {
-        LogUtils.e("onAttachedToWindow()");
         super.onAttachedToWindow();
         animator.start();
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        LogUtils.e("onDetachedFromWindow()");
         super.onDetachedFromWindow();
         animator.end();
     }
