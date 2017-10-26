@@ -18,7 +18,7 @@ captures/
 
 # Intellij
 *.iml
-.idea
+.idea/
 # Eclipse project files
 .project
 .settings/
