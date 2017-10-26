@@ -16,16 +16,23 @@
 
 package com.zwq65.unity.data.network.retrofit.response;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * ================================================
  * gank io返回数据基类
+ * 变量使用{@link SerializedName}注解标记,混淆后gson可根据{@link SerializedName}的字符来解析json,否则解析失败!
  * <p>
  * Created by NIRVANA on 2017/05/03.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
 public class GankApiResponse<T> {
+    @SerializedName("error")
     private boolean error;
+
+    @SerializedName("results")
+    public T results;
 
     public boolean isError() {
         return error;
@@ -35,10 +42,6 @@ public class GankApiResponse<T> {
         this.error = error;
     }
 
-
-    public T results;
-
-
     public T getData() {
         return results;
     }
@@ -47,5 +50,11 @@ public class GankApiResponse<T> {
         this.results = data;
     }
 
-
+    @Override
+    public String toString() {
+        return "GankApiResponse{" +
+                "error=" + error +
+                ", results=" + results +
+                '}';
+    }
 }

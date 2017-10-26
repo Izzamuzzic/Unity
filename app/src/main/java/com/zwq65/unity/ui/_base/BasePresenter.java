@@ -35,6 +35,8 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 
+    public final String TAG = getClass().getSimpleName();
+
     private final DataManager mDataManager;
     /**
      * detach view时，mCompositeDisposable来停止当前所有事务，节省资源

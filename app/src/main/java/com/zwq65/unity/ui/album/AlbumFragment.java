@@ -53,8 +53,10 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
     public void initView() {
         super.initView();
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
+        //item加载动画（默认）
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        //item间隔
+        mRecyclerView.addItemDecoration(new MyItemDecoration());
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         mRecyclerView.setAdapter(mAdapter);
