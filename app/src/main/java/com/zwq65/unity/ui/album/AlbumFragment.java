@@ -60,7 +60,8 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         mRecyclerView.setAdapter(mAdapter);
-        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));//拖拽监听
+        //添加item拖拽监听帮助类
+        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));
         helper.attachToRecyclerView(mRecyclerView);
     }
 
