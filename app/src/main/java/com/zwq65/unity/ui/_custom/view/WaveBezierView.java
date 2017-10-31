@@ -23,12 +23,13 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.zwq65.unity.R;
+import com.zwq65.unity.ui._base.BaseSubView;
 
 /**
  * ================================================
@@ -38,7 +39,7 @@ import com.zwq65.unity.R;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class WaveBezierView extends View {
+public class WaveBezierView extends BaseSubView {
 
     private Paint mPaint, mPaint2;
     private Path mPath, mPath2;
@@ -51,17 +52,16 @@ public class WaveBezierView extends View {
         super(context);
     }
 
-    public WaveBezierView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WaveBezierView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public WaveBezierView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public WaveBezierView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
-        startAnim();
-    }
-
-    private void init(Context context) {
+    @Override
+    public void setUp(Context context, @Nullable AttributeSet attrs) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
@@ -72,6 +72,8 @@ public class WaveBezierView extends View {
                 ContextCompat.getColor(context, R.color.wave1), Shader.TileMode.CLAMP);
         mPaint.setShader(shader1);
         mPaint2.setShader(shader1);
+
+        startAnim();
     }
 
     private void startAnim() {
@@ -158,7 +160,6 @@ public class WaveBezierView extends View {
         path.rQuadTo(quadWidth, quadHeight, 2 * quadWidth, 0);
         //第二个周期
         path.rQuadTo(quadWidth, -quadHeight, 2 * quadWidth, 0);
-//        path.rQuadTo(quadWidth, quadHeight, 2 * quadWidth, 0);
         //右侧的直线
         path.lineTo(x + mScreenWidth * 3, mScreenHeight);
         //下边的直线

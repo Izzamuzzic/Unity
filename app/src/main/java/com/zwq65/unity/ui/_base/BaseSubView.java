@@ -16,11 +16,10 @@
 
 package com.zwq65.unity.ui._base;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.support.annotation.StringRes;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
+import android.view.View;
 
 /**
  * ================================================
@@ -30,76 +29,22 @@ import android.view.ViewGroup;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseSubView extends ViewGroup implements SubMvpView {
-
-    private BaseContract.View mParentMvpView;
+public abstract class BaseSubView extends View {
+    public Context mContext;
 
     public BaseSubView(Context context) {
-        super(context);
+        this(context, null);
     }
 
-    public BaseSubView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public BaseSubView(Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public BaseSubView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BaseSubView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
+        setUp(context, attrs);
     }
 
-    @TargetApi(21)
-    public BaseSubView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    @Override
-    public void attachParentMvpView(BaseContract.View mvpView) {
-        mParentMvpView = mvpView;
-    }
-
-    @Override
-    public void showLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.showLoading();
-        }
-    }
-
-    @Override
-    public void hideLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideLoading();
-        }
-    }
-
-
-    @Override
-    public void showMessage(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(resId);
-        }
-    }
-
-    @Override
-    public void showMessage(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(message);
-        }
-    }
-
-    @Override
-    public void showError(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showError(resId);
-        }
-    }
-
-    @Override
-    public void showError(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showError(message);
-        }
-    }
-
-    protected abstract void bindViewsAndSetOnClickListeners();
-
-    protected abstract void setUp();
+    public abstract void setUp(Context context, @Nullable AttributeSet attrs);
 }

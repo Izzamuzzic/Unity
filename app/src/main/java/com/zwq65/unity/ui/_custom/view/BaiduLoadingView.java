@@ -27,11 +27,11 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.zwq65.unity.R;
+import com.zwq65.unity.ui._base.BaseSubView;
 
 /**
  * ================================================
@@ -41,7 +41,7 @@ import com.zwq65.unity.R;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class BaiduLoadingView extends View {
+public class BaiduLoadingView extends BaseSubView {
 
     private int mHeight = DensityUtils.dip2px(getContext(), 50);
     private int mWidth = DensityUtils.dip2px(getContext(), 50);
@@ -58,15 +58,15 @@ public class BaiduLoadingView extends View {
     }
 
     public BaiduLoadingView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
     }
 
     public BaiduLoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    @Override
+    public void setUp(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.BaiduLoadingView);
         //自定义颜色和文字
         color = array.getColor(R.styleable.BaiduLoadingView_color, Color.rgb(41, 163, 254));
