@@ -18,6 +18,7 @@ package com.zwq65.unity.ui._base;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -101,11 +102,11 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
         }
     }
 
-//    @TargetApi(Build.VERSION_CODES.M)
-//    public boolean hasPermission(String permission) {
-//        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-//                checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
-//    }
+    @TargetApi(Build.VERSION_CODES.M)
+    public boolean hasPermission(String permission) {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
 
     public void openActivity(Class<?> cls) {
         openActivity(cls, null);

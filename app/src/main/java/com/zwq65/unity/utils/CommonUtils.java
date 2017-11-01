@@ -68,7 +68,6 @@ public final class CommonUtils {
     public static String getImageStorePath() {
         String path;
         if (AppFileMgr.getSdCardIsEnable()) {
-            LogUtils.w("AppFileMgr.getSdCardIsEnable()==true");
             path = AppFileMgr.getSdCardPath();
         } else {
             path = AppFileMgr.getDataAbsolutePath();

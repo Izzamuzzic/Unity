@@ -138,6 +138,9 @@ dependencies {
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    //Simplify Android M system permissions
+    compile 'pub.devrel:easypermissions:1.0.1'
+
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
     compile 'com.gyf.barlibrary:barlibrary:2.2.5'
 

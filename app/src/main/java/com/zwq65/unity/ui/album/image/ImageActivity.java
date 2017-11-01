@@ -20,6 +20,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -42,12 +43,16 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
 import com.zwq65.unity.ui._custom.photoview.PhotoView;
+import com.zwq65.unity.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
 /**
@@ -59,7 +64,7 @@ import static android.view.View.GONE;
  * ================================================
  */
 public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageContract.Presenter<ImageContract.View>>
-        implements ImageContract.View {
+        implements ImageContract.View, EasyPermissions.PermissionCallbacks {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";
     private static final int SAVE_MEIZHI = 1;
@@ -132,18 +137,53 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
                 break;
             case R.id.action_save:
                 //保存大图
-                requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);//请求获取权限
-                mPresenter.savePicture(this, imageList.get(currentPosition));
+                if (!EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    //未获取权限
+                    LogUtils.e("未获取权限");
+                    List<String> perms = new ArrayList<>();
+                    perms.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+                        LogUtils.e("不再提醒");
+                        new AppSettingsDialog.Builder(this).build().show();
+                    } else {
+                        EasyPermissions.requestPermissions(this, "請求存儲權限", SAVE_MEIZHI,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    }
+                } else {
+                    LogUtils.i("已获取权限");
+                    savePictrue();
+                }
+//                requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);
+                break;
+            default:
                 break;
         }
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SAVE_MEIZHI) {
+    private void savePictrue() {
+        mPresenter.savePicture(this, imageList.get(currentPosition));
+    }
 
+    /**
+     * 回调中判断权限是否申请成功
+     *
+     * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
+     * @param permissions  The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *                     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+     *                     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        if (requestCode == SAVE_MEIZHI) {
+            if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                LogUtils.i("SAVE_MEIZHI SUCCESS");
+            } else {
+                LogUtils.e("SAVE_MEIZHI FAIL");
+            }
         }
     }
 
@@ -184,10 +224,12 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     }
 
     private void initViewPager() {
-        vpImages.setOffscreenPageLimit(2);//预加载2个item
+        //预加载2个item
+        vpImages.setOffscreenPageLimit(2);
         Myadapter mAdapter = new Myadapter();
         vpImages.setAdapter(mAdapter);
-        vpImages.setCurrentItem(currentPosition);//设置当前加载的资源为点击进入的图片
+        //设置当前加载的资源为点击进入的图片
+        vpImages.setCurrentItem(currentPosition);
         vpImages.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -196,6 +238,16 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
                 setCurrentPage();
             }
         });
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtils.i("SAVE_MEIZHI SUCCESS!!!!");
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        LogUtils.e("SAVE_MEIZHI FAIL!!!");
     }
 
     /**
