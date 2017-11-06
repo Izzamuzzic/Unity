@@ -22,6 +22,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
+import android.view.ViewStub;
+import android.widget.TextView;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.CommonUtils;
@@ -44,7 +47,16 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     public SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.recyclerView)
     public RecyclerView mRecyclerView;
-
+    @BindView(R.id.vs_no_network)
+    ViewStub mVsNoNetwork;
+    /**
+     * viewstub加載的view
+     */
+    View inflateView;
+    /**
+     * 网络出错view的TextView
+     */
+    TextView tvRetry;
     public boolean isRefreshing;
     public boolean isLoading;
 
@@ -83,7 +95,7 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
                         if (isLoading) {
                             return;
                         }
-                        isLoading = true;
+                        setLoading(true);
                         requestDataLoad();
                     }
                 }
@@ -113,7 +125,7 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     public abstract void requestDataLoad();
 
     public void setRefresh(boolean refresh) {
-        if (mSwipeRefreshLayout == null || refresh == isRefreshing) {
+        if (refresh == isRefreshing) {
             return;
         }
         if (refresh) {
@@ -133,6 +145,10 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     @Override
     public void refreshData(List<T> list) {
         setRefresh(false);
+        if (inflateView != null) {
+            //如果加载失败view显示过的话，隐藏之
+            inflateView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -144,6 +160,16 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     public void loadFail(Throwable t) {
         setRefresh(false);
         setLoading(false);
+        //加载失败，viewstub加载显示加载失败‘view
+        try {
+            inflateView = mVsNoNetwork.inflate();
+            tvRetry = inflateView.findViewById(R.id.tv_retry);
+            tvRetry.setOnClickListener(v -> requestDataRefresh());
+        } catch (Exception e) {
+            e.printStackTrace();
+            //viewstub已经inflate()过了,在catch()方法下setVisibility(VISIBLE)显示即可
+            inflateView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

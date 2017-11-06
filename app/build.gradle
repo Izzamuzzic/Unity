@@ -78,6 +78,7 @@ dependencies {
 
     //test
     testCompile "junit:junit:$rootProject.junitVersion"
+    testCompile "org.mockito:mockito-core:$rootProject.mockitoVersion"
 
     //design
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"

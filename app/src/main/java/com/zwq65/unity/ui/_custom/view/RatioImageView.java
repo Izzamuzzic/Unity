@@ -18,7 +18,6 @@ package com.zwq65.unity.ui._custom.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * ================================================
@@ -29,7 +28,7 @@ import android.widget.ImageView;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class RatioImageView extends ImageView {
+public class RatioImageView extends android.support.v7.widget.AppCompatImageView {
 
     private int originalWidth;
     private int originalHeight;

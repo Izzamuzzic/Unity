@@ -99,7 +99,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupBaseToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.mipmap.ic_menu_white);

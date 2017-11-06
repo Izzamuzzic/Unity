@@ -104,4 +104,5 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         super.loadData(list);
         mAdapter.addItems(list);
     }
+
 }

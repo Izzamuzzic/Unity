@@ -113,7 +113,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -122,7 +122,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 firstClick = System.currentTimeMillis();
                 showMessage("再按一次退出");
             } else {
-                exitApp();
+                super.onBackPressed();
             }
         }
     }
@@ -151,8 +151,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 showError("开发中...＜(▰˘◡˘▰)");
                 break;
             case R.id.ll_out:
-                //退出app
-                exitApp();
+                onBackPressed();
                 break;
             case R.id.fab:
                 setDayNightMode();
@@ -195,11 +194,6 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-    }
-
-    private void exitApp() {
-        finish();
-        System.exit(0);
     }
 
     /**

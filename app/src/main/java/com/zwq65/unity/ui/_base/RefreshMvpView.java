@@ -27,11 +27,26 @@ import java.util.List;
  */
 public interface RefreshMvpView<T> extends BaseContract.View {
 
-    void refreshData(List<T> list);//刷新数据
+    /**
+     * 刷新数据
+     * @param list 数据列表
+     */
+    void refreshData(List<T> list);
 
-    void loadData(List<T> list);//加载数据
+    /**
+     * 加载数据
+     * @param list 数据列表
+     */
+    void loadData(List<T> list);
 
-    void loadFail(Throwable t);//加载失败
+    /**
+     * 加载失败
+     * @param t Throwable
+     */
+    void loadFail(Throwable t);
 
-    void noMoreData();//没有数据了
+    /**
+     * 没有数据了
+     */
+    void noMoreData();
 }
