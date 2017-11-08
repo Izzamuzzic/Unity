@@ -16,6 +16,7 @@
 
 package com.zwq65.unity.ui._base.adapter;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,23 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder> exten
         setAnimation(holder.itemView, position);
         //绘制数据ui
         holder.setData(getItem(position));
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
+                    int TYPE_FOOTER = 2;
+                    return getItemViewType(position) == TYPE_FOOTER ? gridManager.getSpanCount() : 1;
+                }
+            });
+        }
     }
 
     /**

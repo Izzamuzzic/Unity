@@ -77,9 +77,6 @@ public class AppApiHelper implements ApiHelper {
                                 videos.get(i).setImage(images.get(i));
                             }
                         }
-                        images = null;
-                        welfareResponse = null;
-                        restVideoResponse = null;
                     }
                     return videos;
                 }), callBack, errorCallBack);
@@ -114,9 +111,6 @@ public class AppApiHelper implements ApiHelper {
                                 articles.get(i).setImage(images.get(i));
                             }
                         }
-                        images = null;
-                        welfareResponse = null;
-                        listGankApiResponse = null;
                     }
                     return articles;
                 }), callBack, errorCallBack);
@@ -141,15 +135,10 @@ public class AppApiHelper implements ApiHelper {
      * @param <T> 返回数据data实际的 数据
      * @return 返回数据data实际的 数据
      */
-    public static <T> FlowableTransformer<T, T> schedulersTransformer() {
-        return new FlowableTransformer<T, T>() {
-            @Override
-            public Flowable<T> apply(Flowable<T> upstream) {
-                return upstream
-                        .subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+    private static <T> FlowableTransformer<T, T> schedulersTransformer() {
+        return upstream -> upstream
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

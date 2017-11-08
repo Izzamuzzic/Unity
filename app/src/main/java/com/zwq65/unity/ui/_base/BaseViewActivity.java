@@ -83,6 +83,8 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
     public abstract Boolean initBaseTooBar();
 
     /**
+     * Intent不为空的话，处理之
+     *
      * @param intent 获取到的Intent
      */
     public abstract void dealIntent(Intent intent);
