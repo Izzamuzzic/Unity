@@ -31,4 +31,11 @@
             android:scrollbarSize="4dp"
             android:scrollbars="vertical"/>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <ViewStub
+        android:id="@+id/vs_no_network"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/ll_no_network"
+        android:layout="@layout/layout_no_network"/>
 </FrameLayout>
