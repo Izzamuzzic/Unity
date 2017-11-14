@@ -153,7 +153,7 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
                     LogUtils.i("已获取权限");
                     savePictrue();
                 }
-//                requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);
+                requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);
                 break;
             default:
                 break;

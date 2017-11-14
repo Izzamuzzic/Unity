@@ -20,7 +20,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.zwq65.unity.R;
 import com.zwq65.unity.data.AppDataManager;
 import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.data.db.AppDbHelper;
@@ -46,7 +45,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * This is a Dagger module. We use this to bind our Application class as a Context in the AppComponent
@@ -136,14 +134,5 @@ public abstract class ApplicationModule {
     @Singleton
     static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
         return appApiHelper;
-    }
-
-    @Provides
-    @Singleton
-    static CalligraphyConfig provideCalligraphyDefaultConfig() {
-        return new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/FZSongKeBenXiuKai.TTF")
-                .setFontAttrId(R.attr.fontPath)
-                .build();
     }
 }

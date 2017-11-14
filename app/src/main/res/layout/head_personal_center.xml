@@ -48,8 +48,8 @@
         android:layout_below="@+id/iv_avatar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_defult"
+        android:fontFamily="@font/songkebenxiukai"
         android:text="@string/desperadozck"
-        android:textAppearance="@style/TextViewCustomFontXiukai"
         />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_below="@+id/tv_account_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_defult"
+        android:fontFamily="@font/songkebenxiukai"
         android:text="@string/github_website_address"
-        android:textAppearance="@style/TextViewCustomFontXiukai"
         />
 </RelativeLayout>

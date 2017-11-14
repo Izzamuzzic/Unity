@@ -47,8 +47,8 @@
             android:layout_marginEnd="@dimen/margin_vertical_title"
             android:layout_marginTop="@dimen/margin_defult_tiny"
             android:ellipsize="end"
+            android:fontFamily="@font/youhei_504"
             android:maxLines="3"
-            android:textAppearance="@style/TextAppearance.Text.youhei"
             android:textStyle="bold"
             />
 
