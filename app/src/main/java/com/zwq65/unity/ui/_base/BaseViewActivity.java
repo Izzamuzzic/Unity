@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui._base;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,8 +34,6 @@ import com.zwq65.unity.R;
 import com.zwq65.unity.utils.CommonUtils;
 
 import javax.inject.Inject;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * ================================================
@@ -70,11 +67,6 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
         }
         initView();
         initData();
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     /**
@@ -151,8 +143,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
                 message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
     }
@@ -168,8 +159,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
                 message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.warn_color));
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
     }

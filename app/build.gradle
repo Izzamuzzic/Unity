@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -14,6 +13,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        flavorDimensions "versionCode"
     }
 
     signingConfigs {
@@ -42,6 +42,17 @@ android {
             // 发布生产版本时，BuildVariant直接选择release，签名过的生产包就会生成在build/outputs/apk文件夹
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            // 自定义输出配置apk名称
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为Unity_v1.0_wandoujia.apk
+//                        def fileName = "Unity_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
         }
         debug {
             minifyEnabled false
@@ -49,9 +60,17 @@ android {
             shrinkResources false
         }
     }
-//    configurations.all {
-//        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
-//    }
+
+    productFlavors {
+        xiaomi {}
+        qihoo360 {}
+        wandoujia {}
+        baidu {}
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

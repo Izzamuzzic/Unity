@@ -72,13 +72,13 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     @BindView(R.id.vp_images)
     ViewPager vpImages;
     @BindView(R.id.tv_current_page)
-    TextView tvCurrentPage;//当前页数
+    TextView tvCurrentPage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     AppCompatCheckBox cbLove;
 
-    int currentPosition, pageSize;//当前显示的大图position
-    List<Image> imageList;//图片list
+    int currentPosition, pageSize;
+    List<Image> imageList;
 
     @Override
     public int getLayoutId() {
@@ -93,8 +93,10 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     @Override
     public void dealIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
-        currentPosition = bundle.getInt(POSITION);
-        imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        if (bundle != null) {
+            currentPosition = bundle.getInt(POSITION);
+            imageList = bundle.getParcelableArrayList(IMAGE_LIST);
+        }
         if (imageList == null) {
             imageList = new ArrayList<>();
         }

@@ -46,7 +46,7 @@ public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleC
     @BindView(R.id.vp_artcle)
     ViewPager vpArtcle;
 
-    public static final String[] Tabs = new String[]{"Android", "Ios", "前端"};
+    public static final String[] TABS = new String[]{"Android", "Ios", "前端"};
     private List<Fragment> fragments;
 
     @Override
@@ -56,16 +56,16 @@ public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleC
 
     @Override
     public void initView() {
-        for (String tabStr : Tabs) {
+        for (String tabStr : TABS) {
             TabLayout.Tab tab = tabType.newTab();
             tab.setText(tabStr);
             tabType.addTab(tab);
         }
         fragments = new ArrayList<>();
-        for (String Tab : Tabs) {
-            fragments.add(TabArticleFragment.newInstance(Tab));
+        for (String tab : TABS) {
+            fragments.add(TabArticleFragment.newInstance(tab));
         }
-        BaseViewPagerAdapter adapter = new BaseViewPagerAdapter(getChildFragmentManager(), fragments, Tabs);
+        BaseViewPagerAdapter adapter = new BaseViewPagerAdapter(getChildFragmentManager(), fragments, TABS);
         vpArtcle.setAdapter(adapter);
         vpArtcle.setOffscreenPageLimit(0);
         //将tabLayout与ViewPager绑定
