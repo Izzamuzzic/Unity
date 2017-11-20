@@ -25,7 +25,7 @@ import com.zwq65.unity.ui._base.BaseContract
  * Contact with <zwq651406441@gmail.com>
  *================================================
  */
-public interface TestContract {
+interface TestContract {
 
     interface View :BaseContract.View
 

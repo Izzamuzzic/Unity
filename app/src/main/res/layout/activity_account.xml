@@ -22,4 +22,22 @@
     android:orientation="vertical">
 
     <include layout="@layout/head_personal_center"/>
+
+    <ImageView
+        android:id="@+id/iv_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageView
+        android:id="@+id/iv_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageView
+        android:id="@+id/iv_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

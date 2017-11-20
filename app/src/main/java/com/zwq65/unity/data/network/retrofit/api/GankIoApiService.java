@@ -47,57 +47,68 @@ public interface GankIoApiService {
      * e.g. http://gank.io/api/data/福利/10/1
      */
     String GANK_IO_HOST = "http://gank.io/api/";
-    String data = "data/";
-    String random = "random/data/";
+    String DATA = "data/";
+    String RANDOM = "random/data/";
 
-    String Welfare = "福利/";
-    String RestVideo = "休息视频/";
-    String Android = "Android/";
+    String WELFARE = "福利/";
+    String REST_VIDEO = "休息视频/";
+    String ANDROID = "Android/";
     String IOS = "iOS/";
-    String Qianduan = "前端/";
+    String QIANDUAN = "前端/";
 
-    String defaultPageSize = "10";
-    String morePageSize20 = "20";
-
-    /**
-     * 获取福利图片
-     */
-    @GET(data + Welfare + defaultPageSize + "/{page}")
-    Flowable<GankApiResponse<List<Image>>> getImages(@Path("page") int page);
+    String PAGESIZE_DEFAULT = "10";
+    String PAGESIZE__20 = "20";
 
     /**
-     * 获取福利图片
+     * 获取随机福利图片
+     *
+     * @return List<Image>
      */
-    @GET(random + Welfare + defaultPageSize)
+    @GET(RANDOM + WELFARE + PAGESIZE_DEFAULT)
     Flowable<GankApiResponse<List<Image>>> getRandomImages();
 
     /**
      * 获取福利图片（20张）
+     *
+     * @param page page
+     * @return List<Image>
      */
-    @GET(data + Welfare + morePageSize20 + "/{page}")
+    @GET(DATA + WELFARE + PAGESIZE__20 + "/{page}")
     Flowable<GankApiResponse<List<Image>>> get20Images(@Path("page") int page);
 
     /**
      * 获取休息视频
+     *
+     * @param page page
+     * @return List<Video>
      */
-    @GET(data + RestVideo + defaultPageSize + "/{page}")
+    @GET(DATA + REST_VIDEO + PAGESIZE_DEFAULT + "/{page}")
     Flowable<GankApiResponse<List<Video>>> getVideos(@Path("page") int page);
 
     /**
      * 获取android文章
+     *
+     * @param page page
+     * @return List<Article>
      */
-    @GET(data + Android + defaultPageSize + "/{page}")
+    @GET(DATA + ANDROID + PAGESIZE_DEFAULT + "/{page}")
     Flowable<GankApiResponse<List<Article>>> getAndroidArticles(@Path("page") int page);
 
     /**
      * 获取ios文章
+     *
+     * @param page page
+     * @return List<Article>
      */
-    @GET(data + IOS + defaultPageSize + "/{page}")
+    @GET(DATA + IOS + PAGESIZE_DEFAULT + "/{page}")
     Flowable<GankApiResponse<List<Article>>> getIosArticles(@Path("page") int page);
 
     /**
      * 获取前端文章
+     *
+     * @param page page
+     * @return List<Article>
      */
-    @GET(data + Qianduan + defaultPageSize + "/{page}")
+    @GET(DATA + QIANDUAN + PAGESIZE_DEFAULT + "/{page}")
     Flowable<GankApiResponse<List<Article>>> getQianduanArticles(@Path("page") int page);
 }

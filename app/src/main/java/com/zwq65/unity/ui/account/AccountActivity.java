@@ -17,6 +17,8 @@
 package com.zwq65.unity.ui.account;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,6 +43,12 @@ public class AccountActivity extends BaseViewActivity<AccountContract.View, Acco
     ImageView ivBack;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
+    @BindView(R.id.iv_1)
+    ImageView mIv1;
+    @BindView(R.id.iv_2)
+    ImageView mIv2;
+    @BindView(R.id.iv_3)
+    ImageView mIv3;
 
     @Override
     public int getLayoutId() {
@@ -59,6 +67,21 @@ public class AccountActivity extends BaseViewActivity<AccountContract.View, Acco
 
     @Override
     public void initView() {
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        //bitmap壓縮之邻近采样（Nearest Neighbour Resampling）
+        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar, options);
+        //bitmap壓縮之双线性采样（Bilinear Resampling）
+        //方法一:
+        Bitmap bitmap3 = Bitmap.createScaledBitmap(bitmap1, bitmap1.getWidth() / 2, bitmap1.getHeight() / 2, true);
+        ////方法二:（直接使用matrix进行缩放）
+//        Matrix matrix = new Matrix();
+//        matrix.setScale(0.5f, 0.5f);
+//        Bitmap bitmap3 = Bitmap.createBitmap(bitmap1, 0, 0, bitmap1.getWidth(), bitmap1.getHeight(), matrix, true);
+        mIv1.setImageBitmap(bitmap1);
+        mIv2.setImageBitmap(bitmap2);
+        mIv3.setImageBitmap(bitmap3);
     }
 
     @Override
