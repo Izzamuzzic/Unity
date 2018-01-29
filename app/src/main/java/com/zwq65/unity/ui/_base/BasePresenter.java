@@ -37,11 +37,11 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     public final String TAG = getClass().getSimpleName();
 
-    private final DataManager mDataManager;
+    private DataManager mDataManager;
     /**
      * detach view时，mCompositeDisposable来停止当前所有事务，节省资源
      */
-    private final CompositeDisposable mCompositeDisposable;
+    private CompositeDisposable mCompositeDisposable;
     /**
      * MvpView接口类型的弱引用
      */
@@ -63,9 +63,13 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
     @Override
     public void onDetach() {
         //这里不使用dispose(),而用clear();dispose()之后会阻止一切事务,不可复用;clear()只会停止当前事务,仍可继续复用。
-        mCompositeDisposable.clear();
-        mViewRef.clear();
-        mViewRef = null;
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
+        if (mViewRef != null) {
+            mViewRef.clear();
+            mViewRef = null;
+        }
     }
 
     @Override

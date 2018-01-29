@@ -162,7 +162,7 @@ dependencies {
     compile 'com.gyf.barlibrary:barlibrary:2.2.5'
 
     //logger log日志打印帮助类
-    compile 'com.orhanobut:logger:1.15'
+    compile 'com.orhanobut:logger:2.1.1'
 
     //Beautiful and smooth custom loading views
     compile 'com.tuyenmonkey:mkloader:1.4.0'

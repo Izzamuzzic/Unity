@@ -91,7 +91,6 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
      */
     public abstract void initData();
 
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void setupBaseToolbar() {
         toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {

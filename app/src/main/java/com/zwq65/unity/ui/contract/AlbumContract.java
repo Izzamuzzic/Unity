@@ -33,6 +33,9 @@ public interface AlbumContract {
     }
 
     interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
+        /**
+         * 初始化
+         */
         void init();
 
         /**

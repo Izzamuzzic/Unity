@@ -46,7 +46,6 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         AlbumContract.Presenter<AlbumContract.View<Image>>> implements AlbumContract.View<Image> {
     @Inject
     AlbumAdapter<Image> mAdapter;
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_album;

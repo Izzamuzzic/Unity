@@ -33,16 +33,42 @@ public interface BaseContract {
      */
     interface View {
 
+        /**
+         * 显示loading框
+         */
         void showLoading();
 
+        /**
+         * 隐藏loading框
+         */
         void hideLoading();
 
+        /**
+         * 显示snackBar消息
+         *
+         * @param resId StringRes
+         */
         void showMessage(@StringRes int resId);
 
+        /**
+         * 显示snackBar消息
+         *
+         * @param message String
+         */
         void showMessage(String message);
 
+        /**
+         * 显示错误消息
+         *
+         * @param resId StringRes
+         */
         void showError(@StringRes int resId);
 
+        /**
+         * 显示错误消息
+         *
+         * @param message String
+         */
         void showError(String message);
     }
 
@@ -51,11 +77,23 @@ public interface BaseContract {
      * indicating the MvpView type that wants to be attached with.
      */
     interface Presenter<V extends View> {
-
+        /**
+         * attach view时调用此方法
+         *
+         * @param mvpView View
+         */
         void onAttach(V mvpView);
 
+        /**
+         * detach view时调用此方法
+         */
         void onDetach();
 
+        /**
+         * 是否还在与view绑定
+         *
+         * @return boolean
+         */
         boolean isViewAttached();
     }
 
