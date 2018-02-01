@@ -37,23 +37,31 @@ public interface ImageContract {
 
     interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
         /**
+         * 保存图片到本地
+         *
          * @param context context
-         * @param image   保存图片到本地
+         * @param image   Image
          */
         void savePicture(Context context, Image image);
 
         /**
-         * @param image 收藏图片
+         * 收藏图片
+         *
+         * @param image Image
          */
         void collectPicture(Image image);
 
         /**
-         * @param image 取消收藏图片
+         * 取消收藏图片
+         *
+         * @param image Image
          */
         void cancelCollectPicture(Image image);
 
         /**
-         * @param image 图片
+         * 该图片是否被收藏
+         *
+         * @param image Image
          * @return 该图片是否被收藏
          */
         Observable<Boolean> isPictureCollect(Image image);

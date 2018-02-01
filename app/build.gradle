@@ -42,17 +42,13 @@ android {
             // 发布生产版本时，BuildVariant直接选择release，签名过的生产包就会生成在build/outputs/apk文件夹
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            // 自定义输出配置apk名称
-//            applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    def outputFile = output.outputFile
-//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                        // 输出apk名称为Unity_v1.0_wandoujia.apk
-//                        def fileName = "Unity_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
-//                        output.outputFile = new File(outputFile.parent, fileName)
-//                    }
-//                }
-//            }
+            // 自定义输出配置apk名称
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    // 输出apk名称为Unity_v1.0_wandoujia.apk
+                    outputFileName = "Unity_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                }
+            }
         }
         debug {
             minifyEnabled false
@@ -88,14 +84,13 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //androidTest
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     //test
     testCompile "junit:junit:$rootProject.junitVersion"
     testCompile "org.mockito:mockito-core:$rootProject.mockitoVersion"
-
     //design
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
@@ -105,74 +100,56 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
-
     //network
     compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitConverterVersion"
     compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxjava2AdapterVersion"
-
     //gson
     compile "com.google.code.gson:gson:$rootProject.gsonVersion"
-
     //glide
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-
-    //database
+    //greenDao database
     compile "org.greenrobot:greendao:$rootProject.greenDaoVersion"
     compile "org.greenrobot:greendao-generator:$rootProject.greenDaoGeneratorVersion"
-
-    //butterknife
+    //butterKnife
     compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
-
-    //rxjava2
+    //rxJava2
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
-
     //dagger2 (dependency injection)
     compile "com.google.dagger:dagger:$rootProject.daggerVersion"
     compile "com.google.dagger:dagger-android:$rootProject.daggerVersion"
     compile "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-
     //multidex
     compile "com.android.support:multidex:$rootProject.multidexVersion"
-
     //LeakCanary: A memory leak detection library for Android and Java.
     debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
-
     //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
     compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
-
     //bugly
     compile "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
-
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     //Simplify Android M system permissions
-    compile 'pub.devrel:easypermissions:1.0.1'
-
+    compile "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
-    compile 'com.gyf.barlibrary:barlibrary:2.2.5'
-
-    //logger log日志打印帮助类
-    compile 'com.orhanobut:logger:2.1.1'
-
-    //Beautiful and smooth custom loading views
-    compile 'com.tuyenmonkey:mkloader:1.4.0'
-
+    compile "com.gyf.barlibrary:barlibrary:$rootProject.barlibraryVersion"
     //A circular ImageView for Android
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-
+    compile "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
+    //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
+    compile "com.blankj:utilcode:$rootProject.utilcodeVersion"
     //快速开发工具类收集
     compile 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
-//
-//    //BRVAH:Powerful and flexible RecyclerAdapter
-//    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
+}
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }

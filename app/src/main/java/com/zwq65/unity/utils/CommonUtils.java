@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import com.blankj.utilcode.util.SDCardUtils;
 import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 
@@ -94,39 +95,4 @@ public final class CommonUtils {
         return max;
     }
 
-    private static Pattern chinesePattern = Pattern.compile("[\\u4E00-\\u9FA5]",
-            Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
-
-    /**
-     * 判断content是否含有中文
-     *
-     * @param content
-     */
-    public static Boolean verifyChinese(String content) {
-        Matcher matcher = chinesePattern.matcher(content);
-        return matcher.matches();
-    }
-    public static boolean isChinese(char c) {
-
-        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-
-        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
-
-                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
-
-                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
-
-                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
-
-                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
-
-                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
-
-            return true;
-
-        }
-
-        return false;
-
-    }
 }

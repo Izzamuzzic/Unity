@@ -38,7 +38,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.gyf.barlibrary.ImmersionBar;
-import com.tuyenmonkey.mkloader.MKLoader;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseViewActivity;
@@ -54,7 +53,6 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.view.View.GONE;
 
 /**
  * ================================================
@@ -216,7 +214,7 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
         if (pageSize <= 1) {
             tvCurrentPage.setVisibility(View.GONE);
         } else {
-            tvCurrentPage.setText(currentPosition + 1 + " / " + pageSize);
+            tvCurrentPage.setText(getResources().getString(R.string.placeholder_divider, String.valueOf(currentPosition + 1), String.valueOf(pageSize)));
         }
         //当前图片是否已被用户收藏
         mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
@@ -244,12 +242,12 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
     }
 
     @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
         LogUtils.i("SAVE_MEIZHI SUCCESS!!!!");
     }
 
     @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         LogUtils.e("SAVE_MEIZHI FAIL!!!");
     }
 
@@ -266,30 +264,28 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return view == object;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
             //显示大图view
             View view = getLayoutInflater().inflate(R.layout.item_image, container, false);
             PhotoView ivImage = view.findViewById(R.id.iv_image);
 
             final Image image = imageList.get(position);
-            final MKLoader pbLoader = view.findViewById(R.id.pb_loader);
             Glide.with(ImageActivity.this).load(image.getUrl())
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             showMessage(R.string.error_msg_load_fail);
-                            pbLoader.setVisibility(GONE);
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            pbLoader.setVisibility(GONE);
                             return false;
                         }
                     }).into(ivImage);
@@ -298,7 +294,7 @@ public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageCon
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             View view = (View) object;
             container.removeView(view);
         }

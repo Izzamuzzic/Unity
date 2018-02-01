@@ -7,7 +7,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha05'
+        classpath 'com.android.tools.build:gradle:3.1.0-alpha09'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         // Better IDE support for annotations (so Android Studio interacts better with Dagger)
@@ -43,6 +43,7 @@ ext {
     supportLibraryVersion = '27.0.2'
     constraintLayoutVersion = '1.0.2'
     okhttpVersion = '3.5.0'
+    okhttpLoggingVersion = '3.4.1'
     retrofitVersion = '2.3.0'
     retrofitConverterVersion = '2.2.0'
     retrofitRxjava2AdapterVersion = '1.0.0'
@@ -58,5 +59,9 @@ ext {
     daggerVersion = '2.11'
     leakCanaryVersion = '1.5.4'
     stethoVersion = '1.5.0'
-    buglyVersion = '2.6.5'
+    buglyVersion = '2.6.6.1'
+    easypermissionsVersion = '1.1.1'
+    barlibraryVersion = '2.2.5'
+    circleimageviewVersion = '2.1.0'
+    utilcodeVersion = '1.12.4'
 }

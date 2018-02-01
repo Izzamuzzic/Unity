@@ -35,7 +35,6 @@ import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -88,15 +87,12 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
 
     @Override
     public void collectPicture(Image image) {
-        isPictureCollect(image).filter(aBoolean -> !aBoolean).flatMap(new Function<Boolean, ObservableSource<Long>>() {
-            @Override
-            public ObservableSource<Long> apply(@NonNull Boolean aBoolean) throws Exception {
-                Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
-                        image.getSource(), image.getType(), image.getUrl(), image.getWho());
-                //显示加载框
-                getMvpView().showLoading();
-                return getDataManager().insertPicture(picture);
-            }
+        isPictureCollect(image).filter(aBoolean -> !aBoolean).flatMap(aBoolean -> {
+            Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
+                    image.getSource(), image.getType(), image.getUrl(), image.getWho());
+            //显示加载框
+            getMvpView().showLoading();
+            return getDataManager().insertPicture(picture);
         }).subscribe(aLong -> {
             getMvpView().showMessage(R.string.success_msg_collect);
             getMvpView().hideLoading();

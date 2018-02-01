@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.Utils;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -51,6 +52,7 @@ public class App extends DaggerApplication {
     public void onCreate() {
         super.onCreate();
         unityApp = this;
+        Utils.init(this);
         initBugly();
         initStetho();
         initLeakcanary();

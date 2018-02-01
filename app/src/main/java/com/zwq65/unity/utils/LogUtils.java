@@ -19,7 +19,7 @@ package com.zwq65.unity.utils;
 
 import android.util.Log;
 
-import com.orhanobut.logger.Logger;
+import com.facebook.stetho.common.LogUtil;
 
 /**
  * ================================================
@@ -50,27 +50,23 @@ public class LogUtils {
     }
 
     public static void i(String msg) {
-        Logger.i(msg);
+        LogUtil.i(msg);
     }
 
     public static void d(String msg) {
-        Logger.d(msg);
+        LogUtil.d(msg);
     }
 
     public static void e(String msg) {
-        Logger.e(msg);
+        LogUtil.e(msg);
     }
 
     public static void v(String msg) {
-        Logger.v(msg);
+        LogUtil.v(msg);
     }
 
     public static void w(String msg) {
-        Logger.w(msg);
-    }
-
-    public static void json(String msg) {
-        Logger.json(msg);
+        LogUtil.w(msg);
     }
 
 }

@@ -57,8 +57,7 @@
     <string name="success_msg_collect">收藏成功</string>
     <string name="error_msg_collect_fail">收藏失败</string>
     <string name="error_msg_cancel_collect_fail">取消收藏失败</string>
-    <string name="rxjava">Rxjava</string>
-    <string name="defer">defer</string>
+    <string name="placeholder_divider">%1$s/%2$s</string>
 
 
     <!--@AccountActivity-->
@@ -82,5 +81,7 @@
 
     <string name="listview_loading">正在加载…</string>
     <string name="nomore_loading">没有更多数据了</string>
+    <string name="str_finish_if_press_again">再按一次退出</string>
+    <string name="str_developping">开发中...＜(▰˘◡˘▰)</string>
 
 </resources>

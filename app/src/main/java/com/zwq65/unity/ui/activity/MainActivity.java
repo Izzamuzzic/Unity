@@ -44,10 +44,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -80,6 +76,11 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
     CircleImageView ivAvatar;
 
     Disposable disposable;
+
+    /**
+     * 退出app延时时间
+     */
+    public static final int DELAY_TIME_FINISH = 2000;
 
 
     @Override
@@ -122,9 +123,9 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //双击退出app
-            if (System.currentTimeMillis() - firstClick > 2000) {
+            if (System.currentTimeMillis() - firstClick > DELAY_TIME_FINISH) {
                 firstClick = System.currentTimeMillis();
-                showMessage("再按一次退出");
+                showMessage(R.string.str_finish_if_press_again);
             } else {
                 super.onBackPressed();
             }
@@ -133,7 +134,6 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
 
     @OnClick({R.id.iv_avatar, R.id.tv_account_name, R.id.ll_welfare, R.id.ll_video, R.id.ll_news, R.id.ll_setting, R.id.ll_out, R.id.fab})
     public void onViewClicked(View view) {
-        drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
             case R.id.ll_welfare:
                 //gank.io福利
@@ -152,7 +152,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
                 gotoFragment(new RestVideoFragment());
                 break;
             case R.id.ll_setting:
-                showError("开发中...＜(▰˘◡˘▰)");
+                showError(R.string.str_developping);
                 break;
             case R.id.ll_out:
                 onBackPressed();
@@ -185,32 +185,6 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         setDayNightMode(mPresenter.getNightMode());
         getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
         recreate();
-        Observable.create(new ObservableOnSubscribe<Object>() {
-            @Override
-            public void subscribe(ObservableEmitter<Object> e) throws Exception {
-
-            }
-        }).subscribe(new Observer<Object>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Object o) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
     }
 
     /**
@@ -234,7 +208,8 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
         //判断500ms内，如果接受到2次的点击事件，则视为用户双击操作
         if (getToolbar() != null) {
             disposable = RxView.clicks(getToolbar()).buffer(500, TimeUnit.MILLISECONDS, 2).subscribe(objects -> {
-                if (objects.size() == 2) {
+                int clickNum = 2;
+                if (objects.size() == clickNum) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     List<Fragment> fragmentList = fragmentManager.getFragments();
                     if (fragmentList != null && fragmentList.size() > 0) {

@@ -29,7 +29,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
-import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseSubView;
 
@@ -43,8 +43,8 @@ import com.zwq65.unity.ui._base.BaseSubView;
  */
 public class BaiduLoadingView extends BaseSubView {
 
-    private int mHeight = DensityUtils.dip2px(getContext(), 50);
-    private int mWidth = DensityUtils.dip2px(getContext(), 50);
+    private int mHeight = SizeUtils.dp2px(50);
+    private int mWidth = SizeUtils.dp2px(50);
     private Path path;
     private Path o;
     private Paint textPaint;
