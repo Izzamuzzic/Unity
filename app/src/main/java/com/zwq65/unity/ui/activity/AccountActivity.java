@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.contract.AccountContract;
 
 import butterknife.BindView;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class AccountActivity extends BaseViewActivity<AccountContract.View, AccountContract.Presenter<AccountContract.View>>
+public class AccountActivity extends BaseDaggerActivity<AccountContract.View, AccountContract.Presenter<AccountContract.View>>
         implements AccountContract.View {
 
     @BindView(R.id.iv_back)

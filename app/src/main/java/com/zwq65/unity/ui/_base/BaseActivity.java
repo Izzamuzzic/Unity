@@ -27,6 +27,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.zwq65.unity.R;
 import com.zwq65.unity.utils.LogUtils;
 
@@ -42,7 +43,7 @@ import dagger.android.support.DaggerAppCompatActivity;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseActivity extends DaggerAppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     public final String TAG = getClass().getSimpleName();
     private FragmentManager fragmentManager;

@@ -22,10 +22,15 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.LogUtils;
 
@@ -33,25 +38,40 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * ================================================
  * Fragment基类
+ * A {@link Fragment} that injects its members in {@link #onAttach(Context)} and can be used to
+ * inject child {@link Fragment}s attached to it. Note that when this fragment gets reattached, its
+ * members will be injected again.
  * <p>
  * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseFragment<V extends BaseContract.View, T extends BaseContract.Presenter<V>> extends DaggerFragment
-        implements BaseContract.View {
+public abstract class BaseFragment<V extends BaseContract.View, T extends BaseContract.Presenter<V>> extends RxFragment
+        implements HasSupportFragmentInjector, BaseContract.View {
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
+
     public final String TAG = getClass().getSimpleName();
-    public BaseViewActivity mActivity;
+    public BaseDaggerActivity mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
 
     @Inject
     public T mPresenter;
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return childFragmentInjector;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,10 +110,11 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
 
     @Override
     public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
         //init mActivity
-        if (context instanceof BaseViewActivity) {
-            BaseViewActivity activity = (BaseViewActivity) context;
+        if (context instanceof BaseDaggerActivity) {
+            BaseDaggerActivity activity = (BaseDaggerActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
@@ -103,6 +124,7 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
         }
         LogUtils.i(TAG, "onAttach");
     }
+
 
     @Override
     public void onDetach() {
@@ -176,6 +198,17 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
         if (mActivity != null) {
             mActivity.showError(message);
         }
+    }
+
+    /**
+     * Fragment/Activity中方法,声明在view中;便于在mvp中的presenter里调用;
+     *
+     * @param <T> T
+     * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
+     */
+    @Override
+    public <T> LifecycleTransformer<T> bindUntilStopEvent() {
+        return bindUntilEvent(FragmentEvent.STOP);
     }
 
     /**

@@ -18,6 +18,10 @@ package com.zwq65.unity.ui._base;
 
 import android.support.annotation.StringRes;
 
+import com.zwq65.unity.data.DataManager;
+
+import io.reactivex.ObservableTransformer;
+
 /**
  * ================================================
  * <p>
@@ -70,6 +74,15 @@ public interface BaseContract {
          * @param message String
          */
         void showError(String message);
+
+
+        /**
+         * Fragment/Activity中方法,声明在view中;便于在mvp中的presenter里调用;
+         *
+         * @param <T> T
+         * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
+         */
+        <T> ObservableTransformer<T, T> bindUntilStopEvent();
     }
 
     /**

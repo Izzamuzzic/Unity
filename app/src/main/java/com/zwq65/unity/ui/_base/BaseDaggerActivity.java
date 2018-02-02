@@ -24,34 +24,63 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.zwq65.unity.R;
+import com.zwq65.unity.data.DataManager;
 import com.zwq65.unity.utils.CommonUtils;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+import io.reactivex.ObservableTransformer;
+
 /**
  * ================================================
- * Mvp架构下的activity基类
+ * Mvp架构下集合Dagger2库的activity基类
+ * An {@link AppCompatActivity} that injects its members in {@link #onCreate(Bundle)} and can be
+ * used to inject {@code Fragment}s attached to it.
  * <p>
  * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseViewActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>>
-        extends BaseActivity implements BaseContract.View, BaseFragment.Callback {
+public abstract class BaseDaggerActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>>
+        extends BaseActivity implements HasFragmentInjector, HasSupportFragmentInjector, BaseContract.View, BaseFragment.Callback {
+    @Inject
+    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
+    @Inject
+    DispatchingAndroidInjector<android.app.Fragment> frameworkFragmentInjector;
+
     Toolbar toolbar;
     private ProgressDialog mProgressDialog;
     @Inject
     public P mPresenter;
 
     @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return supportFragmentInjector;
+    }
+
+    @Override
+    public AndroidInjector<android.app.Fragment> fragmentInjector() {
+        return frameworkFragmentInjector;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
@@ -68,6 +97,7 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
         initView();
         initData();
     }
+
 
     /**
      * @return 是否加载默认ToolBar
@@ -163,6 +193,16 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
         snackbar.show();
     }
 
+    /**
+     * Fragment/Activity中方法,声明在view中;便于在mvp中的presenter里调用;
+     *
+     * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
+     */
+    @Override
+    public <T> ObservableTransformer<T, T> bindUntilStopEvent() {
+        return bindUntilEvent(ActivityEvent.STOP);
+    }
+
     @Override
     public void onFragmentAttached() {
 
@@ -173,7 +213,4 @@ public abstract class BaseViewActivity<V extends BaseContract.View, P extends Ba
 
     }
 
-    public <T> T $(int _id) {
-        return (T) findViewById(_id);
-    }
 }

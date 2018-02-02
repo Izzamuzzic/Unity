@@ -19,7 +19,7 @@ package com.zwq65.unity.ui.activity;
 import android.content.Intent;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.contract.SettingContract;
 
 /**
@@ -29,7 +29,7 @@ import com.zwq65.unity.ui.contract.SettingContract;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class SettingActivity extends BaseViewActivity<SettingContract.View,
+public class SettingActivity extends BaseDaggerActivity<SettingContract.View,
         SettingContract.Presenter<SettingContract.View>> implements SettingContract.View {
 
     @Override

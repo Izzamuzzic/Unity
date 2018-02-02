@@ -40,7 +40,7 @@ import com.bumptech.glide.request.target.Target;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui._custom.photoview.PhotoView;
 import com.zwq65.unity.ui.contract.ImageContract;
 import com.zwq65.unity.utils.LogUtils;
@@ -62,7 +62,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class ImageActivity extends BaseViewActivity<ImageContract.View, ImageContract.Presenter<ImageContract.View>>
+public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageContract.Presenter<ImageContract.View>>
         implements ImageContract.View, EasyPermissions.PermissionCallbacks {
     public static final String POSITION = "POSITION";
     public static final String IMAGE_LIST = "IMAGE_LIST";

@@ -23,7 +23,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.contract.LoginContract;
 
 import butterknife.BindView;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class LoginActivity extends BaseViewActivity<LoginContract.View, LoginContract.Presenter<LoginContract.View>>
+public class LoginActivity extends BaseDaggerActivity<LoginContract.View, LoginContract.Presenter<LoginContract.View>>
         implements LoginContract.View {
 
     @BindView(R.id.et_email)

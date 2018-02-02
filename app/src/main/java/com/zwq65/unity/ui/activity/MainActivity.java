@@ -32,7 +32,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.fragment.AlbumFragment;
 import com.zwq65.unity.ui.fragment.ArticleFragment;
 import com.zwq65.unity.ui.contract.MainContract;
@@ -53,7 +53,7 @@ import io.reactivex.disposables.Disposable;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class MainActivity extends BaseViewActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
+public class MainActivity extends BaseDaggerActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 
     @BindView(R.id.drawer_layout)
@@ -134,6 +134,7 @@ public class MainActivity extends BaseViewActivity<MainContract.View, MainContra
 
     @OnClick({R.id.iv_avatar, R.id.tv_account_name, R.id.ll_welfare, R.id.ll_video, R.id.ll_news, R.id.ll_setting, R.id.ll_out, R.id.fab})
     public void onViewClicked(View view) {
+        drawerLayout.closeDrawer(GravityCompat.START);
         switch (view.getId()) {
             case R.id.ll_welfare:
                 //gank.io福利

@@ -45,14 +45,14 @@ import butterknife.Unbinder;
  */
 public abstract class BaseDialog extends DialogFragment implements DialogMvpView {
 
-    private BaseViewActivity mActivity;
+    private BaseDaggerActivity mActivity;
     private Unbinder mUnBinder;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BaseViewActivity) {
-            BaseViewActivity mActivity = (BaseViewActivity) context;
+        if (context instanceof BaseDaggerActivity) {
+            BaseDaggerActivity mActivity = (BaseDaggerActivity) context;
             this.mActivity = mActivity;
             mActivity.onFragmentAttached();
         }

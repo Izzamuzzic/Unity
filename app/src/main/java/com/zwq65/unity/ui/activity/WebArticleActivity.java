@@ -40,7 +40,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.contract.WebArticleContract;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ import butterknife.BindView;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class WebArticleActivity extends BaseViewActivity<WebArticleContract.View,
+public class WebArticleActivity extends BaseDaggerActivity<WebArticleContract.View,
         WebArticleContract.Presenter<WebArticleContract.View>> implements WebArticleContract.View {
     public static final String ARTICAL = "ARTICAL";
 

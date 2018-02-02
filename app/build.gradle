@@ -121,6 +121,10 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
+    //rxLifeCycle2
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycleVersion"
+    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycleVersion"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     //dagger2 (dependency injection)
     compile "com.google.dagger:dagger:$rootProject.daggerVersion"
     compile "com.google.dagger:dagger-android:$rootProject.daggerVersion"

@@ -30,7 +30,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
-import com.zwq65.unity.ui._base.BaseViewActivity;
+import com.zwq65.unity.ui._base.BaseDaggerActivity;
 import com.zwq65.unity.ui.contract.WatchContract;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import butterknife.BindView;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class WatchActivity extends BaseViewActivity<WatchContract.View, WatchContract.Presenter<WatchContract.View>>
+public class WatchActivity extends BaseDaggerActivity<WatchContract.View, WatchContract.Presenter<WatchContract.View>>
         implements WatchContract.View {
     //intent'key value
     public static final String VIDEO = "VIDEO";
