@@ -17,8 +17,8 @@
 package com.zwq65.unity.ui.module;
 
 import com.zwq65.unity.di.ActivityScoped;
-import com.zwq65.unity.ui.presenter.AccountPresenter;
 import com.zwq65.unity.ui.contract.AccountContract;
+import com.zwq65.unity.ui.presenter.AccountPresenter;
 
 import dagger.Binds;
 import dagger.Module;

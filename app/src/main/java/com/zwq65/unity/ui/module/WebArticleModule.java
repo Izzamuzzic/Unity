@@ -18,8 +18,8 @@ package com.zwq65.unity.ui.module;
 
 
 import com.zwq65.unity.di.ActivityScoped;
-import com.zwq65.unity.ui.presenter.WebArticlePresenter;
 import com.zwq65.unity.ui.contract.WebArticleContract;
+import com.zwq65.unity.ui.presenter.WebArticlePresenter;
 
 import dagger.Binds;
 import dagger.Module;

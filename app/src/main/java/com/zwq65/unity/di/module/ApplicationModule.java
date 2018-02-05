@@ -27,7 +27,6 @@ import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.network.ApiHelper;
 import com.zwq65.unity.data.network.AppApiHelper;
 import com.zwq65.unity.data.network.retrofit.api.GankIoApiService;
-import com.zwq65.unity.data.network.retrofit.interceptor.MyInterceptor;
 import com.zwq65.unity.data.prefs.AppPreferencesHelper;
 import com.zwq65.unity.data.prefs.PreferencesHelper;
 import com.zwq65.unity.di.ApplicationContext;
@@ -41,7 +40,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -66,8 +64,9 @@ public abstract class ApplicationModule {
     }
 
     @Provides
-    static CompositeDisposable provideCompositeDisposable() {
-        return new CompositeDisposable();
+    @PreferenceInfo
+    static String providePreferenceName() {
+        return AppConstants.PREF_NAME;
     }
 
     @Provides
@@ -78,26 +77,43 @@ public abstract class ApplicationModule {
 
     @Provides
     @Singleton
+    static DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
+    }
+
+    @Provides
+    @Singleton
     static DbHelper provideDbHelper(AppDbHelper appDbHelper) {
         return appDbHelper;
     }
 
     @Provides
     @Singleton
-    static DataManager provideDataManager(AppDataManager appDataManager) {
-        return appDataManager;
-    }
-
-    @Provides
-    @PreferenceInfo
-    static String providePreferenceName() {
-        return AppConstants.PREF_NAME;
+    static PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
     }
 
     @Provides
     @Singleton
-    static PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-        return appPreferencesHelper;
+    static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    static GankIoApiService provideGankIoApiService(Retrofit retrofit) {
+        return retrofit.create(GankIoApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    static Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(GankIoApiService.GANK_IO_HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient);
+        return builder.build();
     }
 
     @Provides
@@ -118,26 +134,4 @@ public abstract class ApplicationModule {
                 .build();
     }
 
-    @Provides
-    @Singleton
-    static Retrofit provideRetrofit(OkHttpClient okHttpClient) {
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(GankIoApiService.GANK_IO_HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient);
-        return builder.build();
-    }
-
-    @Provides
-    @Singleton
-    static GankIoApiService provideGankIoApiService(Retrofit retrofit) {
-        return retrofit.create(GankIoApiService.class);
-    }
-
-    @Provides
-    @Singleton
-    static ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
-        return appApiHelper;
-    }
 }

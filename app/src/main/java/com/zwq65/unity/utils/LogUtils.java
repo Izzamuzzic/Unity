@@ -19,7 +19,6 @@ package com.zwq65.unity.utils;
 
 import android.util.Log;
 
-import com.facebook.stetho.common.LogUtil;
 
 /**
  * ================================================
@@ -50,23 +49,23 @@ public class LogUtils {
     }
 
     public static void i(String msg) {
-        LogUtil.i(msg);
+        com.blankj.utilcode.util.LogUtils.i(msg);
     }
 
     public static void d(String msg) {
-        LogUtil.d(msg);
+        com.blankj.utilcode.util.LogUtils.d(msg);
     }
 
     public static void e(String msg) {
-        LogUtil.e(msg);
+        com.blankj.utilcode.util.LogUtils.e(msg);
     }
 
     public static void v(String msg) {
-        LogUtil.v(msg);
+        com.blankj.utilcode.util.LogUtils.v(msg);
     }
 
     public static void w(String msg) {
-        LogUtil.w(msg);
+        com.blankj.utilcode.util.LogUtils.w(msg);
     }
 
 }

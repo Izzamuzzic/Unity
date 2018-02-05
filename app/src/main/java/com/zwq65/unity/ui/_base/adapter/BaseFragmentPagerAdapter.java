@@ -32,17 +32,17 @@ import java.util.List;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class BaseViewPagerAdapter extends FragmentPagerAdapter {
+public class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> mList;
     private CharSequence[] mTitles;
 
-    public BaseViewPagerAdapter(FragmentManager fragmentManager, List<Fragment> list) {
+    public BaseFragmentPagerAdapter(FragmentManager fragmentManager, List<Fragment> list) {
         super(fragmentManager);
         this.mList = list;
     }
 
 
-    public BaseViewPagerAdapter(FragmentManager fragmentManager, List<Fragment> list, CharSequence[] titles) {
+    public BaseFragmentPagerAdapter(FragmentManager fragmentManager, List<Fragment> list, CharSequence[] titles) {
         super(fragmentManager);
         this.mList = list;
         this.mTitles = titles;

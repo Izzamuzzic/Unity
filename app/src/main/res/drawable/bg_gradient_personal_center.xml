@@ -19,5 +19,5 @@
     <gradient
         android:angle="90"
         android:endColor="@color/wave1"
-        android:startColor="@color/wave2" />
+        android:startColor="@color/wave2"/>
 </shape>

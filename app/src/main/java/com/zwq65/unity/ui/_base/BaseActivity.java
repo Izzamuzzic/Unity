@@ -33,7 +33,6 @@ import com.zwq65.unity.utils.LogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * ================================================
@@ -61,6 +60,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     }
 
     /**
+     * 获取Activity的视图资源id
+     *
      * @return Resource ID to be inflated
      */
     @LayoutRes
@@ -117,16 +118,19 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         Intent intent = new Intent(this, cls);
         //添加intentFlag,如果要启动的activity存在于栈中,将其拉到栈顶,不用重新实例化
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        if (bundle != null)
+        if (bundle != null) {
             intent.putExtras(bundle);
+        }
         startActivity(intent);
-        overridePendingTransition(R.anim.right_in, R.anim.right_out);//add animation
+        //add animation
+        overridePendingTransition(R.anim.right_in, R.anim.right_out);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.right_in_back, R.anim.right_out_back);//add animation
+        //add animation
+        overridePendingTransition(R.anim.right_in_back, R.anim.right_out_back);
     }
 
     Fragment currentFragment;

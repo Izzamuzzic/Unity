@@ -40,11 +40,11 @@ public class Image implements Parcelable {
      */
     private String _id;
     private String createdAt;
-    private String desc;//描述文字
+    private String desc;
     private String publishedAt;
     private String source;
     private String type;
-    private String url;//图片链接
+    private String url;
     private boolean used;
     private String who;
     private int width;

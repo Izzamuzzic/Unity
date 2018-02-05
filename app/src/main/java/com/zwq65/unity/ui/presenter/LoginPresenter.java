@@ -22,8 +22,6 @@ import com.zwq65.unity.ui.contract.LoginContract;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * <p>
@@ -34,8 +32,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<V> implements LoginContract.Presenter<V> {
 
     @Inject
-    LoginPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    LoginPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override

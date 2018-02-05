@@ -18,10 +18,8 @@ package com.zwq65.unity.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -33,10 +31,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
@@ -217,17 +211,19 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
             tvCurrentPage.setText(getResources().getString(R.string.placeholder_divider, String.valueOf(currentPosition + 1), String.valueOf(pageSize)));
         }
         //当前图片是否已被用户收藏
-        mPresenter.isPictureCollect(imageList.get(currentPosition)).subscribe(aBoolean -> {
-            if (cbLove != null) {
-                cbLove.setChecked(aBoolean);
-            }
-        });
+        mPresenter.isPictureCollect(imageList.get(currentPosition))
+                .compose(bindUntilStopEvent())
+                .subscribe(aBoolean -> {
+                    if (cbLove != null) {
+                        cbLove.setChecked(aBoolean);
+                    }
+                });
     }
 
     private void initViewPager() {
         //预加载2个item
         vpImages.setOffscreenPageLimit(2);
-        Myadapter mAdapter = new Myadapter();
+        MyAdapter mAdapter = new MyAdapter();
         vpImages.setAdapter(mAdapter);
         //设置当前加载的资源为点击进入的图片
         vpImages.setCurrentItem(currentPosition);
@@ -254,7 +250,7 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
     /**
      * 显示大图viewpager's adapter
      */
-    private class Myadapter extends PagerAdapter {
+    private class MyAdapter extends PagerAdapter {
         @Override
         public int getCount() {
             if (imageList == null) {
@@ -276,19 +272,7 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
             PhotoView ivImage = view.findViewById(R.id.iv_image);
 
             final Image image = imageList.get(position);
-            Glide.with(ImageActivity.this).load(image.getUrl())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            showMessage(R.string.error_msg_load_fail);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    }).into(ivImage);
+            Glide.with(ImageActivity.this).load(image.getUrl()).into(ivImage);
             container.addView(view, 0);
             return view;
         }

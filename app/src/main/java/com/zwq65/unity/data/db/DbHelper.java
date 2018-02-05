@@ -34,13 +34,35 @@ import io.reactivex.Observable;
  */
 public interface DbHelper {
 
-    Observable<Long> insertPicture(final Picture picture);
+    /**
+     * 保存图片
+     *
+     * @param picture picture
+     * @return Observable<Long>
+     */
+    Observable<Long> savePicture(final Picture picture);
 
+    /**
+     * 删除图片
+     *
+     * @param id picture'id
+     * @return Observable<Long>
+     */
     Observable<Long> deletePicture(final String id);
 
+    /**
+     * 判断图片是否保存
+     *
+     * @param id picture'id
+     * @return Observable<Long>
+     */
     Observable<Boolean> isPictureExist(final String id);
 
-    //获取用户收藏的图片
+    /**
+     * 获取用户收藏的图片
+     *
+     * @return Observable<>
+     */
     Observable<List<Picture>> getCollectionPictures();
 
 }

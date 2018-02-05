@@ -17,16 +17,13 @@
 package com.zwq65.unity.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
-import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
+import com.zwq65.unity.ui.activity.WatchActivity;
 import com.zwq65.unity.ui.adapter.RestVideoAdapter;
 import com.zwq65.unity.ui.contract.RestVideoContract;
-import com.zwq65.unity.ui.activity.WatchActivity;
 
 import java.util.List;
 
@@ -53,12 +50,6 @@ public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContr
     @Override
     public void initView() {
         super.initView();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //item加载动画（默认）
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        //item间隔线
-        mRecyclerView.addItemDecoration(new MyItemDecoration());
-        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((video, position) -> gotoWatchActivity(video));
         mRecyclerView.setAdapter(mAdapter);
     }

@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui.presenter;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
@@ -28,7 +27,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * ================================================
@@ -41,8 +39,8 @@ public class AlbumPresenter<V extends AlbumContract.View<Image>> extends BasePre
     private int page;
 
     @Inject
-    AlbumPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    AlbumPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override
@@ -53,27 +51,25 @@ public class AlbumPresenter<V extends AlbumContract.View<Image>> extends BasePre
 
     @Override
     public void loadImages(final Boolean isRefresh) {
-        getCompositeDisposable().add(
-                getDataManager().get20Images(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
-                    @Override
-                    public void onSuccess(GankApiResponse<List<Image>> welfareResponse) {
-                        if (welfareResponse != null && welfareResponse.getData() != null) {
-                            page++;
-                            if (isRefresh) {
-                                getMvpView().refreshData(welfareResponse.getData());
-                            } else {
-                                getMvpView().loadData(welfareResponse.getData());
-                            }
-                        } else {
-                            getMvpView().noMoreData();
-                        }
+        getDataManager().get20Images(page, new ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
+            @Override
+            public void onSuccess(GankApiResponse<List<Image>> welfareResponse) {
+                if (welfareResponse != null && welfareResponse.getData() != null) {
+                    page++;
+                    if (isRefresh) {
+                        getMvpView().refreshData(welfareResponse.getData());
+                    } else {
+                        getMvpView().loadData(welfareResponse.getData());
                     }
-                }, new ApiErrorCallBack<Throwable>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        getMvpView().loadFail(t);
-                    }
-                })
-        );
+                } else {
+                    getMvpView().noMoreData();
+                }
+            }
+
+            @Override
+            public void onFailure(String errCode, String errMsg) {
+
+            }
+        }, getMvpView().bindUntilStopEvent());
     }
 }

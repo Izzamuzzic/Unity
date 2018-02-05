@@ -19,10 +19,10 @@ package com.zwq65.unity.data;
 
 import android.content.Context;
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.zwq65.unity.data.db.DbHelper;
 import com.zwq65.unity.data.db.model.Picture;
 import com.zwq65.unity.data.network.ApiHelper;
-import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
@@ -37,7 +37,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * ================================================
@@ -89,8 +88,8 @@ public class AppDataManager implements DataManager {
     /*****************************************************  DbHelper  *****************************************************************/
 
     @Override
-    public Observable<Long> insertPicture(Picture picture) {
-        return mDbHelper.insertPicture(picture);
+    public Observable<Long> savePicture(Picture picture) {
+        return mDbHelper.savePicture(picture);
     }
 
     @Override
@@ -110,34 +109,74 @@ public class AppDataManager implements DataManager {
 
     /*****************************************************  ApiHelper  *****************************************************************/
 
+    /**
+     * 获取随机数目的image'list
+     *
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getRandomImages(callBack, errorCallBack);
+    public void getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, LifecycleTransformer<GankApiResponse<List<Image>>> lifecycleTransformer) {
+        mApiHelper.getRandomImages(callBack, lifecycleTransformer);
     }
 
+    /**
+     * 获取page页的image'list
+     *
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.get20Images(page, callBack, errorCallBack);
+    public void get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack, LifecycleTransformer<GankApiResponse<List<Image>>> lifecycleTransformer) {
+        mApiHelper.get20Images(page, callBack, lifecycleTransformer);
     }
 
+    /**
+     * 同时获取相同数量的image和video实例
+     *
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<Video>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getVideosAndIMages(page, callBack, errorCallBack);
+    public void getVideosAndImages(int page, ApiSubscriberCallBack<List<Video>> callBack, LifecycleTransformer<List<Video>> lifecycleTransformer) {
+        mApiHelper.getVideosAndImages(page, callBack, lifecycleTransformer);
     }
 
+    /**
+     * 获取page页的android'list
+     *
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getAndroidArticles(page, callBack, errorCallBack);
+    public void getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, LifecycleTransformer<List<Article>> lifecycleTransformer) {
+        mApiHelper.getAndroidArticles(page, callBack, lifecycleTransformer);
     }
 
+    /**
+     * 获取page页的ios'list
+     *
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getIosArticles(page, callBack, errorCallBack);
+    public void getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, LifecycleTransformer<List<Article>> lifecycleTransformer) {
+        mApiHelper.getIosArticles(page, callBack, lifecycleTransformer);
     }
 
+    /**
+     * 获取page页的前端'list
+     *
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
+     */
     @Override
-    public Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, ApiErrorCallBack<Throwable> errorCallBack) {
-        return mApiHelper.getQianduanArticles(page, callBack, errorCallBack);
+    public void getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack, LifecycleTransformer<List<Article>> lifecycleTransformer) {
+        mApiHelper.getQianduanArticles(page, callBack, lifecycleTransformer);
     }
-
 }

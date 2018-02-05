@@ -16,7 +16,7 @@
 
 package com.zwq65.unity.data.network;
 
-import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
@@ -24,8 +24,6 @@ import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -40,66 +38,60 @@ public interface ApiHelper {
     /**
      * 获取随机数目的image'list
      *
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack,
-                               ApiErrorCallBack<Throwable> errorCallBack);
+    void getRandomImages(ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack,
+                         LifecycleTransformer<GankApiResponse<List<Image>>> lifecycleTransformer);
 
     /**
      * 获取page页的image'list
      *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack,
-                           ApiErrorCallBack<Throwable> errorCallBack);
+    void get20Images(int page, ApiSubscriberCallBack<GankApiResponse<List<Image>>> callBack,
+                     LifecycleTransformer<GankApiResponse<List<Image>>> lifecycleTransformer);
 
     /**
      * 同时获取相同数量的image和video实例
      *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable getVideosAndIMages(int page, ApiSubscriberCallBack<List<Video>> callBack,
-                                  ApiErrorCallBack<Throwable> errorCallBack);
+    void getVideosAndImages(int page, ApiSubscriberCallBack<List<Video>> callBack,
+                            LifecycleTransformer<List<Video>> lifecycleTransformer);
 
     /**
      * 获取page页的android'list
      *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
-                                  ApiErrorCallBack<Throwable> errorCallBack);
+    void getAndroidArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
+                            LifecycleTransformer<List<Article>> lifecycleTransformer);
 
     /**
      * 获取page页的ios'list
      *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
-                              ApiErrorCallBack<Throwable> errorCallBack);
+    void getIosArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
+                        LifecycleTransformer<List<Article>> lifecycleTransformer);
 
     /**
      * 获取page页的前端'list
      *
-     * @param page          页数
-     * @param callBack      callBack
-     * @param errorCallBack errorCallBack
-     * @return Disposable
+     * @param page                 页数
+     * @param callBack             callBack
+     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    Disposable getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
-                                   ApiErrorCallBack<Throwable> errorCallBack);
+    void getQianduanArticles(int page, ApiSubscriberCallBack<List<Article>> callBack,
+                             LifecycleTransformer<List<Article>> lifecycleTransformer);
 
 }

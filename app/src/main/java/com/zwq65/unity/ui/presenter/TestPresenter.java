@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.Flowable;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * ================================================
@@ -37,12 +37,31 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class TestPresenter<V extends TestContract.View> extends BasePresenter<V> implements TestContract.Presenter<V> {
     @Inject
-    TestPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    TestPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override
     public void test() {
-        Observable.interval(1, TimeUnit.SECONDS).subscribe(aLong -> LogUtils.i("test", "---------" + aLong));
+        Flowable.interval(1, TimeUnit.SECONDS)
+                .compose(getMvpView().bindUntilStopEvent())
+                .subscribe(
+                        new DisposableSubscriber<Long>() {
+                            @Override
+                            public void onNext(Long aLong) {
+                                LogUtils.i("test", "---------" + aLong);
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        }
+                );
     }
 }

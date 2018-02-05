@@ -21,8 +21,6 @@ import java.lang.ref.WeakReference;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * Base class that implements the Presenter interface and provides a base implementation for
@@ -34,14 +32,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * ================================================
  */
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
-
     public final String TAG = getClass().getSimpleName();
 
     private DataManager mDataManager;
-    /**
-     * detach view时，mCompositeDisposable来停止当前所有事务，节省资源
-     */
-    private CompositeDisposable mCompositeDisposable;
     /**
      * MvpView接口类型的弱引用
      */
@@ -49,10 +42,8 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     @Inject
     public BasePresenter(
-            DataManager dataManager,
-            CompositeDisposable compositeDisposable) {
+            DataManager dataManager) {
         this.mDataManager = dataManager;
-        this.mCompositeDisposable = compositeDisposable;
     }
 
     @Override
@@ -62,10 +53,6 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     @Override
     public void onDetach() {
-        //这里不使用dispose(),而用clear();dispose()之后会阻止一切事务,不可复用;clear()只会停止当前事务,仍可继续复用。
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
-        }
         if (mViewRef != null) {
             mViewRef.clear();
             mViewRef = null;
@@ -79,10 +66,6 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     public V getMvpView() {
         return mViewRef.get();
-    }
-
-    public CompositeDisposable getCompositeDisposable() {
-        return mCompositeDisposable;
     }
 
     public DataManager getDataManager() {

@@ -17,17 +17,12 @@
 package com.zwq65.unity.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
-import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
 import com.zwq65.unity.ui.activity.ImageActivity;
 import com.zwq65.unity.ui.adapter.AlbumAdapter;
-import com.zwq65.unity.ui._custom.recycleview.MyItemTouchCallBack;
 import com.zwq65.unity.ui.contract.AlbumContract;
 
 import java.util.ArrayList;
@@ -54,17 +49,8 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
     @Override
     public void initView() {
         super.initView();
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        //item加载动画（默认）
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        //item间隔
-        mRecyclerView.addItemDecoration(new MyItemDecoration());
-        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((image, position) -> gotoContentActivity(position));
         mRecyclerView.setAdapter(mAdapter);
-        //添加item拖拽监听帮助类
-        ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallBack(mAdapter));
-        helper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override

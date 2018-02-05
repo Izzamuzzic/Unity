@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui.presenter;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.BasePresenter;
@@ -27,8 +26,6 @@ import com.zwq65.unity.ui.fragment.TabArticleFragment;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * ================================================
@@ -44,8 +41,8 @@ public class TabArticlePresenter<V extends TabArticleContract.View<Article>> ext
     private boolean isRefresh;
 
     @Inject
-    TabArticlePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    TabArticlePresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override
@@ -64,16 +61,15 @@ public class TabArticlePresenter<V extends TabArticleContract.View<Article>> ext
         this.isRefresh = isRefresh;
         switch (type) {
             case Android:
-                getCompositeDisposable().add(getDataManager().getAndroidArticles(page, getApiSubscriberCallBack(),
-                        getApiErrorCallBack()));
+                getDataManager().getAndroidArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
                 break;
             case Ios:
-                getCompositeDisposable().add(getDataManager().getIosArticles(page, getApiSubscriberCallBack(),
-                        getApiErrorCallBack()));
+                getDataManager().getIosArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
                 break;
             case Qianduan:
-                getCompositeDisposable().add(getDataManager().getQianduanArticles(page, getApiSubscriberCallBack(),
-                        getApiErrorCallBack()));
+                getDataManager().getQianduanArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
+                break;
+            default:
                 break;
         }
     }
@@ -93,14 +89,10 @@ public class TabArticlePresenter<V extends TabArticleContract.View<Article>> ext
                     getMvpView().noMoreData();
                 }
             }
-        };
-    }
 
-    private ApiErrorCallBack<Throwable> getApiErrorCallBack() {
-        return new ApiErrorCallBack<Throwable>() {
             @Override
-            public void onFailure(Throwable t) {
-                getMvpView().loadFail(t);
+            public void onFailure(String errCode, String errMsg) {
+                getMvpView().loadFail(errMsg);
             }
         };
     }

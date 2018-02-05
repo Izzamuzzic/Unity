@@ -18,6 +18,7 @@ package com.zwq65.unity.ui._base;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,15 +63,10 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
 
     @Override
     public void initView() {
-        //上拉刷新監聽
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        mSwipeRefreshLayout.setOnRefreshListener(() -> {
-            if (isRefreshing) {
-                return;
-            }
-            isRefreshing = true;
-            requestDataRefresh();
-        });
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        //item加载动画（默认）
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         //下拉加載監聽
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -100,6 +96,15 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
                     }
                 }
             }
+        });
+        //上拉刷新監聽
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            if (isRefreshing) {
+                return;
+            }
+            isRefreshing = true;
+            requestDataRefresh();
         });
     }
 
@@ -134,7 +139,11 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
         } else {
             isRefreshing = false;
             //防止刷新太快，让刷新动画保留一会儿~
-            mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.setRefreshing(false), 1000);
+            mSwipeRefreshLayout.postDelayed(() -> {
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }, 1000);
         }
     }
 
@@ -157,7 +166,7 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     }
 
     @Override
-    public void loadFail(Throwable t) {
+    public void loadFail(String errMsg) {
         setRefresh(false);
         setLoading(false);
         //加载失败，viewstub加载显示加载失败‘view

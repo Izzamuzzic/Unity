@@ -29,21 +29,24 @@ public interface RefreshMvpView<T> extends BaseContract.View {
 
     /**
      * 刷新数据
+     *
      * @param list 数据列表
      */
     void refreshData(List<T> list);
 
     /**
      * 加载数据
+     *
      * @param list 数据列表
      */
     void loadData(List<T> list);
 
     /**
      * 加载失败
-     * @param t Throwable
+     *
+     * @param errMsg 错误信息
      */
-    void loadFail(Throwable t);
+    void loadFail(String errMsg);
 
     /**
      * 没有数据了

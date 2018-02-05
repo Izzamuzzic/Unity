@@ -22,8 +22,6 @@ import com.zwq65.unity.ui.contract.WatchContract;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * <p>
@@ -34,7 +32,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class WatchPresenter<V extends WatchContract.View> extends BasePresenter<V>
         implements WatchContract.Presenter<V> {
     @Inject
-    WatchPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    WatchPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 }

@@ -18,8 +18,8 @@ package com.zwq65.unity.ui.module;
 
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.presenter.AlbumPresenter;
 import com.zwq65.unity.ui.contract.AlbumContract;
+import com.zwq65.unity.ui.presenter.AlbumPresenter;
 
 import dagger.Binds;
 import dagger.Module;

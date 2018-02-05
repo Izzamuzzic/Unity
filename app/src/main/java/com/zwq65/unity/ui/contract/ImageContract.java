@@ -59,7 +59,7 @@ public interface ImageContract {
         void cancelCollectPicture(Image image);
 
         /**
-         * 该图片是否被收藏
+         * 判断该图片是否被收藏
          *
          * @param image Image
          * @return 该图片是否被收藏

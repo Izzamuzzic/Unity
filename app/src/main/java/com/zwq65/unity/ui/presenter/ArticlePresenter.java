@@ -23,8 +23,6 @@ import com.zwq65.unity.ui.contract.ArticleContract;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * <p>
@@ -34,7 +32,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class ArticlePresenter<V extends ArticleContract.View> extends BasePresenter<V> implements ArticleContract.Presenter<V> {
     @Inject
-    ArticlePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    ArticlePresenter(DataManager dataManager) {
+        super(dataManager);
     }
 }

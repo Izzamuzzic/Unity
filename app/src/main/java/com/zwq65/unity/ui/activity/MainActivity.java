@@ -31,12 +31,13 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseFragment;
 import com.zwq65.unity.ui._base.BaseDaggerActivity;
+import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui.contract.MainContract;
 import com.zwq65.unity.ui.fragment.AlbumFragment;
 import com.zwq65.unity.ui.fragment.ArticleFragment;
-import com.zwq65.unity.ui.contract.MainContract;
 import com.zwq65.unity.ui.fragment.RestVideoFragment;
+import com.zwq65.unity.ui.fragment.TestFragment;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -153,7 +154,8 @@ public class MainActivity extends BaseDaggerActivity<MainContract.View, MainCont
                 gotoFragment(new RestVideoFragment());
                 break;
             case R.id.ll_setting:
-                showError(R.string.str_developping);
+//                showError(R.string.str_developping);
+                gotoFragment(new TestFragment());
                 break;
             case R.id.ll_out:
                 onBackPressed();

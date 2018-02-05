@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui.presenter;
 
 import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.data.network.retrofit.callback.ApiErrorCallBack;
 import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack;
 import com.zwq65.unity.data.network.retrofit.response.enity.Video;
 import com.zwq65.unity.ui._base.BasePresenter;
@@ -26,8 +25,6 @@ import com.zwq65.unity.ui.contract.RestVideoContract;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * ================================================
@@ -41,8 +38,8 @@ public class RestVideoPresenter<V extends RestVideoContract.View<Video>> extends
     private int page;
 
     @Inject
-    RestVideoPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    RestVideoPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override
@@ -53,26 +50,25 @@ public class RestVideoPresenter<V extends RestVideoContract.View<Video>> extends
 
     @Override
     public void loadVideos(final Boolean isRefresh) {
-        getCompositeDisposable().add(
-                getDataManager().getVideosAndIMages(page, new ApiSubscriberCallBack<List<Video>>() {
-                    @Override
-                    public void onSuccess(List<Video> videoWithImages) {
-                        if (videoWithImages != null && videoWithImages.size() > 0) {
-                            page++;
-                            if (isRefresh) {
-                                getMvpView().refreshData(videoWithImages);
-                            } else {
-                                getMvpView().loadData(videoWithImages);
-                            }
-                        } else {
-                            getMvpView().noMoreData();
-                        }
+        getDataManager().getVideosAndImages(page, new ApiSubscriberCallBack<List<Video>>() {
+            @Override
+            public void onSuccess(List<Video> videoWithImages) {
+                if (videoWithImages != null && videoWithImages.size() > 0) {
+                    page++;
+                    if (isRefresh) {
+                        getMvpView().refreshData(videoWithImages);
+                    } else {
+                        getMvpView().loadData(videoWithImages);
                     }
-                }, new ApiErrorCallBack<Throwable>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        getMvpView().loadFail(t);
-                    }
-                }));
+                } else {
+                    getMvpView().noMoreData();
+                }
+            }
+
+            @Override
+            public void onFailure(String errCode, String errMsg) {
+                getMvpView().loadFail(errMsg);
+            }
+        }, getMvpView().bindUntilStopEvent());
     }
 }

@@ -16,7 +16,7 @@
   -->
 
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="100"
-    android:fromYDelta="-80%p"
-    android:interpolator="@android:anim/linear_interpolator"
-    android:toYDelta="0" />
+           android:duration="100"
+           android:fromYDelta="-80%p"
+           android:interpolator="@android:anim/linear_interpolator"
+           android:toYDelta="0"/>

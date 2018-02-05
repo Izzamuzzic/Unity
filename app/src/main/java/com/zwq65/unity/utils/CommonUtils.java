@@ -22,13 +22,10 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import com.blankj.utilcode.util.SDCardUtils;
 import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * ================================================

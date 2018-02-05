@@ -37,7 +37,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -50,15 +49,16 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<V> implements ImageContract.Presenter<V> {
     @Inject
-    ImagePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    ImagePresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
     @Override
     public void savePicture(final Context context, Image image) {
         getMvpView().showLoading();
         Observable.just(image)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .compose(getMvpView().bindUntilStopEvent())
                 .map(new Function<Image, Bitmap>() {
                     Bitmap bitmap;
 
@@ -87,13 +87,16 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
 
     @Override
     public void collectPicture(Image image) {
-        isPictureCollect(image).filter(aBoolean -> !aBoolean).flatMap(aBoolean -> {
-            Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
-                    image.getSource(), image.getType(), image.getUrl(), image.getWho());
-            //显示加载框
-            getMvpView().showLoading();
-            return getDataManager().insertPicture(picture);
-        }).subscribe(aLong -> {
+        isPictureCollect(image)
+                .compose(getMvpView().bindUntilStopEvent())
+                .filter(aBoolean -> !aBoolean)
+                .flatMap(aBoolean -> {
+                    Picture picture = new Picture(image.get_id(), image.getCreatedAt(), image.getDesc(),
+                            image.getSource(), image.getType(), image.getUrl(), image.getWho());
+                    //显示加载框
+                    getMvpView().showLoading();
+                    return getDataManager().savePicture(picture);
+                }).subscribe(aLong -> {
             getMvpView().showMessage(R.string.success_msg_collect);
             getMvpView().hideLoading();
         }, throwable -> {
@@ -106,10 +109,12 @@ public class ImagePresenter<V extends ImageContract.View> extends BasePresenter<
     @Override
     public void cancelCollectPicture(Image image) {
         getMvpView().showLoading();
-        getDataManager().deletePicture(image.get_id()).subscribe(aLong -> getMvpView().hideLoading(), throwable -> {
-            getMvpView().hideLoading();
-            getMvpView().showError(R.string.error_msg_cancel_collect_fail);
-        });
+        getDataManager().deletePicture(image.get_id())
+                .compose(getMvpView().bindUntilStopEvent())
+                .subscribe(aLong -> getMvpView().hideLoading(), throwable -> {
+                    getMvpView().hideLoading();
+                    getMvpView().showError(R.string.error_msg_cancel_collect_fail);
+                });
     }
 
     @Override

@@ -17,15 +17,12 @@
 package com.zwq65.unity.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
 import com.zwq65.unity.ui._base.BaseRefreshFragment;
-import com.zwq65.unity.ui._custom.recycleview.MyItemDecoration;
-import com.zwq65.unity.ui.adapter.TabArticleAdapter;
 import com.zwq65.unity.ui.activity.WebArticleActivity;
+import com.zwq65.unity.ui.adapter.TabArticleAdapter;
 import com.zwq65.unity.ui.contract.TabArticleContract;
 
 import java.util.List;
@@ -78,10 +75,6 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
     @Override
     public void initView() {
         super.initView();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());//item加载动画（默认）
-        mRecyclerView.addItemDecoration(new MyItemDecoration());//item间隔
-        ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setOnItemClickListener((article, position) -> gotoDetailActivity(article));
         mRecyclerView.setAdapter(mAdapter);
     }

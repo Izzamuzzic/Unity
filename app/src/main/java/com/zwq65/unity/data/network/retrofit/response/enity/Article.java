@@ -52,7 +52,6 @@ public class Article implements Parcelable {
     private boolean used;
     private String who;
     private List<String> images;
-    //set value,show it as background
     private Image image;
 
     @Override

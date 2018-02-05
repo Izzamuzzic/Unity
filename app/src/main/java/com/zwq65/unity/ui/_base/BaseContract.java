@@ -18,9 +18,8 @@ package com.zwq65.unity.ui._base;
 
 import android.support.annotation.StringRes;
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.zwq65.unity.data.DataManager;
-
-import io.reactivex.ObservableTransformer;
 
 /**
  * ================================================
@@ -82,7 +81,7 @@ public interface BaseContract {
          * @param <T> T
          * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
          */
-        <T> ObservableTransformer<T, T> bindUntilStopEvent();
+        <T> LifecycleTransformer<T> bindUntilStopEvent();
     }
 
     /**

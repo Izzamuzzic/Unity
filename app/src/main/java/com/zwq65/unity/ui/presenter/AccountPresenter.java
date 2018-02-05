@@ -22,8 +22,6 @@ import com.zwq65.unity.ui.contract.AccountContract;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * <p>
@@ -33,8 +31,8 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class AccountPresenter<V extends AccountContract.View> extends BasePresenter<V> implements AccountContract.Presenter<V> {
     @Inject
-    AccountPresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    AccountPresenter(DataManager dataManager) {
+        super(dataManager);
     }
 
 }

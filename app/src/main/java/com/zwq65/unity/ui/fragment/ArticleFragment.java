@@ -23,7 +23,7 @@ import android.support.v4.view.ViewPager;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._base.adapter.BaseViewPagerAdapter;
+import com.zwq65.unity.ui._base.adapter.BaseFragmentPagerAdapter;
 import com.zwq65.unity.ui.contract.ArticleContract;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleC
         for (String tab : TABS) {
             fragments.add(TabArticleFragment.newInstance(tab));
         }
-        BaseViewPagerAdapter adapter = new BaseViewPagerAdapter(getChildFragmentManager(), fragments, TABS);
+        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(getChildFragmentManager(), fragments, TABS);
         vpArtcle.setAdapter(adapter);
         vpArtcle.setOffscreenPageLimit(0);
         //将tabLayout与ViewPager绑定

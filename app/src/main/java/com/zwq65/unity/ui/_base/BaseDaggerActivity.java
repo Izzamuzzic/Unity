@@ -18,10 +18,8 @@ package com.zwq65.unity.ui._base;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -32,6 +30,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.DataManager;
@@ -44,7 +43,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import io.reactivex.ObservableTransformer;
 
 /**
  * ================================================
@@ -98,9 +96,10 @@ public abstract class BaseDaggerActivity<V extends BaseContract.View, P extends 
         initData();
     }
 
-
     /**
-     * @return 是否加载默认ToolBar
+     * 是否加载默认ToolBar
+     *
+     * @return Boolean
      */
     public abstract Boolean initBaseTooBar();
 
@@ -199,7 +198,7 @@ public abstract class BaseDaggerActivity<V extends BaseContract.View, P extends 
      * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
      */
     @Override
-    public <T> ObservableTransformer<T, T> bindUntilStopEvent() {
+    public <T> LifecycleTransformer<T> bindUntilStopEvent() {
         return bindUntilEvent(ActivityEvent.STOP);
     }
 

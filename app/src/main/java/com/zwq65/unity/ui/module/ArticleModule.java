@@ -17,8 +17,8 @@
 package com.zwq65.unity.ui.module;
 
 import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.presenter.ArticlePresenter;
 import com.zwq65.unity.ui.contract.ArticleContract;
+import com.zwq65.unity.ui.presenter.ArticlePresenter;
 
 import dagger.Binds;
 import dagger.Module;

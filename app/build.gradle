@@ -13,7 +13,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        flavorDimensions "versionCode"
+        flavorDimensions "default"
     }
 
     signingConfigs {
@@ -45,7 +45,7 @@ android {
             // 自定义输出配置apk名称
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
-                    // 输出apk名称为Unity_v1.0_wandoujia.apk
+                    // 输出apk名称为Unity_v1.0_productFlavors.apk
                     outputFileName = "Unity_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
                 }
             }
@@ -58,10 +58,10 @@ android {
     }
 
     productFlavors {
-        xiaomi {}
-        qihoo360 {}
-        wandoujia {}
-        baidu {}
+        xiaomi { dimension "default" }
+        qihoo360 { dimension "default" }
+        wandoujia { dimension "default" }
+        baidu { dimension "default" }
         productFlavors.all {
             flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
@@ -83,75 +83,75 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //androidTest
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //test
-    testCompile "junit:junit:$rootProject.junitVersion"
-    testCompile "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     //design
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.supportLibraryVersion"
-    compile "com.android.support:support-v13:$rootProject.supportLibraryVersion"
-    compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v13:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     //network
-    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
-    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitConverterVersion"
-    compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxjava2AdapterVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitConverterVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxjava2AdapterVersion"
     //gson
-    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     //glide
-    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     //greenDao database
-    compile "org.greenrobot:greendao:$rootProject.greenDaoVersion"
-    compile "org.greenrobot:greendao-generator:$rootProject.greenDaoGeneratorVersion"
+    implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
+    implementation "org.greenrobot:greendao-generator:$rootProject.greenDaoGeneratorVersion"
     //butterKnife
-    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
     //rxJava2
-    compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-    compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
-    compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
     //rxLifeCycle2
-    compile "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycleVersion"
-    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycleVersion"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycleVersion"
+    implementation "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycleVersion"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycleVersion"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     //dagger2 (dependency injection)
-    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
-    compile "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    compile "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     //multidex
-    compile "com.android.support:multidex:$rootProject.multidexVersion"
+    implementation "com.android.support:multidex:$rootProject.multidexVersion"
     //LeakCanary: A memory leak detection library for Android and Java.
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
     //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
-    compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
+    implementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
     //bugly
-    compile "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
+    implementation "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
     //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //Simplify Android M system permissions
-    compile "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
+    implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
-    compile "com.gyf.barlibrary:barlibrary:$rootProject.barlibraryVersion"
+    implementation "com.gyf.barlibrary:barlibrary:$rootProject.barlibraryVersion"
     //A circular ImageView for Android
-    compile "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
+    implementation "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
     //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
-    compile "com.blankj:utilcode:$rootProject.utilcodeVersion"
+    implementation "com.blankj:utilcode:$rootProject.utilcodeVersion"
     //快速开发工具类收集
-    compile 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
+    implementation 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
 }
 
 static def releaseTime() {

@@ -41,7 +41,6 @@ import butterknife.Unbinder;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import dagger.android.support.HasSupportFragmentInjector;
 
 /**

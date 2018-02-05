@@ -17,8 +17,8 @@
 package com.zwq65.unity.ui.module;
 
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
-import com.zwq65.unity.ui.presenter.TabArticlePresenter;
 import com.zwq65.unity.ui.contract.TabArticleContract;
+import com.zwq65.unity.ui.presenter.TabArticlePresenter;
 
 import dagger.Binds;
 import dagger.Module;

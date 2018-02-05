@@ -46,7 +46,7 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<Long> insertPicture(final Picture picture) {
+    public Observable<Long> savePicture(final Picture picture) {
         return Observable.fromCallable(() -> mDaoSession.getPictureDao().insertOrReplace(picture));
     }
 

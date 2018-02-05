@@ -33,7 +33,4 @@
         android:layout_height="wrap_content"
         android:text="@string/exit"/>
 
-    <com.zwq65.unity.ui._custom.view.DLAnimView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

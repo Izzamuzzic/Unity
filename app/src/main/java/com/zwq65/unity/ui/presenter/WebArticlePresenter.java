@@ -23,8 +23,6 @@ import com.zwq65.unity.ui.contract.WebArticleContract;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 /**
  * ================================================
  * <p>
@@ -35,7 +33,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class WebArticlePresenter<V extends WebArticleContract.View> extends BasePresenter<V>
         implements WebArticleContract.Presenter<V> {
     @Inject
-    WebArticlePresenter(DataManager dataManager, CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+    WebArticlePresenter(DataManager dataManager) {
+        super(dataManager);
     }
 }
