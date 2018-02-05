@@ -16,11 +16,8 @@
 
 package com.zwq65.unity.data.network.retrofit.callback;
 
+import com.zwq65.unity.App;
 import com.zwq65.unity.utils.LogUtils;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -37,24 +34,20 @@ public abstract class ApiSubscriberCallBack<T> extends DisposableSubscriber<T> {
 
     @Override
     public void onNext(T t) {
-        LogUtils.e(TAG, "onNext");
         onSuccess(t);
     }
 
     @Override
     public void onComplete() {
-        LogUtils.e(TAG, "onComplete");
     }
 
     @Override
     public void onError(Throwable t) {
         LogUtils.e(TAG, t.toString());
-        //后台返回数据解析异常，常见的是data返回String
-        if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException) {
-            //网络异常（超时、连接、未识别域名...）
-            onFailure("999", "网络不给力，请稍后再试");
-        } else {
-            onFailure("999", "未知异常");
+        if (t instanceof ApiException) {
+            //toast错误信息
+            App.getInstance().showToast(((ApiException) t).message);
+            onFailure(((ApiException) t).code, ((ApiException) t).message);
         }
     }
 

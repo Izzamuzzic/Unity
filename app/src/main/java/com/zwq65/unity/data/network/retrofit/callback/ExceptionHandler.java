@@ -53,15 +53,15 @@ public class ExceptionHandler {
                 || e instanceof ParseException) {
             ex = new ApiException(e, String.valueOf(Error.PARSE_ERROR));
             //均视为解析错误
-            ex.message = "解析错误";
+            ex.message = "解析异常";
             return ex;
         } else if (e instanceof ConnectException) {
             ex = new ApiException(e, String.valueOf(Error.NETWORK_ERROR));
-            ex.message = "连接失败";
+            ex.message = "网络异常：连接失败";
             return ex;
         } else if (e instanceof SocketTimeoutException) {
             ex = new ApiException(e, String.valueOf(Error.NETWORK_ERROR));
-            ex.message = "连接超时";
+            ex.message = "网络异常：连接超时";
             return ex;
         } else if (e instanceof ServerException) {
             //服务器返回的错误

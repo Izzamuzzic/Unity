@@ -24,7 +24,6 @@ import com.blankj.utilcode.util.Utils;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.zwq65.unity.di.component.ApplicationComponent;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
 import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
@@ -64,9 +63,7 @@ public class App extends DaggerApplication {
      */
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        ApplicationComponent appComponent = DaggerApplicationComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
+        return DaggerApplicationComponent.builder().application(this).build();
     }
 
     @Override
@@ -104,7 +101,7 @@ public class App extends DaggerApplication {
         LeakCanary.install(this);
     }
 
-    public static void showShortToast(String msg) {
+    public void showToast(String msg) {
         ToastUtils.makeText(msg, Toast.LENGTH_SHORT);
     }
 }

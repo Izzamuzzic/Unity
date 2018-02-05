@@ -68,7 +68,7 @@ public class AlbumPresenter<V extends AlbumContract.View<Image>> extends BasePre
 
             @Override
             public void onFailure(String errCode, String errMsg) {
-
+                getMvpView().loadFail(errMsg);
             }
         }, getMvpView().bindUntilStopEvent());
     }
