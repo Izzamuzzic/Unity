@@ -17,9 +17,9 @@
 
 <resources>
     <!--actionBar栏颜色 不能添加透明通道-->
-    <color name="colorPrimary">#e62d5d82</color>
+    <color name="colorPrimary">#6BB9F0</color>
     <!--状态栏颜色-->
-    <color name="colorPrimaryDark">#e621425d</color>
+    <color name="colorPrimaryDark">#6BB9F0</color>
     <!--editText线条、radioButton按钮颜色-->
     <color name="colorAccent">#e601bcd5</color>
 
@@ -60,4 +60,5 @@
     <color name="btn_default_light_pressed">#40ffffff</color>
     <color name="black_effective">#2a2a2a</color>
     <color name="gray_ebony_clay">#6e22313f</color>
+
 </resources>

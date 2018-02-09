@@ -14,30 +14,23 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.presenter
 
-import com.zwq65.unity.data.network.retrofit.response.enity.Article;
-import com.zwq65.unity.ui._base.BaseContract;
-import com.zwq65.unity.ui._base.RefreshMvpView;
-import com.zwq65.unity.ui.fragment.TabArticleFragment;
-
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.TestContract
+import javax.inject.Inject
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/08/31
+ *
+ * Created by NIRVANA on 2017/09/13
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class TabArticleContract {
-    public interface View<T extends Article> extends RefreshMvpView<T> {
-    }
+class TestPresenter<V : TestContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), TestContract.Presenter<V> {
 
-    public interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
-        void setType(@TabArticleFragment.Type int type);
-
-        void init();
-
-        void loadDatas(Boolean isRefresh);
+    override fun test() {
     }
 }

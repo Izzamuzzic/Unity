@@ -63,7 +63,11 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
 
     @Override
     public void initView() {
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        if (getSpanCount() == 1) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(getSpanCount(), StaggeredGridLayoutManager.VERTICAL));
+        }
         //item加载动画（默认）
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         ((DefaultItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -118,6 +122,13 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
     public void onToolbarClick() {
         mRecyclerView.smoothScrollToPosition(0);
     }
+
+    /**
+     * 获取RecycleView的spanCount
+     *
+     * @return If orientation is vertical, spanCount is number of columns. If orientation is horizontal, spanCount is number of rows.
+     */
+    public abstract int getSpanCount();
 
     /**
      * 刷新数据(子类复写该方法)

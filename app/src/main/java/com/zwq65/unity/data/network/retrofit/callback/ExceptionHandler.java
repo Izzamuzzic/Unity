@@ -18,7 +18,7 @@ import java.net.SocketTimeoutException;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class ExceptionHandler {
+class ExceptionHandler {
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
@@ -28,7 +28,7 @@ public class ExceptionHandler {
     private static final int SERVICE_UNAVAILABLE = 503;
     private static final int GATEWAY_TIMEOUT = 504;
 
-    public static ApiException handleException(Throwable e) {
+    static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;

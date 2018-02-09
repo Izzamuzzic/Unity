@@ -30,7 +30,18 @@ import android.view.View;
  * ================================================
  */
 public abstract class BaseSubView extends View {
+    public final String TAG = getClass().getSimpleName();
+
     public Context mContext;
+    /**
+     * 自定义view的宽度和高度
+     */
+    public int mWidth, mHeight;
+
+    /**
+     * 自定义view的中心坐标
+     */
+    public int centerX, centerY;
 
     public BaseSubView(Context context) {
         this(context, null);
@@ -46,5 +57,30 @@ public abstract class BaseSubView extends View {
         setUp(context, attrs);
     }
 
-    public abstract void setUp(Context context, @Nullable AttributeSet attrs);
+    /**
+     * This is called during layout when the size of this view has changed. If
+     * you were just added to the view hierarchy, you're called with the old
+     * values of 0.
+     *
+     * @param w    Current width of this view.
+     * @param h    Current height of this view.
+     * @param oldw Old width of this view.
+     * @param oldh Old height of this view.
+     */
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
+        centerX = w / 2;
+        centerY = h / 2;
+    }
+
+    /**
+     * 自定义view初始化成员变量和获取attrs的value
+     *
+     * @param context context
+     * @param attrs   attrs
+     */
+    protected abstract void setUp(Context context, @Nullable AttributeSet attrs);
 }

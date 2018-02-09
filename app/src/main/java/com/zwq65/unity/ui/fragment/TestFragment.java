@@ -17,13 +17,18 @@
 package com.zwq65.unity.ui.fragment;
 
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.ui._base.BaseFragment;
+import com.zwq65.unity.ui._custom.view.PolygonView;
 import com.zwq65.unity.ui.contract.TestContract;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * ================================================
@@ -33,10 +38,9 @@ import butterknife.BindView;
  * ================================================
  */
 public class TestFragment extends BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>> implements TestContract.View {
-    @BindView(R.id.btn_test)
-    Button btnTest;
-    @BindView(R.id.btn_exit)
-    Button btnExit;
+
+    @BindView(R.id.polygonView)
+    PolygonView mPolygonView;
 
     @Override
     public int getLayoutId() {
@@ -45,8 +49,6 @@ public class TestFragment extends BaseFragment<TestContract.View, TestContract.P
 
     @Override
     public void initView() {
-        btnTest.setOnClickListener(v -> mPresenter.test());
-        btnExit.setOnClickListener(v -> getFragmentManager().beginTransaction().remove(this).commit());
     }
 
     @Override
