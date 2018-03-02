@@ -104,11 +104,13 @@ public class WebArticleActivity extends BaseDaggerActivity<WebArticleContract.Vi
                 @Override
                 public void onProgressChanged(WebView view, int newProgress) {
                     super.onProgressChanged(view, newProgress);
-                    progressbar.setProgress(newProgress);
-                    if (newProgress >= 100) {
-                        progressbar.setVisibility(View.GONE);
-                    } else {
-                        progressbar.setVisibility(View.VISIBLE);
+                    if (progressbar != null) {
+                        progressbar.setProgress(newProgress);
+                        if (newProgress >= 100) {
+                            progressbar.setVisibility(View.GONE);
+                        } else {
+                            progressbar.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });

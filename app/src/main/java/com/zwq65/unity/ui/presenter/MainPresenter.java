@@ -38,11 +38,11 @@ public class MainPresenter<V extends MainContract.View> extends BasePresenter<V>
 
     @Override
     public void setNightMode(boolean nightMode) {
-        getDataManager().setDayNightmode(nightMode);
+        getDataManager().setDayNightMode(nightMode);
     }
 
     @Override
     public Boolean getNightMode() {
-        return getDataManager().getDayNightmode();
+        return getDataManager().getDayNightMode();
     }
 }

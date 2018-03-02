@@ -143,6 +143,8 @@ dependencies {
     implementation "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //anko
+    implementation "org.jetbrains.anko:anko:$anko_version"
     //Simplify Android M system permissions
     implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理

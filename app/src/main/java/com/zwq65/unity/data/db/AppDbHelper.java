@@ -29,7 +29,7 @@ import io.reactivex.Observable;
 
 /**
  * ================================================
- * databese操作帮助类
+ * database操作帮助类
  * <p>
  * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>
@@ -41,7 +41,7 @@ public class AppDbHelper implements DbHelper {
     private final DaoSession mDaoSession;
 
     @Inject
-    public AppDbHelper(DbOpenHelper dbOpenHelper) {
+    AppDbHelper(DbOpenHelper dbOpenHelper) {
         mDaoSession = new DaoMaster(dbOpenHelper.getWritableDb()).newSession();
     }
 
