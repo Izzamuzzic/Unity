@@ -60,6 +60,16 @@ public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContr
         initData();
     }
 
+    /**
+     * 获取RecycleView的spanCount
+     *
+     * @return If orientation is vertical, spanCount is number of columns. If orientation is horizontal, spanCount is number of rows.
+     */
+    @Override
+    public int getSpanCount() {
+        return 1;
+    }
+
     @Override
     public void requestDataRefresh() {
         initData();

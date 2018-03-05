@@ -50,13 +50,15 @@ public class WatchActivity extends BaseDaggerActivity<WatchContract.View, WatchC
         implements WatchContract.View {
     //intent'key value
     public static final String VIDEO = "VIDEO";
-    Video video;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.iv_title_bg)
     ImageView ivTitleBg;
+
+    Video video;
 
     @Override
     public int getLayoutId() {

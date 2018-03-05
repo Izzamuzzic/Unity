@@ -59,6 +59,16 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         initData();
     }
 
+    /**
+     * 获取RecycleView的spanCount
+     *
+     * @return If orientation is vertical, spanCount is number of columns. If orientation is horizontal, spanCount is number of rows.
+     */
+    @Override
+    public int getSpanCount() {
+        return 2;
+    }
+
     private void gotoContentActivity(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);

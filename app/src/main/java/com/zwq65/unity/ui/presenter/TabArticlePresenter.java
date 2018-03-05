@@ -36,7 +36,8 @@ import javax.inject.Inject;
  */
 public class TabArticlePresenter<V extends TabArticleContract.View<Article>> extends BasePresenter<V>
         implements TabArticleContract.Presenter<V> {
-    private TabArticleFragment.Type type;
+    private @TabArticleFragment.Type
+    int type;
     private int page;
     private boolean isRefresh;
 
@@ -46,7 +47,7 @@ public class TabArticlePresenter<V extends TabArticleContract.View<Article>> ext
     }
 
     @Override
-    public void setType(TabArticleFragment.Type type) {
+    public void setType(@TabArticleFragment.Type int type) {
         this.type = type;
     }
 
@@ -60,13 +61,13 @@ public class TabArticlePresenter<V extends TabArticleContract.View<Article>> ext
     public void loadDatas(Boolean isRefresh) {
         this.isRefresh = isRefresh;
         switch (type) {
-            case Android:
+            case TabArticleFragment.Type.android:
                 getDataManager().getAndroidArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
                 break;
-            case Ios:
+            case TabArticleFragment.Type.ios:
                 getDataManager().getIosArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
                 break;
-            case Qianduan:
+            case TabArticleFragment.Type.h5:
                 getDataManager().getQianduanArticles(page, getApiSubscriberCallBack(), getMvpView().bindUntilStopEvent());
                 break;
             default:

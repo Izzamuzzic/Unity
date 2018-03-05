@@ -29,7 +29,7 @@ import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
 
 import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import dagger.android.support.DaggerApplication;
 
 /**
  * ================================================

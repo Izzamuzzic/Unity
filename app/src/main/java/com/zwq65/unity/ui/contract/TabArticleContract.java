@@ -34,7 +34,7 @@ public class TabArticleContract {
     }
 
     public interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
-        void setType(TabArticleFragment.Type type);
+        void setType(@TabArticleFragment.Type int type);
 
         void init();
 

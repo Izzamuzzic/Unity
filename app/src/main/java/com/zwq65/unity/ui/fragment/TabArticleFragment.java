@@ -17,6 +17,7 @@
 package com.zwq65.unity.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Article;
@@ -25,9 +26,15 @@ import com.zwq65.unity.ui.activity.WebArticleActivity;
 import com.zwq65.unity.ui.adapter.TabArticleAdapter;
 import com.zwq65.unity.ui.contract.TabArticleContract;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static com.zwq65.unity.ui.fragment.TabArticleFragment.Type.android;
+import static com.zwq65.unity.ui.fragment.TabArticleFragment.Type.h5;
+import static com.zwq65.unity.ui.fragment.TabArticleFragment.Type.ios;
 
 /**
  * ================================================
@@ -38,30 +45,15 @@ import javax.inject.Inject;
  */
 public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleContract.View<Article>,
         TabArticleContract.Presenter<TabArticleContract.View<Article>>> implements TabArticleContract.View<Article> {
-
-    public static final String TECH_TAG = "tag";
-    public Type mType;
+    public static final String TECH_TAG = "TECH_TAG";
+    @Type
+    public int mType;
     @Inject
     TabArticleAdapter<Article> mAdapter;
 
-    public enum Type {
-        Android(R.string.android),
-        Ios(R.string.ios),
-        Qianduan(R.string.qianduan);
-        private int value;
-
-        Type(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    public static TabArticleFragment newInstance(String type) {
+    public static TabArticleFragment newInstance(@Type int type) {
         Bundle args = new Bundle();
-        args.putString(TECH_TAG, type);
+        args.putInt(TECH_TAG, type);
         TabArticleFragment fragment = new TabArticleFragment();
         fragment.setArguments(args);
         return fragment;
@@ -84,6 +76,16 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
         super.initData(saveInstanceState);
         getType();
         initData();
+    }
+
+    /**
+     * 获取RecycleView的spanCount
+     *
+     * @return If orientation is vertical, spanCount is number of columns. If orientation is horizontal, spanCount is number of rows.
+     */
+    @Override
+    public int getSpanCount() {
+        return 1;
     }
 
     @Override
@@ -120,23 +122,21 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
     }
 
     private void getType() {
-        String type = getArguments().getString(TECH_TAG);
-        assert type != null;
-        switch (type) {
-            case "Android":
-                mType = Type.Android;
-                break;
-            case "Ios":
-                mType = Type.Ios;
-                break;
-            case "前端":
-                mType = Type.Qianduan;
-                break;
-            default:
-                mType = Type.Android;
-                break;
+        if (getArguments() != null) {
+            mType = getArguments().getInt(TECH_TAG, android);
+            mPresenter.setType(mType);
         }
-        mPresenter.setType(mType);
     }
 
+    @IntDef({
+            android,
+            ios,
+            h5
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Type {
+        int android = R.string.android;
+        int ios = R.string.ios;
+        int h5 = R.string.qianduan;
+    }
 }

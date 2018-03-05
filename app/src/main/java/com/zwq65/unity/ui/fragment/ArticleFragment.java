@@ -43,11 +43,14 @@ public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleC
 
     @BindView(R.id.tab_type)
     TabLayout tabType;
-    @BindView(R.id.vp_artcle)
-    ViewPager vpArtcle;
+    @BindView(R.id.vp_article)
+    ViewPager vpArticle;
 
-    public static final String[] TABS = new String[]{"Android", "Ios", "前端"};
-    private List<Fragment> fragments;
+    public static final int[] TABS = new int[]{
+            TabArticleFragment.Type.android,
+            TabArticleFragment.Type.ios,
+            TabArticleFragment.Type.h5
+    };
 
     @Override
     public int getLayoutId() {
@@ -56,20 +59,22 @@ public class ArticleFragment extends BaseFragment<ArticleContract.View, ArticleC
 
     @Override
     public void initView() {
-        for (String tabStr : TABS) {
+        for (int tabInt : TABS) {
             TabLayout.Tab tab = tabType.newTab();
-            tab.setText(tabStr);
+            tab.setText(tabInt);
             tabType.addTab(tab);
         }
-        fragments = new ArrayList<>();
-        for (String tab : TABS) {
-            fragments.add(TabArticleFragment.newInstance(tab));
+        List<Fragment> fragments = new ArrayList<>();
+        String[] strTabs = new String[TABS.length];
+        for (int i = 0; i < TABS.length; i++) {
+            strTabs[i] = getString(TABS[i]);
+            fragments.add(TabArticleFragment.newInstance(TABS[i]));
         }
-        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(getChildFragmentManager(), fragments, TABS);
-        vpArtcle.setAdapter(adapter);
-        vpArtcle.setOffscreenPageLimit(0);
+        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(getChildFragmentManager(), fragments, strTabs);
+        vpArticle.setAdapter(adapter);
+        vpArticle.setOffscreenPageLimit(0);
         //将tabLayout与ViewPager绑定
-        tabType.setupWithViewPager(vpArtcle);
+        tabType.setupWithViewPager(vpArticle);
     }
 
     @Override
