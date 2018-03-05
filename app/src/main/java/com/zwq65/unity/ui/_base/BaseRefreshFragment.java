@@ -36,7 +36,7 @@ import butterknife.BindView;
 
 /**
  * ================================================
- * some view that has handle of refresh  should extends {@link BaseRefreshFragment}
+ * some view that has handle of refresh should extends {@link BaseRefreshFragment}
  * <p>
  * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>

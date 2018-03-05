@@ -20,6 +20,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -54,7 +55,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseFragment<V extends BaseContract.View, T extends BaseContract.Presenter<V>> extends RxFragment
+public abstract class BaseFragment<V extends BaseContract.View, P extends BaseContract.Presenter<V>> extends RxFragment
         implements HasSupportFragmentInjector, BaseContract.View {
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;
@@ -65,7 +66,7 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
     private ProgressDialog mProgressDialog;
 
     @Inject
-    public T mPresenter;
+    public P mPresenter;
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
@@ -80,7 +81,7 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView");
         View view = inflater.inflate(getLayoutId(), container, false);
         mUnBinder = ButterKnife.bind(this, view);
@@ -211,14 +212,24 @@ public abstract class BaseFragment<V extends BaseContract.View, T extends BaseCo
     }
 
     /**
+     * 获取Fragment的视图资源id
+     *
      * @return fragment'ResLayoutId
      */
     @LayoutRes
     public abstract int getLayoutId();
 
 
+    /**
+     * 初始化View
+     */
     public abstract void initView();
 
+    /**
+     * 初始化数据
+     *
+     * @param saveInstanceState Bundle
+     */
     public abstract void initData(Bundle saveInstanceState);
 
     public interface Callback {
