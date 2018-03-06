@@ -14,9 +14,11 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.contract
 
-import com.zwq65.unity.ui._base.BaseContract;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image
+import com.zwq65.unity.ui._base.BaseContract
+import com.zwq65.unity.ui._base.RefreshMvpView
 
 /**
  * ================================================
@@ -25,13 +27,21 @@ import com.zwq65.unity.ui._base.BaseContract;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface MainContract {
-    interface View extends BaseContract.View {
-    }
+interface AlbumContract {
+    interface View<T : Image> : RefreshMvpView<T>
 
-    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
-        void setNightMode(boolean nightMode);
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
+        /**
+         * 初始化
+         */
+        fun init()
 
-        Boolean getNightMode();
+        /**
+         * 加载图片资源
+         *
+         * @param isRefresh 是否为刷新操作
+         */
+        fun loadImages(isRefresh: Boolean?)
+
     }
 }

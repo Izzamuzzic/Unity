@@ -31,11 +31,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zwq65.unity.R;
 import com.zwq65.unity.data.network.retrofit.response.enity.Image;
 import com.zwq65.unity.ui._base.BaseDaggerActivity;
-import com.zwq65.unity.ui._custom.photoview.PhotoView;
 import com.zwq65.unity.ui.contract.ImageContract;
 import com.zwq65.unity.utils.LogUtils;
 

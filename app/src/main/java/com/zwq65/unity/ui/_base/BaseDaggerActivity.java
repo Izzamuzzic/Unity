@@ -61,6 +61,7 @@ public abstract class BaseDaggerActivity<V extends BaseContract.View, P extends 
     @Inject
     DispatchingAndroidInjector<android.app.Fragment> frameworkFragmentInjector;
 
+    @Nullable
     Toolbar toolbar;
     private ProgressDialog mProgressDialog;
     @Inject

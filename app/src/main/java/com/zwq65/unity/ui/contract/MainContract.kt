@@ -14,20 +14,23 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.photoview;
+package com.zwq65.unity.ui.contract
 
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
- * Interface definition for callback to be invoked when attached ImageView scale changes
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/26
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-public interface OnScaleChangedListener {
+interface MainContract {
+    interface View : BaseContract.View
 
-    /**
-     * Callback for when the scale changes
-     *
-     * @param scaleFactor the scale factor (less than 1 for zoom out, greater than 1 for zoom in)
-     * @param focusX      focal point X position
-     * @param focusY      focal point Y position
-     */
-    void onScaleChange(float scaleFactor, float focusX, float focusY);
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
+
+        val nightMode: Boolean?
+        fun setNightMode(nightMode: Boolean)
+    }
 }

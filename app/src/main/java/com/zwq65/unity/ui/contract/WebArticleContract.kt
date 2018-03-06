@@ -14,23 +14,19 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.contract
 
-import com.zwq65.unity.ui._base.BaseContract;
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
  * ================================================
  * <p>
- * Created by NIRVANA on 2017/10/10
+ * Created by NIRVANA on 2017/09/28
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface SettingContract {
-    interface View extends BaseContract.View {
+interface WebArticleContract {
+    interface View : BaseContract.View
 
-    }
-
-    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
-
-    }
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V>
 }

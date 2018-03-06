@@ -14,9 +14,13 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.contract
 
-import com.zwq65.unity.ui._base.BaseContract;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article
+import com.zwq65.unity.ui._base.BaseContract
+import com.zwq65.unity.ui._base.RefreshMvpView
+import com.zwq65.unity.ui.fragment.TabArticleFragment
+
 
 /**
  * ================================================
@@ -25,12 +29,14 @@ import com.zwq65.unity.ui._base.BaseContract;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface ArticleContract {
-    interface View extends BaseContract.View {
+class TabArticleContract {
+    interface View<T : Article> : RefreshMvpView<T>
 
-    }
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
+        fun setType(@TabArticleFragment.Type type: Int)
 
-    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
+        fun init()
 
+        fun loadDatas(isRefresh: Boolean?)
     }
 }

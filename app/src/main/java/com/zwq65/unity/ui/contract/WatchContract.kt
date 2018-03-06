@@ -14,32 +14,19 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.contract
 
-import com.zwq65.unity.data.network.retrofit.response.enity.Video;
-import com.zwq65.unity.ui._base.BaseContract;
-import com.zwq65.unity.ui._base.RefreshMvpView;
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
  * ================================================
  * <p>
- * Created by NIRVANA on 2017/09/26
+ * Created by NIRVANA on 2017/09/28
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface RestVideoContract {
-    interface View<T extends Video> extends RefreshMvpView<T> {
+interface WatchContract {
+    interface View : BaseContract.View
 
-    }
-
-    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
-        void init();
-
-        /**
-         * 加载视频资源
-         *
-         * @param isRefresh 是否为刷新操作
-         */
-        void loadVideos(Boolean isRefresh);
-    }
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V>
 }

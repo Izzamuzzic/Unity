@@ -151,10 +151,12 @@ dependencies {
     implementation "com.gyf.barlibrary:barlibrary:$rootProject.barlibraryVersion"
     //A circular ImageView for Android
     implementation "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
+    //Implementation of ImageView for Android that supports zooming, by various touch gestures.
+    implementation "com.github.chrisbanes:PhotoView:$rootProject.photoViewVersion"
     //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
     implementation "com.blankj:utilcode:$rootProject.utilcodeVersion"
     //快速开发工具类收集
-    implementation 'com.abrahamcaijin.commonutil:CommonUtil:1.0.0'
+    implementation "com.abrahamcaijin.commonutil:CommonUtil:1.0.0"
 }
 
 static def releaseTime() {

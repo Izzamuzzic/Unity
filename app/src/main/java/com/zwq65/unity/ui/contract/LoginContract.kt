@@ -14,19 +14,29 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.photoview;
+package com.zwq65.unity.ui.contract
+
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
- * Interface definition for a callback to be invoked when the photo is experiencing a drag event
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/09/26
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-public interface OnViewDragListener {
+interface LoginContract {
+    interface View : BaseContract.View {
+        fun openMainActivity()
 
-    /**
-     * Callback for when the photo is experiencing a drag event. This cannot be invoked when the
-     * user is scaling.
-     *
-     * @param dx The change of the coordinates in the x-direction
-     * @param dy The change of the coordinates in the y-direction
-     */
-    void onDrag(float dx, float dy);
+        fun openRegisterActivity()
+    }
+
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
+        fun login(account: String, password: String)
+
+        fun register()
+
+        fun forgotPsd()
+    }
 }

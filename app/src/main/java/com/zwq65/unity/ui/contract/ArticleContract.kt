@@ -14,17 +14,19 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.photoview;
+package com.zwq65.unity.ui.contract
 
-import android.widget.ImageView;
+import com.zwq65.unity.ui._base.BaseContract
 
 /**
- * Callback when the user tapped outside of the photo
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2017/08/31
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-public interface OnOutsidePhotoTapListener {
+interface ArticleContract {
+    interface View : BaseContract.View
 
-    /**
-     * The outside of the photo has been tapped
-     */
-    void onOutsidePhotoTap(ImageView imageView);
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V>
 }

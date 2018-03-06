@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.contract;
+package com.zwq65.unity.ui.contract
 
-import android.content.Context;
+import android.content.Context
 
-import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.ui._base.BaseContract;
+import com.zwq65.unity.data.network.retrofit.response.enity.Image
+import com.zwq65.unity.ui._base.BaseContract
 
-import io.reactivex.Observable;
+import io.reactivex.Observable
 
 /**
  * ================================================
@@ -30,33 +30,31 @@ import io.reactivex.Observable;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface ImageContract {
-    interface View extends BaseContract.View {
+interface ImageContract {
+    interface View : BaseContract.View
 
-    }
-
-    interface Presenter<V extends BaseContract.View> extends BaseContract.Presenter<V> {
+    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
         /**
          * 保存图片到本地
          *
          * @param context context
          * @param image   Image
          */
-        void savePicture(Context context, Image image);
+        fun savePicture(context: Context, image: Image)
 
         /**
          * 收藏图片
          *
          * @param image Image
          */
-        void collectPicture(Image image);
+        fun collectPicture(image: Image)
 
         /**
          * 取消收藏图片
          *
          * @param image Image
          */
-        void cancelCollectPicture(Image image);
+        fun cancelCollectPicture(image: Image)
 
         /**
          * 判断该图片是否被收藏
@@ -64,7 +62,7 @@ public interface ImageContract {
          * @param image Image
          * @return 该图片是否被收藏
          */
-        Observable<Boolean> isPictureCollect(Image image);
+        fun isPictureCollect(image: Image): Observable<Boolean>
 
     }
 }
