@@ -14,17 +14,29 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._base;
+package com.zwq65.unity.ui._custom.recycleview
 
+import android.graphics.Rect
+import android.support.v7.widget.RecyclerView
+import android.view.View
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/05/24
+ * 自定义[android.support.v7.widget.RecyclerView.ItemDecoration]分割线
+ *
+ * Created by NIRVANA on 2017/07/20.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface DialogMvpView extends BaseContract.View {
-
-    void dismissDialog(String tag);
+class MyItemDecoration : RecyclerView.ItemDecoration() {
+    /**
+     * @param outRect 边界
+     * @param view    recyclerView ItemView
+     * @param parent  recyclerView
+     * @param state   recycler 内部数据管理
+     */
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+        //设定底部边距为1px
+        outRect.set(0, 0, 0, 1)
+    }
 }

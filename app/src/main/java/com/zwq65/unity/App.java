@@ -105,4 +105,3 @@ public class App extends DaggerApplication {
         ToastUtils.makeText(msg, Toast.LENGTH_SHORT);
     }
 }
-

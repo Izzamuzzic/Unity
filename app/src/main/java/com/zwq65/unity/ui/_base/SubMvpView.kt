@@ -14,30 +14,31 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._custom.recycleview;
-
-import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+package com.zwq65.unity.ui._base
 
 /**
  * ================================================
- * 自定义recycleview{@link android.support.v7.widget.RecyclerView.ItemDecoration},添加分割线
+ * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
+ * pattern must implement. Generally this interface will be extended by a more specific interface
+ * that then usually will be implemented by an Activity or Fragment.
  * <p>
- * Created by NIRVANA on 2017/07/20.
+ * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class MyItemDecoration extends RecyclerView.ItemDecoration {
-    /**
-     * @param outRect 边界
-     * @param view    recyclerView ItemView
-     * @param parent  recyclerView
-     * @param state   recycler 内部数据管理
-     */
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        //设定底部边距为1px
-        outRect.set(0, 0, 0, 1);
-    }
+interface SubMvpView : BaseContract.View {
+
+    fun onCreate()
+
+    fun onStart()
+
+    fun onResume()
+
+    fun onPause()
+
+    fun onStop()
+
+    fun onDestroy()
+
+    fun attachParentMvpView(mvpView: BaseContract.View)
 }

@@ -14,47 +14,37 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._base;
+package com.zwq65.unity.ui._base
 
-import android.content.Context;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.View
 
 /**
  * ================================================
  * 自定义view基类
- * <p>
+ *
  * Created by NIRVANA on 2017/01/27.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public abstract class BaseSubView extends View {
-    public final String TAG = getClass().getSimpleName();
-
-    public Context mContext;
+abstract class BaseSubView @JvmOverloads constructor(var mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : View(mContext, attrs, defStyleAttr) {
+    val TAG = javaClass.simpleName
     /**
      * 自定义view的宽度和高度
      */
-    public int mWidth, mHeight;
+    internal var mWidth: Int = 0
+    internal var mHeight: Int = 0
 
     /**
      * 自定义view的中心坐标
      */
-    public int centerX, centerY;
+    internal var centerX: Int = 0
+    internal var centerY: Int = 0
 
-    public BaseSubView(Context context) {
-        this(context, null);
-    }
-
-    public BaseSubView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public BaseSubView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        mContext = context;
-        setUp(context, attrs);
+    init {
+        setUp(mContext, attrs)
     }
 
     /**
@@ -67,13 +57,12 @@ public abstract class BaseSubView extends View {
      * @param oldw Old width of this view.
      * @param oldh Old height of this view.
      */
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = w;
-        mHeight = h;
-        centerX = w / 2;
-        centerY = h / 2;
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        mWidth = w
+        mHeight = h
+        centerX = w / 2
+        centerY = h / 2
     }
 
     /**
@@ -82,5 +71,5 @@ public abstract class BaseSubView extends View {
      * @param context context
      * @param attrs   attrs
      */
-    protected abstract void setUp(Context context, @Nullable AttributeSet attrs);
+    protected abstract fun setUp(context: Context, attrs: AttributeSet?)
 }

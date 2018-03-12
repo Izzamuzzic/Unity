@@ -73,4 +73,15 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+
+    <!--自定义DialogFragment样式-->
+    <style name="DialogFragment" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/bg_dialog_shape_round</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+
 </resources>

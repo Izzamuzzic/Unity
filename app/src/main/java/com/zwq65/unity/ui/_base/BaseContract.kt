@@ -14,12 +14,12 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._base;
+package com.zwq65.unity.ui._base
 
-import android.support.annotation.StringRes;
+import android.support.annotation.StringRes
 
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.zwq65.unity.data.DataManager;
+import com.trello.rxlifecycle2.LifecycleTransformer
+import com.zwq65.unity.data.DataManager
 
 /**
  * ================================================
@@ -28,7 +28,7 @@ import com.zwq65.unity.data.DataManager;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface BaseContract {
+interface BaseContract {
     /**
      * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
      * pattern must implement. Generally this interface will be extended by a more specific interface
@@ -39,74 +39,75 @@ public interface BaseContract {
         /**
          * 显示loading框
          */
-        void showLoading();
+        fun showLoading()
 
         /**
          * 隐藏loading框
          */
-        void hideLoading();
+        fun hideLoading()
 
         /**
          * 显示snackBar消息
          *
          * @param resId StringRes
          */
-        void showMessage(@StringRes int resId);
+        fun showMessage(@StringRes resId: Int)
 
         /**
          * 显示snackBar消息
          *
          * @param message String
          */
-        void showMessage(String message);
+        fun showMessage(message: String)
 
         /**
          * 显示错误消息
          *
          * @param resId StringRes
          */
-        void showError(@StringRes int resId);
+        fun showError(@StringRes resId: Int)
 
         /**
          * 显示错误消息
          *
          * @param message String
          */
-        void showError(String message);
+        fun showError(message: String)
 
 
         /**
          * Fragment/Activity中方法,声明在view中;便于在mvp中的presenter里调用;
          *
          * @param <T> T
-         * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止{@link DataManager}事物.
+         * @return ObservableTransformer view层状态为STOP时调用RxLifeCycle来停止[DataManager]事物.
          */
-        <T> LifecycleTransformer<T> bindUntilStopEvent();
+        fun <T> bindUntilStopEvent(): LifecycleTransformer<T>
     }
 
     /**
      * Every presenter in the app must either implement this interface or extend BasePresenter
      * indicating the MvpView type that wants to be attached with.
      */
-    interface Presenter<V extends View> {
-        /**
-         * attach view时调用此方法
-         *
-         * @param mvpView View
-         */
-        void onAttach(V mvpView);
-
-        /**
-         * detach view时调用此方法
-         */
-        void onDetach();
+    interface Presenter<in V : BaseContract.View> {
 
         /**
          * 是否还在与view绑定
          *
          * @return boolean
          */
-        boolean isViewAttached();
+        val isViewAttached: Boolean
+
+        /**
+         * attach view时调用此方法
+         *
+         * @param mvpView View
+         */
+        fun onAttach(mvpView: V)
+
+        /**
+         * detach view时调用此方法
+         */
+        fun onDetach()
     }
 
 }

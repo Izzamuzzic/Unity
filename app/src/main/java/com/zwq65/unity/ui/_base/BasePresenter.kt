@@ -13,13 +13,13 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.zwq65.unity.ui._base;
+package com.zwq65.unity.ui._base
 
-import com.zwq65.unity.data.DataManager;
+import com.zwq65.unity.data.DataManager
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.WeakReference
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
 /**
  * ================================================
@@ -31,45 +31,27 @@ import javax.inject.Inject;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
-    public final String TAG = getClass().getSimpleName();
-
-    private DataManager mDataManager;
+open class BasePresenter<V : BaseContract.View> @Inject
+constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
+    val TAG = javaClass.simpleName
     /**
      * MvpView接口类型的弱引用
      */
-    private WeakReference<V> mViewRef;
+    private var mViewRef: WeakReference<V>? = null
 
-    @Inject
-    public BasePresenter(
-            DataManager dataManager) {
-        this.mDataManager = dataManager;
+    override val isViewAttached: Boolean
+        get() = mViewRef?.get() != null
+
+    val mvpView: V?
+        get() = mViewRef?.get()
+
+    override fun onAttach(mvpView: V) {
+        mViewRef = WeakReference(mvpView)
     }
 
-    @Override
-    public void onAttach(V mvpView) {
-        mViewRef = new WeakReference<>(mvpView);
-    }
-
-    @Override
-    public void onDetach() {
-        if (mViewRef != null) {
-            mViewRef.clear();
-            mViewRef = null;
-        }
-    }
-
-    @Override
-    public boolean isViewAttached() {
-        return mViewRef != null && mViewRef.get() != null;
-    }
-
-    public V getMvpView() {
-        return mViewRef.get();
-    }
-
-    public DataManager getDataManager() {
-        return mDataManager;
+    override fun onDetach() {
+        mViewRef?.clear()
+        mViewRef = null
     }
 
 }

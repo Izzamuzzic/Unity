@@ -14,31 +14,17 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._base;
+package com.zwq65.unity.ui._base
+
 
 /**
  * ================================================
- * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
- * pattern must implement. Generally this interface will be extended by a more specific interface
- * that then usually will be implemented by an Activity or Fragment.
  * <p>
- * Created by NIRVANA on 2017/01/27.
+ * Created by NIRVANA on 2017/05/24
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface SubMvpView extends BaseContract.View {
+interface DialogMvpView : BaseContract.View {
 
-    void onCreate();
-
-    void onStart();
-
-    void onResume();
-
-    void onPause();
-
-    void onStop();
-
-    void onDestroy();
-
-    void attachParentMvpView(BaseContract.View mvpView);
+    fun dismissDialog(tag: String)
 }
