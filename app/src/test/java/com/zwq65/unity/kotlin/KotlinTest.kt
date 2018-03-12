@@ -20,21 +20,31 @@ class KotlinTest {
 
     @Test
     fun test() {
-        //单行注释
-        /**
-         * 块注释
-         */
-        a = 2
-//        println("${s.replace("is", "was")},but now is $a")
-//        val asc = Array(5, { i -> (i * i).toDouble() })
-        val text = """
-    |Tell me and I forget.
-    |Teach me and I remember.
-    |Involve me and I learn.
-    |(Benjamin Franklin)
-    """.trimMargin(">")
+//        //单行注释
+//        /**
+//         * 块注释
+//         */
+//        a = 2
+////        println("${s.replace("is", "was")},but now is $a")
+////        val asc = Array(5, { i -> (i * i).toDouble() })
+//        val text = """
+//    |Tell me and I forget.
+//    |Teach me and I remember.
+//    |Involve me and I learn.
+//    |(Benjamin Franklin)
+//    """.trimMargin(">")
+//
+//        val price = """${'$'}9.99"""
+//        println(price)
 
-        val price = """${'$'}9.99"""
-        println(price)
+        val person = getPerson()
+        println("name:${person.name},phone:${person.phone}")
+    }
+
+    private fun getPerson(): Person {
+        return Person().apply {
+            name = "赵文强"
+            phone = 18758248004
+        }
     }
 }
