@@ -6,9 +6,8 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import com.jingewenku.abrahamcaijin.commonutil.DensityUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.zwq65.unity.R
-
 import com.zwq65.unity.ui._base.BaseSubView
 
 /**
@@ -32,7 +31,7 @@ class PolygonView : BaseSubView {
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mPaint.style = Paint.Style.STROKE
         mPaint.color = ContextCompat.getColor(mContext, R.color.colorPrimary)
-        mPaint.strokeWidth = DensityUtils.dip2px(mContext, 2f).toFloat()
+        mPaint.strokeWidth = SizeUtils.dp2px(2f).toFloat()
     }
 
     override fun onDraw(canvas: Canvas?) {

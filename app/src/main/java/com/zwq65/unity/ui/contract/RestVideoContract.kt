@@ -30,7 +30,7 @@ import com.zwq65.unity.ui._base.RefreshMvpView
 interface RestVideoContract {
     interface View<T : Video> : RefreshMvpView<T>
 
-    interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
+    interface Presenter<in V : BaseContract.View> : BaseContract.Presenter<V> {
         fun init()
 
         /**

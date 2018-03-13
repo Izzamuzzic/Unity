@@ -49,9 +49,9 @@ abstract class ApiSubscriberCallBack<T> : DisposableSubscriber<T>() {
     /**
      * api接口成功回调
      *
-     * @param t T
+     * @param response T
      */
-    abstract fun onSuccess(t: T)
+    abstract fun onSuccess(response: T)
 
     /**
      * api接口失败回调

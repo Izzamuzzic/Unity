@@ -14,40 +14,20 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.utils;
+package com.zwq65.unity.ui.presenter
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.WatchContract
+
+import javax.inject.Inject
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/09/29
+ *
+ * Created by NIRVANA on 2017/09/28
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class RxBus<T> {
-    private static RxBus mRxBus;
-
-    public static RxBus getInstance() {
-        if (mRxBus == null) {
-            synchronized (RxBus.class) {
-                if (mRxBus == null) {
-                    mRxBus = new RxBus();
-                }
-            }
-        }
-        return mRxBus;
-    }
-
-    private PublishSubject<T> bus = PublishSubject.create();
-
-    public void send(T t) {
-        bus.onNext(t);
-    }
-
-    public Observable<T> toObservable() {
-        return bus;
-    }
-
-}
+class WatchPresenter<V : WatchContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), WatchContract.Presenter<V>

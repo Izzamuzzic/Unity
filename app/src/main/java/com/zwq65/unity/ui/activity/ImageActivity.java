@@ -134,18 +134,18 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
                 //保存大图
                 if (!EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     //未获取权限
-                    LogUtils.e("未获取权限");
+                    LogUtils.INSTANCE.e("未获取权限");
                     List<String> perms = new ArrayList<>();
                     perms.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-                        LogUtils.e("不再提醒");
+                        LogUtils.INSTANCE.e("不再提醒");
                         new AppSettingsDialog.Builder(this).build().show();
                     } else {
                         EasyPermissions.requestPermissions(this, "請求存儲權限", SAVE_MEIZHI,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     }
                 } else {
-                    LogUtils.i("已获取权限");
+                    LogUtils.INSTANCE.i("已获取权限");
                     savePictrue();
                 }
                 requestPermissionsSafely(Manifest.permission.WRITE_EXTERNAL_STORAGE, SAVE_MEIZHI);
@@ -175,9 +175,9 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
         if (requestCode == SAVE_MEIZHI) {
             if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                LogUtils.i("SAVE_MEIZHI SUCCESS");
+                LogUtils.INSTANCE.i("SAVE_MEIZHI SUCCESS");
             } else {
-                LogUtils.e("SAVE_MEIZHI FAIL");
+                LogUtils.INSTANCE.e("SAVE_MEIZHI FAIL");
             }
         }
     }
@@ -239,12 +239,12 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        LogUtils.i("SAVE_MEIZHI SUCCESS!!!!");
+        LogUtils.INSTANCE.i("SAVE_MEIZHI SUCCESS!!!!");
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        LogUtils.e("SAVE_MEIZHI FAIL!!!");
+        LogUtils.INSTANCE.e("SAVE_MEIZHI FAIL!!!");
     }
 
     /**

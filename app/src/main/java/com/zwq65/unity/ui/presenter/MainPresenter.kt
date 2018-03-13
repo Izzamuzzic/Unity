@@ -14,25 +14,28 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.presenter;
+package com.zwq65.unity.ui.presenter
 
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.MainContract
 
-import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.ui.contract.ArticleContract;
-
-import javax.inject.Inject;
+import javax.inject.Inject
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/08/31
+ *
+ * Created by NIRVANA on 2017/06/29.
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class ArticlePresenter<V extends ArticleContract.View> extends BasePresenter<V> implements ArticleContract.Presenter<V> {
-    @Inject
-    ArticlePresenter(DataManager dataManager) {
-        super(dataManager);
+class MainPresenter<V : MainContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), MainContract.Presenter<V> {
+
+    override val nightMode: Boolean?
+        get() = dataManager.dayNightMode
+
+    override fun setNightMode(nightMode: Boolean) {
+        dataManager.dayNightMode = nightMode
     }
 }

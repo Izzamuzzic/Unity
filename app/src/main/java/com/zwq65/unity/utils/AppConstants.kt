@@ -14,26 +14,16 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.presenter;
-
-
-import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.ui.contract.WebArticleContract;
-
-import javax.inject.Inject;
+package com.zwq65.unity.utils
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/09/28
+ *
+ * Created by NIRVANA on 2017/09/29
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class WebArticlePresenter<V extends WebArticleContract.View> extends BasePresenter<V>
-        implements WebArticleContract.Presenter<V> {
-    @Inject
-    WebArticlePresenter(DataManager dataManager) {
-        super(dataManager);
-    }
+object AppConstants {
+    const val DB_NAME = "unity.db"
+    const val PREF_NAME = "unity_pref"
 }

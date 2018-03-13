@@ -22,10 +22,14 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
 import com.zwq65.unity.R;
 
 import java.io.File;
+
+import static com.zwq65.unity.utils.UtilsKt.getDataAbsolutePath;
+import static com.zwq65.unity.utils.UtilsKt.getSdCardIsEnable;
+import static com.zwq65.unity.utils.UtilsKt.getSdCardPath;
+
 
 /**
  * ================================================
@@ -67,10 +71,10 @@ public final class CommonUtils {
 
     public static String getImageStorePath() {
         String path;
-        if (AppFileMgr.getSdCardIsEnable()) {
-            path = AppFileMgr.getSdCardPath();
+        if (getSdCardIsEnable()) {
+            path = getSdCardPath();
         } else {
-            path = AppFileMgr.getDataAbsolutePath();
+            path = getDataAbsolutePath();
         }
         path = path + "Unity" + File.separator + "image" + File.separator;
         return path;

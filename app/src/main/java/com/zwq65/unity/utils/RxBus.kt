@@ -14,35 +14,28 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.presenter;
+package com.zwq65.unity.utils
 
-import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.ui.contract.MainContract;
-
-import javax.inject.Inject;
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 /**
  * ================================================
  * <p>
- * Created by NIRVANA on 2017/06/29.
+ * Created by NIRVANA on 2017/09/29
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class MainPresenter<V extends MainContract.View> extends BasePresenter<V> implements MainContract.Presenter<V> {
-    @Inject
-    MainPresenter(DataManager dataManager) {
-        super(dataManager);
+object RxBus {
+
+    private val bus = PublishSubject.create<Any>()
+
+    fun send(t: Any) {
+        bus.onNext(t)
     }
 
-
-    @Override
-    public void setNightMode(boolean nightMode) {
-        getDataManager().setDayNightMode(nightMode);
+    fun toObservable(): Observable<Any> {
+        return bus
     }
 
-    @Override
-    public Boolean getNightMode() {
-        return getDataManager().getDayNightMode();
-    }
 }

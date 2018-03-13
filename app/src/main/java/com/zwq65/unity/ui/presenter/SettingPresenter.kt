@@ -14,25 +14,20 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.presenter;
+package com.zwq65.unity.ui.presenter
 
-import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.ui.contract.SettingContract;
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.SettingContract
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
 /**
  * ================================================
- * <p>
+ *
  * Created by NIRVANA on 2017/10/10
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class SettingPresenter<V extends SettingContract.View> extends BasePresenter<V>
-        implements SettingContract.Presenter<V> {
-    @Inject
-    SettingPresenter(DataManager dataManager) {
-        super(dataManager);
-    }
-}
+class SettingPresenter<V : SettingContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), SettingContract.Presenter<V>

@@ -14,10 +14,10 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.utils;
+package com.zwq65.unity.utils
 
 
-import android.util.Log;
+import android.util.Log
 
 
 /**
@@ -27,45 +27,45 @@ import android.util.Log;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class LogUtils {
-    public static void i(String tag, String msg) {
-        Log.i(tag, msg);
+object LogUtils {
+    fun i(tag: String, msg: String) {
+        Log.i(tag, msg)
     }
 
-    public static void d(String tag, String msg) {
-        Log.d(tag, msg);
+    fun d(tag: String, msg: String) {
+        Log.d(tag, msg)
     }
 
-    public static void e(String tag, String msg) {
-        Log.e(tag, msg);
+    fun e(tag: String, msg: String) {
+        Log.e(tag, msg)
     }
 
-    public static void v(String tag, String msg) {
-        Log.v(tag, msg);
+    fun v(tag: String, msg: String) {
+        Log.v(tag, msg)
     }
 
-    public static void w(String tag, String msg) {
-        Log.w(tag, msg);
+    fun w(tag: String, msg: String) {
+        Log.w(tag, msg)
     }
 
-    public static void i(String msg) {
-        com.blankj.utilcode.util.LogUtils.i(msg);
+    fun i(msg: String) {
+        com.blankj.utilcode.util.LogUtils.i(msg)
     }
 
-    public static void d(String msg) {
-        com.blankj.utilcode.util.LogUtils.d(msg);
+    fun d(msg: String) {
+        com.blankj.utilcode.util.LogUtils.d(msg)
     }
 
-    public static void e(String msg) {
-        com.blankj.utilcode.util.LogUtils.e(msg);
+    fun e(msg: String) {
+        com.blankj.utilcode.util.LogUtils.e(msg)
     }
 
-    public static void v(String msg) {
-        com.blankj.utilcode.util.LogUtils.v(msg);
+    fun v(msg: String) {
+        com.blankj.utilcode.util.LogUtils.v(msg)
     }
 
-    public static void w(String msg) {
-        com.blankj.utilcode.util.LogUtils.w(msg);
+    fun w(msg: String) {
+        com.blankj.utilcode.util.LogUtils.w(msg)
     }
 
 }

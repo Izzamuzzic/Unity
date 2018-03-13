@@ -102,6 +102,6 @@ public class App extends DaggerApplication {
     }
 
     public void showToast(String msg) {
-        ToastUtils.makeText(msg, Toast.LENGTH_SHORT);
+        ToastUtils.INSTANCE.makeText(msg, Toast.LENGTH_SHORT);
     }
 }

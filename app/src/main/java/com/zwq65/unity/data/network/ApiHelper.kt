@@ -40,7 +40,7 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>,
-                        lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>)
+                        lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?)
 
     /**
      * 获取page页的image'list
@@ -50,7 +50,7 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>,
-                    lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>)
+                    lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?)
 
     /**
      * 同时获取相同数量的image和video实例
@@ -60,7 +60,7 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>,
-                           lifecycleTransformer: LifecycleTransformer<List<Video>>)
+                           lifecycleTransformer: LifecycleTransformer<List<Video>>?)
 
     /**
      * 获取page页的android'list
@@ -70,7 +70,7 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun getAndroidArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>,
-                           lifecycleTransformer: LifecycleTransformer<List<Article>>)
+                           lifecycleTransformer: LifecycleTransformer<List<Article>>?)
 
     /**
      * 获取page页的ios'list
@@ -80,7 +80,7 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun getIosArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>,
-                       lifecycleTransformer: LifecycleTransformer<List<Article>>)
+                       lifecycleTransformer: LifecycleTransformer<List<Article>>?)
 
     /**
      * 获取page页的前端'list
@@ -90,6 +90,6 @@ interface ApiHelper {
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
     fun getQianduanArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>,
-                            lifecycleTransformer: LifecycleTransformer<List<Article>>)
+                            lifecycleTransformer: LifecycleTransformer<List<Article>>?)
 
 }

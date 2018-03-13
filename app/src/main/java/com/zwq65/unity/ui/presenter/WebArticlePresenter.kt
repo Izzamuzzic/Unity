@@ -14,25 +14,21 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.presenter;
+package com.zwq65.unity.ui.presenter
 
-import com.zwq65.unity.data.DataManager;
-import com.zwq65.unity.ui._base.BasePresenter;
-import com.zwq65.unity.ui.contract.WatchContract;
 
-import javax.inject.Inject;
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.WebArticleContract
+
+import javax.inject.Inject
 
 /**
  * ================================================
- * <p>
+ *
  * Created by NIRVANA on 2017/09/28
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class WatchPresenter<V extends WatchContract.View> extends BasePresenter<V>
-        implements WatchContract.Presenter<V> {
-    @Inject
-    WatchPresenter(DataManager dataManager) {
-        super(dataManager);
-    }
-}
+class WebArticlePresenter<V : WebArticleContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), WebArticleContract.Presenter<V>

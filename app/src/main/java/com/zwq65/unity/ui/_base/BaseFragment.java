@@ -77,12 +77,12 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(false);
-        LogUtils.i(TAG, "onCreate");
+        LogUtils.INSTANCE.i(TAG, "onCreate");
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LogUtils.i(TAG, "onCreateView");
+        LogUtils.INSTANCE.i(TAG, "onCreateView");
         View view = inflater.inflate(getLayoutId(), container, false);
         mUnBinder = ButterKnife.bind(this, view);
         initView();
@@ -92,20 +92,20 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.i(TAG, "onResume");
+        LogUtils.INSTANCE.i(TAG, "onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.i(TAG, "onPause");
+        LogUtils.INSTANCE.i(TAG, "onPause");
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         initData(savedInstanceState);
         super.onActivityCreated(savedInstanceState);
-        LogUtils.i(TAG, "onActivityCreated");
+        LogUtils.INSTANCE.i(TAG, "onActivityCreated");
     }
 
     @Override
@@ -122,7 +122,7 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
         if (mPresenter != null) {
             mPresenter.onAttach((V) this);
         }
-        LogUtils.i(TAG, "onAttach");
+        LogUtils.INSTANCE.i(TAG, "onAttach");
     }
 
 
@@ -135,7 +135,7 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
             mPresenter.onDetach();
             mPresenter = null;
         }
-        LogUtils.i(TAG, "onDetach");
+        LogUtils.INSTANCE.i(TAG, "onDetach");
     }
 
     @Override
@@ -145,13 +145,13 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
             mUnBinder.unbind();
             mUnBinder = null;
         }
-        LogUtils.i(TAG, "onDestroyView");
+        LogUtils.INSTANCE.i(TAG, "onDestroyView");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.i(TAG, "onDestroy");
+        LogUtils.INSTANCE.i(TAG, "onDestroy");
     }
 
     public void onToolbarClick() {

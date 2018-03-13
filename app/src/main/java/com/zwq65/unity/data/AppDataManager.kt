@@ -100,7 +100,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>) {
+    override fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
         mApiHelper.getRandomImages(callBack, lifecycleTransformer)
     }
 
@@ -111,7 +111,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>) {
+    override fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
         mApiHelper.get20Images(page, callBack, lifecycleTransformer)
     }
 
@@ -122,7 +122,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>, lifecycleTransformer: LifecycleTransformer<List<Video>>) {
+    override fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>, lifecycleTransformer: LifecycleTransformer<List<Video>>?) {
         mApiHelper.getVideosAndImages(page, callBack, lifecycleTransformer)
     }
 
@@ -133,7 +133,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getAndroidArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+    override fun getAndroidArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         mApiHelper.getAndroidArticles(page, callBack, lifecycleTransformer)
     }
 
@@ -144,7 +144,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getIosArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+    override fun getIosArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         mApiHelper.getIosArticles(page, callBack, lifecycleTransformer)
     }
 
@@ -155,7 +155,7 @@ constructor(@param:ApplicationContext private val mContext: Context,
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getQianduanArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+    override fun getQianduanArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         mApiHelper.getQianduanArticles(page, callBack, lifecycleTransformer)
     }
 }

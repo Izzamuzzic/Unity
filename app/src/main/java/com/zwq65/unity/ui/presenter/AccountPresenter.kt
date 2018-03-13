@@ -14,21 +14,20 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.utils;
+package com.zwq65.unity.ui.presenter
+
+import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.ui._base.BasePresenter
+import com.zwq65.unity.ui.contract.AccountContract
+
+import javax.inject.Inject
 
 /**
  * ================================================
  * <p>
- * Created by NIRVANA on 2017/09/29
+ * Created by NIRVANA on 2017/08/07
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public final class AppConstants {
-
-    public static final String DB_NAME = "unity.db";
-    public static final String PREF_NAME = "unity_pref";
-
-    private AppConstants() {
-        // This utility class is not publicly instantiable
-    }
-}
+class AccountPresenter<V : AccountContract.View> @Inject
+internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), AccountContract.Presenter<V>

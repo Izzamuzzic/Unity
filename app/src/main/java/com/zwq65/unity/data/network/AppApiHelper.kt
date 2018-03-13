@@ -51,7 +51,7 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>) {
+    override fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
         composeScheduler(gankIoApiService.randomImages, callBack, lifecycleTransformer)
     }
 
@@ -62,7 +62,7 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>) {
+    override fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
         composeScheduler(gankIoApiService.get20Images(page), callBack, lifecycleTransformer)
     }
 
@@ -73,7 +73,7 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      * @param callBack             callBack
      * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>, lifecycleTransformer: LifecycleTransformer<List<Video>>) {
+    override fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>, lifecycleTransformer: LifecycleTransformer<List<Video>>?) {
         composeScheduler(Flowable.zip(gankIoApiService.getVideos(page), gankIoApiService.randomImages,
                 BiFunction<GankApiResponse<List<Video>>, GankApiResponse<List<Image>>, List<Video>> { t1, t2 ->
                     var videos: List<Video> = ArrayList()
@@ -100,7 +100,7 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      */
     override fun getAndroidArticles(page: Int,
                                     callBack: ApiSubscriberCallBack<List<Article>>,
-                                    lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+                                    lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         zipArticleWithImage(gankIoApiService.getAndroidArticles(page), callBack, lifecycleTransformer)
     }
 
@@ -112,7 +112,7 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      */
     override fun getIosArticles(page: Int,
                                 callBack: ApiSubscriberCallBack<List<Article>>,
-                                lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+                                lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         zipArticleWithImage(gankIoApiService.getIosArticles(page), callBack, lifecycleTransformer)
     }
 
@@ -124,13 +124,13 @@ internal constructor(private val gankIoApiService: GankIoApiService) : ApiHelper
      */
     override fun getQianduanArticles(page: Int,
                                      callBack: ApiSubscriberCallBack<List<Article>>,
-                                     lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+                                     lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         zipArticleWithImage(gankIoApiService.getQianduanArticles(page), callBack, lifecycleTransformer)
     }
 
     private fun zipArticleWithImage(flowable: Flowable<GankApiResponse<List<Article>>>,
                                     callBack: ApiSubscriberCallBack<List<Article>>,
-                                    lifecycleTransformer: LifecycleTransformer<List<Article>>) {
+                                    lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
         composeScheduler(Flowable.zip(flowable, gankIoApiService.randomImages, BiFunction<GankApiResponse<List<Article>>, GankApiResponse<List<Image>>, List<Article>> { t1, t2 ->
             var articles: List<Article> = ArrayList()
             if (t1.data != null && t2.data != null) {

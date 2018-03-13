@@ -1,5 +1,6 @@
 package com.zwq65.unity.kotlin
 
+import com.zwq65.unity.kotlin.objectOriented.MathTeacher
 import org.junit.Test
 
 /**
@@ -37,8 +38,12 @@ class KotlinTest {
 //        val price = """${'$'}9.99"""
 //        println(price)
 
-        val person = getPerson()
-        println("name:${person.name},phone:${person.phone}")
+//        val person = getPerson()
+//        println("name:${person.name},phone:${person.phone}")
+
+        var m  = MathTeacher("old name")
+        m.teach("体育")
+
     }
 
     private fun getPerson(): Person {

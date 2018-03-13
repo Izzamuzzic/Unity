@@ -14,29 +14,30 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.utils
 
+import android.widget.Toast
 
-import com.zwq65.unity.di.ActivityScoped;
-import com.zwq65.unity.ui.contract.SettingContract;
-import com.zwq65.unity.ui.presenter.SettingPresenter;
-
-import dagger.Binds;
-import dagger.Module;
-
+import com.zwq65.unity.App
 
 /**
  * ================================================
- * <p>
- * Created by NIRVANA on 2017/10/10
+ * 防止多次调用弹出toast,统一以[ToastUtils]显示Toast
+ *
+ * Created by NIRVANA on 2017/09/29
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-@Module
-public abstract class SettingModule {
-    @ActivityScoped
-    @Binds
-    abstract SettingContract.Presenter<SettingContract.View>
-    providerSettingPresenter(SettingPresenter<SettingContract.View>
-                                     settingPresenter);
+object ToastUtils {
+    private var toast: Toast? = null
+
+    fun makeText(message: String, duration: Int) {
+        if (toast == null) {
+            toast = Toast.makeText(App.getInstance(), message, duration)
+        } else {
+            toast!!.setText(message)
+            toast!!.duration = duration
+        }
+        toast!!.show()
+    }
 }
