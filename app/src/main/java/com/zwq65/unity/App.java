@@ -25,7 +25,6 @@ import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zwq65.unity.di.component.DaggerApplicationComponent;
-import com.zwq65.unity.utils.CommonUtils;
 import com.zwq65.unity.utils.ToastUtils;
 
 import dagger.android.AndroidInjector;
@@ -83,10 +82,7 @@ public class App extends DaggerApplication {
      * 初始化Stetho(可以在chrome中方便地查看app数据库等信息,release版本关闭)
      */
     private void initStetho() {
-        //仅在debug版本开启
-        if (CommonUtils.INSTANCE.isApkInDebug(this)) {
-            Stetho.initializeWithDefaults(this);
-        }
+        Stetho.initializeWithDefaults(this);
     }
 
     /**
