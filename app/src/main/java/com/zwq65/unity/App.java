@@ -84,7 +84,7 @@ public class App extends DaggerApplication {
      */
     private void initStetho() {
         //仅在debug版本开启
-        if (CommonUtils.isApkInDebug(this)) {
+        if (CommonUtils.INSTANCE.isApkInDebug(this)) {
             Stetho.initializeWithDefaults(this);
         }
     }

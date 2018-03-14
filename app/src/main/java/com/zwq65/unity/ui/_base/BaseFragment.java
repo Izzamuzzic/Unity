@@ -161,7 +161,7 @@ public abstract class BaseFragment<V extends BaseContract.View, P extends BaseCo
     public void showLoading() {
         hideLoading();
         if (mActivity != null) {
-            mProgressDialog = CommonUtils.showLoadingDialog(mActivity);
+            mProgressDialog = CommonUtils.INSTANCE.showLoadingDialog(mActivity);
         }
     }
 

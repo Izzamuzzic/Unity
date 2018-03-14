@@ -84,7 +84,7 @@ public abstract class BaseRefreshFragment<T, V extends RefreshMvpView<T>, P exte
                     } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                         int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
-                        lastVisibleItemPosition = CommonUtils.findMax(into);
+                        lastVisibleItemPosition = CommonUtils.INSTANCE.findMax(into);
                     } else {
                         lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                     }

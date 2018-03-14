@@ -64,7 +64,7 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
                             e.printStackTrace()
                         }
 
-                        val path = CommonUtils.getImageStorePath()
+                        val path = CommonUtils.imageStorePath
                         saveFileToSdcard(bitmap, path + image._id + ".jpg")
 
                         return bitmap
