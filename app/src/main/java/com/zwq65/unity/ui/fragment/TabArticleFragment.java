@@ -95,17 +95,17 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
 
     @Override
     public void requestDataLoad() {
-        mPresenter.loadDatas(false);
+        getMPresenter().loadDatas(false);
     }
 
     public void initData() {
-        mPresenter.init();
+        getMPresenter().init();
     }
 
     private void gotoDetailActivity(Article article) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WebArticleActivity.ARTICAL, article);
-        mActivity.openActivity(WebArticleActivity.class, bundle);
+        getMActivity().openActivity(WebArticleActivity.class, bundle);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
     private void getType() {
         if (getArguments() != null) {
             mType = getArguments().getInt(TECH_TAG, android);
-            mPresenter.setType(mType);
+            getMPresenter().setType(mType);
         }
     }
 

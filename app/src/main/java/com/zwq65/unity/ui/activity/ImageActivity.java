@@ -116,9 +116,9 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
         cbLove.setButtonDrawable(R.drawable.selector_ic_love);
         cbLove.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                mPresenter.collectPicture(imageList.get(currentPosition));
+                getMPresenter().collectPicture(imageList.get(currentPosition));
             } else {
-                mPresenter.cancelCollectPicture(imageList.get(currentPosition));
+                getMPresenter().cancelCollectPicture(imageList.get(currentPosition));
             }
         });
         return true;
@@ -157,7 +157,7 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
     }
 
     private void savePictrue() {
-        mPresenter.savePicture(this, imageList.get(currentPosition));
+        getMPresenter().savePicture(this, imageList.get(currentPosition));
     }
 
     /**
@@ -211,7 +211,7 @@ public class ImageActivity extends BaseDaggerActivity<ImageContract.View, ImageC
             tvCurrentPage.setText(getResources().getString(R.string.placeholder_divider, String.valueOf(currentPosition + 1), String.valueOf(pageSize)));
         }
         //当前图片是否已被用户收藏
-        mPresenter.isPictureCollect(imageList.get(currentPosition))
+        getMPresenter().isPictureCollect(imageList.get(currentPosition))
                 .compose(bindUntilStopEvent())
                 .subscribe(aBoolean -> {
                     if (cbLove != null) {

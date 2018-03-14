@@ -77,18 +77,18 @@ public class RestVideoFragment extends BaseRefreshFragment<Video, RestVideoContr
 
     @Override
     public void requestDataLoad() {
-        mPresenter.loadVideos(false);
+        getMPresenter().loadVideos(false);
 
     }
 
     public void initData() {
-        mPresenter.init();
+        getMPresenter().init();
     }
 
     private void gotoWatchActivity(Video video) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WatchActivity.VIDEO, video);
-        mActivity.openActivity(WatchActivity.class, bundle);
+        getMActivity().openActivity(WatchActivity.class, bundle);
     }
 
     @Override

@@ -73,11 +73,11 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
         Bundle bundle = new Bundle();
         bundle.putInt(ImageActivity.POSITION, position);
         bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, (ArrayList<Image>) mAdapter.getmDataList());
-        mActivity.openActivity(ImageActivity.class, bundle);
+        getMActivity().openActivity(ImageActivity.class, bundle);
     }
 
     public void initData() {
-        mPresenter.init();
+        getMPresenter().init();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class AlbumFragment extends BaseRefreshFragment<Image, AlbumContract.View
 
     @Override
     public void requestDataLoad() {
-        mPresenter.loadImages(false);
+        getMPresenter().loadImages(false);
     }
 
     @Override

@@ -87,7 +87,7 @@ public class LoginActivity extends BaseDaggerActivity<LoginContract.View, LoginC
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                mPresenter.login(etEmail.getText().toString(), etPassword.getText().toString());
+                getMPresenter().login(etEmail.getText().toString(), etPassword.getText().toString());
                 break;
             case R.id.btn_signup:
                 break;

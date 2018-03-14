@@ -53,7 +53,7 @@ public class App extends DaggerApplication {
         Utils.init(this);
         initBugly();
         initStetho();
-        initLeakcanary();
+        initLeakCanary();
     }
 
     /**
@@ -86,9 +86,9 @@ public class App extends DaggerApplication {
     }
 
     /**
-     * 初始化Leakcanary(内存泄漏检测工具)
+     * 初始化LeakCanary(内存泄漏检测工具)
      */
-    private void initLeakcanary() {
+    private void initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
