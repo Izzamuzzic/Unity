@@ -57,7 +57,6 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
             }
 
             override fun onFailure(errCode: String, errMsg: String) {
-                mvpView?.loadFail(errMsg)
             }
         }, mvpView?.bindUntilStopEvent())
     }

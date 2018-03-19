@@ -13,7 +13,6 @@ import java.io.*
  */
 
 
-
 /**
  * 用于取得recycleView当前最大的position以判断是否许需要加载
  *
@@ -88,4 +87,3 @@ fun getSdCardIsEnable(): Boolean {
 fun getSdCardPath(): String {
     return Environment.getExternalStorageDirectory().path + File.separator
 }
-

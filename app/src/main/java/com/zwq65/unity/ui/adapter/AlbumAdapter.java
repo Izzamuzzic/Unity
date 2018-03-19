@@ -61,7 +61,9 @@ public class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, Al
 
         @Override
         public void setData(T data) {
-            Glide.with(getContext()).load(data.getUrl()).into(ivBeauty);
+            Glide.with(getContext())
+                    .load(data.getUrl())
+                    .into(ivBeauty);
         }
     }
 }

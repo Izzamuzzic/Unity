@@ -220,6 +220,8 @@
   **[] $VALUES;
   public *;
 }
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 ######################## greenDao混淆 ########################
 -keep class de.greenrobot.dao.** {*;}
@@ -248,19 +250,6 @@
 -dontwarn java.lang.invoke.*
 -dontwarn **$$Lambda$*
 
-######################## BRVAH ########################
--keep class com.chad.library.adapter.** {*;}
--keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
--keep public class * extends com.chad.library.adapter.base.BaseViewHolder
--keepclassmembers public class * extends com.chad.library.adapter.base.BaseViewHolder {
-     <init>(android.view.View);
-}
-
-######################## commonutil混淆 ########################
--keep class com.jingewenku.abrahamcaijin.commonutil.** { *; }
--keepclassmembers class com.jingewenku.abrahamcaijin.commonutil.** { *; }
--dontwarn com.jingewenku.abrahamcaijin.commonutil.**
-
 ######################## barlibrary混淆 ########################
 -keep class com.gyf.barlibrary.** {*;}
 -dontwarn  com.gyf.barlibrary.**
@@ -276,7 +265,3 @@
 ######################## circleimageview混淆 ########################
 -keep class de.hdodenhof.circleimageview.** {*;}
 -dontwarn  de.hdodenhof.circleimageview.**
-
-######################## calligraphy混淆 ########################
--keep class uk.co.chrisjenx.calligraphy.** {*;}
--dontwarn  uk.co.chrisjenx.calligraphy.**

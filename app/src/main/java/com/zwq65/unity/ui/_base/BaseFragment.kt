@@ -50,7 +50,7 @@ import javax.inject.Inject
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> : RxFragment(), HasSupportFragmentInjector, BaseContract.View {
+abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter<V>> : RxFragment(), HasSupportFragmentInjector, BaseContract.View {
     @Inject
     lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
 
@@ -111,17 +111,16 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         if (context is BaseDaggerActivity<*, *>) {
             val activity = context as BaseDaggerActivity<*, *>?
             this.mActivity = activity
-            activity!!.onFragmentAttached()
+            activity?.onFragmentAttached()
         }
         //Presenter attach the view
         mPresenter.onAttach(this as V)
         LogUtils.i(TAG, "onAttach")
     }
 
-
     override fun onDetach() {
         super.onDetach()
-        mActivity!!.onFragmentDetached(TAG)
+        mActivity?.onFragmentDetached(TAG)
         mActivity = null
         if (mPresenter.isViewAttached) {
             mPresenter.onDetach()
@@ -131,10 +130,8 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-            mUnBinder = null
-        }
+        mUnBinder?.unbind()
+        mUnBinder = null
         LogUtils.i(TAG, "onDestroyView")
     }
 
@@ -159,27 +156,19 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     }
 
     override fun showMessage(@StringRes resId: Int) {
-        if (mActivity != null) {
-            mActivity!!.showMessage(resId)
-        }
+        mActivity?.showMessage(resId)
     }
 
     override fun showMessage(message: String) {
-        if (mActivity != null) {
-            mActivity!!.showMessage(message)
-        }
+        mActivity?.showMessage(message)
     }
 
     override fun showError(@StringRes resId: Int) {
-        if (mActivity != null) {
-            mActivity!!.showError(resId)
-        }
+        mActivity?.showError(resId)
     }
 
     override fun showError(message: String) {
-        if (mActivity != null) {
-            mActivity!!.showError(message)
-        }
+        mActivity?.showError(message)
     }
 
     /**

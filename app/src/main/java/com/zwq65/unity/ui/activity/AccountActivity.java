@@ -19,6 +19,8 @@ package com.zwq65.unity.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -62,17 +64,36 @@ public class AccountActivity extends BaseDaggerActivity<AccountContract.View, Ac
     }
 
     @Override
-    public void dealIntent(Intent intent) {
+    public void dealIntent(@NonNull Intent intent) {
 
     }
 
     @Override
     public void initView() {
-        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar);
+
+        // 设置参数
         BitmapFactory.Options options = new BitmapFactory.Options();
+        // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar, options);
+        int height = options.outHeight;
+        int width = options.outWidth;
+        Log.w("TAG", " width: " + width + " height:" + height);
+        /**
+         * 不进行压缩
+         */
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar);
+
+        /**
+         * 采样率压缩：根据图片的采样率大小进行压缩
+         */
+        // 计算好压缩比例后，这次可以去加载原图了
+        options.inJustDecodeBounds = false;
+        //采样率设置:压缩比例为1/2
         options.inSampleSize = 2;
         //bitmap壓縮之邻近采样（Nearest Neighbour Resampling）
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_avatar, options);
+
         //bitmap壓縮之双线性采样（Bilinear Resampling）
         //方法一:
         Bitmap bitmap3 = Bitmap.createScaledBitmap(bitmap1, bitmap1.getWidth() / 2, bitmap1.getHeight() / 2, true);
