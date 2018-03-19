@@ -14,28 +14,26 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.ui.module
 
 
-import com.zwq65.unity.di.ActivityScoped;
-import com.zwq65.unity.ui.contract.WebArticleContract;
-import com.zwq65.unity.ui.presenter.WebArticlePresenter;
+import com.zwq65.unity.di.ActivityScoped
+import com.zwq65.unity.ui.contract.WatchContract
+import com.zwq65.unity.ui.presenter.WatchPresenter
 
-import dagger.Binds;
-import dagger.Module;
-
+import dagger.Binds
+import dagger.Module
 
 /**
  * ================================================
  * <p>
  * Created by NIRVANA on 2017/09/28
  * Contact with <zwq651406441@gmail.com>
- * ===============================================
+ * ================================================
  */
 @Module
-public abstract class WebArticleModule {
+abstract class WatchModule {
     @ActivityScoped
     @Binds
-    abstract WebArticleContract.Presenter<WebArticleContract.View> provideWebArticlePresenter(
-            WebArticlePresenter<WebArticleContract.View> webArticlePresenter);
+    internal abstract fun providerWatchPresenter(watchPresenter: WatchPresenter<WatchContract.View>): WatchContract.Presenter<WatchContract.View>
 }

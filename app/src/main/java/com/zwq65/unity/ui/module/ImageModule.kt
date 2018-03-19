@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.ui.module
 
-import com.zwq65.unity.di.ActivityScoped;
-import com.zwq65.unity.ui.contract.AccountContract;
-import com.zwq65.unity.ui.presenter.AccountPresenter;
+import com.zwq65.unity.di.ActivityScoped
+import com.zwq65.unity.ui.contract.ImageContract
+import com.zwq65.unity.ui.presenter.ImagePresenter
 
-import dagger.Binds;
-import dagger.Module;
+import dagger.Binds
+import dagger.Module
 
 /**
  * ================================================
@@ -31,9 +31,9 @@ import dagger.Module;
  * ================================================
  */
 @Module
-public abstract class AccountModule {
+abstract class ImageModule {
     @ActivityScoped
     @Binds
-    abstract AccountContract.Presenter<AccountContract.View> provideAccountPresenter(
-            AccountPresenter<AccountContract.View> accountPresenter);
+    internal abstract fun provideImagePresenter(
+            imagePresenter: ImagePresenter<ImageContract.View>): ImageContract.Presenter<ImageContract.View>
 }
