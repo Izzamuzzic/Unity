@@ -73,7 +73,8 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         mPresenter.onAttach(this as V)
-        if (initBaseTooBar() != null && initBaseTooBar()!!) {
+        toolbar = findViewById(R.id.toolbar)
+        if (initBaseTooBar()) {
             setupBaseToolbar()
         } else {
             //不含toolbar的activity，采用fitsSystemWindows(false)方式实现沉浸栏
@@ -91,7 +92,7 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
      *
      * @return Boolean
      */
-    abstract fun initBaseTooBar(): Boolean?
+    abstract fun initBaseTooBar(): Boolean
 
     /**
      * Intent不为空的话，处理之
@@ -110,8 +111,7 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
      */
     abstract fun initData()
 
-    protected fun setupBaseToolbar() {
-        toolbar = findViewById(R.id.toolbar)
+    private fun setupBaseToolbar() {
         if (toolbar != null) {
             setSupportActionBar(toolbar)
             toolbar!!.setNavigationIcon(R.mipmap.ic_menu_white)

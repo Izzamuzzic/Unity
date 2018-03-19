@@ -104,7 +104,7 @@ public class TabArticleFragment extends BaseRefreshFragment<Article, TabArticleC
 
     private void gotoDetailActivity(Article article) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(WebArticleActivity.ARTICAL, article);
+        bundle.putParcelable(WebArticleActivity.ARTICLE, article);
         getMActivity().openActivity(WebArticleActivity.class, bundle);
     }
 

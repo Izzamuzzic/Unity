@@ -14,46 +14,40 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.activity;
+package com.zwq65.unity.ui.activity
 
-import android.content.Intent;
+import android.content.Intent
 
-import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseDaggerActivity;
-import com.zwq65.unity.ui.contract.SettingContract;
+import com.zwq65.unity.R
+import com.zwq65.unity.ui._base.BaseDaggerActivity
+import com.zwq65.unity.ui.contract.SettingContract
 
 /**
  * ================================================
- * <p>
+ *
+ *
  * Created by NIRVANA on 2017/10/10
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class SettingActivity extends BaseDaggerActivity<SettingContract.View,
-        SettingContract.Presenter<SettingContract.View>> implements SettingContract.View {
+class SettingActivity : BaseDaggerActivity<SettingContract.View, SettingContract.Presenter<SettingContract.View>>(), SettingContract.View {
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_setting;
+    override val layoutId: Int
+        get() = R.layout.activity_setting
+
+    override fun initBaseTooBar(): Boolean {
+        return false
     }
 
-    @Override
-    public Boolean initBaseTooBar() {
-        return null;
-    }
-
-    @Override
-    public void dealIntent(Intent intent) {
+    override fun dealIntent(intent: Intent) {
 
     }
 
-    @Override
-    public void initView() {
+    override fun initView() {
 
     }
 
-    @Override
-    public void initData() {
+    override fun initData() {
 
     }
 }
