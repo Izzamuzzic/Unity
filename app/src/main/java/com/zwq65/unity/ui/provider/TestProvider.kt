@@ -33,7 +33,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class TestProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = arrayOf(TestModule::class))
-    internal abstract fun testFragment(): TestFragment?
+    @ContributesAndroidInjector(modules = [(TestModule::class)])
+    internal abstract fun testFragment(): TestFragment
 
 }

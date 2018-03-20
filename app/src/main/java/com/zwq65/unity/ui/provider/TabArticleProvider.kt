@@ -33,6 +33,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class TabArticleProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = arrayOf(TabArticleModule::class))
-    internal abstract fun tabArticleFragment(): TabArticleFragment?
+    @ContributesAndroidInjector(modules = [(TabArticleModule::class)])
+    internal abstract fun tabArticleFragment(): TabArticleFragment
 }

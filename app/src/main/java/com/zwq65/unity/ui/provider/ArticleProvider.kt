@@ -33,7 +33,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ArticleProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = arrayOf(ArticleModule::class))
-    internal abstract fun articleFragment(): ArticleFragment?
+    @ContributesAndroidInjector(modules = [(ArticleModule::class)])
+    internal abstract fun articleFragment(): ArticleFragment
 
 }

@@ -33,6 +33,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class RestVideoProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = arrayOf(RestVideoModule::class))
-    internal abstract fun restVideoFragment(): RestVideoFragment?
+    @ContributesAndroidInjector(modules = [(RestVideoModule::class)])
+    internal abstract fun restVideoFragment(): RestVideoFragment
 }

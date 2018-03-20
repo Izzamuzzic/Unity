@@ -33,7 +33,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class AlbumProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = arrayOf(AlbumModule::class))
-    internal abstract fun albumFragment(): AlbumFragment?
+    @ContributesAndroidInjector(modules = [(AlbumModule::class)])
+    internal abstract fun albumFragment(): AlbumFragment
 
 }
