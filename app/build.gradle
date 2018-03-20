@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+
 apply plugin: 'org.greenrobot.greendao'
+
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -116,13 +119,13 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     //glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     //greenDao database
     implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
     implementation "org.greenrobot:greendao-generator:$rootProject.greenDaoGeneratorVersion"
     //butterKnife
     implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
     //rxJava2
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
@@ -135,8 +138,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     //multidex
     implementation "com.android.support:multidex:$rootProject.multidexVersion"
     //LeakCanary: A memory leak detection library for Android and Java.

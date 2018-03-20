@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.provider;
+package com.zwq65.unity.ui.provider
 
-import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.fragment.TestFragment;
-import com.zwq65.unity.ui.module.TestModule;
+import com.zwq65.unity.di.FragmentScoped
+import com.zwq65.unity.ui.fragment.TestFragment
+import com.zwq65.unity.ui.module.TestModule
 
-import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * ================================================
@@ -31,9 +31,9 @@ import dagger.android.ContributesAndroidInjector;
  * ================================================
  */
 @Module
-public abstract class TestProvider {
+abstract class TestProvider {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = TestModule.class)
-    abstract TestFragment testFragment();
+    @ContributesAndroidInjector(modules = arrayOf(TestModule::class))
+    internal abstract fun testFragment(): TestFragment?
 
 }

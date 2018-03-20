@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.ui.module
 
-import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.contract.ArticleContract;
-import com.zwq65.unity.ui.presenter.ArticlePresenter;
+import com.zwq65.unity.data.network.retrofit.response.enity.Article
+import com.zwq65.unity.ui.contract.TabArticleContract
+import com.zwq65.unity.ui.presenter.TabArticlePresenter
 
-import dagger.Binds;
-import dagger.Module;
+import dagger.Binds
+import dagger.Module
 
 /**
  * ================================================
@@ -31,9 +31,14 @@ import dagger.Module;
  * ================================================
  */
 @Module
-public abstract class ArticleModule {
-    @FragmentScoped
+abstract class TabArticleModule {
+    /**
+     * 不使用注解[@FragmentScoped][com.zwq65.unity.di.FragmentScoped],因为该presenter作用于多个fragment，不可唯一。
+     *
+     * @param tabArticlePresenter tabArticlePresenter
+     * @return tabArticlePresenter
+     */
     @Binds
-    abstract ArticleContract.Presenter<ArticleContract.View> provideArticlePresenter(
-            ArticlePresenter<ArticleContract.View> articlePresenter);
+    internal abstract fun provideTabArticlePresenter(
+            tabArticlePresenter: TabArticlePresenter<TabArticleContract.View<Article>>): TabArticleContract.Presenter<TabArticleContract.View<Article>>
 }

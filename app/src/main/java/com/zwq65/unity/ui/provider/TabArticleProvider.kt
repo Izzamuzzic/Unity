@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.ui.provider
 
-import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.contract.TestContract;
-import com.zwq65.unity.ui.presenter.TestPresenter;
+import com.zwq65.unity.di.FragmentScoped
+import com.zwq65.unity.ui.fragment.TabArticleFragment
+import com.zwq65.unity.ui.module.TabArticleModule
 
-import dagger.Binds;
-import dagger.Module;
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * ================================================
@@ -31,9 +31,8 @@ import dagger.Module;
  * ================================================
  */
 @Module
-public abstract class TestModule {
+abstract class TabArticleProvider {
     @FragmentScoped
-    @Binds
-    abstract TestContract.Presenter<TestContract.View> provideTestPresenter(
-            TestPresenter<TestContract.View> testPresenter);
+    @ContributesAndroidInjector(modules = arrayOf(TabArticleModule::class))
+    internal abstract fun tabArticleFragment(): TabArticleFragment?
 }

@@ -14,15 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.module;
+package com.zwq65.unity.ui.provider
 
-import com.zwq65.unity.data.network.retrofit.response.enity.Image;
-import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.contract.AlbumContract;
-import com.zwq65.unity.ui.presenter.AlbumPresenter;
+import com.zwq65.unity.di.FragmentScoped
+import com.zwq65.unity.ui.fragment.AlbumFragment
+import com.zwq65.unity.ui.module.AlbumModule
 
-import dagger.Binds;
-import dagger.Module;
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * ================================================
@@ -32,9 +31,9 @@ import dagger.Module;
  * ================================================
  */
 @Module
-public abstract class AlbumModule {
+abstract class AlbumProvider {
     @FragmentScoped
-    @Binds
-    abstract AlbumContract.Presenter<AlbumContract.View<Image>> provideAlbumPresenter(
-            AlbumPresenter<AlbumContract.View<Image>> albumPresenter);
+    @ContributesAndroidInjector(modules = arrayOf(AlbumModule::class))
+    internal abstract fun albumFragment(): AlbumFragment?
+
 }

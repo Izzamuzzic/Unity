@@ -16,7 +16,7 @@ import java.net.SocketTimeoutException
  *
  *
  * Created by NIRVANA on 2018/02/05.
- * Contact with <zwq651406441></zwq651406441>@gmail.com>
+ * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
 internal object ExceptionHandler {

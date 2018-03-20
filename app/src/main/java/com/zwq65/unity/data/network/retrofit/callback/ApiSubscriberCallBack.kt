@@ -16,9 +16,7 @@
 
 package com.zwq65.unity.data.network.retrofit.callback
 
-import com.zwq65.unity.App
 import com.zwq65.unity.utils.LogUtils
-
 import io.reactivex.subscribers.DisposableSubscriber
 
 /**
@@ -40,8 +38,6 @@ abstract class ApiSubscriberCallBack<T> : DisposableSubscriber<T>() {
     override fun onError(t: Throwable) {
         LogUtils.e(TAG, t.toString())
         if (t is ApiException) {
-            //toast错误信息
-            App.getInstance().showToast(t.message)
             onFailure(t.code, t.message)
         }
     }

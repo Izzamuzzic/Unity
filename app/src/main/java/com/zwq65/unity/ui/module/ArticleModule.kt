@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.provider;
+package com.zwq65.unity.ui.module
 
-import com.zwq65.unity.di.FragmentScoped;
-import com.zwq65.unity.ui.fragment.RestVideoFragment;
-import com.zwq65.unity.ui.module.RestVideoModule;
+import com.zwq65.unity.di.FragmentScoped
+import com.zwq65.unity.ui.contract.ArticleContract
+import com.zwq65.unity.ui.presenter.ArticlePresenter
 
-import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import dagger.Binds
+import dagger.Module
 
 /**
  * ================================================
@@ -31,8 +31,9 @@ import dagger.android.ContributesAndroidInjector;
  * ================================================
  */
 @Module
-public abstract class RestVideoProvider {
+abstract class ArticleModule {
     @FragmentScoped
-    @ContributesAndroidInjector(modules = RestVideoModule.class)
-    abstract RestVideoFragment restVideoFragment();
+    @Binds
+    internal abstract fun provideArticlePresenter(
+            articlePresenter: ArticlePresenter<ArticleContract.View>): ArticleContract.Presenter<ArticleContract.View>
 }
