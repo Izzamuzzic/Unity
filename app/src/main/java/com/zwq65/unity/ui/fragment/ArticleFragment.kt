@@ -62,6 +62,6 @@ class ArticleFragment : BaseFragment<ArticleContract.View, ArticleContract.Prese
 
     companion object {
 
-        val TABS = intArrayOf(TabArticleFragment.Type.android, TabArticleFragment.Type.ios, TabArticleFragment.Type.h5)
+        val TABS = intArrayOf(TabArticleFragment.ANDROID, TabArticleFragment.IOS, TabArticleFragment.H5)
     }
 }
