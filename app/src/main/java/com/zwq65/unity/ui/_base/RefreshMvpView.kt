@@ -14,42 +14,41 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui._base;
-
-import java.util.List;
+package com.zwq65.unity.ui._base
 
 /**
  * ================================================
- * <p>
+ *
+ *
  * Created by NIRVANA on 2017/09/14.
- * Contact with <zwq651406441@gmail.com>
+ * Contact with <zwq651406441></zwq651406441>@gmail.com>
  * ================================================
  */
-public interface RefreshMvpView<T> extends BaseContract.View {
+interface RefreshMvpView<T> : BaseContract.View {
 
     /**
      * 刷新数据
      *
      * @param list 数据列表
      */
-    void refreshData(List<T> list);
+    fun refreshData(list: List<T>)
 
     /**
      * 加载数据
      *
      * @param list 数据列表
      */
-    void loadData(List<T> list);
+    fun loadData(list: List<T>)
 
     /**
      * 加载失败
      *
      * @param errMsg 错误信息
      */
-    void loadFail(String errMsg);
+    fun loadFail(errMsg: String)
 
     /**
      * 没有数据了
      */
-    void noMoreData();
+    fun noMoreData()
 }

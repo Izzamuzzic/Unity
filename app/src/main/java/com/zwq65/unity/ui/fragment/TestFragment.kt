@@ -14,21 +14,12 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.ui.fragment;
+package com.zwq65.unity.ui.fragment
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.zwq65.unity.R;
-import com.zwq65.unity.ui._base.BaseFragment;
-import com.zwq65.unity.ui._custom.view.PolygonView;
-import com.zwq65.unity.ui.contract.TestContract;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import android.os.Bundle
+import com.zwq65.unity.R
+import com.zwq65.unity.ui._base.BaseFragment
+import com.zwq65.unity.ui.contract.TestContract
 
 /**
  * ================================================
@@ -37,22 +28,14 @@ import butterknife.Unbinder;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public class TestFragment extends BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>> implements TestContract.View {
+class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>>(), TestContract.View {
 
-    @BindView(R.id.polygonView)
-    PolygonView mPolygonView;
+    override val layoutId: Int
+        get() = R.layout.fragment_test
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_test;
-    }
+    override fun initView() {}
 
-    @Override
-    public void initView() {
-    }
-
-    @Override
-    public void initData(Bundle saveInstanceState) {
+    override fun initData(saveInstanceState: Bundle?) {
 
     }
 

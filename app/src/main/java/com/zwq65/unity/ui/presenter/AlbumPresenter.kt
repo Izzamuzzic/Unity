@@ -47,9 +47,9 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
                 if (response.data?.isNotEmpty()!!) {
                     page++
                     if (isRefresh!!) {
-                        mvpView?.refreshData(response.data)
+                        mvpView?.refreshData(response.data!!)
                     } else {
-                        mvpView?.loadData(response.data)
+                        mvpView?.loadData(response.data!!)
                     }
                 } else {
                     mvpView?.noMoreData()
