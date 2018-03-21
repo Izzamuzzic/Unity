@@ -33,7 +33,7 @@ object ToastUtils {
 
     fun makeText(message: String, duration: Int) {
         if (toast == null) {
-            toast = Toast.makeText(App.getInstance(), message, duration)
+            toast = Toast.makeText(App.instance, message, duration)
         } else {
             toast!!.setText(message)
             toast!!.duration = duration

@@ -103,15 +103,18 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
 
     override fun cancelCollectPicture(image: Image) {
         mvpView?.showLoading()
-        dataManager.deletePicture(image._id)
-                .compose(mvpView?.bindUntilStopEvent())
-                .subscribe({ mvpView?.hideLoading() }) {
-                    mvpView?.hideLoading()
-                    mvpView?.showError(R.string.error_msg_cancel_collect_fail)
-                }
+        image._id?.let {
+            dataManager.deletePicture(it)
+                    .compose(mvpView?.bindUntilStopEvent())
+                    .subscribe({ mvpView?.hideLoading() }) {
+                        mvpView?.hideLoading()
+                        mvpView?.showError(R.string.error_msg_cancel_collect_fail)
+                    }
+        }
+
     }
 
     override fun isPictureCollect(image: Image): Observable<Boolean> {
-        return dataManager.isPictureExist(image._id)
+        return image._id?.let { dataManager.isPictureExist(it) }!!
     }
 }

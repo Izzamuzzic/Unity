@@ -69,14 +69,14 @@ constructor(@param:ApplicationContext private val mContext: Context,
     /*******************************************************************************************************
      * DbHelper
      * *****************************************************************************************************/
+
     /**
      * 获取用户收藏的图片
      *
      * @return Observable<>
      */
-    override fun getCollectionPictures(): Observable<MutableList<Picture>> {
-        return mDbHelper.collectionPictures
-    }
+    override val collectionPictures: Observable<List<Picture>>
+        get() = mDbHelper.collectionPictures
 
     override fun savePicture(picture: Picture): Observable<Long> {
         return mDbHelper.savePicture(picture)

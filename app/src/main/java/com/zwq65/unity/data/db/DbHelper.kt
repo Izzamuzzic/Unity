@@ -14,15 +14,11 @@
  *    limitations under the License.
  */
 
-package com.zwq65.unity.data.db;
+package com.zwq65.unity.data.db
 
 
-import com.zwq65.unity.data.db.model.Picture;
-
-import java.util.List;
-
-import io.reactivex.Observable;
-
+import com.zwq65.unity.data.db.model.Picture
+import io.reactivex.Observable
 
 /**
  * ================================================
@@ -32,7 +28,14 @@ import io.reactivex.Observable;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface DbHelper {
+interface DbHelper {
+
+    /**
+     * 获取用户收藏的图片
+     *
+     * @return Observable<>
+     */
+    val collectionPictures: Observable<List<Picture>>
 
     /**
      * 保存图片
@@ -40,7 +43,7 @@ public interface DbHelper {
      * @param picture picture
      * @return Observable<Long>
      */
-    Observable<Long> savePicture(final Picture picture);
+    fun savePicture(picture: Picture): Observable<Long>
 
     /**
      * 删除图片
@@ -48,7 +51,7 @@ public interface DbHelper {
      * @param id picture'id
      * @return Observable<Long>
      */
-    Observable<Long> deletePicture(final String id);
+    fun deletePicture(id: String): Observable<Long>
 
     /**
      * 判断图片是否保存
@@ -56,13 +59,6 @@ public interface DbHelper {
      * @param id picture'id
      * @return Observable<Long>
      */
-    Observable<Boolean> isPictureExist(final String id);
-
-    /**
-     * 获取用户收藏的图片
-     *
-     * @return Observable<>
-     */
-    Observable<List<Picture>> getCollectionPictures();
+    fun isPictureExist(id: String): Observable<Boolean>
 
 }

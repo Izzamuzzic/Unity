@@ -51,7 +51,7 @@ class AlbumFragment : BaseRefreshFragment<Image, AlbumContract.View<Image>, Albu
     override fun initView() {
         super.initView()
         mAdapter.setOnItemClickListener { _, position -> gotoContentActivity(position) }
-        mRecyclerView?.adapter = mAdapter
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun initData(saveInstanceState: Bundle?) {

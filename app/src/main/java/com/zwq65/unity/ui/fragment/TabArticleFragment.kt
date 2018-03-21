@@ -53,7 +53,7 @@ class TabArticleFragment : BaseRefreshFragment<Article, TabArticleContract.View<
     override fun initView() {
         super.initView()
         mAdapter.setOnItemClickListener { article, _ -> gotoDetailActivity(article) }
-        mRecyclerView!!.adapter = mAdapter
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun initData(saveInstanceState: Bundle?) {
