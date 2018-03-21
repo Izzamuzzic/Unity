@@ -59,6 +59,8 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
     private var mUnBinder: Unbinder? = null
     private var mProgressDialog: ProgressDialog? = null
 
+    lateinit var rootView: View
+
     @Inject
     lateinit var mPresenter: P
 
@@ -82,10 +84,10 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         LogUtils.i(TAG, "onCreateView")
-        val view = inflater.inflate(layoutId, container, false)
-        mUnBinder = ButterKnife.bind(this, view)
+        rootView = inflater.inflate(layoutId, container, false)
+        mUnBinder = ButterKnife.bind(this, rootView)
         initView()
-        return view
+        return rootView
     }
 
     override fun onResume() {

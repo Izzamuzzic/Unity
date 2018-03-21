@@ -2,6 +2,8 @@ package com.zwq65.unity.utils
 
 import android.graphics.Bitmap
 import android.os.Environment
+import android.support.annotation.IdRes
+import android.view.View
 import java.io.*
 
 /**
@@ -12,6 +14,10 @@ import java.io.*
  *================================================
  */
 
+fun <T : View> bind(root: View, @IdRes res: Int): T {
+    @Suppress("UNCHECKED_CAST")
+    return root.findViewById(res) as T
+}
 
 /**
  * 用于取得recycleView当前最大的position以判断是否许需要加载

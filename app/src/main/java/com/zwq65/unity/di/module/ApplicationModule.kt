@@ -50,7 +50,7 @@ import javax.inject.Singleton
  * [ApplicationComponent].
  */
 @Module
-abstract class ApplicationModule {
+ class ApplicationModule {
 
     @Provides
     @ApplicationContext

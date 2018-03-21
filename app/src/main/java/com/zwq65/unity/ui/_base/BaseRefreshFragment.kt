@@ -24,7 +24,7 @@ import android.view.ViewStub
 import android.widget.TextView
 import com.zwq65.unity.R
 import com.zwq65.unity.utils.CommonUtils
-import org.jetbrains.anko.support.v4.find
+import com.zwq65.unity.utils.bind
 
 /**
  * ================================================
@@ -36,9 +36,10 @@ import org.jetbrains.anko.support.v4.find
  * ================================================
  */
 abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Presenter<V>> : BaseFragment<V, P>(), RefreshMvpView<T> {
-    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
-    var mRecyclerView: RecyclerView? = null
-    var mVsNoNetwork: ViewStub? = null
+
+    lateinit var mRecyclerView: RecyclerView
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var mVsNoNetwork: ViewStub
     /**
      * ViewStub加載的view
      */
@@ -58,25 +59,25 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
     abstract val spanCount: Int
 
     override fun initView() {
-        //findViewById
-        mRecyclerView = find(R.id.recyclerView)
-        mSwipeRefreshLayout = find(R.id.swipeRefreshLayout)
-        mVsNoNetwork = find(R.id.vs_no_network)
+        //init views
+        mRecyclerView = bind(rootView, R.id.recyclerView)
+        mSwipeRefreshLayout = bind(rootView, R.id.swipeRefreshLayout)
+        mVsNoNetwork = bind(rootView, R.id.vs_no_network)
 
         if (spanCount == 1) {
-            mRecyclerView?.layoutManager = LinearLayoutManager(context)
+            mRecyclerView.layoutManager = LinearLayoutManager(context)
         } else {
-            mRecyclerView?.layoutManager = StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
+            mRecyclerView.layoutManager = StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
         }
         //item加载动画（默认）
-        mRecyclerView?.itemAnimator = DefaultItemAnimator()
-        (mRecyclerView?.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        (mRecyclerView.itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations = false
         //下拉加載監聽
-        mRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val layoutManager = mRecyclerView!!.layoutManager
+                    val layoutManager = mRecyclerView.layoutManager
                     val lastVisibleItemPosition: Int
                     lastVisibleItemPosition = when (layoutManager) {
                         is GridLayoutManager -> layoutManager.findLastVisibleItemPosition()
@@ -101,8 +102,8 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
             }
         })
         //上拉刷新監聽
-        mSwipeRefreshLayout?.setColorSchemeResources(R.color.colorAccent)
-        mSwipeRefreshLayout?.setOnRefreshListener {
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        mSwipeRefreshLayout.setOnRefreshListener {
             if (isRefreshing) {
                 return@setOnRefreshListener
             }
@@ -117,7 +118,7 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
     }
 
     override fun onToolbarClick() {
-        mRecyclerView!!.smoothScrollToPosition(0)
+        mRecyclerView.smoothScrollToPosition(0)
     }
 
     /**
@@ -136,12 +137,14 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
         }
         if (refresh) {
             isRefreshing = true
-            mSwipeRefreshLayout?.isRefreshing = true
+            mSwipeRefreshLayout.isRefreshing = true
         } else {
             isRefreshing = false
             //防止刷新太快，让刷新动画保留一会儿~
-            mSwipeRefreshLayout?.postDelayed({
-                mSwipeRefreshLayout?.isRefreshing = false
+            mSwipeRefreshLayout.postDelayed({
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.isRefreshing = false
+                }
             }, 1000)
         }
     }
@@ -161,7 +164,7 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
         isLoading = false
         //加载失败,ViewStub加载显示'加载失败'view
         try {
-            inflateView = mVsNoNetwork?.inflate()
+            inflateView = mVsNoNetwork.inflate()
             tvRetry = inflateView?.findViewById(R.id.tv_retry)
             tvRetry?.setOnClickListener { v -> requestDataRefresh() }
         } catch (e: Exception) {
@@ -169,7 +172,6 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
             //ViewStub已经inflate()过了,在catch()方法下setVisibility(VISIBLE)显示即可
             inflateView?.visibility = View.VISIBLE
         }
-
     }
 
     override fun noMoreData() {
