@@ -39,9 +39,9 @@ class ArticleFragment : BaseFragment<ArticleContract.View, ArticleContract.Prese
 
     override fun initView() {
         for (tabInt in TABS) {
-            val tab = tab_type?.newTab()
-            tab?.setText(tabInt)
-            tab?.let { tab_type?.addTab(it) }
+            val tab = tab_type.newTab()
+            tab.setText(tabInt)
+            tab.let { tab_type.addTab(it) }
         }
         val fragments = ArrayList<Fragment>()
         val strTabs = arrayOfNulls<String>(TABS.size)
@@ -50,10 +50,10 @@ class ArticleFragment : BaseFragment<ArticleContract.View, ArticleContract.Prese
             fragments.add(TabArticleFragment.newInstance(TABS[i]))
         }
         val adapter = BaseFragmentPagerAdapter(childFragmentManager, fragments, strTabs)
-        vp_article?.adapter = adapter
-        vp_article?.offscreenPageLimit = 0
+        vp_article.adapter = adapter
+        vp_article.offscreenPageLimit = 0
         //将tabLayout与ViewPager绑定
-        tab_type?.setupWithViewPager(vp_article)
+        tab_type.setupWithViewPager(vp_article)
     }
 
     override fun initData(saveInstanceState: Bundle?) {
