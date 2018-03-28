@@ -63,7 +63,7 @@ public class TabArticleAdapter<T extends Article> extends BaseRecyclerViewAdapte
         }
 
         @Override
-        public void setData(T data) {
+        public void setData(int position, T data) {
             tvTitle.setText(data.getDesc());
             Glide.with(getContext()).load(data.getImage().getUrl()).into(ivBackground);
         }

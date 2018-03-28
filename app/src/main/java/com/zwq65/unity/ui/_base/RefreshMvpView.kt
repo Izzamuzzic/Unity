@@ -41,6 +41,13 @@ interface RefreshMvpView<T> : BaseContract.View {
     fun loadData(list: List<T>)
 
     /**
+     * 刷新失败
+     *
+     * @param errMsg 错误信息
+     */
+    fun refreshFail(errMsg: String)
+
+    /**
      * 加载失败
      *
      * @param errMsg 错误信息

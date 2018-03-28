@@ -64,7 +64,7 @@ public class RestVideoAdapter<T extends Video> extends BaseRecyclerViewAdapter<T
         }
 
         @Override
-        public void setData(T data) {
+        public void setData(int position, T data) {
             tvTitle.setText(data.getDesc());
 //            FontUtils.getInstance().setTypeface(tvTitle, FontUtils.Font.FZYouH_504L);
             Glide.with(getContext()).load(data.getImage().getUrl()).into(ivBackground);

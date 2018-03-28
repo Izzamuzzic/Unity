@@ -64,7 +64,7 @@ public abstract class BaseRecyclerViewAdapter<T, V extends BaseViewHolder> exten
         //添加动画
         setAnimation(holder.itemView, position);
         //绘制数据ui
-        holder.setData(getItem(position));
+        holder.setData(position,getItem(position));
     }
 
     @Override

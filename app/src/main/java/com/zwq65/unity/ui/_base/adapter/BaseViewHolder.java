@@ -43,7 +43,7 @@ abstract public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, view);
     }
 
-    public abstract void setData(T data);
+    public abstract void setData(int position,T data);
 
     protected Context getContext() {
         return itemView.getContext();

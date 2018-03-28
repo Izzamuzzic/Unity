@@ -60,7 +60,7 @@ public class AlbumAdapter<T extends Image> extends BaseRecyclerViewAdapter<T, Al
         }
 
         @Override
-        public void setData(T data) {
+        public void setData(int position, T data) {
             Glide.with(getContext())
                     .load(data.getUrl())
                     .into(ivBeauty);

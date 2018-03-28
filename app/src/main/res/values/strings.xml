@@ -79,9 +79,17 @@
     <string name="test">测试</string>
     <string name="exit">退出</string>
 
-    <string name="listview_loading">正在加载…</string>
-    <string name="nomore_loading">没有更多数据了</string>
     <string name="str_finish_if_press_again">再按一次退出</string>
     <string name="str_developping">开发中...＜(▰˘◡˘▰)</string>
+
+    <string name="str_load_more">显示更多</string>
+    <string name="listview_loading">努力加载中…</string>
+    <string name="nomore_loading">没有更多了</string>
+    <string name="refreshing">　正在刷新　</string>
+    <string name="listview_header_hint_normal">下拉刷新…</string>
+    <string name="listview_header_hint_release">释放刷新…</string>
+    <string name="refresh_done">刷新完成…</string>
+    <string name="listview_header_last_time">上次更新时间：</string>
+    <string name="str_no_network">网络开小差了,点击重试</string>
 
 </resources>

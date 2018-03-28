@@ -73,6 +73,10 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="text_12_light_gray">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <!--自定义DialogFragment样式-->
     <style name="DialogFragment" parent="android:style/Theme.Dialog">

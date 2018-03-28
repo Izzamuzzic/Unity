@@ -18,12 +18,15 @@ package com.zwq65.unity.ui._base
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.*
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewStub
 import android.widget.TextView
 import com.zwq65.unity.R
-import com.zwq65.unity.utils.CommonUtils
+import com.zwq65.unity.ui._custom.recycleview.XRecyclerView
 import com.zwq65.unity.utils.bind
 
 /**
@@ -37,17 +40,17 @@ import com.zwq65.unity.utils.bind
  */
 abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Presenter<V>> : BaseFragment<V, P>(), RefreshMvpView<T> {
 
-    lateinit var mRecyclerView: RecyclerView
+    lateinit var mRecyclerView: XRecyclerView
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mVsNoNetwork: ViewStub
     /**
      * ViewStub加載的view
      */
-    private var inflateView: View? = null
+    private var mInflateView: View? = null
     /**
      * 网络出错view的TextView
      */
-    private var tvRetry: TextView? = null
+    private var mTvErrorMessage: TextView? = null
     private var isRefreshing: Boolean = false
     var isLoading: Boolean = false
 
@@ -69,36 +72,24 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
         } else {
             mRecyclerView.layoutManager = StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
         }
+
+        mRecyclerView.setPullRefreshEnabled(false)
+        mRecyclerView.clearHeader()
         //item加载动画（默认）
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         (mRecyclerView.itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations = false
         //下拉加載監聽
-        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val layoutManager = mRecyclerView.layoutManager
-                    val lastVisibleItemPosition: Int
-                    lastVisibleItemPosition = when (layoutManager) {
-                        is GridLayoutManager -> layoutManager.findLastVisibleItemPosition()
-                        is StaggeredGridLayoutManager -> {
-                            val into = IntArray(layoutManager.spanCount)
-                            layoutManager.findLastVisibleItemPositions(into)
-                            CommonUtils.findMax(into)
-                        }
-                        else -> (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                    }
-                    if (layoutManager.childCount > 0
-                            && lastVisibleItemPosition >= layoutManager.itemCount - 1
-                            && layoutManager.itemCount > layoutManager.childCount) {
-                        //onLoadMore
-                        if (isLoading) {
-                            return
-                        }
-                        isLoading = true
-                        requestDataLoad()
-                    }
+        mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
+            override fun onRefresh() {
+
+            }
+
+            override fun onLoadMore() {
+                if (isLoading) {
+                    return
                 }
+                isLoading = true
+                requestDataLoad()
             }
         })
         //上拉刷新監聽
@@ -145,37 +136,61 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
                 if (mSwipeRefreshLayout != null) {
                     mSwipeRefreshLayout.isRefreshing = false
                 }
-            }, 1000)
+            }, 500)
         }
     }
 
     override fun refreshData(list: List<T>) {
         setRefresh(false)
+        mRecyclerView.refreshComplete()
         //如果加载失败view显示过的话，隐藏之
-        inflateView?.visibility = View.GONE
+        mInflateView?.visibility = View.GONE
     }
 
     override fun loadData(list: List<T>) {
         isLoading = false
+        mRecyclerView.refreshComplete()
+    }
+
+    override fun refreshFail(errMsg: String) {
+        setRefresh(false)
+        mRecyclerView.refreshComplete()
+        //加载失败，viewStub加载显示'加载失败‘view
+        showErrorView(errMsg)
     }
 
     override fun loadFail(errMsg: String) {
-        setRefresh(false)
         isLoading = false
-        //加载失败,ViewStub加载显示'加载失败'view
-        try {
-            inflateView = mVsNoNetwork.inflate()
-            tvRetry = inflateView?.findViewById(R.id.tv_retry)
-            tvRetry?.setOnClickListener { v -> requestDataRefresh() }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            //ViewStub已经inflate()过了,在catch()方法下setVisibility(VISIBLE)显示即可
-            inflateView?.visibility = View.VISIBLE
-        }
+        mRecyclerView.refreshComplete()
     }
 
     override fun noMoreData() {
         setRefresh(false)
         isLoading = false
+        mRecyclerView.noMoreLoading()
+    }
+
+    /**
+     * 显示加载数据错误页
+     *
+     * @param errMsg 错误信息
+     */
+    private fun showErrorView(errMsg: String) {
+        if (mInflateView == null) {
+            try {
+                mInflateView = mVsNoNetwork.inflate()
+                mTvErrorMessage = mInflateView?.findViewById(R.id.tv_error_message)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                //viewStub已经执行inflate(),在try catch下setVisibility(VISIBLE)显示即可
+                mInflateView?.visibility = View.VISIBLE
+            }
+
+        } else {
+            mInflateView?.visibility = View.VISIBLE
+        }
+        if (!TextUtils.isEmpty(errMsg) && mTvErrorMessage != null) {
+            mTvErrorMessage?.text = errMsg
+        }
     }
 }
