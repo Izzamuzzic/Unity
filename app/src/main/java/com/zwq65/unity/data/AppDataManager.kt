@@ -18,11 +18,9 @@ package com.zwq65.unity.data
 
 
 import android.content.Context
-import com.trello.rxlifecycle2.LifecycleTransformer
 import com.zwq65.unity.data.db.DbHelper
 import com.zwq65.unity.data.db.model.Picture
 import com.zwq65.unity.data.network.ApiHelper
-import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack
 import com.zwq65.unity.data.network.retrofit.response.GankApiResponse
 import com.zwq65.unity.data.network.retrofit.response.enity.Article
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
@@ -93,69 +91,56 @@ constructor(@param:ApplicationContext private val mContext: Context,
     /*******************************************************************************************************
      * ApiHelper
      * *****************************************************************************************************/
-
     /**
      * 获取随机数目的image'list
      *
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getRandomImages(callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
-        mApiHelper.getRandomImages(callBack, lifecycleTransformer)
+    override fun getRandomImages(): Observable<GankApiResponse<List<Image>>> {
+        return mApiHelper.getRandomImages()
     }
 
     /**
      * 获取page页的image'list
      *
      * @param page                 页数
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun get20Images(page: Int, callBack: ApiSubscriberCallBack<GankApiResponse<List<Image>>>, lifecycleTransformer: LifecycleTransformer<GankApiResponse<List<Image>>>?) {
-        mApiHelper.get20Images(page, callBack, lifecycleTransformer)
+    override fun get20Images(page: Int): Observable<GankApiResponse<List<Image>>> {
+        return mApiHelper.get20Images(page)
     }
 
     /**
      * 同时获取相同数量的image和video实例
      *
      * @param page                 页数
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getVideosAndImages(page: Int, callBack: ApiSubscriberCallBack<List<Video>>, lifecycleTransformer: LifecycleTransformer<List<Video>>?) {
-        mApiHelper.getVideosAndImages(page, callBack, lifecycleTransformer)
+    override fun getVideosAndImages(page: Int): Observable<List<Video>> {
+        return mApiHelper.getVideosAndImages(page)
     }
 
     /**
      * 获取page页的android'list
      *
      * @param page                 页数
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getAndroidArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
-        mApiHelper.getAndroidArticles(page, callBack, lifecycleTransformer)
+    override fun getAndroidArticles(page: Int): Observable<List<Article>> {
+        return mApiHelper.getAndroidArticles(page)
     }
 
     /**
      * 获取page页的ios'list
      *
      * @param page                 页数
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getIosArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
-        mApiHelper.getIosArticles(page, callBack, lifecycleTransformer)
+    override fun getIosArticles(page: Int): Observable<List<Article>> {
+        return mApiHelper.getIosArticles(page)
     }
 
     /**
      * 获取page页的前端'list
      *
      * @param page                 页数
-     * @param callBack             callBack
-     * @param lifecycleTransformer LifecycleTransformer 自动管理生命周期,避免内存泄漏
      */
-    override fun getQianduanArticles(page: Int, callBack: ApiSubscriberCallBack<List<Article>>, lifecycleTransformer: LifecycleTransformer<List<Article>>?) {
-        mApiHelper.getQianduanArticles(page, callBack, lifecycleTransformer)
+    override fun getQianduanArticles(page: Int): Observable<List<Article>> {
+        return mApiHelper.getQianduanArticles(page)
     }
 }

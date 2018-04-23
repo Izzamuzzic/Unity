@@ -23,6 +23,7 @@ import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.data.network.retrofit.response.enity.Video
 
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -42,7 +43,7 @@ interface GankIoApiService {
      * @return List<Image>
     </Image> */
     @get:GET(RANDOM + WELFARE + PAGESIZE_DEFAULT)
-    val randomImages: Flowable<GankApiResponse<List<Image>>>
+    val randomImages: Observable<GankApiResponse<List<Image>>>
 
     /**
      * 获取福利图片（20张）
@@ -51,7 +52,7 @@ interface GankIoApiService {
      * @return List<Image>
     </Image> */
     @GET(DATA + WELFARE + PAGESIZE__20 + "/{page}")
-    fun get20Images(@Path("page") page: Int): Flowable<GankApiResponse<List<Image>>>
+    fun get20Images(@Path("page") page: Int): Observable<GankApiResponse<List<Image>>>
 
     /**
      * 获取休息视频
@@ -60,7 +61,7 @@ interface GankIoApiService {
      * @return List<Video>
     </Video> */
     @GET(DATA + REST_VIDEO + PAGESIZE_DEFAULT + "/{page}")
-    fun getVideos(@Path("page") page: Int): Flowable<GankApiResponse<List<Video>>>
+    fun getVideos(@Path("page") page: Int): Observable<GankApiResponse<List<Video>>>
 
     /**
      * 获取android文章
@@ -69,7 +70,7 @@ interface GankIoApiService {
      * @return List<Article>
     </Article> */
     @GET(DATA + ANDROID + PAGESIZE_DEFAULT + "/{page}")
-    fun getAndroidArticles(@Path("page") page: Int): Flowable<GankApiResponse<List<Article>>>
+    fun getAndroidArticles(@Path("page") page: Int): Observable<GankApiResponse<List<Article>>>
 
     /**
      * 获取ios文章
@@ -78,7 +79,7 @@ interface GankIoApiService {
      * @return List<Article>
     </Article> */
     @GET(DATA + IOS + PAGESIZE_DEFAULT + "/{page}")
-    fun getIosArticles(@Path("page") page: Int): Flowable<GankApiResponse<List<Article>>>
+    fun getIosArticles(@Path("page") page: Int): Observable<GankApiResponse<List<Article>>>
 
     /**
      * 获取前端文章
@@ -87,7 +88,7 @@ interface GankIoApiService {
      * @return List<Article>
     </Article> */
     @GET(DATA + QIANDUAN + PAGESIZE_DEFAULT + "/{page}")
-    fun getQianduanArticles(@Path("page") page: Int): Flowable<GankApiResponse<List<Article>>>
+    fun getQianduanArticles(@Path("page") page: Int): Observable<GankApiResponse<List<Article>>>
 
     companion object {
         /**

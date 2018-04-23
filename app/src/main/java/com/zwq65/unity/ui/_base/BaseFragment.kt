@@ -86,7 +86,6 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
         LogUtils.i(TAG, "onCreateView")
         rootView = inflater.inflate(layoutId, container, false)
         mUnBinder = ButterKnife.bind(this, rootView)
-        initView()
         return rootView
     }
 
@@ -101,6 +100,7 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        initView()
         initData(savedInstanceState)
         super.onActivityCreated(savedInstanceState)
         LogUtils.i(TAG, "onActivityCreated")

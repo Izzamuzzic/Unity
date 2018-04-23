@@ -42,22 +42,23 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     }
 
     override fun loadImages(isRefresh: Boolean?) {
-        dataManager.get20Images(page, object : ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
-            override fun onSuccess(response: GankApiResponse<List<Image>>) {
-                if (response.data?.isNotEmpty()!!) {
-                    page++
-                    if (isRefresh!!) {
-                        mvpView?.refreshData(response.data!!)
-                    } else {
-                        mvpView?.loadData(response.data!!)
+        dataManager.get20Images(page)
+                .apiSubscribe(object : ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
+                    override fun onSuccess(response: GankApiResponse<List<Image>>) {
+                        if (response.data?.isNotEmpty()!!) {
+                            page++
+                            if (isRefresh!!) {
+                                mvpView?.refreshData(response.data!!)
+                            } else {
+                                mvpView?.loadData(response.data!!)
+                            }
+                        } else {
+                            mvpView?.noMoreData()
+                        }
                     }
-                } else {
-                    mvpView?.noMoreData()
-                }
-            }
 
-            override fun onFailure(errCode: String, errMsg: String) {
-            }
-        }, mvpView?.bindUntilStopEvent())
+                    override fun onFailure(errCode: String, errMsg: String) {
+                    }
+                })
     }
 }

@@ -1,7 +1,8 @@
 package com.zwq65.unity.data.network.retrofit.callback
 
 
-import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.ObservableSource
 import io.reactivex.functions.Function
 
 /**
@@ -12,15 +13,15 @@ import io.reactivex.functions.Function
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class HttpErrorFunction<T> : Function<Throwable, Flowable<T>> {
+class HttpErrorFunction<T> : Function<Throwable, ObservableSource<T>> {
     /**
      * Applies this function to the given argument.
      *
      * @param throwable the function argument
      * @return the function result
      */
-    override fun apply(throwable: Throwable): Flowable<T> {
+    override fun apply(throwable: Throwable): ObservableSource<T> {
         //ExceptionEngine为处理异常的驱动器
-        return Flowable.error(ExceptionHandler.handleException(throwable))
+        return Observable.error(ExceptionHandler.handleException(throwable))
     }
 }

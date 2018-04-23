@@ -41,23 +41,24 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     }
 
     override fun loadVideos(isRefresh: Boolean?) {
-        dataManager.getVideosAndImages(page, object : ApiSubscriberCallBack<List<Video>>() {
-            override fun onSuccess(response: List<Video>) {
-                if (response.isNotEmpty()) {
-                    page++
-                    if (isRefresh!!) {
-                        mvpView?.refreshData(response)
-                    } else {
-                        mvpView?.loadData(response)
+        dataManager.getVideosAndImages(page)
+                .apiSubscribe(object : ApiSubscriberCallBack<List<Video>>() {
+                    override fun onSuccess(response: List<Video>) {
+                        if (response.isNotEmpty()) {
+                            page++
+                            if (isRefresh!!) {
+                                mvpView?.refreshData(response)
+                            } else {
+                                mvpView?.loadData(response)
+                            }
+                        } else {
+                            mvpView?.noMoreData()
+                        }
                     }
-                } else {
-                    mvpView?.noMoreData()
-                }
-            }
 
-            override fun onFailure(errCode: String, errMsg: String) {
-                mvpView?.loadFail(errMsg)
-            }
-        }, mvpView?.bindUntilStopEvent())
+                    override fun onFailure(errCode: String, errMsg: String) {
+                        mvpView?.loadFail(errMsg)
+                    }
+                })
     }
 }

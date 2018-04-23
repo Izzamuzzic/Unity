@@ -16,6 +16,12 @@
 package com.zwq65.unity.ui._base
 
 import com.zwq65.unity.data.DataManager
+import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack
+import com.zwq65.unity.data.network.retrofit.callback.HttpErrorFunction
+import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 import java.lang.ref.WeakReference
 
@@ -52,6 +58,47 @@ constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
     override fun onDetach() {
         mViewRef?.clear()
         mViewRef = null
+    }
+
+    /**
+     * [Observable]扩展函数 订阅之前网络请求统一调度处理
+     *
+     * @param callBack             callback回调
+     * @param <T>                  返回类型泛型
+     */
+    fun <T> Observable<T>.apiSubscribe(callBack: ApiSubscriberCallBack<T>) {
+        this.compose(getLifeTransformer())
+                //简化线程、返回数据处理
+                .compose(schedulersTransformer())
+                .subscribe(callBack)
+    }
+
+    /**
+     * 所有网络请求统一处理(compose简化线程、返回数据处理)
+     *
+     * @param <T> api返回数据
+     * @return api返回数据
+    </T> */
+    private fun <T> schedulersTransformer(): ObservableTransformer<T, T> {
+        return ObservableTransformer { upstream ->
+            upstream
+                    //统一切换线程(在io线程进行网络请求；在主线程执行回传ui操作)
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    //返回数据统一处理(操作失败、异常等情况)
+                    .onErrorResumeNext(HttpErrorFunction())
+        }
+
+    }
+
+    /**
+     * 提供RxLifeCycle的生命周期Transformer
+     *
+     * @return ObservableTransformer
+     */
+    private fun <T> getLifeTransformer(): ObservableTransformer<T, T>? {
+        return mvpView?.bindUntilStopEvent()
     }
 
 }

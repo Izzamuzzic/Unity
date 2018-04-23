@@ -71,9 +71,9 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     override fun loadDatas(isRefresh: Boolean?) {
         this.isRefresh = isRefresh!!
         when (type) {
-            TabArticleFragment.ANDROID -> dataManager.getAndroidArticles(page, apiSubscriberCallBack, mvpView!!.bindUntilStopEvent())
-            TabArticleFragment.IOS -> dataManager.getIosArticles(page, apiSubscriberCallBack, mvpView!!.bindUntilStopEvent())
-            TabArticleFragment.H5 -> dataManager.getQianduanArticles(page, apiSubscriberCallBack, mvpView!!.bindUntilStopEvent())
+            TabArticleFragment.ANDROID -> dataManager.getAndroidArticles(page).apiSubscribe(apiSubscriberCallBack)
+            TabArticleFragment.IOS -> dataManager.getIosArticles(page).apiSubscribe(apiSubscriberCallBack)
+            TabArticleFragment.H5 -> dataManager.getQianduanArticles(page).apiSubscribe(apiSubscriberCallBack)
             else -> {
             }
         }
