@@ -87,12 +87,7 @@ class App : DaggerApplication() {
         LeakCanary.install(this)
     }
 
-    fun showToast(msg: String) {
-        ToastUtils.makeText(msg, Toast.LENGTH_SHORT)
-    }
-
     companion object {
-
         var instance: App? = null
             private set
     }

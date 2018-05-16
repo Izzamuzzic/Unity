@@ -33,9 +33,8 @@ import com.zwq65.unity.utils.bind
  * ================================================
  * some view that has handle of refresh should extends [BaseRefreshFragment]
  *
- *
  * Created by NIRVANA on 2017/01/27.
- * Contact with <zwq651406441></zwq651406441>@gmail.com>
+ * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
 abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Presenter<V>> : BaseFragment<V, P>(), RefreshMvpView<T> {

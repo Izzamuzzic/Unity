@@ -78,7 +78,7 @@ class AccountActivity : BaseDaggerActivity<AccountContract.View, AccountContract
          RGB_565表示没有透明度A，R=5,G=6,B=5, 1个像素占5+6+5=16位=2字节。
          如果没有透明度A需求，将ARGB_8888改为RGB_565可以降低1个像素所占字节，Bitmap占用内存也就降低
          */
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inPreferredConfig = Bitmap.Config.RGB_565
         //bitmap壓縮之邻近采样（Nearest Neighbour Resampling）
         val bitmap2 = BitmapFactory.decodeResource(resources, R.mipmap.ic_avatar, options)
 
