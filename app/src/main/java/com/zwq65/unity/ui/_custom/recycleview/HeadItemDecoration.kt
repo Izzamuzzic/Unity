@@ -42,6 +42,7 @@ class HeadItemDecoration : RecyclerView.ItemDecoration() {
     var mGroupInfoCallback: GroupInfoCallback? = null
     private var mHeaderHeight: Int = SizeUtils.dp2px(20f)
     private var mDividerHeight: Int = SizeUtils.dp2px(1f)
+    private var mPadding: Int = SizeUtils.dp2px(6f)
     private val mPaint by lazy {
         Paint().apply {
             this.color = ContextCompat.getColor(App.instance!!.applicationContext, R.color.chart_blue)
@@ -50,7 +51,7 @@ class HeadItemDecoration : RecyclerView.ItemDecoration() {
     private val mTextPaint by lazy {
         Paint().apply {
             this.color = ContextCompat.getColor(App.instance!!.applicationContext, R.color.white)
-            this.textSize = SizeUtils.sp2px(20f).toFloat()
+            this.textSize = SizeUtils.sp2px(16f).toFloat()
         }
     }
 
@@ -62,27 +63,26 @@ class HeadItemDecoration : RecyclerView.ItemDecoration() {
         outRect.top = if (groupInfo?.position == 0) mHeaderHeight else mDividerHeight
     }
 
-    override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDrawOver(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+        super.onDrawOver(c, parent, state)
+
         super.onDraw(c, parent, state)
         val childCount = parent?.childCount
         for (i in 0 until childCount!!) {
-            var view = parent.getChildAt(i)
-            var index = parent.getChildAdapterPosition(view)
-            var groupInfo = mGroupInfoCallback?.getGroupInfo(index)
+            val view = parent.getChildAt(i)
+            val index = parent.getChildAdapterPosition(view)
+            val groupInfo = mGroupInfoCallback?.getGroupInfo(index)
             //只有组内的第一个ItemView之上才绘制
             if (groupInfo?.position == 0) {
-                val left = parent.paddingLeft
-                val top = view.top - mHeaderHeight
-                val right = parent.width - parent.paddingRight
-                val bottom = view.top
-                c?.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), mPaint)
-                val titleX = left
-                val titleY = bottom
+                val left = parent.paddingLeft + mPadding
+                val top = view.top - (mHeaderHeight + mPadding)
+                val right = parent.width - (parent.paddingRight + mPadding)
+                val bottom = view.top + mPadding
+                c?.drawRect(left.toFloat() - mPadding, top.toFloat(), right.toFloat() + mPadding, bottom.toFloat(), mPaint)
                 //绘制Title
-                c?.drawText(groupInfo.content, titleX.toFloat(), titleY.toFloat(), mTextPaint)
+                c?.drawText(groupInfo.content, left.toFloat(), bottom.toFloat(), mTextPaint)
             }
         }
-
     }
 
 
