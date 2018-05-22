@@ -18,7 +18,6 @@ package com.zwq65.unity.data.network.retrofit.callback
 
 import com.zwq65.unity.utils.LogUtils
 import io.reactivex.observers.DefaultObserver
-import io.reactivex.subscribers.DisposableSubscriber
 
 /**
  * ================================================
