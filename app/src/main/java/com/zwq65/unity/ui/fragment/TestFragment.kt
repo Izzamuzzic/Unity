@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.zwq65.unity.R
+import com.zwq65.unity.R.id.mRecyclerView
 import com.zwq65.unity.data.db.model.GroupInfo
 import com.zwq65.unity.ui._base.BaseFragment
 import com.zwq65.unity.ui._custom.recycleview.HeadItemDecoration
@@ -55,7 +56,7 @@ class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<Test
                  */
                 val groupId = position / 5
                 val index = position % 5
-                return GroupInfo(groupId, index, groupId.toString())
+                return GroupInfo(groupId, index, 5, groupId.toString())
             }
         }
         mRecyclerView?.addItemDecoration(mHeadItemDecoration)
