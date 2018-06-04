@@ -11,13 +11,6 @@ import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * ================================================
- * <p>
- * Created by NIRVANA on 2016/1/28
- * Contact with <zwq651406441@gmail.com>
- * ================================================
- */
 public class XRecyclerView extends RecyclerView {
     public final String TAG = "XRecyclerView";
     private Context mContext;
@@ -132,7 +125,7 @@ public class XRecyclerView extends RecyclerView {
         } else {
             loadMoreComplete();
             if (pullRefreshEnabled) {
-                mRefreshHeader.refreshComplate();
+                mRefreshHeader.refreshComplete();
             }
         }
     }
@@ -197,7 +190,7 @@ public class XRecyclerView extends RecyclerView {
                 mLastY = ev.getRawY();
                 if (isOnTop() && pullRefreshEnabled) {
                     mRefreshHeader.onMove(deltaY / DRAG_RATE);
-                    if (mRefreshHeader.getVisiableHeight() > 0 && mRefreshHeader.getState() < YunRefreshHeader.STATE_REFRESHING) {
+                    if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < YunRefreshHeader.STATE_REFRESHING) {
                         return false;
                     }
                 }
