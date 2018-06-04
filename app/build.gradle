@@ -7,12 +7,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion Versions.compileSdkVersion
+    buildToolsVersion Versions.buildToolsVersion
     defaultConfig {
         applicationId "com.zwq65.unity"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -102,71 +102,72 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //test
-    testImplementation "junit:junit:$rootProject.junitVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
-    //design
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v13:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
-    //network
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitConverterVersion"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxjava2AdapterVersion"
-    //gson
-    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
-    //glide
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    //greenDao database
-    implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
-    implementation "org.greenrobot:greendao-generator:$rootProject.greenDaoGeneratorVersion"
-    //butterKnife
-    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
-    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
-    //rxJava2
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
-    //rxLifeCycle2
-    implementation "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycleVersion"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycleVersion"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycleVersion"
-    //dagger2 (dependency injection)
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    //multidex
-    implementation "com.android.support:multidex:$rootProject.multidexVersion"
-    //LeakCanary: A memory leak detection library for Android and Java.
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
-    //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
-    implementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
-    //bugly
-    implementation "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
+    testImplementation "junit:junit:$Versions.junitVersion"
+    testImplementation "org.mockito:mockito-core:$Versions.mockitoVersion"
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //anko
     implementation "org.jetbrains.anko:anko:$anko_version"
+    //design
+    implementation "com.android.support:appcompat-v7:$Versions.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$Versions.supportLibraryVersion"
+    implementation "com.android.support:design:$Versions.supportLibraryVersion"
+    implementation "com.android.support:support-v13:$Versions.supportLibraryVersion"
+    implementation "com.android.support:palette-v7:$Versions.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$Versions.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$Versions.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$Versions.constraintLayoutVersion"
+    //network
+    implementation "com.squareup.okhttp3:okhttp:$Versions.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$Versions.okhttpLoggingVersion"
+    implementation "com.squareup.retrofit2:retrofit:$Versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$Versions.retrofitConverterVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$Versions.retrofitRxjava2AdapterVersion"
+    //gson
+    implementation "com.google.code.gson:gson:$Versions.gsonVersion"
+    //glide
+    implementation "com.github.bumptech.glide:glide:$Versions.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$Versions.glideVersion"
+    //greenDao database
+    implementation "org.greenrobot:greendao:$Versions.greenDaoVersion"
+    implementation "org.greenrobot:greendao-generator:$Versions.greenDaoGeneratorVersion"
+    //butterKnife
+    implementation "com.jakewharton:butterknife:$Versions.butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$Versions.butterknifeVersion"
+    //rxJava2
+    implementation "io.reactivex.rxjava2:rxandroid:$Versions.rxandroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$Versions.rxjavaVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$Versions.rxbindingVersion"
+    //rxLifeCycle2
+    implementation "com.trello.rxlifecycle2:rxlifecycle:$Versions.rxlifecycleVersion"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$Versions.rxlifecycleVersion"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$Versions.rxlifecycleVersion"
+    //dagger2 (dependency injection)
+    implementation "com.google.dagger:dagger:$Versions.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$Versions.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$Versions.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$Versions.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$Versions.daggerVersion"
+    //multidex
+    implementation "com.android.support:multidex:$Versions.multidexVersion"
+    //LeakCanary: A memory leak detection library for Android and Java.
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$Versions.leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$Versions.leakCanaryVersion"
+    //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
+    implementation "com.facebook.stetho:stetho:$Versions.stethoVersion"
+    //bugly
+    implementation "com.tencent.bugly:crashreport:$Versions.buglyVersion"
     //Simplify Android M system permissions
-    implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
+    implementation "pub.devrel:easypermissions:$Versions.easypermissionsVersion"
     //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
-    implementation "com.gyf.barlibrary:barlibrary:$rootProject.barlibraryVersion"
+    implementation "com.gyf.barlibrary:barlibrary:$Versions.barlibraryVersion"
     //A circular ImageView for Android
-    implementation "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
+    implementation "de.hdodenhof:circleimageview:$Versions.circleimageviewVersion"
     //Implementation of ImageView for Android that supports zooming, by various touch gestures.
-    implementation "com.github.chrisbanes:PhotoView:$rootProject.photoViewVersion"
+    implementation "com.github.chrisbanes:PhotoView:$Versions.photoViewVersion"
     //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
-    implementation "com.blankj:utilcode:$rootProject.utilcodeVersion"
+    implementation "com.blankj:utilcode:$Versions.utilcodeVersion"
+
 }
 
 static def releaseTime() {
