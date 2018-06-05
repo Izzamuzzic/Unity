@@ -52,8 +52,4 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
 
     }
 
-
-    override fun onDetach() {
-
-    }
 }

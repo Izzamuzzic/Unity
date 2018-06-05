@@ -29,7 +29,7 @@ import com.zwq65.unity.ui.fragment.TabArticleFragment
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class TabArticleContract {
+interface TabArticleContract {
     interface View<T : Article> : RefreshMvpView<T>
 
     interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
