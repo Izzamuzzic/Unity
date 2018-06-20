@@ -73,7 +73,6 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setCustomDensity(this, application, 375.0f)
         mPresenter.onAttach(this as V)
         toolbar = findViewById(R.id.toolbar)
         if (initBaseTooBar()) {

@@ -31,6 +31,7 @@ import com.zwq65.unity.ui.fragment.AlbumFragment
 import com.zwq65.unity.ui.fragment.ArticleFragment
 import com.zwq65.unity.ui.fragment.RestVideoFragment
 import com.zwq65.unity.ui.fragment.TestFragment
+import com.zwq65.unity.utils.setCustomDensity
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -63,6 +64,8 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
     }
 
     override fun initView() {
+        //屏幕适配方案
+        setCustomDensity(this, application, 375.0f)
         //将drawerLayout、toolBar绑定
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
