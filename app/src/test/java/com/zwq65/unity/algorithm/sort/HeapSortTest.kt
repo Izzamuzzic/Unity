@@ -47,7 +47,7 @@ class HeapSortTest {
     /**
      * 完成一次建堆，最大值在堆的顶部(根节点)
      */
-    fun maxHeapify(arrays: Array<Int>, size: Int) {
+    private fun maxHeapify(arrays: Array<Int>, size: Int) {
         // 从数组的尾部开始，直到第一个元素(角标为0)
         for (i in size - 1 downTo 0) {
             heapify(arrays, i, size)
@@ -61,7 +61,7 @@ class HeapSortTest {
      * @param currentRootNode 当前父节点位置
      * @param size            节点总数
      */
-    fun heapify(arrays: Array<Int>, currentRootNode: Int, size: Int) {
+    private fun heapify(arrays: Array<Int>, currentRootNode: Int, size: Int) {
         if (currentRootNode < size) {
             //左子树和右字数的位置
             val left = 2 * currentRootNode + 1

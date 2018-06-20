@@ -32,6 +32,7 @@ import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zwq65.unity.R
 import com.zwq65.unity.data.DataManager
 import com.zwq65.unity.utils.CommonUtils
+import com.zwq65.unity.utils.setCustomDensity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -72,6 +73,7 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+        setCustomDensity(this, application, 375.0f)
         mPresenter.onAttach(this as V)
         toolbar = findViewById(R.id.toolbar)
         if (initBaseTooBar()) {
