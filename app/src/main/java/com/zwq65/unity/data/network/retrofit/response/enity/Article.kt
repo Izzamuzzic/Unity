@@ -29,8 +29,7 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-open
-data class Article(var _id: String?, var createdAt: String?, var desc: String?,var publishedAt: String?,
+open class Article(var _id: String?, var createdAt: String?, var desc: String?,var publishedAt: String?,
                    var source: String?, var type: String?, var url: String?,
                    var isUsed: Boolean = false, var who: String?, var images: List<String>?, var image: Image?) : Parcelable {
     /**
