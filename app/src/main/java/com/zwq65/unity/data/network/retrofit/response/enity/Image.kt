@@ -29,9 +29,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-class Image(var _id: String?, var createdAt: String?, var desc: String?, var publishedAt: String?,
-            var source: String?, var type: String?, var url: String?,
-            var isUsed: Boolean = false, var who: String?, var width: Int?, var height: Int?) : Parcelable {
+open class Image(var _id: String?, var createdAt: String?, var desc: String?, var publishedAt: String?,
+                 var source: String?, var type: String?, var url: String?,
+                 var isUsed: Boolean = false, var who: String?, var width: Int?, var height: Int?) : Parcelable {
     /**
      * _id : 596ea620421aa90c9203d3bc
      * createdAt : 2017-07-19T08:21:52.67Z

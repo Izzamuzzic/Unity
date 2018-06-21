@@ -29,9 +29,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-class Video(var _id: String?, var createdAt: String?, var desc: String?, var publishedAt: String?,
-            var source: String?, var type: String?, var url: String?,
-            var isUsed: Boolean = false, var who: String?, var image: Image?) : Parcelable {
+open class Video(var _id: String?, var createdAt: String?, var desc: String?, var publishedAt: String?,
+                 var source: String?, var type: String?, var url: String?,
+                 var isUsed: Boolean = false, var who: String?, var image: Image?) : Parcelable {
     /**
      * _id : 59906c33421aa90f4919c7e1
      * createdAt : 2017-08-13T23:11:47.518Z
