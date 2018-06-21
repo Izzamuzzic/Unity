@@ -20,10 +20,10 @@ import android.os.Bundle
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BaseRefreshFragment
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter
 import com.zwq65.unity.ui.activity.ImageActivity
 import com.zwq65.unity.ui.adapter.AlbumAdapter
 import com.zwq65.unity.ui.contract.AlbumContract
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -50,7 +50,12 @@ class AlbumFragment : BaseRefreshFragment<Image, AlbumContract.View<Image>, Albu
 
     override fun initView() {
         super.initView()
-        mAdapter.setOnItemClickListener { _, position -> gotoContentActivity(position) }
+        mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Image> {
+            override fun onClick(t: Image, position: Int) {
+                gotoContentActivity(position)
+            }
+
+        })
         mRecyclerView.adapter = mAdapter
     }
 
@@ -62,7 +67,7 @@ class AlbumFragment : BaseRefreshFragment<Image, AlbumContract.View<Image>, Albu
     private fun gotoContentActivity(position: Int) {
         val bundle = Bundle()
         bundle.putInt(ImageActivity.POSITION, position)
-        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, mAdapter.getmDataList() as ArrayList<Image>)
+        bundle.putParcelableArrayList(ImageActivity.IMAGE_LIST, mAdapter.getmDataList())
         mActivity?.openActivity(ImageActivity::class.java, bundle)
     }
 

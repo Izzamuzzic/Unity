@@ -17,14 +17,13 @@
 package com.zwq65.unity.ui.fragment
 
 import android.os.Bundle
-
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Video
 import com.zwq65.unity.ui._base.BaseRefreshFragment
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter
 import com.zwq65.unity.ui.activity.WatchActivity
 import com.zwq65.unity.ui.adapter.RestVideoAdapter
 import com.zwq65.unity.ui.contract.RestVideoContract
-
 import javax.inject.Inject
 
 /**
@@ -52,8 +51,13 @@ class RestVideoFragment : BaseRefreshFragment<Video, RestVideoContract.View<Vide
 
     override fun initView() {
         super.initView()
-        mAdapter.setOnItemClickListener { video, _ -> gotoWatchActivity(video) }
-        mRecyclerView?.adapter = mAdapter
+        mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Video> {
+            override fun onClick(t: Video, position: Int) {
+                gotoWatchActivity(t)
+            }
+
+        })
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun initData(saveInstanceState: Bundle?) {

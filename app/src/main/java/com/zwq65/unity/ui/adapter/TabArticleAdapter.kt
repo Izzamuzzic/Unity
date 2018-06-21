@@ -47,10 +47,6 @@ internal constructor() : BaseRecyclerViewAdapter<T, TabArticleAdapter<T>.ViewHol
     }
 
     inner class ViewHolder(view: View) : BaseViewHolder<T>(view) {
-        @BindView(R.id.iv_background)
-        var ivBackground: ImageView? = null
-        @BindView(R.id.tv_title)
-        var tvTitle: TextView? = null
 
         override fun setData(position: Int, data: T) {
             itemView.tv_title?.text = data.desc

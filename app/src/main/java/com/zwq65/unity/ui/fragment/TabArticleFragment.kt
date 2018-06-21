@@ -21,6 +21,7 @@ import android.support.annotation.IntDef
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Article
 import com.zwq65.unity.ui._base.BaseRefreshFragment
+import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter
 import com.zwq65.unity.ui.activity.WebArticleActivity
 import com.zwq65.unity.ui.adapter.TabArticleAdapter
 import com.zwq65.unity.ui.contract.TabArticleContract
@@ -52,7 +53,12 @@ class TabArticleFragment : BaseRefreshFragment<Article, TabArticleContract.View<
 
     override fun initView() {
         super.initView()
-        mAdapter.setOnItemClickListener { article, _ -> gotoDetailActivity(article) }
+        mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Article> {
+            override fun onClick(t: Article, position: Int) {
+                gotoDetailActivity(t)
+            }
+
+        })
         mRecyclerView.adapter = mAdapter
     }
 
