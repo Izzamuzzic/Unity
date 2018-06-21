@@ -13,7 +13,7 @@ object Versions {
     val kotlinVersion = "1.2.21"
     val ankoVersion = "0.10.4"
     val supportLibraryVersion = "27.1.1"
-    val constraintLayoutVersion = "1.1.0"
+    val constraintLayoutVersion = "1.1.2"
     val okhttpVersion = "3.5.0"
     val okhttpLoggingVersion = "3.4.1"
     val retrofitVersion = "2.3.0"
