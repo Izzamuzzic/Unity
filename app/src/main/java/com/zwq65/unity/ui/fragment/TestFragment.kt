@@ -20,6 +20,7 @@ import android.os.Bundle
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseFragment
 import com.zwq65.unity.ui.contract.TestContract
+import kotlinx.android.synthetic.main.fragment_test.*
 
 
 /**
@@ -35,7 +36,7 @@ class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<Test
         get() = R.layout.fragment_test
 
     override fun initView() {
-
+        btn_test?.setOnClickListener { mPresenter.test() }
     }
 
     override fun initData(saveInstanceState: Bundle?) {

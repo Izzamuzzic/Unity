@@ -74,6 +74,21 @@ constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
     }
 
     /**
+     * [Observable]网络请求时显示加载框，结束后隐藏
+     *
+     * @param <T>                  返回类型泛型
+     */
+    fun <T> Observable<T>.showLoading(): Observable<T> {
+        return this.observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    mvpView?.showLoading()
+                }
+                .doAfterTerminate {
+                    mvpView?.hideLoading()
+                }
+    }
+
+    /**
      * 所有网络请求统一处理(compose简化线程、返回数据处理)
      *
      * @param <T> api返回数据

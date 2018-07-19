@@ -47,12 +47,11 @@ class ImagePresenter<V : ImageContract.View> @Inject
 internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), ImageContract.Presenter<V> {
 
     override fun savePicture(context: Context, image: Image) {
-        mvpView?.showLoading()
         Observable.just(image)
                 .subscribeOn(Schedulers.io())
                 .compose(mvpView?.bindUntilStopEvent())
                 .map(object : Function<Image, Bitmap> {
-                    internal lateinit var bitmap: Bitmap
+                    lateinit var bitmap: Bitmap
 
                     @Throws(Exception::class)
                     override fun apply(@NonNull image: Image): Bitmap {
@@ -70,13 +69,12 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
                         return bitmap
                     }
                 })
+                .showLoading()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ _ ->
-                    mvpView?.hideLoading()
                     mvpView?.showMessage(R.string.success_msg_save)
                 }) { throwable ->
                     LogUtils.e(throwable.toString())
-                    mvpView?.hideLoading()
                     mvpView?.showError(R.string.error_msg_save_fail)
                 }
     }
@@ -88,26 +86,23 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
                 .flatMap { _ ->
                     val picture = Picture(image._id, image.createdAt, image.desc,
                             image.source, image.type, image.url, image.who)
-                    //显示加载框
-                    mvpView?.showLoading()
                     dataManager.savePicture(picture)
-                }.subscribe({ _ ->
+                }
+                .showLoading()
+                .subscribe({ _ ->
                     mvpView?.showMessage(R.string.success_msg_collect)
-                    mvpView?.hideLoading()
                 }) { throwable ->
                     LogUtils.e(throwable.toString())
-                    mvpView?.hideLoading()
                     mvpView?.showError(R.string.error_msg_collect_fail)
                 }
     }
 
     override fun cancelCollectPicture(image: Image) {
-        mvpView?.showLoading()
         image._id?.let {
             dataManager.deletePicture(it)
                     .compose(mvpView?.bindUntilStopEvent())
-                    .subscribe({ mvpView?.hideLoading() }) {
-                        mvpView?.hideLoading()
+                    .showLoading()
+                    .subscribe {
                         mvpView?.showError(R.string.error_msg_cancel_collect_fail)
                     }
         }

@@ -71,7 +71,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout?.addDrawerListener(toggle)
         toggle.syncState()
-        gotoFragment(AlbumFragment())
+
         addToolbarDoubleClick()
         iv_avatar.setOnClickListener(this)
         tv_account_name.setOnClickListener(this)
@@ -81,6 +81,9 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         ll_setting.setOnClickListener(this)
         ll_out.setOnClickListener(this)
         fab.setOnClickListener(this)
+
+        //默认跳转
+        gotoFragment(TestFragment())
     }
 
     override fun initData() {

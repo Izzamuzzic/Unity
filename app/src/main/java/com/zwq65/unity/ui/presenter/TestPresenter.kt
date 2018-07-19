@@ -19,6 +19,8 @@ package com.zwq65.unity.ui.presenter
 import com.zwq65.unity.data.DataManager
 import com.zwq65.unity.ui._base.BasePresenter
 import com.zwq65.unity.ui.contract.TestContract
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -32,5 +34,9 @@ class TestPresenter<V : TestContract.View> @Inject
 internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), TestContract.Presenter<V> {
 
     override fun test() {
+        Observable.timer(1, TimeUnit.SECONDS)
+                .showLoading()
+                .subscribe {
+        }
     }
 }
