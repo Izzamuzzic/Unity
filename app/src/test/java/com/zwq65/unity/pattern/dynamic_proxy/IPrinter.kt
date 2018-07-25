@@ -1,4 +1,4 @@
-package com.zwq65.unity.pattern.dynamic_proxy;
+package com.zwq65.unity.pattern.dynamic_proxy
 
 /**
  * ================================================
@@ -7,8 +7,8 @@ package com.zwq65.unity.pattern.dynamic_proxy;
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-public interface IPrinter {
-    void print();
+interface IPrinter {
+    fun print()
 
-    void cancelPrint();
+    fun cancelPrint()
 }

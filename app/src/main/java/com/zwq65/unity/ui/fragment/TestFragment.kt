@@ -17,10 +17,16 @@
 package com.zwq65.unity.ui.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearLayoutManager.HORIZONTAL
 import com.zwq65.unity.R
+import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BaseFragment
+import com.zwq65.unity.ui.adapter.AvatarAdapter
 import com.zwq65.unity.ui.contract.TestContract
 import kotlinx.android.synthetic.main.fragment_test.*
+import javax.inject.Inject
 
 
 /**
@@ -31,17 +37,30 @@ import kotlinx.android.synthetic.main.fragment_test.*
  * ================================================
  */
 class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>>(), TestContract.View {
-
+    @Inject
+    lateinit var mAdapter: AvatarAdapter<Image>
     override val layoutId: Int
         get() = R.layout.fragment_test
 
     override fun initView() {
-        btn_test?.setOnClickListener { mPresenter.test() }
+        val mLinearLayoutManager = LinearLayoutManager(context)
+        mLinearLayoutManager.orientation = HORIZONTAL
+        mRecyclerView.layoutManager = mLinearLayoutManager
+        //item加载动画（默认）
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun initData(saveInstanceState: Bundle?) {
-
+        mPresenter.loadImages()
     }
 
-
+    /**
+     * 加载数据
+     *
+     * @param list 数据列表
+     */
+    override fun loadData(list: List<Image>) {
+        mAdapter.addItems(list)
+    }
 }

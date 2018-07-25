@@ -104,11 +104,6 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         }
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
     override fun onClick(v: View?) {
         drawer_layout?.closeDrawer(GravityCompat.START)
         when (v?.id) {

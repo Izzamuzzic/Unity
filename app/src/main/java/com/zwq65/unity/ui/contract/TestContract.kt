@@ -16,6 +16,7 @@
 
 package com.zwq65.unity.ui.contract
 
+import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BaseContract
 
 /**
@@ -27,9 +28,20 @@ import com.zwq65.unity.ui._base.BaseContract
  */
 interface TestContract {
 
-    interface View :BaseContract.View
+    interface View : BaseContract.View {
+        /**
+         * 加载数据
+         *
+         * @param list 数据列表
+         */
+        fun loadData(list: List<Image>)
+    }
 
     interface Presenter<V : BaseContract.View> : BaseContract.Presenter<V> {
         fun test()
+        /**
+         * 加载图片资源
+         */
+        fun loadImages()
     }
 }
