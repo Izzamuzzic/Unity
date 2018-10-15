@@ -66,11 +66,14 @@ constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
      * @param callBack             callback回调
      * @param <T>                  返回类型泛型
      */
-    fun <T> Observable<T>.apiSubscribe(callBack: ApiSubscriberCallBack<T>) {
+    fun <T> Observable<T>.apiSubscribe(callBack: ApiSubscriberCallBack<T>, showLoading: Boolean = false) {
         this.compose(getLifeTransformer())
                 //简化线程、返回数据处理
                 .compose(schedulersTransformer())
-                .subscribe(callBack)
+        if (showLoading) {
+            this.showLoading()
+        }
+        this.subscribe(callBack)
     }
 
     /**

@@ -22,14 +22,38 @@ import java.lang.ref.WeakReference
 
 /**
  * 加载图片url
+ *
  * @param url 图片url
  */
 fun ImageView.loadUrl(url: String?) {
     // 具体图片加载实现可以使用第三方框架加载，也可以自己实现，
-    var requestOptions = RequestOptions().centerCrop()
+    val requestOptions = RequestOptions()
+            .centerCrop()
             .transform(CenterCrop())
             .format(DecodeFormat.PREFER_RGB_565)
             .priority(Priority.NORMAL)
+            .dontAnimate()
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+
+    Glide.with(context.applicationContext)
+            .load(url)
+            .apply(requestOptions)
+            .into(this)
+}
+
+/**
+ * 加载圆形图片url
+ *
+ * @param url 图片url
+ */
+fun ImageView.loadCircle(url: String?) {
+    // 具体图片加载逻辑
+    val requestOptions = RequestOptions()
+            .centerCrop()
+            .transform(CenterCrop())
+            .format(DecodeFormat.PREFER_RGB_565)
+            .priority(Priority.NORMAL)
+            .circleCrop()
             .dontAnimate()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
 
@@ -54,10 +78,6 @@ fun loadCircle(context: WeakReference<Context>, url: String?, image: ImageView?,
     // 具体图片加载逻辑
 }
 
-fun loadRound(context: WeakReference<Context>, url: String, image: ImageView?, width: Int, height: Int, round: Int) {
-    if (image == null) return
-    // 具体图片加载逻辑
-}
 
 fun clearCache(context: WeakReference<Context>) {
     // 强制清楚缓存，可以为内存缓存也可以为硬盘缓存

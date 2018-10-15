@@ -5,7 +5,7 @@ import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.adapter.BaseRecyclerViewAdapter
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder
-import com.zwq65.unity.utils.loadUrl
+import com.zwq65.unity.utils.loadCircle
 import kotlinx.android.synthetic.main.item_avatar.view.*
 import javax.inject.Inject
 
@@ -30,7 +30,7 @@ internal constructor() : BaseRecyclerViewAdapter<T, AvatarAdapter<T>.ViewHolder>
     inner class ViewHolder(view: View) : BaseViewHolder<T>(view) {
 
         override fun setData(position: Int, data: T) {
-            itemView.iv_avatar?.loadUrl(data.url)
+            itemView.iv_avatar?.loadCircle(data.url)
         }
     }
 }

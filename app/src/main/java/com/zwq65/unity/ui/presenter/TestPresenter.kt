@@ -41,7 +41,6 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     override fun loadImages() {
         dataManager
                 .getRandomImages()
-                .showLoading()
                 .apiSubscribe(object : ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
                     override fun onSuccess(response: GankApiResponse<List<Image>>) {
                         mvpView?.loadData(response.data!!)
@@ -49,7 +48,7 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
 
                     override fun onFailure(errCode: String, errMsg: String) {
                     }
-                })
+                }, true)
     }
 
     override fun test() {
