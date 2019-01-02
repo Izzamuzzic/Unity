@@ -5,7 +5,7 @@ object Versions {
     const val minSdkVersion = 19
     const val targetSdkVersion = 27
     const val compileSdkVersion = 27
-    const val buildToolsVersion = "27.0.3"
+    const val buildToolsVersion = "28.0.3"
 
     // App dependencies
     const val junitVersion = "4.12"
