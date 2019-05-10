@@ -23,7 +23,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatDelegate
 import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
-import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseDaggerActivity
 import com.zwq65.unity.ui._base.BaseFragment
 import com.zwq65.unity.ui.contract.MainContract
@@ -31,12 +30,15 @@ import com.zwq65.unity.ui.fragment.AlbumFragment
 import com.zwq65.unity.ui.fragment.ArticleFragment
 import com.zwq65.unity.ui.fragment.RestVideoFragment
 import com.zwq65.unity.ui.fragment.TestFragment
+import com.zwq65.unity.utils.loadCircle
 import com.zwq65.unity.utils.setCustomDensity
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.drawer_left.*
+import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
+
 
 /**
  * ================================================
@@ -51,7 +53,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
     private var disposable: Disposable? = null
 
     override val layoutId: Int
-        get() = R.layout.activity_main
+        get() = com.zwq65.unity.R.layout.activity_main
 
     private var firstClick: Long = 0
 
@@ -68,22 +70,24 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         setCustomDensity(this, application, 375.0f)
         //将drawerLayout、toolBar绑定
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, toolbar, com.zwq65.unity.R.string.navigation_drawer_open, com.zwq65.unity.R.string.navigation_drawer_close)
         drawer_layout?.addDrawerListener(toggle)
         toggle.syncState()
 
         addToolbarDoubleClick()
-        iv_avatar.setOnClickListener(this)
-        tv_account_name.setOnClickListener(this)
-        ll_welfare.setOnClickListener(this)
-        ll_news.setOnClickListener(this)
-        ll_video.setOnClickListener(this)
-        ll_setting.setOnClickListener(this)
-        ll_out.setOnClickListener(this)
-        fab.setOnClickListener(this)
+        iv_avatar?.setOnClickListener(this)
+        iv_avatar?.loadCircle(com.zwq65.unity.R.mipmap.ic_avatar)
+        tv_account_name?.setOnClickListener(this)
+        ll_welfare?.setOnClickListener(this)
+        ll_news?.setOnClickListener(this)
+        ll_video?.setOnClickListener(this)
+        ll_setting?.setOnClickListener(this)
+        ll_out?.setOnClickListener(this)
+        fab?.setOnClickListener(this)
 
         //默认跳转
         gotoFragment(TestFragment())
+        logTest()
     }
 
     override fun initData() {
@@ -97,7 +101,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
             //双击退出app
             if (System.currentTimeMillis() - firstClick > DELAY_TIME_FINISH) {
                 firstClick = System.currentTimeMillis()
-                showMessage(R.string.str_finish_if_press_again)
+                showMessage(com.zwq65.unity.R.string.str_finish_if_press_again)
             } else {
                 super.onBackPressed()
             }
@@ -107,25 +111,43 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
     override fun onClick(v: View?) {
         drawer_layout?.closeDrawer(GravityCompat.START)
         when (v?.id) {
-            R.id.iv_avatar, R.id.tv_account_name ->
+            com.zwq65.unity.R.id.iv_avatar, com.zwq65.unity.R.id.tv_account_name ->
                 //个人中心
                 openActivity(AccountActivity::class.java)
-            R.id.ll_welfare ->
+            com.zwq65.unity.R.id.ll_welfare ->
                 //福利图集
                 gotoFragment(AlbumFragment())
-            R.id.ll_news ->
+            com.zwq65.unity.R.id.ll_news ->
                 //技术文章
                 gotoFragment(ArticleFragment())
-            R.id.ll_video ->
+            com.zwq65.unity.R.id.ll_video ->
                 //休息视频
                 gotoFragment(RestVideoFragment())
-            R.id.ll_setting ->
+            com.zwq65.unity.R.id.ll_setting -> {
                 gotoFragment(TestFragment())
-            R.id.ll_out -> onBackPressed()
-            R.id.fab -> setDayNightMode()
+                logTest()
+            }
+            com.zwq65.unity.R.id.ll_out -> onBackPressed()
+            com.zwq65.unity.R.id.fab -> setDayNightMode()
             else -> {
             }
         }
+    }
+
+    private fun logTest() {
+        val log = LoggerFactory.getLogger("logloglog")
+        val log2 = LoggerFactory.getLogger(MainActivity::class.java)
+        log.trace("hello world{}",1)
+        log.info("hello world{}",2)
+        log.debug("hello world{}",3)
+        log.error("hello world{}",4)
+        log.warn("hello world{}",5)
+
+        log2.trace("hello world")
+        log2.info("hello world")
+        log2.debug("hello world")
+        log2.error("hello world")
+        log2.warn("hello world")
     }
 
     /**
@@ -143,7 +165,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
             }
         }
         setDayNightMode(mPresenter.nightMode!!)
-        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+        window.setWindowAnimations(com.zwq65.unity.R.style.WindowAnimationFadeInOut)
         recreate()
     }
 
@@ -172,7 +194,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
                 if (objects.size == clickNum) {
                     val fragmentManager = supportFragmentManager
                     val fragmentList = fragmentManager.fragments
-                    if (fragmentList != null && fragmentList.size > 0) {
+                    if (fragmentList.size > 0) {
                         fragmentList
                                 .filter { it.isVisible }
                                 .filterIsInstance<BaseFragment<*, *>>()
@@ -184,7 +206,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
     }
 
     private fun gotoFragment(fragment: BaseFragment<*, *>) {
-        switchFragment(R.id.fl_main, fragment, fragment.javaClass.simpleName)
+        switchFragment(com.zwq65.unity.R.id.fl_main, fragment, fragment.javaClass.simpleName)
     }
 
     override fun onDestroy() {

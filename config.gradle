@@ -1,0 +1,120 @@
+ext {
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+    ]
+
+    dependVersion = [
+            androidSupportSdkVersion     : "28.0.0",
+            espressoSdkVersion           : "3.0.2",
+            retrofitSdkVersion           : "2.4.0",
+            glideSdkVersion              : "4.8.0",
+            rxJava                       : "2.2.2",
+            rxAndroid                    : "2.1.0",
+            rxKotlin                     : "2.3.0",
+            anko                         : "0.10.7",
+            junitVersion                 : "4.12",
+            mockitoVersion               : "2.11.0",
+            kotlinVersion                : "1.2.21",
+            supportLibraryVersion        : "28.0.0",
+            constraintLayoutVersion      : "1.1.2",
+            okhttpVersion                : "3.5.0",
+            okhttpLoggingVersion         : "3.4.1",
+            retrofitVersion              : "2.3.0",
+            retrofitConverterVersion     : "2.2.0",
+            retrofitRxjava2AdapterVersion: "1.0.0",
+            gsonVersion                  : "2.8.2",
+            glideVersion                 : "4.6.1",
+            greenDaoVersion              : "3.2.0",
+            greenDaoGeneratorVersion     : "3.1.0",
+            butterknifeVersion           : "8.8.1",
+            rxjavaVersion                : "2.1.3",
+            rxbindingVersion             : "2.0.0",
+            rxandroidVersion             : "2.0.2",
+            rxlifecycleVersion           : "2.2.1",
+            multidexVersion              : "1.0.3",
+            daggerVersion                : "2.15",
+            leakCanaryVersion            : "1.5.4",
+    ]
+
+    supportDeps = [
+            "supportv4"        : "com.android.support:support-v4:${dependVersion.androidSupportSdkVersion}",
+            "supportv13"       : "com.android.support:support-v13:${dependVersion.androidSupportSdkVersion}",
+            "appcompatv7"      : "com.android.support:appcompat-v7:${dependVersion.androidSupportSdkVersion}",
+            "apppalettev7"     : "com.android.support:palette-v7:${dependVersion.androidSupportSdkVersion}",
+            "apprecyclerviewv7": "com.android.support:recyclerview-v7:${dependVersion.androidSupportSdkVersion}",
+            "cardview"         : "com.android.support:cardview-v7:${dependVersion.androidSupportSdkVersion}",
+            "design"           : "com.android.support:design:${dependVersion.androidSupportSdkVersion}",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:1.1.3",
+            "annotations"      : "com.android.support:support-annotations:${dependVersion.androidSupportSdkVersion}"
+    ]
+
+    retrofit = [
+            "retrofit"                : "com.squareup.retrofit2:retrofit:${dependVersion.retrofitSdkVersion}",
+            "retrofitConverterGson"   : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofitSdkVersion}",
+            "retrofitAdapterRxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofitSdkVersion}",
+            "okhttp3LoggerInterceptor": 'com.squareup.okhttp3:logging-interceptor:3.11.0',
+            "retrofitConverterMoshi"  : 'com.squareup.retrofit2:converter-moshi:2.4.0',
+            "retrofitKotlinMoshi"     : "com.squareup.moshi:moshi-kotlin:1.7.0"
+
+    ]
+
+    rxJava = [
+            "rxJava"                : "io.reactivex.rxjava2:rxjava:${dependVersion.rxJava}",
+            "rxAndroid"             : "io.reactivex.rxjava2:rxandroid:${dependVersion.rxAndroid}",
+            "rxKotlin"              : "io.reactivex.rxjava2:rxkotlin:${dependVersion.rxKotlin}",
+            "rxbinding"             : "com.jakewharton.rxbinding2:rxbinding:${dependVersion.rxbindingVersion}",
+            "rxlifecycle"           : "com.trello.rxlifecycle2:rxlifecycle:${dependVersion.rxlifecycleVersion}",
+            "rxlifecycle-android"   : "com.trello.rxlifecycle2:rxlifecycle-android:${dependVersion.rxlifecycleVersion}",
+            "rxlifecycle-components": "com.trello.rxlifecycle2:rxlifecycle-components:${dependVersion.rxlifecycleVersion}",
+            "anko"                  : "org.jetbrains.anko:anko:${dependVersion.anko}"
+    ]
+    dagger = [
+            "dagger"                  : "com.google.dagger:dagger:${dependVersion.daggerVersion}",
+            "dagger-android"          : "com.google.dagger:dagger-android:${dependVersion.rxAndroid}",
+            "dagger-android-support"  : "com.google.dagger:dagger-android-support:${dependVersion.rxKotlin}",
+            "dagger-compiler"         : "com.google.dagger:dagger-compiler:${dependVersion.anko}",
+            "dagger-android-processor": "com.google.dagger:dagger-android-processor:${dependVersion.anko}"
+    ]
+
+    testDeps = [
+            "junit"             : 'junit:junit:4.12',
+            "runner"            : 'com.android.support.test:runner:1.0.2',
+            "espresso-core"     : "com.android.support.test.espresso:espresso-core:${dependVersion.espressoSdkVersion}",
+            "espresso-contrib"  : "com.android.support.test.espresso:espresso-contrib:${dependVersion.espressoSdkVersion}",
+            "espresso-intents"  : "com.android.support.test.espresso:espresso-intents:${dependVersion.espressoSdkVersion}",
+            "leakcanary-debug"  : 'com.squareup.leakcanary:leakcanary-android:${dependVersion.leakCanaryVersion}',
+            "leakcanary-release": 'com.squareup.leakcanary:leakcanary-android-no-op:${dependVersion.leakCanaryVersion}',
+    ]
+
+    commonDeps = [
+            "multidex"       : 'com.android.support:multidex:1.0.3',
+            "logger"         : 'com.orhanobut:logger:2.2.0',
+            "glide"          : 'com.github.bumptech.glide:glide:4.8.0',
+            "rxpermissions"  : 'com.github.tbruyelle:rxpermissions:0.10.2',
+            "gson"           : 'com.google.code.gson:gson:2.8.2',
+            //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
+            "stetho"         : 'com.facebook.stetho:stetho:1.5.0',
+            "bugly"          : 'com.tencent.bugly:crashreport:2.6.6.1',
+            "easypermissions": 'pub.devrel:easypermissions:1.1.1',
+            //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
+            "barlibrary"     : 'com.gyf.barlibrary:barlibrary:2.3.0',
+            //Implementation of ImageView for Android that supports zooming, by various touch gestures.
+            "photoView"      : 'com.github.chrisbanes:PhotoView:2.1.3',
+            //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
+            "utilcode"       : 'com.blankj:utilcode:1.15.1',
+    ]
+
+    otherDeps = [
+            "arouter-compiler": 'com.alibaba:arouter-compiler:1.2.1'
+    ]
+
+    supportLibs = supportDeps.values()
+    networkLibs = retrofit.values()
+    rxJavaLibs = rxJava.values()
+    daggerLibs = dagger.values()
+    commonLibs = commonDeps.values()
+
+}

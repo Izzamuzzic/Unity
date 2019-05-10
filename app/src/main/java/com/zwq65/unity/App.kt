@@ -18,15 +18,12 @@ package com.zwq65.unity
 
 import android.content.Context
 import android.support.multidex.MultiDex
-import android.widget.Toast
-
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 import com.tencent.bugly.crashreport.CrashReport
 import com.zwq65.unity.di.component.DaggerApplicationComponent
-import com.zwq65.unity.utils.ToastUtils
-
+import com.zwq65.unity.utils.LogConfigurator
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
@@ -47,6 +44,7 @@ class App : DaggerApplication() {
         initBugly()
         initStetho()
         initLeakCanary()
+        LogConfigurator.configure()
     }
 
     /**

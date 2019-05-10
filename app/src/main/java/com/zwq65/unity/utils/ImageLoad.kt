@@ -63,6 +63,28 @@ fun ImageView.loadCircle(url: String?) {
             .into(this)
 }
 
+/**
+ * 加载圆形图片資源
+ *
+ * @param url 图片url
+ */
+fun ImageView.loadCircle(source: Int?) {
+    // 具体图片加载逻辑
+    val requestOptions = RequestOptions()
+            .centerCrop()
+            .transform(CenterCrop())
+            .format(DecodeFormat.PREFER_RGB_565)
+            .priority(Priority.NORMAL)
+            .circleCrop()
+            .dontAnimate()
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+
+    Glide.with(context.applicationContext)
+            .load(source)
+            .apply(requestOptions)
+            .into(this)
+}
+
 fun load(context: WeakReference<Context>, url: String?, image: ImageView?, transformation: BitmapTransformation) {
     if (image == null) return
     // 具体图片加载逻辑

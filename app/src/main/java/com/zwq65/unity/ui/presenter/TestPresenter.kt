@@ -22,8 +22,6 @@ import com.zwq65.unity.data.network.retrofit.response.GankApiResponse
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BasePresenter
 import com.zwq65.unity.ui.contract.TestContract
-import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -52,9 +50,6 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     }
 
     override fun test() {
-        Observable.timer(1, TimeUnit.SECONDS)
-                .showLoading()
-                .subscribe {
-                }
+
     }
 }

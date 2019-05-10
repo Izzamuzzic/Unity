@@ -262,6 +262,7 @@
 -keep class com.tuyenmonkey.mkloader.** {*;}
 -dontwarn  com.tuyenmonkey.mkloader.**
 
-######################## circleimageview混淆 ########################
--keep class de.hdodenhof.circleimageview.** {*;}
--dontwarn  de.hdodenhof.circleimageview.**
+########################slf4j混淆 ########################
+-keep class ch.qos.** { *; }
+-keep class org.slf4j.** { *; }
+-keepattributes *Annotation*

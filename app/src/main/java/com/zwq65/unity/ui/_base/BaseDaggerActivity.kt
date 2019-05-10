@@ -32,7 +32,6 @@ import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zwq65.unity.R
 import com.zwq65.unity.data.DataManager
 import com.zwq65.unity.utils.CommonUtils
-import com.zwq65.unity.utils.setCustomDensity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -161,13 +160,13 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
     }
 
     override fun showError(message: String) {
-        val snackbar = Snackbar.make(findViewById(android.R.id.content),
+        val snackBar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT)
-        val sbView = snackbar.view
+        val sbView = snackBar.view
         sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.warn_color))
         val textView = sbView.findViewById<TextView>(android.support.design.R.id.snackbar_text)
         textView.setTextColor(ContextCompat.getColor(this, R.color.white))
-        snackbar.show()
+        snackBar.show()
     }
 
     /**

@@ -35,7 +35,6 @@ object Versions {
     const val buglyVersion = "2.6.6.1"
     const val easypermissionsVersion = "1.1.1"
     const val barlibraryVersion = "2.3.0"
-    const val circleimageviewVersion = "2.2.0"
     const val photoViewVersion = "2.1.3"
     const val utilcodeVersion = "1.15.1"
 }

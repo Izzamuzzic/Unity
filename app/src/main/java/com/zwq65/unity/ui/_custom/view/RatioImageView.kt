@@ -22,7 +22,7 @@ import android.util.AttributeSet
 /**
  * ================================================
  * 一个能保持比例的 ImageView
- * TODO: 暂时只支持维持宽度适应高度
+ * 暂时只支持维持宽度适应高度
  *
  * Created by NIRVANA on 2017/09/07
  * Contact with <zwq651406441@gmail.com>
@@ -51,7 +51,7 @@ class RatioImageView : android.support.v7.widget.AppCompatImageView {
             var width = MeasureSpec.getSize(widthMeasureSpec)
             var height = MeasureSpec.getSize(heightMeasureSpec)
 
-            // TODO: 现在只支持固定宽度
+            //现在只支持固定宽度
             if (width > 0) {
                 height = (width.toFloat() / ratio).toInt()
             } else if (height > 0) {
