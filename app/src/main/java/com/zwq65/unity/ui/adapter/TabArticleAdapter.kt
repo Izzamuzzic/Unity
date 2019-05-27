@@ -17,9 +17,6 @@
 package com.zwq65.unity.ui.adapter
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
 import com.bumptech.glide.Glide
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Article

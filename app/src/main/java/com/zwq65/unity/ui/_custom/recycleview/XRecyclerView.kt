@@ -153,10 +153,10 @@ class XRecyclerView @JvmOverloads constructor(mContext: Context, attrs: Attribut
         }
     }
 
-    override fun setAdapter(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+    override fun setAdapter(adapter: Adapter<ViewHolder>?) {
         mWrapAdapter = WrapAdapter(mHeaderViews, mFootViews, adapter)
         super.setAdapter(mWrapAdapter)
-        adapter.registerAdapterDataObserver(mDataObserver)
+        adapter?.registerAdapterDataObserver(mDataObserver)
         mDataObserver.onChanged()
     }
 

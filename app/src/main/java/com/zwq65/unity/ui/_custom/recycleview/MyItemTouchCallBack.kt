@@ -46,7 +46,7 @@ class MyItemTouchCallBack(private val adapter: BaseRecyclerViewAdapter<*, *>) : 
             dragFlag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
             swipeFlag = ItemTouchHelper.END
         }
-        return ItemTouchHelper.Callback.makeMovementFlags(dragFlag, swipeFlag)
+        return makeMovementFlags(dragFlag, swipeFlag)
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -61,7 +61,7 @@ class MyItemTouchCallBack(private val adapter: BaseRecyclerViewAdapter<*, *>) : 
                 Collections.swap(adapter.getmDataList(), i, i - 1)
             }
         }
-        recyclerView.adapter.notifyItemMoved(fromPosition, toPosition)
+        recyclerView.adapter?.notifyItemMoved(fromPosition, toPosition)
         return true
     }
 

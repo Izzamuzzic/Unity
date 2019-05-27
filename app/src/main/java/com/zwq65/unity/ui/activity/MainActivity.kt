@@ -137,11 +137,11 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
     private fun logTest() {
         val log = LoggerFactory.getLogger("logloglog")
         val log2 = LoggerFactory.getLogger(MainActivity::class.java)
-        log.trace("hello world{}",1)
-        log.info("hello world{}",2)
-        log.debug("hello world{}",3)
-        log.error("hello world{}",4)
-        log.warn("hello world{}",5)
+        log.trace("hello world{}", 1)
+        log.info("hello world{}", 2)
+        log.debug("hello world{}", 3)
+        log.error("hello world{}", 4)
+        log.warn("hello world{}", 5)
 
         log2.trace("hello world")
         log2.info("hello world")

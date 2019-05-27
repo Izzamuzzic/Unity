@@ -18,7 +18,6 @@ package com.zwq65.unity.di.module
 
 import android.app.Application
 import android.content.Context
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.zwq65.unity.data.AppDataManager
 import com.zwq65.unity.data.DataManager
 import com.zwq65.unity.data.db.AppDbHelper
@@ -37,6 +36,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -50,7 +50,7 @@ import javax.inject.Singleton
  * [ApplicationComponent].
  */
 @Module
- class ApplicationModule {
+class ApplicationModule {
 
     @Provides
     @ApplicationContext

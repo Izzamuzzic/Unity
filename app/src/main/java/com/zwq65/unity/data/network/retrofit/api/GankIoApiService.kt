@@ -21,8 +21,6 @@ import com.zwq65.unity.data.network.retrofit.response.GankApiResponse
 import com.zwq65.unity.data.network.retrofit.response.enity.Article
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.data.network.retrofit.response.enity.Video
-
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

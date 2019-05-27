@@ -39,16 +39,4 @@ import javax.inject.Singleton
 class DbOpenHelper @Inject
 constructor(@ApplicationContext context: Context, @DatabaseInfo name: String) : DaoMaster.OpenHelper(context, name) {
 
-    override fun onUpgrade(db: Database?, oldVersion: Int, newVersion: Int) {
-        super.onUpgrade(db, oldVersion, newVersion)
-        //        LogUtils.d("DEBUG", "DB_OLD_VERSION : " + oldVersion + ", DB_NEW_VERSION : " + newVersion);
-        //        switch (oldVersion) {
-        //            case 1:
-        //            case 2:
-        //                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
-        //                        + "sex" + " TEXT DEFAULT 'MAN'");
-        //                db.execSQL("ALTER TABLE " + UserDao.TABLENAME + " ADD COLUMN "
-        //                        + "sex" + " TEXT DEFAULT 'MAN'");
-        //        }
-    }
 }

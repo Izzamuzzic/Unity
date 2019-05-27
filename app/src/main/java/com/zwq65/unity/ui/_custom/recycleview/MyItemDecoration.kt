@@ -35,7 +35,7 @@ class MyItemDecoration : RecyclerView.ItemDecoration() {
      * @param parent  recyclerView
      * @param state   recycler 内部数据管理
      */
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         //设定底部边距为1px
         outRect.set(0, 0, 0, 1)
     }

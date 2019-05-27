@@ -7,12 +7,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion Versions.compileSdkVersion
-    buildToolsVersion Versions.buildToolsVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId "com.zwq65.unity"
-        minSdkVersion Versions.minSdkVersion
-        targetSdkVersion Versions.targetSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -96,78 +96,78 @@ androidExtensions {
 }
 
 dependencies {
+
+    def appDependence = rootProject.ext.deps
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.anko:anko:$anko_version"
+
     //androidTest
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //test
-    testImplementation "junit:junit:$Versions.junitVersion"
-    testImplementation "org.mockito:mockito-core:$Versions.mockitoVersion"
-    //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //anko
-    implementation "org.jetbrains.anko:anko:$anko_version"
-    //design
-    implementation "com.android.support:appcompat-v7:$Versions.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$Versions.supportLibraryVersion"
-    implementation "com.android.support:design:$Versions.supportLibraryVersion"
-    implementation "com.android.support:support-v13:$Versions.supportLibraryVersion"
-    implementation "com.android.support:palette-v7:$Versions.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$Versions.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$Versions.supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$Versions.constraintLayoutVersion"
-    //network
-    implementation "com.squareup.okhttp3:okhttp:$Versions.okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$Versions.okhttpLoggingVersion"
-    implementation "com.squareup.retrofit2:retrofit:$Versions.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$Versions.retrofitConverterVersion"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$Versions.retrofitRxjava2AdapterVersion"
-    //gson
-    implementation "com.google.code.gson:gson:$Versions.gsonVersion"
-    //glide
-    implementation "com.github.bumptech.glide:glide:$Versions.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$Versions.glideVersion"
-    //greenDao database
-    implementation "org.greenrobot:greendao:$Versions.greenDaoVersion"
-    implementation "org.greenrobot:greendao-generator:$Versions.greenDaoGeneratorVersion"
-    //butterKnife
-    implementation "com.jakewharton:butterknife:$Versions.butterknifeVersion"
-    kapt "com.jakewharton:butterknife-compiler:$Versions.butterknifeVersion"
-    //rxJava2
-    implementation "io.reactivex.rxjava2:rxandroid:$Versions.rxandroidVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$Versions.rxjavaVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding:$Versions.rxbindingVersion"
-    //rxLifeCycle2
-    implementation "com.trello.rxlifecycle2:rxlifecycle:$Versions.rxlifecycleVersion"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$Versions.rxlifecycleVersion"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$Versions.rxlifecycleVersion"
-    //dagger2 (dependency injection)
-    implementation "com.google.dagger:dagger:$Versions.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$Versions.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$Versions.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$Versions.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$Versions.daggerVersion"
-    //multidex
-    implementation "com.android.support:multidex:$Versions.multidexVersion"
-    //LeakCanary: A memory leak detection library for Android and Java.
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$Versions.leakCanaryVersion"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$Versions.leakCanaryVersion"
-    //facebook开源的一款用于查看app数据库等信息的工具,浏览器访问地址：chrome://inspect/#devices
-    implementation "com.facebook.stetho:stetho:$Versions.stethoVersion"
-    //bugly
-    implementation "com.tencent.bugly:crashreport:$Versions.buglyVersion"
-    //Simplify Android M system permissions
-    implementation "pub.devrel:easypermissions:$Versions.easypermissionsVersion"
-    //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
-    implementation "com.gyf.barlibrary:barlibrary:$Versions.barlibraryVersion"
-    //Implementation of ImageView for Android that supports zooming, by various touch gestures.
-    implementation "com.github.chrisbanes:PhotoView:$Versions.photoViewVersion"
-    //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
-    implementation "com.blankj:utilcode:$Versions.utilcodeVersion"
-    implementation 'org.slf4j:slf4j-api:1.7.25'
-    implementation 'com.github.tony19:logback-android:2.0.0'
+    testImplementation appDependence.junit
+    testImplementation appDependence.mockito
+    debugImplementation appDependence.leakcanary_debug
+    releaseImplementation appDependence.leakcanary_release
+    implementation appDependence.stetho
+    implementation appDependence.bugly
 
+    //support
+    implementation appDependence.supportv4
+    implementation appDependence.supportv13
+    implementation appDependence.appcompatv7
+    implementation appDependence.palettev7
+    implementation appDependence.recyclerview
+    implementation appDependence.cardview
+    implementation appDependence.design
+    implementation appDependence.annotations
+    implementation appDependence.constraint_layout
+
+    //retrofit
+    implementation appDependence.okhttp
+    implementation appDependence.okhttp3LoggerInterceptor
+    implementation appDependence.retrofit
+    implementation appDependence.retrofitConverterGson
+    implementation appDependence.retrofitAdapterRxjava2
+
+    //reactivexJava
+    implementation appDependence.rxJava
+    implementation appDependence.rxAndroid
+    implementation appDependence.rxKotlin
+    implementation appDependence.rxbinding
+    //rxLifeCycle2
+    implementation appDependence.rxlifecycle
+    implementation appDependence.rxlifecycle_android
+    implementation appDependence.rxlifecycle_components
+
+    //dagger (dependency injection)
+    implementation appDependence.dagger
+    implementation appDependence.dagger_android
+    implementation appDependence.dagger_android_support
+    kapt appDependence.dagger_compiler
+    kapt appDependence.dagger_android_processor
+
+    //database
+    implementation appDependence.greenDao
+    implementation appDependence.greenDaoGenerator
+
+    //glide
+    implementation appDependence.glide
+    kapt appDependence.glide_compiler
+
+    //common
+    implementation appDependence.gson
+    implementation appDependence.multidex
+    implementation appDependence.easypermissions
+    implementation appDependence.barlibrary
+    implementation appDependence.photoView
+    implementation appDependence.utilcode
+    implementation appDependence.slf4j
+    implementation appDependence.logback
 }
 
 static def releaseTime() {

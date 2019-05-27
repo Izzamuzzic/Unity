@@ -25,8 +25,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
@@ -56,7 +54,6 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
 
     val TAG = javaClass.simpleName
     var mActivity: BaseDaggerActivity<*, *>? = null
-    private var mUnBinder: Unbinder? = null
     private var mProgressDialog: ProgressDialog? = null
 
     lateinit var rootView: View
@@ -85,7 +82,6 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         LogUtils.i(TAG, "onCreateView")
         rootView = inflater.inflate(layoutId, container, false)
-        mUnBinder = ButterKnife.bind(this, rootView)
         return rootView
     }
 
@@ -132,8 +128,6 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mUnBinder?.unbind()
-        mUnBinder = null
         LogUtils.i(TAG, "onDestroyView")
     }
 

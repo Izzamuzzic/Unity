@@ -26,8 +26,6 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.zwq65.unity.R
 
 /**
@@ -41,7 +39,6 @@ import com.zwq65.unity.R
 abstract class BaseDialogFragment : DialogFragment(), DialogMvpView {
 
     private var mActivity: BaseDaggerActivity<*, *>? = null
-    private var mUnBinder: Unbinder? = null
 
     abstract fun getLayoutId(): Int
 
@@ -99,7 +96,6 @@ abstract class BaseDialogFragment : DialogFragment(), DialogMvpView {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, getLayoutId(), null)
-        mUnBinder = ButterKnife.bind(this, view)
 
         // creating the fullscreen dialog
         val dialog = Dialog(activity, R.style.DialogFragment)
@@ -136,10 +132,4 @@ abstract class BaseDialogFragment : DialogFragment(), DialogMvpView {
         mActivity!!.onFragmentDetached(tag)
     }
 
-    override fun onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-        }
-        super.onDestroy()
-    }
 }

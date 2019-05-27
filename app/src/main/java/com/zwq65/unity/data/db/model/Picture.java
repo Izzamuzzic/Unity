@@ -32,7 +32,18 @@ import org.greenrobot.greendao.annotation.Property;
  * ================================================
  */
 @Entity(nameInDb = "Picture")
-public class Picture implements Parcelable{
+public class Picture implements Parcelable {
+    public static final Creator<Picture> CREATOR = new Creator<Picture>() {
+        @Override
+        public Picture createFromParcel(Parcel in) {
+            return new Picture(in);
+        }
+
+        @Override
+        public Picture[] newArray(int size) {
+            return new Picture[size];
+        }
+    };
     @Id
     private String _id;
     @Property(nameInDb = "created_at")
@@ -47,9 +58,10 @@ public class Picture implements Parcelable{
     private String url;
     @Property(nameInDb = "who")
     private String who;
+
     @Generated(hash = 314158784)
     public Picture(String _id, String createdAt, String desc, String source,
-            String type, String url, String who) {
+                   String type, String url, String who) {
         this._id = _id;
         this.createdAt = createdAt;
         this.desc = desc;
@@ -58,6 +70,7 @@ public class Picture implements Parcelable{
         this.url = url;
         this.who = who;
     }
+
     @Generated(hash = 1602548376)
     public Picture() {
     }
@@ -72,57 +85,58 @@ public class Picture implements Parcelable{
         who = in.readString();
     }
 
-    public static final Creator<Picture> CREATOR = new Creator<Picture>() {
-        @Override
-        public Picture createFromParcel(Parcel in) {
-            return new Picture(in);
-        }
-
-        @Override
-        public Picture[] newArray(int size) {
-            return new Picture[size];
-        }
-    };
-
     public String get_id() {
         return this._id;
     }
+
     public void set_id(String _id) {
         this._id = _id;
     }
+
     public String getCreatedAt() {
         return this.createdAt;
     }
+
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
     public String getDesc() {
         return this.desc;
     }
+
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
     public String getSource() {
         return this.source;
     }
+
     public void setSource(String source) {
         this.source = source;
     }
+
     public String getType() {
         return this.type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public String getUrl() {
         return this.url;
     }
+
     public void setUrl(String url) {
         this.url = url;
     }
+
     public String getWho() {
         return this.who;
     }
+
     public void setWho(String who) {
         this.who = who;
     }

@@ -20,12 +20,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import android.view.View
-import butterknife.OnClick
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseDaggerActivity
 import com.zwq65.unity.ui.contract.AccountContract
 import kotlinx.android.synthetic.main.activity_account.*
+import kotlinx.android.synthetic.main.head_personal_center.*
 
 /**
  * ================================================
@@ -50,6 +49,7 @@ class AccountActivity : BaseDaggerActivity<AccountContract.View, AccountContract
 
     override fun initView() {
 
+        iv_back?.setOnClickListener { finish() }
         // 设置参数
         val options = BitmapFactory.Options()
         // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
@@ -98,12 +98,4 @@ class AccountActivity : BaseDaggerActivity<AccountContract.View, AccountContract
 
     }
 
-    @OnClick(R.id.iv_back)
-    fun onViewClicked(view: View) {
-        when (view.id) {
-            R.id.iv_back -> finish()
-            else -> {
-            }
-        }
-    }
 }

@@ -24,8 +24,6 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.zwq65.unity.R
 import com.zwq65.unity.utils.LogUtils
@@ -42,7 +40,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     val TAG = javaClass.simpleName
     private var fragmentManager: FragmentManager? = null
-    private var mUnBinder: Unbinder? = null
 
     /**
      * 获取Activity的视图资源id
@@ -59,7 +56,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
         val layoutId = layoutId
         if (layoutId != 0) {
             setContentView(layoutId)
-            mUnBinder = ButterKnife.bind(this)
         }
         LogUtils.i(TAG, "onCreate")
     }
@@ -77,10 +73,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
     override fun onDestroy() {
         LogUtils.i(TAG, "onDestroy")
         super.onDestroy()
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-            mUnBinder = null
-        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -135,26 +127,20 @@ abstract class BaseActivity : RxAppCompatActivity() {
             fragmentManager = supportFragmentManager
         }
         val transaction = fragmentManager!!.beginTransaction()
-        val exsitFragment = fragmentManager!!.findFragmentByTag(tag)
-        if (exsitFragment != null) {
+        val existFragment = fragmentManager!!.findFragmentByTag(tag)
+        if (existFragment != null) {
             //已添加( ⊙o⊙ ),show()
-            if (currentFragment != null) {
-                transaction.hide(currentFragment)
-            }
-            transaction.show(exsitFragment).commit()
-            currentFragment = exsitFragment
+            currentFragment?.let { transaction.hide(it) }
+            transaction.show(existFragment).commit()
+            currentFragment = existFragment
         } else {
             //还没添加,add()
             if (!targetFragment.isAdded) {
-                if (currentFragment != null) {
-                    transaction.hide(currentFragment)
-                }
+                currentFragment?.let { transaction.hide(it) }
                 transaction.add(containerViewId, targetFragment, tag).commit()
             } else {
                 //已添加( ⊙o⊙ ),show()
-                if (currentFragment != null) {
-                    transaction.hide(currentFragment)
-                }
+                currentFragment?.let { transaction.hide(it) }
                 transaction.show(targetFragment).commit()
             }
             currentFragment = targetFragment

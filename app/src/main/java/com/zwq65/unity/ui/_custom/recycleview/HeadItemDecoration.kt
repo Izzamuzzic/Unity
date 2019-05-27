@@ -38,8 +38,7 @@ import com.zwq65.unity.data.db.model.GroupInfo
  */
 class HeadItemDecoration : RecyclerView.ItemDecoration() {
 
-
-    var mGroupInfoCallback: GroupInfoCallback? = null
+    private var mGroupInfoCallback: GroupInfoCallback? = null
     private var mHeaderHeight: Int = SizeUtils.dp2px(20f)
     private var mDividerHeight: Int = SizeUtils.dp2px(1f)
     private val mPaint by lazy {
@@ -54,19 +53,19 @@ class HeadItemDecoration : RecyclerView.ItemDecoration() {
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
-        var groupInfo = mGroupInfoCallback?.getGroupInfo(position)
+        val groupInfo = mGroupInfoCallback?.getGroupInfo(position)
         //判断是否是同类别的第一个item
         outRect.top = if (true == groupInfo?.isFirstViewInGroup()) mHeaderHeight else mDividerHeight
     }
 
-    override fun onDrawOver(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
 
-        val childCount = parent?.childCount
-        for (i in 0 until childCount!!) {
+        val childCount = parent.childCount
+        for (i in 0 until childCount) {
             val view = parent.getChildAt(i)
             val index = parent.getChildAdapterPosition(view)
             val groupInfo = mGroupInfoCallback?.getGroupInfo(index)

@@ -19,15 +19,10 @@ package com.zwq65.unity.ui._custom.view
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Camera
-import android.graphics.Canvas
-import android.graphics.Paint
+import android.graphics.*
 import android.support.annotation.Keep
 import android.util.AttributeSet
 import android.view.View
-
 import com.zwq65.unity.R
 
 /**

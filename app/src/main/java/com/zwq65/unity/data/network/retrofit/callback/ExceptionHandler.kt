@@ -3,9 +3,9 @@ package com.zwq65.unity.data.network.retrofit.callback
 import android.net.ParseException
 
 import com.google.gson.JsonParseException
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 
 import org.json.JSONException
+import retrofit2.HttpException
 
 import java.net.ConnectException
 import java.net.SocketTimeoutException
