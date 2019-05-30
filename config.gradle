@@ -7,28 +7,28 @@ ext {
     ]
 
     dependVersion = [
-            junitVersion                 : "4.12",
-            mockitoVersion               : "2.11.0",
-            leakCanaryVersion            : "1.5.4",
-            espressoSdkVersion           : "3.0.2",
+            junitVersion            : "4.12",
+            mockitoVersion          : "2.11.0",
+            leakCanaryVersion       : "1.5.4",
+            espressoSdkVersion      : "3.0.2",
             stethoVersion           : "1.5.0",
-            buglyVersion           : "2.6.6.1",
-            androidSupportSdkVersion     : "28.0.0",
-            constraintLayoutVersion      : "1.1.2",
-            okhttpVersion                : "3.5.0",
-            okhttpLoggingVersion         : "3.4.1",
-            retrofitSdkVersion           : "2.4.0",
-            rxJavaVersion                       : "2.2.2",
-            rxAndroidVersion                    : "2.1.0",
-            rxKotlinVersion                     : "2.3.0",
-            rxbindingVersion             : "2.0.0",
-            rxlifecycleVersion           : "2.2.1",
-            daggerVersion                : "2.15",
-            greenDaoVersion              : "3.2.0",
-            greenDaoGeneratorVersion     : "3.1.0",
-            glideVersion                 : "4.6.1",
-            gsonVersion                  : "2.8.2",
-            multidexVersion              : "1.0.3",
+            buglyVersion            : "2.6.6.1",
+            androidSupportSdkVersion: "28.0.0",
+            constraintLayoutVersion : "1.1.2",
+            okhttpVersion           : "3.5.0",
+            okhttpLoggingVersion    : "3.4.1",
+            retrofitSdkVersion      : "2.4.0",
+            rxJavaVersion           : "2.2.2",
+            rxAndroidVersion        : "2.1.0",
+            rxKotlinVersion         : "2.3.0",
+            rxbindingVersion        : "2.0.0",
+            rxlifecycleVersion      : "2.2.1",
+            daggerVersion           : "2.15",
+            greenDaoVersion         : "3.2.0",
+            greenDaoGeneratorVersion: "3.1.0",
+            glideVersion            : "4.6.1",
+            gsonVersion             : "2.8.2",
+            multidexVersion         : "1.0.3",
 //            retrofitConverterVersion     : "2.2.0",
 //            retrofitRxjava2AdapterVersion: "1.0.0",
     ]
@@ -92,14 +92,17 @@ ext {
             "gson"                    : "com.google.code.gson:gson:${dependVersion.gsonVersion}",
             "multidex"                : "com.android.support:multidex:${dependVersion.multidexVersion}",
             "easypermissions"         : "pub.devrel:easypermissions:1.1.1",
-            //android 4.4以上沉浸式状态栏和沉浸式导航栏管理
             "barlibrary"              : "com.gyf.barlibrary:barlibrary:2.3.0",
-            //Implementation of ImageView for Android that supports zooming, by various touch gestures.
             "photoView"               : "com.github.chrisbanes:PhotoView:2.1.3",
-            //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
             "utilcode"                : "com.blankj:utilcode:1.15.1",
-            "slf4j"                : "org.slf4j:slf4j-api:1.7.25",
-            "logback"                : "com.github.tony19:logback-android:2.0.0",
+            "slf4j"                   : "org.slf4j:slf4j-api:1.7.25",
+            "logback"                 : "com.github.tony19:logback-android:2.0.0",
+
+            //高德地图
+            "map2d"                   : "com.amap.api:map2d:latest.integration",
+            "navi_3dmap"              : "com.amap.api:navi-3dmap:latest.integration",
+            "search"                  : "com.amap.api:search:latest.integration",
+            "location"                : "com.amap.api:location:latest.integration",
     ]
 
 }

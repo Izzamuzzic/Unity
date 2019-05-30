@@ -99,7 +99,7 @@ class WebArticleActivity : BaseDaggerActivity<WebArticleContract.View, WebArticl
         }
     }
 
-    override fun initData() {}
+    override fun initData(savedInstanceState: Bundle?) {}
 
     private fun initToolBar() {
         collapsingToolbarLayout?.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white))

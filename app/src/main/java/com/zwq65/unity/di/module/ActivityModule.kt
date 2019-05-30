@@ -59,4 +59,8 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [(WatchModule::class)])
     internal abstract fun watchActivity(): WatchActivity
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [(MapModule::class)])
+    internal abstract fun mapActivity(): MapActivity
+
 }

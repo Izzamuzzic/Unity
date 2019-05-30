@@ -18,6 +18,7 @@ package com.zwq65.unity.ui.activity
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatDelegate
@@ -90,7 +91,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         logTest()
     }
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

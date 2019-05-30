@@ -19,6 +19,7 @@ package com.zwq65.unity.ui.activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.util.Log
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseDaggerActivity
@@ -94,7 +95,7 @@ class AccountActivity : BaseDaggerActivity<AccountContract.View, AccountContract
         iv_3?.setImageBitmap(bitmap3)
     }
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 
