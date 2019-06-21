@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseDaggerActivity
@@ -48,7 +47,7 @@ class SettingActivity : BaseDaggerActivity<SettingContract.View, SettingContract
 
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData() {
 
     }
 }

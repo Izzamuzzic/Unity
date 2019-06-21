@@ -72,7 +72,7 @@ class WatchActivity : BaseDaggerActivity<WatchContract.View, WatchContract.Prese
         ImmersionBar.with(this).titleBar(toolbar!!).init()
     }
 
-    override fun initData(savedInstanceState: Bundle?) {}
+    override fun initData() {}
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_content, menu)

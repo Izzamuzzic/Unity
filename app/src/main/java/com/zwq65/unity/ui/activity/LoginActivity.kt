@@ -17,7 +17,6 @@
 package com.zwq65.unity.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseDaggerActivity
@@ -49,7 +48,7 @@ class LoginActivity : BaseDaggerActivity<LoginContract.View, LoginContract.Prese
         btn_signup.setOnClickListener(this)
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData() {
 
     }
 

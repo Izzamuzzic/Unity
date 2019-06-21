@@ -18,7 +18,6 @@
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
@@ -26,8 +25,7 @@
     android:gravity="center"
     app:elevation="@dimen/default_elevation"
     app:layout_scrollFlags="scroll|enterAlways|snap"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:title=" ">
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <!--app:layout_scrollFlags="scroll|enterAlways":
     scroll: 所有想滚动出屏幕的view都需要设置这个flag， 没有设置这个flag的view将被固定在屏幕顶部。
     enterAlways: 设置这个flag时，向下的滚动都会导致该view变为可见。
@@ -40,10 +38,9 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:scaleType="center"
-        android:src="@mipmap/img_toolbar_logo"
-        tools:ignore="ContentDescription"/>
+        android:src="@mipmap/img_toolbar_logo"/>
 </android.support.v7.widget.Toolbar>

@@ -19,7 +19,6 @@ package com.zwq65.unity.ui.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.AppCompatCheckBox
@@ -77,7 +76,7 @@ class ImageActivity : BaseDaggerActivity<ImageContract.View, ImageContract.Prese
         setCurrentPage()
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData() {
         //empty
     }
 
