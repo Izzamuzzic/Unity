@@ -88,7 +88,7 @@ interface BaseContract {
      * Every presenter in the app must either implement this interface or extend BasePresenter
      * indicating the MvpView type that wants to be attached with.
      */
-    interface Presenter<in V : BaseContract.View> {
+    interface Presenter<in V : View> {
 
         /**
          * 是否还在与view绑定
