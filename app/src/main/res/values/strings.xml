@@ -91,5 +91,9 @@
     <string name="refresh_done">刷新完成…</string>
     <string name="listview_header_last_time">上次更新时间：</string>
     <string name="str_no_network">网络开小差了,点击重试</string>
+    <!--@自定义View-->
+    <string name="separator">\t|\t</string>
+    <string name="km">%1$s千米</string>
+    <string name="kcal">%1$s千卡</string>
 
 </resources>

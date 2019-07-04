@@ -22,19 +22,13 @@ import com.zwq65.unity.ui._base.BaseSubView
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class LoadingView : BaseSubView {
-
+class LoadingView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : BaseSubView(context, attrs, defStyleAttr) {
     private var mSize: Int = 0
     private var mPaintColor: Int = 0
     private var mAnimateValue = 0
     private var mAnimator: ValueAnimator? = null
     private var mPaint: Paint? = null
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     private val mUpdateListener = ValueAnimator.AnimatorUpdateListener { animation ->
         mAnimateValue = animation.animatedValue as Int

@@ -33,7 +33,8 @@ import com.zwq65.unity.ui._base.BaseSubView
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class BaiduLoadingView : BaseSubView {
+class BaiduLoadingView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : BaseSubView(context, attrs, defStyleAttr) {
 
     private var path: Path? = null
     private var o: Path? = null
@@ -42,12 +43,6 @@ class BaiduLoadingView : BaseSubView {
     private var currentPercent: Float = 0.toFloat()
     private var color: Int = 0
     private var text: String? = "贴"
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     public override fun setUp(context: Context, attrs: AttributeSet?) {
         mHeight = SizeUtils.dp2px(50f)

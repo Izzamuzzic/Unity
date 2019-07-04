@@ -52,14 +52,31 @@
     <color name="chart_text_color">#888888</color>
     <color name="chart_line_color">#a9a3a3</color>
 
-    <!-- collect nice colors-->
-    <color name="picton_blue">#59ABE3</color>
-    <color name="mono_black_bg">#232427</color><!-- mono'custom bg-->
-    <color name="mono_main_color">#16A5AF</color><!-- mono'main color -->
+    <color name="color_android">#26A65B</color>
+    <color name="color_ios">#59ABE3</color>
+    <color name="color_html">#F9690E</color>
 
-    <color name="btn_default_light_normal">#00000000</color>
-    <color name="btn_default_light_pressed">#40ffffff</color>
-    <color name="black_effective">#2a2a2a</color>
-    <color name="gray_ebony_clay">#6e22313f</color>
+    <!--com.desperado.infinity.ui.custom.view.MintRulerView -->
+    <color name="medium_scale">#3FC380</color>
+    <color name="large_scale">#019875</color>
+
+    <!--com.desperado.infinity.ui.custom.view.XiaoMiStepView-->
+    <color name="xiaomi_white">#F0FEF7</color>
+    <color name="xiaomi_white_trans">#50f0fef7</color>
+    <color name="xiaomi_white_tiny_text">#b4f0fef7</color>
+    <color name="xiaomi_white_offset_trans_1">#a0f0fef7</color>
+    <color name="xiaomi_white_offset_trans_2">#78f0fef7</color>
+    <color name="xiaomi_white_offset_trans_3">#4ff0fef7</color>
+
+    <!--com.desperado.infinity.ui.custom.view.ThumbView -->
+    <color name="thumb_gray">#CCCCCC</color>
+    <color name="thumb_red">#e4583e</color>
+
+    <!--com.desperado.infinity.ui.custom.view.LolAbilityViewView -->
+    <color name="heptagon_1">#bf278892</color>
+    <color name="heptagon_2">#ba57c1c8</color>
+    <color name="heptagon_3">#c699dde3</color>
+    <color name="heptagon_4">#d4d4f0f2</color>
+    <color name="value_color">#d2f22613</color>
 
 </resources>

@@ -18,14 +18,10 @@ import com.zwq65.unity.ui._base.BaseSubView
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class PolygonView : BaseSubView {
+class PolygonView @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : BaseSubView(mContext, attrs, defStyleAttr) {
+
     private lateinit var mPaint: Paint
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun setUp(context: Context, attrs: AttributeSet?) {
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)

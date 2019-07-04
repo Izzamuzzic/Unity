@@ -22,8 +22,8 @@ import android.content.Context
 import android.graphics.*
 import android.support.annotation.Keep
 import android.util.AttributeSet
-import android.view.View
 import com.zwq65.unity.R
+import com.zwq65.unity.ui._base.BaseSubView
 
 /**
  * ================================================
@@ -32,13 +32,12 @@ import com.zwq65.unity.R
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class RotateAvatarView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
-    private var mWidth: Int = 0
-    private var mHeight: Int = 0
+class RotateAvatarView @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : BaseSubView(mContext, attrs, defStyleAttr) {
+
+
     private var bitmapWidth: Int = 0
     private var bitmapHeight: Int = 0
-    private var centerX: Int = 0
-    private var centerY: Int = 0
     private var mAvatar: Bitmap? = null
     private var mAnimator: ObjectAnimator? = null
     /**
@@ -54,7 +53,7 @@ class RotateAvatarView @JvmOverloads constructor(context: Context, attrs: Attrib
         invalidate()
     }
 
-    init {
+    override fun setUp(context: Context, attrs: AttributeSet?) {
         mAvatar = BitmapFactory.decodeResource(resources, R.mipmap.ic_avatar)
         bitmapWidth = mAvatar!!.width
         bitmapHeight = mAvatar!!.height
@@ -103,14 +102,6 @@ class RotateAvatarView @JvmOverloads constructor(context: Context, attrs: Attrib
         mCamera!!.restore()
         canvas.drawBitmap(mAvatar!!, left.toFloat(), top.toFloat(), mPaint)
         canvas.restore()
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        mWidth = View.MeasureSpec.getSize(widthMeasureSpec)
-        mHeight = View.MeasureSpec.getSize(heightMeasureSpec)
-        centerX = mWidth / 2
-        centerY = mHeight / 2
     }
 
     companion object {

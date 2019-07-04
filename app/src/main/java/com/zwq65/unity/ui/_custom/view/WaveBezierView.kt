@@ -33,7 +33,8 @@ import com.zwq65.unity.ui._base.BaseSubView
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class WaveBezierView : BaseSubView {
+class WaveBezierView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : BaseSubView(context, attrs, defStyleAttr){
 
     private var mPaint: Paint? = null
     private var mPaint2: Paint? = null
@@ -43,12 +44,6 @@ class WaveBezierView : BaseSubView {
     private var mScreenHeight: Int = 0
     private var mScreenWidth: Int = 0
     private var animator: ValueAnimator? = null
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     public override fun setUp(context: Context, attrs: AttributeSet?) {
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
