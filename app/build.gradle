@@ -166,8 +166,6 @@ dependencies {
     implementation appDependence.barlibrary
     implementation appDependence.photoView
     implementation appDependence.utilcode
-    implementation appDependence.slf4j
-    implementation appDependence.logback
 }
 
 static def releaseTime() {

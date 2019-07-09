@@ -36,7 +36,6 @@ import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.drawer_left.*
-import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -87,7 +86,6 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
 
         //默认跳转
         gotoFragment(TestFragment())
-        logTest()
     }
 
     override fun initData() {
@@ -123,31 +121,13 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
             com.zwq65.unity.R.id.ll_video ->
                 //休息视频
                 gotoFragment(RestVideoFragment())
-            com.zwq65.unity.R.id.ll_setting -> {
+            com.zwq65.unity.R.id.ll_setting ->
                 gotoFragment(TestFragment())
-                logTest()
-            }
             com.zwq65.unity.R.id.ll_out -> onBackPressed()
             com.zwq65.unity.R.id.fab -> setDayNightMode()
             else -> {
             }
         }
-    }
-
-    private fun logTest() {
-        val log = LoggerFactory.getLogger("logloglog")
-        val log2 = LoggerFactory.getLogger(MainActivity::class.java)
-        log.trace("hello world{}", 1)
-        log.info("hello world{}", 2)
-        log.debug("hello world{}", 3)
-        log.error("hello world{}", 4)
-        log.warn("hello world{}", 5)
-
-        log2.trace("hello world")
-        log2.info("hello world")
-        log2.debug("hello world")
-        log2.error("hello world")
-        log2.warn("hello world")
     }
 
     /**

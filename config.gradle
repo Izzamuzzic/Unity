@@ -98,8 +98,6 @@ ext {
             "photoView"               : "com.github.chrisbanes:PhotoView:2.1.3",
             //🔥 a powerful & easy to use library for Android (https://github.com/Blankj/AndroidUtilCode)
             "utilcode"                : "com.blankj:utilcode:1.15.1",
-            "slf4j"                   : "org.slf4j:slf4j-api:1.7.25",
-            "logback"                 : "com.github.tony19:logback-android:2.0.0",
     ]
 
 }

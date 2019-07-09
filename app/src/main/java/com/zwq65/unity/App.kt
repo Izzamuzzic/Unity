@@ -44,7 +44,6 @@ class App : DaggerApplication() {
         initBugly()
         initStetho()
         initLeakCanary()
-        LogConfigurator.configure()
     }
 
     /**
