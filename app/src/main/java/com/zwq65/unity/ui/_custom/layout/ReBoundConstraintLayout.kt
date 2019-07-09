@@ -1,7 +1,6 @@
 package com.zwq65.unity.ui._custom.layout
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -9,6 +8,7 @@ import android.view.ViewConfiguration
 import android.view.ViewParent
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlin.math.abs
 
 /**

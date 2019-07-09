@@ -21,7 +21,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Point
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import com.blankj.utilcode.util.SizeUtils
 import com.zwq65.unity.R

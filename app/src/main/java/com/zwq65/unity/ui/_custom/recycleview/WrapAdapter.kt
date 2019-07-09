@@ -1,12 +1,11 @@
 package com.zwq65.unity.ui._custom.recycleview
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zwq65.unity.ui._base.adapter.BaseViewHolder
 
 

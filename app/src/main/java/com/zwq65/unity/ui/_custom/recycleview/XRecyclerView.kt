@@ -2,16 +2,17 @@ package com.zwq65.unity.ui._custom.recycleview
 
 
 import android.content.Context
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.MotionEvent
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-class XRecyclerView @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(mContext, attrs, defStyle) {
+class XRecyclerView @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
+    : RecyclerView(mContext, attrs, defStyle) {
     private var mLoadingListener: LoadingListener? = null
     private var mWrapAdapter: WrapAdapter? = null
     private val mHeaderViews = SparseArray<View>()
@@ -100,12 +101,12 @@ class XRecyclerView @JvmOverloads constructor(mContext: Context, attrs: Attribut
      */
     fun clearHeader() {
         mHeaderViews.clear()
-        //        final float scale = getContext().getResources().getDisplayMetrics().density;
-        //        int height = (int) (1.0f * scale + 0.5f);
-        //        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
-        //        View view = new View(getContext());
-        //        view.setLayoutParams(params);
-        //        mHeaderViews.put(0, view);
+//        final float scale = getContext().getResources().getDisplayMetrics().density;
+//        int height =(int)(1.0f * scale + 0.5f);
+//        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+//        View view = new View(getContext());
+//        view.setLayoutParams(params);
+//        mHeaderViews.put(0, view);
     }
 
     fun addHeaderView(view: View) {
@@ -208,7 +209,8 @@ class XRecyclerView @JvmOverloads constructor(mContext: Context, attrs: Attribut
                 mLastY = ev.rawY
                 if (isOnTop && pullRefreshEnabled) {
                     mRefreshHeader!!.onMove(deltaY / DRAG_RATE)
-                    if (mRefreshHeader!!.visibleHeight > 0 && mRefreshHeader!!.state < BaseRefreshHeader.STATE_REFRESHING) {
+                    if (mRefreshHeader!!.visibleHeight > 0
+                            && mRefreshHeader!!.state < BaseRefreshHeader.STATE_REFRESHING) {
                         return false
                     }
                 }

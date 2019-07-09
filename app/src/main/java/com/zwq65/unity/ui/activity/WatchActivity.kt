@@ -18,9 +18,9 @@ package com.zwq65.unity.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.gyf.barlibrary.ImmersionBar
 import com.zwq65.unity.R

@@ -9,10 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
-import android.support.annotation.ColorInt
-import android.support.annotation.IdRes
-import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
@@ -20,7 +16,11 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
+import androidx.annotation.IdRes
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.BarUtils
+import com.google.android.material.tabs.TabLayout
 import com.zwq65.unity.R
 import java.io.*
 import java.lang.reflect.Field

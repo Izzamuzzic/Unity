@@ -16,10 +16,9 @@
 package com.zwq65.unity.ui._base.adapter
 
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 
 /**
  * ================================================
@@ -34,11 +33,11 @@ class BaseFragmentPagerAdapter : FragmentPagerAdapter {
     private var mList: List<Fragment>? = null
     private var mTitles: Array<String?>? = null
 
-    constructor(fragmentManager: FragmentManager, list: List<Fragment>) : super(fragmentManager) {
+    constructor(fragmentManager: androidx.fragment.app.FragmentManager, list: List<Fragment>) : super(fragmentManager) {
         this.mList = list
     }
 
-    constructor(fragmentManager: FragmentManager, list: List<Fragment>, titles: Array<String?>) : super(fragmentManager) {
+    constructor(fragmentManager: androidx.fragment.app.FragmentManager, list: List<Fragment>, titles: Array<String?>) : super(fragmentManager) {
         this.mList = list
         this.mTitles = titles
     }

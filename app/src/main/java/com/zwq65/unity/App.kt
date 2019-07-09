@@ -17,7 +17,7 @@
 package com.zwq65.unity
 
 import android.content.Context
-import android.support.multidex.MultiDex
+import androidx.multidex.MultiDex
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary

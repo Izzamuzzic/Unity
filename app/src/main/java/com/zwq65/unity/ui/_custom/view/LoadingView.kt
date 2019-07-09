@@ -4,11 +4,10 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
-
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.SizeUtils
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseSubView

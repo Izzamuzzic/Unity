@@ -22,7 +22,7 @@
 <!--scroll：现有容器，可以滚动折叠-->
 <!--exitUntilCollapsed：可以让ToolBar固定在最顶部，而不会伴随手势的滚动移除-->
 <!--enterAlways：ToolBar完全在滚动过程中隐藏，如果手势向下移动则此ToolBar再次显示-->
-<android.support.design.widget.CollapsingToolbarLayout
+<com.google.android.material.appbar.CollapsingToolbarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/collapsingToolbarLayout"
@@ -44,7 +44,7 @@
         app:layout_collapseParallaxMultiplier="0.7"/>
     <!--app:layout_collapseMode="pin"当CollapsingToolbarLayout收缩的时候，
     Toolbar还留在屏幕上-->
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -53,4 +53,4 @@
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-</android.support.design.widget.CollapsingToolbarLayout>
+</com.google.android.material.appbar.CollapsingToolbarLayout>

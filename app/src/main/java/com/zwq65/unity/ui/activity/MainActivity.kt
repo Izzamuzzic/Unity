@@ -18,10 +18,10 @@ package com.zwq65.unity.ui.activity
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatDelegate
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
 import com.jakewharton.rxbinding2.view.RxView
 import com.zwq65.unity.ui._base.BaseDaggerActivity
 import com.zwq65.unity.ui._base.BaseFragment

@@ -22,11 +22,11 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.graphics.*
-import android.support.annotation.Keep
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.annotation.Keep
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.SizeUtils
 import com.jakewharton.rxbinding2.view.RxView
 import com.zwq65.unity.R

@@ -17,7 +17,7 @@
 package com.zwq65.unity.ui.fragment
 
 import android.os.Bundle
-import android.support.annotation.IntDef
+import androidx.annotation.IntDef
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Article
 import com.zwq65.unity.ui._base.BaseRefreshFragment

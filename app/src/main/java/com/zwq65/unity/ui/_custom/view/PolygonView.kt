@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.SizeUtils
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseSubView

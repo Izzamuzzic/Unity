@@ -1,8 +1,8 @@
 package com.zwq65.unity.utils.listener
 
-import android.support.annotation.IntDef
-import android.support.design.widget.AppBarLayout
+import androidx.annotation.IntDef
 import com.blankj.utilcode.util.LogUtils
+import com.google.android.material.appbar.AppBarLayout
 import com.zwq65.unity.utils.listener.AppBarStateChangeListener.AppBarStatus.COLLAPSED
 import com.zwq65.unity.utils.listener.AppBarStateChangeListener.AppBarStatus.EXPANDED
 import com.zwq65.unity.utils.listener.AppBarStateChangeListener.AppBarStatus.IDLE

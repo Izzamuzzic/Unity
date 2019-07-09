@@ -17,14 +17,14 @@
 package com.zwq65.unity.ui._base
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewStub
 import android.widget.TextView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._custom.recycleview.XRecyclerView
 import com.zwq65.unity.utils.bind
@@ -132,9 +132,7 @@ abstract class BaseRefreshFragment<T, V : RefreshMvpView<T>, P : BaseContract.Pr
             isRefreshing = false
             //防止刷新太快，让刷新动画保留一会儿~
             mSwipeRefreshLayout.postDelayed({
-                if (mSwipeRefreshLayout != null) {
-                    mSwipeRefreshLayout.isRefreshing = false
-                }
+                mSwipeRefreshLayout.isRefreshing = false
             }, 500)
         }
     }

@@ -20,7 +20,7 @@
     <item
         android:id="@+id/menu_cb_love"
         android:title="checkbox"
-        app:actionViewClass="android.support.v7.widget.AppCompatCheckBox"
+        app:actionViewClass="androidx.appcompat.widget.AppCompatCheckBox"
         app:showAsAction="always"/>
 
     <item

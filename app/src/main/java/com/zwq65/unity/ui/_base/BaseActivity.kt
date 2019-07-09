@@ -21,9 +21,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.zwq65.unity.R
 import com.zwq65.unity.utils.LogUtils

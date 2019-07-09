@@ -20,8 +20,8 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
-import android.support.annotation.Keep
 import android.util.AttributeSet
+import androidx.annotation.Keep
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseSubView
 

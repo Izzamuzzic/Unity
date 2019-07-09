@@ -19,13 +19,13 @@ package com.zwq65.unity.ui._base
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.widget.TextView
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.gyf.barlibrary.ImmersionBar
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -150,7 +150,7 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
                 message, Snackbar.LENGTH_SHORT)
         val sbView = snackbar.view
         sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
-        val textView = sbView.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+        val textView = sbView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
         textView.setTextColor(ContextCompat.getColor(this, R.color.white))
         snackbar.show()
     }
@@ -164,7 +164,7 @@ abstract class BaseDaggerActivity<in V : BaseContract.View, P : BaseContract.Pre
                 message, Snackbar.LENGTH_SHORT)
         val sbView = snackBar.view
         sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.warn_color))
-        val textView = sbView.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+        val textView = sbView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
         textView.setTextColor(ContextCompat.getColor(this, R.color.white))
         snackBar.show()
     }

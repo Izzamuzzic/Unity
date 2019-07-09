@@ -20,10 +20,10 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
-import android.support.annotation.Keep
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.animation.LinearInterpolator
+import androidx.annotation.Keep
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.SizeUtils
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseSubView

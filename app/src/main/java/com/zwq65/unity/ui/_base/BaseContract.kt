@@ -16,7 +16,7 @@
 
 package com.zwq65.unity.ui._base
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.zwq65.unity.data.DataManager

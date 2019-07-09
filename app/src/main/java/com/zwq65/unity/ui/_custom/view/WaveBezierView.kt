@@ -19,9 +19,9 @@ package com.zwq65.unity.ui._custom.view
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.animation.LinearInterpolator
+import androidx.core.content.ContextCompat
 import com.zwq65.unity.R
 import com.zwq65.unity.ui._base.BaseSubView
 
