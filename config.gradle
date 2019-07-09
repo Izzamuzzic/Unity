@@ -24,7 +24,7 @@ ext {
             rxbindingVersion        : "2.0.0",
             rxlifecycleVersion      : "2.2.1",
             daggerVersion           : "2.15",
-            greenDaoVersion         : "3.2.0",
+            greenDaoVersion         : "3.2.2",
             greenDaoGeneratorVersion: "3.1.0",
             glideVersion            : "4.6.1",
             gsonVersion             : "2.8.2",
