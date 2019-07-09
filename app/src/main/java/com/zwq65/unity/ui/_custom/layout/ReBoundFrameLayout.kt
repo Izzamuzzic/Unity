@@ -99,8 +99,8 @@ class ReBoundFrameLayout @JvmOverloads constructor(mContext: Context, attrs: Att
                 }
                 if (isRebound) {
                     mInnerView?.translationY = difY.toFloat()
-                    if (mOnBounceDistanceChangeListener != null) {
-                        mOnBounceDistanceChangeListener?.onDistanceChange(abs(difY),
+                    if (mOnBounceDistanceChangeListener != null && difY > 0) {
+                        mOnBounceDistanceChangeListener?.onDistanceChange(difY,
                                 if (difY > 0)
                                     OnBounceDistanceChangeListener.DIRECTION_DOWN
                                 else
@@ -112,10 +112,10 @@ class ReBoundFrameLayout @JvmOverloads constructor(mContext: Context, attrs: Att
             MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
                 val difY = mInnerView?.translationY!!.toInt()
                 if (difY != 0) {
-                    if (abs(difY) <= mResetDistance || isNeedReset) {
+                    if (difY <= mResetDistance || isNeedReset) {
                         mInnerView?.animate()!!.translationY(0f).setDuration(mDuration).interpolator = mInterpolator
                     }
-                    if (mOnBounceDistanceChangeListener != null) {
+                    if (mOnBounceDistanceChangeListener != null && difY > 0) {
                         mOnBounceDistanceChangeListener?.onFingerUp(abs(difY), if (difY > 0)
                             OnBounceDistanceChangeListener.DIRECTION_DOWN
                         else

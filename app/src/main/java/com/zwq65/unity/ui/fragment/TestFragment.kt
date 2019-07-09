@@ -16,7 +16,6 @@
 
 package com.zwq65.unity.ui.fragment
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.widget.LinearLayout
 import com.blankj.utilcode.util.LogUtils
