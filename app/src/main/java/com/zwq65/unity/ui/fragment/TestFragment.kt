@@ -16,17 +16,16 @@
 
 package com.zwq65.unity.ui.fragment
 
+import android.animation.ValueAnimator
 import android.os.Bundle
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+import android.widget.LinearLayout
+import com.blankj.utilcode.util.LogUtils
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BaseFragment
-import com.zwq65.unity.ui.adapter.AvatarAdapter
+import com.zwq65.unity.ui._custom.layout.OnBounceDistanceChangeListener
 import com.zwq65.unity.ui.contract.TestContract
 import kotlinx.android.synthetic.main.fragment_test.*
-import javax.inject.Inject
 
 
 /**
@@ -37,22 +36,43 @@ import javax.inject.Inject
  * ================================================
  */
 class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<TestContract.View>>(), TestContract.View {
-    @Inject
-    lateinit var mAdapter: AvatarAdapter<Image>
+
     override val layoutId: Int
         get() = R.layout.fragment_test
 
     override fun initView() {
-        val mLinearLayoutManager = LinearLayoutManager(context)
-        mLinearLayoutManager.orientation = HORIZONTAL
-        mRecyclerView.layoutManager = mLinearLayoutManager
-        //item加载动画（默认）
-        mRecyclerView.itemAnimator = DefaultItemAnimator()
-        mRecyclerView.adapter = mAdapter
     }
 
+    private var mHeight: Int? = null
+
     override fun initData(saveInstanceState: Bundle?) {
-        mPresenter.loadImages()
+        mView?.let {
+            it.post {
+                mHeight = it.height
+            }
+        }
+        mReboundLayout?.mOnBounceDistanceChangeListener = object : OnBounceDistanceChangeListener {
+            override fun onDistanceChange(distance: Int, direction: Int) {
+                LogUtils.i("onDistanceChange distance: $distance")
+                mView?.let {
+                    it.post {
+                        it.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                mHeight!! + distance)
+                    }
+                }
+            }
+
+            override fun onFingerUp(distance: Int, direction: Int) {
+                LogUtils.i("onFingerUp distance: $distance")
+                mView?.let {
+                    it.post {
+                        mView?.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, mHeight
+                                ?: 0)
+                    }
+                }
+            }
+
+        }
     }
 
     /**
@@ -61,6 +81,5 @@ class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<Test
      * @param list 数据列表
      */
     override fun loadData(list: List<Image>) {
-        mAdapter.addItems(list)
     }
 }

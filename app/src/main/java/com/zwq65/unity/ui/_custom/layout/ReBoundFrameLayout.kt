@@ -8,27 +8,30 @@ import android.view.ViewConfiguration
 import android.view.ViewParent
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.FrameLayout
 import kotlin.math.abs
 
 /**
- * Created by zhaowenqiang.
- * Desc: "description info"
- * Date: 2019/7/8
- * Time: 14:25
+ * ================================================
+ * <p>
+ * Created by NIRVANA on 2019/07/09.
+ * Contact with <zwq651406441@gmail.com>
+ * ================================================
  */
-class ReBoundConstraintLayout @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        ConstraintLayout(mContext, attrs, defStyleAttr) {
+class ReBoundFrameLayout @JvmOverloads constructor(mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+        FrameLayout(mContext, attrs, defStyleAttr) {
     private var mInnerView: View? = null
     private var mDownX: Int = 0
     private var mDownY: Int = 0
     private var isIntercept: Boolean = false
-    private var mResistance: Float = 3f
+    private var mResistance: Float = 2f
     private var mDuration: Long = 300
     private val mTouchSlop: Int = ViewConfiguration.get(context).scaledTouchSlop
     private var mInterpolator: Interpolator? = null
     private var mResetDistance: Int = 0
     private var isNeedReset: Boolean = false
+    var mOnBounceDistanceChangeListener: OnBounceDistanceChangeListener? = null
+
 
     init {
         mInterpolator = AccelerateDecelerateInterpolator()
@@ -83,6 +86,7 @@ class ReBoundConstraintLayout @JvmOverloads constructor(mContext: Context, attrs
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> return true
             MotionEvent.ACTION_MOVE -> {
                 val difY = ((event.y - mDownY) / mResistance).toInt()
                 var isRebound = false
@@ -95,12 +99,13 @@ class ReBoundConstraintLayout @JvmOverloads constructor(mContext: Context, attrs
                 }
                 if (isRebound) {
                     mInnerView?.translationY = difY.toFloat()
-//                    if (onBounceDistanceChangeListener != null) {
-//                        onBounceDistanceChangeListener.onDistanceChange(abs(difY), if (difY > 0)
-//                            OnBounceDistanceChangeListener.DIRECTION_DOWN
-//                        else
-//                            OnBounceDistanceChangeListener.DIRECTION_UP)
-//                    }
+                    if (mOnBounceDistanceChangeListener != null) {
+                        mOnBounceDistanceChangeListener?.onDistanceChange(abs(difY),
+                                if (difY > 0)
+                                    OnBounceDistanceChangeListener.DIRECTION_DOWN
+                                else
+                                    OnBounceDistanceChangeListener.DIRECTION_UP)
+                    }
                     return true
                 }
             }
@@ -110,12 +115,12 @@ class ReBoundConstraintLayout @JvmOverloads constructor(mContext: Context, attrs
                     if (abs(difY) <= mResetDistance || isNeedReset) {
                         mInnerView?.animate()!!.translationY(0f).setDuration(mDuration).interpolator = mInterpolator
                     }
-//                    if (onBounceDistanceChangeListener != null) {
-//                        onBounceDistanceChangeListener.onFingerUp(Math.abs(difY), if (difY > 0)
-//                            OnBounceDistanceChangeListener.DIRECTION_DOWN
-//                        else
-//                            OnBounceDistanceChangeListener.DIRECTION_UP)
-//                    }
+                    if (mOnBounceDistanceChangeListener != null) {
+                        mOnBounceDistanceChangeListener?.onFingerUp(abs(difY), if (difY > 0)
+                            OnBounceDistanceChangeListener.DIRECTION_DOWN
+                        else
+                            OnBounceDistanceChangeListener.DIRECTION_UP)
+                    }
                 }
             }
             else -> {
@@ -127,10 +132,11 @@ class ReBoundConstraintLayout @JvmOverloads constructor(mContext: Context, attrs
     override fun onFinishInflate() {
         super.onFinishInflate()
         if (childCount > 0) {
-            mInnerView = getChildAt(0)
+            mInnerView = rootView
         } else {
             throw IllegalArgumentException("it must have mInnerView")
         }
     }
+
 
 }
