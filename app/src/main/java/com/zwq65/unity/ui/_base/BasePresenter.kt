@@ -77,6 +77,32 @@ constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
     }
 
     /**
+     * [Observable]扩展函数 订阅之前网络请求统一调度处理
+     *
+     * @param callBack             callback回调
+     * @param <T>                  返回类型泛型
+     */
+    fun <T> Observable<T>.apiSubscribe(onSucceed: (data: T?) -> Unit,
+                                       onFailure: ((errCode: String, errMsg: String) -> Unit)? = null, showLoading: Boolean = false) {
+        var observable = compose(getLifeTransformer())
+                //简化线程、返回数据处理
+                .compose(schedulersTransformer())
+        if (showLoading) {
+            observable = observable.showLoading()
+        }
+        observable.subscribe(object : ApiSubscriberCallBack<T>() {
+            override fun onSuccess(response: T) {
+                onSucceed(response)
+            }
+
+            override fun onFailure(errCode: String, errMsg: String) {
+                onFailure?.let { it(errCode, errMsg) }
+            }
+
+        })
+    }
+
+    /**
      * [Observable]网络请求时显示加载框，结束后隐藏
      *
      * @param <T>                  返回类型泛型

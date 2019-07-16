@@ -17,9 +17,6 @@
 package com.zwq65.unity.ui.presenter
 
 import com.zwq65.unity.data.DataManager
-import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack
-import com.zwq65.unity.data.network.retrofit.response.GankApiResponse
-import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BasePresenter
 import com.zwq65.unity.ui.contract.TestContract
 import javax.inject.Inject
@@ -39,14 +36,11 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
     override fun loadImages() {
         dataManager
                 .getRandomImages()
-                .apiSubscribe(object : ApiSubscriberCallBack<GankApiResponse<List<Image>>>() {
-                    override fun onSuccess(response: GankApiResponse<List<Image>>) {
-                        mvpView?.loadData(response.data!!)
+                .apiSubscribe({
+                    it?.let {
+                        mvpView?.loadData(it.data!!)
                     }
-
-                    override fun onFailure(errCode: String, errMsg: String) {
-                    }
-                }, true)
+                }, null, true)
     }
 
     override fun test() {

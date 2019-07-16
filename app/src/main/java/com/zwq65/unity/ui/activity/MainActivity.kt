@@ -85,7 +85,7 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         fab?.setOnClickListener(this)
 
         //默认跳转
-        gotoFragment(TestFragment())
+        gotoFragment(AlbumFragment())
     }
 
     override fun initData() {

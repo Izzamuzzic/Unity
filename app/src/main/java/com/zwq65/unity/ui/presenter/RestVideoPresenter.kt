@@ -17,11 +17,9 @@
 package com.zwq65.unity.ui.presenter
 
 import com.zwq65.unity.data.DataManager
-import com.zwq65.unity.data.network.retrofit.callback.ApiSubscriberCallBack
 import com.zwq65.unity.data.network.retrofit.response.enity.Video
 import com.zwq65.unity.ui._base.BasePresenter
 import com.zwq65.unity.ui.contract.RestVideoContract
-
 import javax.inject.Inject
 
 /**
@@ -42,23 +40,22 @@ internal constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), 
 
     override fun loadVideos(isRefresh: Boolean?) {
         dataManager.getVideosAndImages(page)
-                .apiSubscribe(object : ApiSubscriberCallBack<List<Video>>() {
-                    override fun onSuccess(response: List<Video>) {
-                        if (response.isNotEmpty()) {
+                .apiSubscribe({
+                    it?.let {
+                        if (it.isNotEmpty()) {
                             page++
                             if (isRefresh!!) {
-                                mvpView?.refreshData(response)
+                                mvpView?.refreshData(it)
                             } else {
-                                mvpView?.loadData(response)
+                                mvpView?.loadData(it)
                             }
                         } else {
                             mvpView?.noMoreData()
                         }
                     }
-
-                    override fun onFailure(errCode: String, errMsg: String) {
-                        mvpView?.loadFail(errMsg)
-                    }
-                })
+                }, { _: String, errMsg: String ->
+                    mvpView?.loadFail(errMsg)
+                }
+                )
     }
 }
