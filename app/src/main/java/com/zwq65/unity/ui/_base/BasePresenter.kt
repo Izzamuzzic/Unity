@@ -79,7 +79,8 @@ constructor(val dataManager: DataManager) : BaseContract.Presenter<V> {
     /**
      * [Observable]扩展函数 订阅之前网络请求统一调度处理
      *
-     * @param callBack             callback回调
+     * @param onSucceed             callback回调成功方法块
+     * @param onFailure             callback回调失败方法块
      * @param <T>                  返回类型泛型
      */
     fun <T> Observable<T>.apiSubscribe(onSucceed: (data: T?) -> Unit,
