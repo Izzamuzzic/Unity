@@ -200,5 +200,6 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
          * 退出app延时时间
          */
         const val DELAY_TIME_FINISH = 2000
+        //测试git reset -001
     }
 }
