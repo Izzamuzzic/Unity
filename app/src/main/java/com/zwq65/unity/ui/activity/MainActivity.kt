@@ -17,10 +17,8 @@
 package com.zwq65.unity.ui.activity
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import com.jakewharton.rxbinding2.view.RxView
 import com.zwq65.unity.ui._base.BaseDaggerActivity
@@ -34,7 +32,6 @@ import com.zwq65.unity.utils.loadCircle
 import com.zwq65.unity.utils.setCustomDensity
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.drawer_left.*
 import java.util.concurrent.TimeUnit
 
@@ -82,7 +79,6 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
         ll_video?.setOnClickListener(this)
         ll_setting?.setOnClickListener(this)
         ll_out?.setOnClickListener(this)
-        fab?.setOnClickListener(this)
 
         //默认跳转
         gotoFragment(AlbumFragment())
@@ -124,41 +120,8 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
             com.zwq65.unity.R.id.ll_setting ->
                 gotoFragment(TestFragment())
             com.zwq65.unity.R.id.ll_out -> onBackPressed()
-            com.zwq65.unity.R.id.fab -> setDayNightMode()
             else -> {
             }
-        }
-    }
-
-    /**
-     * 设置白天/黑夜主题
-     * TODO: 2017/10/24 有bug,找机会修复(｡◕ˇ∀ˇ◕)
-     */
-    private fun setDayNightMode() {
-        //获取应用当前的主题
-        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES ->
-                //当前为夜间模式，切换为日间模式
-                mPresenter.setNightMode(false)
-            Configuration.UI_MODE_NIGHT_NO -> mPresenter.setNightMode(true)
-            else -> {
-            }
-        }
-        setDayNightMode(mPresenter.nightMode!!)
-        window.setWindowAnimations(com.zwq65.unity.R.style.WindowAnimationFadeInOut)
-        recreate()
-    }
-
-    /**
-     * 设置app主题模式
-     *
-     * @param nightMode 是否夜间
-     */
-    private fun setDayNightMode(nightMode: Boolean) {
-        if (nightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
@@ -200,6 +163,5 @@ class MainActivity : BaseDaggerActivity<MainContract.View, MainContract.Presente
          * 退出app延时时间
          */
         const val DELAY_TIME_FINISH = 2000
-        //测试git reset -001
     }
 }

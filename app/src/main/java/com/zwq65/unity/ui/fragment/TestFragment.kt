@@ -17,14 +17,12 @@
 package com.zwq65.unity.ui.fragment
 
 import android.os.Bundle
-import android.widget.LinearLayout
-import com.blankj.utilcode.util.LogUtils
 import com.zwq65.unity.R
 import com.zwq65.unity.data.network.retrofit.response.enity.Image
 import com.zwq65.unity.ui._base.BaseFragment
-import com.zwq65.unity.ui._custom.layout.OnBounceDistanceChangeListener
 import com.zwq65.unity.ui.contract.TestContract
-import kotlinx.android.synthetic.main.fragment_test.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -42,38 +40,13 @@ class TestFragment : BaseFragment<TestContract.View, TestContract.Presenter<Test
     override fun initView() {
     }
 
-    private var mHeight: Int? = null
-
     override fun initData(saveInstanceState: Bundle?) {
-        mView?.let {
-            it.post {
-                mHeight = it.height
-            }
-        }
-        mReboundLayout?.mOnBounceDistanceChangeListener = object : OnBounceDistanceChangeListener {
-            override fun onDistanceChange(distance: Int, direction: Int) {
-                LogUtils.i("onDistanceChange distance: $distance")
-                mView?.let {
-                    it.post {
-                        it.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                mHeight!! + distance)
-                    }
-                }
-            }
 
-            override fun onFingerUp(distance: Int, direction: Int) {
-                LogUtils.i("onFingerUp distance: $distance")
-                mView?.let {
-                    it.post {
-                        mView?.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, mHeight
-                                ?: 0)
-                    }
-                }
-            }
-
-        }
     }
 
+    suspend fun suspendingGetImage(id: String) = withContext(Dispatchers.IO) {
+
+    }
     /**
      * 加载数据
      *

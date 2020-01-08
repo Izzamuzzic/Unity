@@ -123,9 +123,9 @@ class ApplicationModule {
                 //                .addInterceptor(new HeadInterceptor())
                 .addInterceptor(httpLoggingInterceptor)
                 // 连接超时时间设置
-                .connectTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
                 // 读取超时时间设置
-                .readTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .build()
     }
 

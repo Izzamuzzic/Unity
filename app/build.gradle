@@ -104,6 +104,10 @@ dependencies {
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.anko:anko:$anko_version"
+    //coroutines依赖协程核心库
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+    //coroutines依赖当前平台所对应的平台库
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
 
     //androidTest
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
