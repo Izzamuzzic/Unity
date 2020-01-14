@@ -14,7 +14,7 @@ import org.junit.Test
  */
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class Channels {
+class `6Channels` {
 
     /**
      * 通道

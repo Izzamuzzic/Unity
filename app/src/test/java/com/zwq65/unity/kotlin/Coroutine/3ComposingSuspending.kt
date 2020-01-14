@@ -12,7 +12,7 @@ import kotlin.system.measureTimeMillis
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class ComposingSuspending {
+class `3ComposingSuspending` {
 
     /**
      * 默认顺序调用

@@ -11,7 +11,7 @@ import org.junit.Test
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class Basics {
+class `1Basics` {
 
     /**
      * 协程是轻量级的线程. 它们在某些 CoroutineScope 上下文中与 launch 协程构建器 一起启动.

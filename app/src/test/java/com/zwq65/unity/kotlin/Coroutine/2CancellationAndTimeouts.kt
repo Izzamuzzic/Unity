@@ -12,7 +12,7 @@ import org.junit.Test
  * Contact with <zwq651406441@gmail.com>
  * ================================================
  */
-class CancellationAndTimeouts {
+class `2CancellationAndTimeouts` {
 
     /**
      * 取消协程的执行
