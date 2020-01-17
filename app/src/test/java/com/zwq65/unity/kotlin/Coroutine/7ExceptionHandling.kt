@@ -42,13 +42,12 @@ class `7ExceptionHandling` {
     }
 
     /**
-     *
-     *  [CoroutineExceptionHandler]上下文元素被用来将通用的 catch 代码块用于在协程中自定义日志记录或异常处理.
+     *  [CoroutineExceptionHandler]上下文元素 用作协程的通用捕获块,在协程中可能发生自定义日志记录或异常处理.
      *  它和使用[Thread.UncaughtExceptionHandler]很相似.
-     *  在 JVM 中可以重定义一个全局的异常处理者来将所有的协程通过 ServiceLoader 注册到 [CoroutineExceptionHandler].
-     *  全局异常处理者就如同[Thread.UncaughtExceptionHandler]一样,在没有更多的指定的异常处理者被注册的时候被使用.
+     *  在JVM上，可以通过ServiceLoader注册[CoroutineExceptionHandler]来为所有协程重新定义全局异常处理程序.
+     *  全局异常处理者就如同[Thread.UncaughtExceptionHandler]一样,当没有其他特定的处理程序注册时使用.
      *  在 Android 中,uncaughtExceptionPreHandler被设置在全局协程异常处理者中.
-     *  [CoroutineExceptionHandler] 仅在预计不会由用户处理的异常上调用, 所以在[async]构建器中注册它没有任何效果.
+     *  仅在不希望用户处理的异常上调用[CoroutineExceptionHandler] ，因此在[async]中注册它等无效.
      */
     @Test
     fun test2() = runBlocking<Unit> {
